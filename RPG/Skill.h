@@ -1,0 +1,27 @@
+//
+//  Skill.h
+//  RPG
+//
+//  Created by Ben Ferraro on 5/17/17.
+//  Copyright © 2017 Ben Ferraro. All rights reserved.
+//
+
+#ifndef Skill_h
+#define Skill_h
+#import "Hero.h"
+#import "Enemy.h"
+@interface Skill : NSObject
+
+@property NSString *moveName;
+@property NSString *moveDescription;
+@property BOOL spell;
+
+-(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription spell:(BOOL)aSpell;
+
+-(int)getCombatResourceCost:(int)totalResource;
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap;
+-(void)activateEnemyMove:(Enemy*)e ElementMap:(NSMutableDictionary*)elementMap Hero:(Hero*)mainCharacter;
+
+@end
+
+#endif /* Skill_h */

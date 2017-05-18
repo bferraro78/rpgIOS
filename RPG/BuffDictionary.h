@@ -1,0 +1,21 @@
+//
+//  BuffDictionary.h
+//  RPG
+//
+//  Created by Ben Ferraro on 5/18/17.
+//  Copyright © 2017 Ben Ferraro. All rights reserved.
+//
+
+#ifndef BuffDictionary_h
+#define BuffDictionary_h
+@interface BuffDictionary : NSObject
+
+
+@property NSMutableDictionary *buffLibrary;
+
++(void)loadBuffLibrary;
++(NSString*)getDescription:(NSString*)s;
+
+@end
+
+#endif /* BuffDictionary_h */

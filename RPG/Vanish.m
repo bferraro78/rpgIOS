@@ -1,0 +1,43 @@
+//
+//  Vanish.m
+//  RPG
+//
+//  Created by Ben Ferraro on 5/17/17.
+//  Copyright © 2017 Ben Ferraro. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "Vanish.h"
+@implementation Vanish
+
+int vanishResourceCost;
+
+-(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription resourceCost:(int)aResourceCost
+            spell:(BOOL)aSpell {
+    
+    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell];
+    _vanishResourceCost = aResourceCost;
+    
+    return self;
+}
+
+
+-(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.vanishResourceCost/100.0)*(float)totalResource); }
+
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap {
+    printf("Vanish!!");
+    
+    /* Insert Vanish Dot */
+    mainCharacter.buffLibrary[@"vanish"] = [[Buff alloc] initvalue:0 duration:2];
+    
+}
+
+-(void)activateEnemyMove:(Enemy*)e ElementMap:(NSMutableDictionary*)elementMap Hero:(Hero*)mainCharacter {
+    printf("Enemey uses Vanish...");
+    
+    /* Insert Vanish Dot */
+    mainCharacter.buffLibrary[@"vanish"] = [[Buff alloc] initvalue:0 duration:2];
+    
+}
+
+@end

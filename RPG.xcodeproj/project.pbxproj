@@ -1,0 +1,803 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FF2ABA221EC7CCDA00EC8B3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA211EC7CCDA00EC8B3C /* main.m */; };
+		FF2ABA251EC7CCDA00EC8B3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */; };
+		FF2ABA281EC7CCDA00EC8B3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */; };
+		FF2ABA2B1EC7CCDA00EC8B3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF2ABA291EC7CCDA00EC8B3C /* Main.storyboard */; };
+		FF2ABA2E1EC7CCDA00EC8B3C /* RPG.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA2C1EC7CCDA00EC8B3C /* RPG.xcdatamodeld */; };
+		FF2ABA301EC7CCDA00EC8B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2ABA2F1EC7CCDA00EC8B3C /* Assets.xcassets */; };
+		FF2ABA331EC7CCDA00EC8B3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF2ABA311EC7CCDA00EC8B3C /* LaunchScreen.storyboard */; };
+		FF2ABA3E1EC7CCDA00EC8B3C /* RPGTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA3D1EC7CCDA00EC8B3C /* RPGTests.m */; };
+		FF2ABA491EC7CCDA00EC8B3C /* RPGUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA481EC7CCDA00EC8B3C /* RPGUITests.m */; };
+		FF2ABAC31ECA323600EC8B3C /* Armor.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAAA1EC94A4900EC8B3C /* Armor.m */; };
+		FF2ABAC41ECA323600EC8B3C /* Weapon.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAAD1EC94A6100EC8B3C /* Weapon.m */; };
+		FF2ABAC81ECA448C00EC8B3C /* Barbarian.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAC71ECA448C00EC8B3C /* Barbarian.m */; };
+		FF2ABACC1ECA4D3900EC8B3C /* Wizard.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABACB1ECA4D3900EC8B3C /* Wizard.m */; };
+		FF2ABACE1ECA535F00EC8B3C /* Rogue.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABACD1ECA535F00EC8B3C /* Rogue.m */; };
+		FF2ABAD31ECA56A300EC8B3C /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAD21ECA56A300EC8B3C /* Enemy.m */; };
+		FF2ABAD51ECA686E00EC8B3C /* Buff.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAD41ECA686E00EC8B3C /* Buff.m */; };
+		FF2ABADC1ECA6FD900EC8B3C /* Dungeon.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABADB1ECA6FD900EC8B3C /* Dungeon.m */; };
+		FF2ABAE41ECA7D7600EC8B3C /* Space.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAAF1EC9548800EC8B3C /* Space.m */; };
+		FF2ABAE51ECB593400EC8B3C /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAB31ECA1A9A00EC8B3C /* Item.m */; };
+		FF2ABAE81ECB9DB700EC8B3C /* ItemDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAE71ECB9DB700EC8B3C /* ItemDictionary.m */; };
+		FF2ABAEC1ECBAB4C00EC8B3C /* Firestone.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAEB1ECBAB4C00EC8B3C /* Firestone.m */; };
+		FF2ABAF01ECBC87E00EC8B3C /* Lightningstone.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAEF1ECBC87E00EC8B3C /* Lightningstone.m */; };
+		FF2ABAF21ECBC88900EC8B3C /* Arcanestone.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAF11ECBC88900EC8B3C /* Arcanestone.m */; };
+		FF2ABAF61ECBC89D00EC8B3C /* Poisonstone.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAF51ECBC89D00EC8B3C /* Poisonstone.m */; };
+		FF2ABAF81ECBC8A300EC8B3C /* Coldstone.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAF71ECBC8A300EC8B3C /* Coldstone.m */; };
+		FF2ABAFC1ECBDA6600EC8B3C /* XPBoost.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAFB1ECBDA6600EC8B3C /* XPBoost.m */; };
+		FF2ABAFE1ECBEFB300EC8B3C /* ArmorDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAFD1ECBEFB300EC8B3C /* ArmorDictionary.m */; };
+		FF2ABB021ECC003E00EC8B3C /* WeaponDIctionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB011ECC003E00EC8B3C /* WeaponDIctionary.m */; };
+		FF2ABB041ECC072500EC8B3C /* EnemyDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB031ECC072500EC8B3C /* EnemyDictionary.m */; };
+		FF2ABB101ECCB72100EC8B3C /* Backstab.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB0F1ECCB72100EC8B3C /* Backstab.m */; };
+		FF2ABB121ECCB73D00EC8B3C /* Fireball.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB111ECCB73D00EC8B3C /* Fireball.m */; };
+		FF2ABB161ECCB76100EC8B3C /* Freezecone.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB151ECCB76100EC8B3C /* Freezecone.m */; };
+		FF2ABB181ECCB77100EC8B3C /* Frenzy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB171ECCB77100EC8B3C /* Frenzy.m */; };
+		FF2ABB1B1ECCB78100EC8B3C /* Heal.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB1A1ECCB78100EC8B3C /* Heal.m */; };
+		FF2ABB1E1ECCB78C00EC8B3C /* Rend.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB1D1ECCB78C00EC8B3C /* Rend.m */; };
+		FF2ABB211ECCB79A00EC8B3C /* Vanish.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB201ECCB79A00EC8B3C /* Vanish.m */; };
+		FF2ABB241ECCB81D00EC8B3C /* SkillDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB231ECCB81D00EC8B3C /* SkillDictionary.m */; };
+		FF2ABB281ECCDBAA00EC8B3C /* Skill.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB271ECCDBAA00EC8B3C /* Skill.m */; };
+		FF2ABB2B1ECD0AE000EC8B3C /* Combat.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB2A1ECD0AE000EC8B3C /* Combat.m */; };
+		FF2ABB2E1ECE609700EC8B3C /* BuffDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB2D1ECE609700EC8B3C /* BuffDictionary.m */; };
+		FF2ABB321ECE688500EC8B3C /* Hero.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB311ECE688500EC8B3C /* Hero.m */; };
+		FF2ABB341ECE68BA00EC8B3C /* BasicAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FF2ABA3A1EC7CCDA00EC8B3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF2ABA151EC7CCDA00EC8B3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF2ABA1C1EC7CCDA00EC8B3C;
+			remoteInfo = RPG;
+		};
+		FF2ABA451EC7CCDA00EC8B3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF2ABA151EC7CCDA00EC8B3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF2ABA1C1EC7CCDA00EC8B3C;
+			remoteInfo = RPG;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FF2ABA1D1EC7CCDA00EC8B3C /* RPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF2ABA211EC7CCDA00EC8B3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FF2ABA231EC7CCDA00EC8B3C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FF2ABA261EC7CCDA00EC8B3C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FF2ABA2A1EC7CCDA00EC8B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FF2ABA2D1EC7CCDA00EC8B3C /* RPG.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RPG.xcdatamodel; sourceTree = "<group>"; };
+		FF2ABA2F1EC7CCDA00EC8B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FF2ABA321EC7CCDA00EC8B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FF2ABA341EC7CCDA00EC8B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF2ABA391EC7CCDA00EC8B3C /* RPGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RPGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF2ABA3D1EC7CCDA00EC8B3C /* RPGTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPGTests.m; sourceTree = "<group>"; };
+		FF2ABA3F1EC7CCDA00EC8B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF2ABA441EC7CCDA00EC8B3C /* RPGUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RPGUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF2ABA481EC7CCDA00EC8B3C /* RPGUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPGUITests.m; sourceTree = "<group>"; };
+		FF2ABA4A1EC7CCDA00EC8B3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF2ABA9E1EC8D52000EC8B3C /* Hero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Hero.h; sourceTree = "<group>"; };
+		FF2ABAA91EC94A3E00EC8B3C /* Armor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Armor.h; sourceTree = "<group>"; };
+		FF2ABAAA1EC94A4900EC8B3C /* Armor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Armor.m; sourceTree = "<group>"; };
+		FF2ABAAC1EC94A5600EC8B3C /* Weapon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Weapon.h; sourceTree = "<group>"; };
+		FF2ABAAD1EC94A6100EC8B3C /* Weapon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weapon.m; sourceTree = "<group>"; };
+		FF2ABAAF1EC9548800EC8B3C /* Space.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Space.m; sourceTree = "<group>"; };
+		FF2ABAB11EC9549400EC8B3C /* Space.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Space.h; sourceTree = "<group>"; };
+		FF2ABAB21ECA1A8F00EC8B3C /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		FF2ABAB31ECA1A9A00EC8B3C /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		FF2ABAC71ECA448C00EC8B3C /* Barbarian.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Barbarian.m; sourceTree = "<group>"; };
+		FF2ABAC91ECA449600EC8B3C /* Barbarian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Barbarian.h; sourceTree = "<group>"; };
+		FF2ABACA1ECA4D3200EC8B3C /* Wizard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wizard.h; sourceTree = "<group>"; };
+		FF2ABACB1ECA4D3900EC8B3C /* Wizard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wizard.m; sourceTree = "<group>"; };
+		FF2ABACD1ECA535F00EC8B3C /* Rogue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rogue.m; sourceTree = "<group>"; };
+		FF2ABACF1ECA536900EC8B3C /* Rogue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rogue.h; sourceTree = "<group>"; };
+		FF2ABAD11ECA569A00EC8B3C /* Enemy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		FF2ABAD21ECA56A300EC8B3C /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
+		FF2ABAD41ECA686E00EC8B3C /* Buff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Buff.m; sourceTree = "<group>"; };
+		FF2ABAD61ECA687700EC8B3C /* Buff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Buff.h; sourceTree = "<group>"; };
+		FF2ABADB1ECA6FD900EC8B3C /* Dungeon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dungeon.m; sourceTree = "<group>"; };
+		FF2ABADE1ECA6FEB00EC8B3C /* Dungeon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dungeon.h; sourceTree = "<group>"; };
+		FF2ABAE71ECB9DB700EC8B3C /* ItemDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemDictionary.m; sourceTree = "<group>"; };
+		FF2ABAE91ECB9DC400EC8B3C /* ItemDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemDictionary.h; sourceTree = "<group>"; };
+		FF2ABAEB1ECBAB4C00EC8B3C /* Firestone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Firestone.m; sourceTree = "<group>"; };
+		FF2ABAED1ECBAB5200EC8B3C /* Firestone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Firestone.h; sourceTree = "<group>"; };
+		FF2ABAEE1ECBC87500EC8B3C /* Lightningstone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lightningstone.h; sourceTree = "<group>"; };
+		FF2ABAEF1ECBC87E00EC8B3C /* Lightningstone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lightningstone.m; sourceTree = "<group>"; };
+		FF2ABAF11ECBC88900EC8B3C /* Arcanestone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arcanestone.m; sourceTree = "<group>"; };
+		FF2ABAF31ECBC88F00EC8B3C /* Arcanestone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arcanestone.h; sourceTree = "<group>"; };
+		FF2ABAF41ECBC89500EC8B3C /* Poisonstone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Poisonstone.h; sourceTree = "<group>"; };
+		FF2ABAF51ECBC89D00EC8B3C /* Poisonstone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poisonstone.m; sourceTree = "<group>"; };
+		FF2ABAF71ECBC8A300EC8B3C /* Coldstone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coldstone.m; sourceTree = "<group>"; };
+		FF2ABAF91ECBC8A800EC8B3C /* Coldstone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Coldstone.h; sourceTree = "<group>"; };
+		FF2ABAFA1ECBDA5F00EC8B3C /* XPBoost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XPBoost.h; sourceTree = "<group>"; };
+		FF2ABAFB1ECBDA6600EC8B3C /* XPBoost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPBoost.m; sourceTree = "<group>"; };
+		FF2ABAFD1ECBEFB300EC8B3C /* ArmorDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArmorDictionary.m; sourceTree = "<group>"; };
+		FF2ABAFF1ECBEFB900EC8B3C /* ArmorDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArmorDictionary.h; sourceTree = "<group>"; };
+		FF2ABB001ECC003500EC8B3C /* WeaponDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeaponDictionary.h; sourceTree = "<group>"; };
+		FF2ABB011ECC003E00EC8B3C /* WeaponDIctionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeaponDIctionary.m; sourceTree = "<group>"; };
+		FF2ABB031ECC072500EC8B3C /* EnemyDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyDictionary.m; sourceTree = "<group>"; };
+		FF2ABB051ECC072D00EC8B3C /* EnemyDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnemyDictionary.h; sourceTree = "<group>"; };
+		FF2ABB0E1ECCB71B00EC8B3C /* Backstab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Backstab.h; sourceTree = "<group>"; };
+		FF2ABB0F1ECCB72100EC8B3C /* Backstab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Backstab.m; sourceTree = "<group>"; };
+		FF2ABB111ECCB73D00EC8B3C /* Fireball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fireball.m; sourceTree = "<group>"; };
+		FF2ABB131ECCB74200EC8B3C /* Fireball.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fireball.h; sourceTree = "<group>"; };
+		FF2ABB141ECCB75900EC8B3C /* Freezecone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Freezecone.h; sourceTree = "<group>"; };
+		FF2ABB151ECCB76100EC8B3C /* Freezecone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Freezecone.m; sourceTree = "<group>"; };
+		FF2ABB171ECCB77100EC8B3C /* Frenzy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Frenzy.m; sourceTree = "<group>"; };
+		FF2ABB191ECCB77700EC8B3C /* Frenzy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Frenzy.h; sourceTree = "<group>"; };
+		FF2ABB1A1ECCB78100EC8B3C /* Heal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Heal.m; sourceTree = "<group>"; };
+		FF2ABB1C1ECCB78500EC8B3C /* Heal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Heal.h; sourceTree = "<group>"; };
+		FF2ABB1D1ECCB78C00EC8B3C /* Rend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rend.m; sourceTree = "<group>"; };
+		FF2ABB1F1ECCB79000EC8B3C /* Rend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rend.h; sourceTree = "<group>"; };
+		FF2ABB201ECCB79A00EC8B3C /* Vanish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vanish.m; sourceTree = "<group>"; };
+		FF2ABB221ECCB79F00EC8B3C /* Vanish.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vanish.h; sourceTree = "<group>"; };
+		FF2ABB231ECCB81D00EC8B3C /* SkillDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillDictionary.m; sourceTree = "<group>"; };
+		FF2ABB251ECCB82300EC8B3C /* SkillDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkillDictionary.h; sourceTree = "<group>"; };
+		FF2ABB261ECCDBA300EC8B3C /* Skill.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Skill.h; sourceTree = "<group>"; };
+		FF2ABB271ECCDBAA00EC8B3C /* Skill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skill.m; sourceTree = "<group>"; };
+		FF2ABB2A1ECD0AE000EC8B3C /* Combat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Combat.m; sourceTree = "<group>"; };
+		FF2ABB2D1ECE609700EC8B3C /* BuffDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuffDictionary.m; sourceTree = "<group>"; };
+		FF2ABB2F1ECE60A000EC8B3C /* BuffDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuffDictionary.h; sourceTree = "<group>"; };
+		FF2ABB311ECE688500EC8B3C /* Hero.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hero.m; sourceTree = "<group>"; };
+		FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicAttack.m; sourceTree = "<group>"; };
+		FF2ABB351ECE68D400EC8B3C /* BasicAttack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicAttack.h; sourceTree = "<group>"; };
+		FF2ABB361ECE68F400EC8B3C /* Combat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Combat.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FF2ABA1A1EC7CCDA00EC8B3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF2ABA361EC7CCDA00EC8B3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF2ABA411EC7CCDA00EC8B3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FF2ABA141EC7CCDA00EC8B3C = {
+			isa = PBXGroup;
+			children = (
+				FF2ABA1F1EC7CCDA00EC8B3C /* RPG */,
+				FF2ABA3C1EC7CCDA00EC8B3C /* RPGTests */,
+				FF2ABA471EC7CCDA00EC8B3C /* RPGUITests */,
+				FF2ABA1E1EC7CCDA00EC8B3C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FF2ABA1E1EC7CCDA00EC8B3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABA1D1EC7CCDA00EC8B3C /* RPG.app */,
+				FF2ABA391EC7CCDA00EC8B3C /* RPGTests.xctest */,
+				FF2ABA441EC7CCDA00EC8B3C /* RPGUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FF2ABA1F1EC7CCDA00EC8B3C /* RPG */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABB291ECD0AD300EC8B3C /* Combats */,
+				FF2ABB061ECC8F3A00EC8B3C /* Abilities */,
+				FF2ABAEA1ECBA2BE00EC8B3C /* Items */,
+				FF2ABAE61ECB630200EC8B3C /* Dictionaries */,
+				FF2ABADD1ECA6FDE00EC8B3C /* Places */,
+				FF2ABAA81EC94A2300EC8B3C /* Equipment */,
+				FF2ABAA61EC9468200EC8B3C /* Misc */,
+				FF2ABAA31EC93B9000EC8B3C /* Classes */,
+				FF2ABA231EC7CCDA00EC8B3C /* AppDelegate.h */,
+				FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */,
+				FF2ABA261EC7CCDA00EC8B3C /* ViewController.h */,
+				FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */,
+				FF2ABA291EC7CCDA00EC8B3C /* Main.storyboard */,
+				FF2ABA2F1EC7CCDA00EC8B3C /* Assets.xcassets */,
+				FF2ABA311EC7CCDA00EC8B3C /* LaunchScreen.storyboard */,
+				FF2ABA341EC7CCDA00EC8B3C /* Info.plist */,
+				FF2ABA2C1EC7CCDA00EC8B3C /* RPG.xcdatamodeld */,
+				FF2ABA201EC7CCDA00EC8B3C /* Supporting Files */,
+			);
+			path = RPG;
+			sourceTree = "<group>";
+		};
+		FF2ABA201EC7CCDA00EC8B3C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABA211EC7CCDA00EC8B3C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FF2ABA3C1EC7CCDA00EC8B3C /* RPGTests */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABA3D1EC7CCDA00EC8B3C /* RPGTests.m */,
+				FF2ABA3F1EC7CCDA00EC8B3C /* Info.plist */,
+			);
+			path = RPGTests;
+			sourceTree = "<group>";
+		};
+		FF2ABA471EC7CCDA00EC8B3C /* RPGUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABA481EC7CCDA00EC8B3C /* RPGUITests.m */,
+				FF2ABA4A1EC7CCDA00EC8B3C /* Info.plist */,
+			);
+			path = RPGUITests;
+			sourceTree = "<group>";
+		};
+		FF2ABAA31EC93B9000EC8B3C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABB311ECE688500EC8B3C /* Hero.m */,
+				FF2ABA9E1EC8D52000EC8B3C /* Hero.h */,
+				FF2ABAC71ECA448C00EC8B3C /* Barbarian.m */,
+				FF2ABAC91ECA449600EC8B3C /* Barbarian.h */,
+				FF2ABACB1ECA4D3900EC8B3C /* Wizard.m */,
+				FF2ABACA1ECA4D3200EC8B3C /* Wizard.h */,
+				FF2ABACD1ECA535F00EC8B3C /* Rogue.m */,
+				FF2ABACF1ECA536900EC8B3C /* Rogue.h */,
+				FF2ABAD21ECA56A300EC8B3C /* Enemy.m */,
+				FF2ABAD11ECA569A00EC8B3C /* Enemy.h */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		FF2ABAA61EC9468200EC8B3C /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABAAF1EC9548800EC8B3C /* Space.m */,
+				FF2ABAB11EC9549400EC8B3C /* Space.h */,
+				FF2ABAB21ECA1A8F00EC8B3C /* Item.h */,
+				FF2ABAB31ECA1A9A00EC8B3C /* Item.m */,
+				FF2ABAD41ECA686E00EC8B3C /* Buff.m */,
+				FF2ABAD61ECA687700EC8B3C /* Buff.h */,
+				FF2ABB271ECCDBAA00EC8B3C /* Skill.m */,
+				FF2ABB261ECCDBA300EC8B3C /* Skill.h */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		FF2ABAA81EC94A2300EC8B3C /* Equipment */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABAAA1EC94A4900EC8B3C /* Armor.m */,
+				FF2ABAA91EC94A3E00EC8B3C /* Armor.h */,
+				FF2ABAAD1EC94A6100EC8B3C /* Weapon.m */,
+				FF2ABAAC1EC94A5600EC8B3C /* Weapon.h */,
+			);
+			name = Equipment;
+			sourceTree = "<group>";
+		};
+		FF2ABADD1ECA6FDE00EC8B3C /* Places */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABADB1ECA6FD900EC8B3C /* Dungeon.m */,
+				FF2ABADE1ECA6FEB00EC8B3C /* Dungeon.h */,
+			);
+			name = Places;
+			sourceTree = "<group>";
+		};
+		FF2ABAE61ECB630200EC8B3C /* Dictionaries */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABAE71ECB9DB700EC8B3C /* ItemDictionary.m */,
+				FF2ABAE91ECB9DC400EC8B3C /* ItemDictionary.h */,
+				FF2ABAFD1ECBEFB300EC8B3C /* ArmorDictionary.m */,
+				FF2ABAFF1ECBEFB900EC8B3C /* ArmorDictionary.h */,
+				FF2ABB011ECC003E00EC8B3C /* WeaponDIctionary.m */,
+				FF2ABB001ECC003500EC8B3C /* WeaponDictionary.h */,
+				FF2ABB031ECC072500EC8B3C /* EnemyDictionary.m */,
+				FF2ABB051ECC072D00EC8B3C /* EnemyDictionary.h */,
+				FF2ABB231ECCB81D00EC8B3C /* SkillDictionary.m */,
+				FF2ABB251ECCB82300EC8B3C /* SkillDictionary.h */,
+				FF2ABB2D1ECE609700EC8B3C /* BuffDictionary.m */,
+				FF2ABB2F1ECE60A000EC8B3C /* BuffDictionary.h */,
+			);
+			name = Dictionaries;
+			sourceTree = "<group>";
+		};
+		FF2ABAEA1ECBA2BE00EC8B3C /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABAEB1ECBAB4C00EC8B3C /* Firestone.m */,
+				FF2ABAED1ECBAB5200EC8B3C /* Firestone.h */,
+				FF2ABAEF1ECBC87E00EC8B3C /* Lightningstone.m */,
+				FF2ABAEE1ECBC87500EC8B3C /* Lightningstone.h */,
+				FF2ABAF11ECBC88900EC8B3C /* Arcanestone.m */,
+				FF2ABAF31ECBC88F00EC8B3C /* Arcanestone.h */,
+				FF2ABAF51ECBC89D00EC8B3C /* Poisonstone.m */,
+				FF2ABAF41ECBC89500EC8B3C /* Poisonstone.h */,
+				FF2ABAF71ECBC8A300EC8B3C /* Coldstone.m */,
+				FF2ABAF91ECBC8A800EC8B3C /* Coldstone.h */,
+				FF2ABAFB1ECBDA6600EC8B3C /* XPBoost.m */,
+				FF2ABAFA1ECBDA5F00EC8B3C /* XPBoost.h */,
+			);
+			name = Items;
+			sourceTree = "<group>";
+		};
+		FF2ABB061ECC8F3A00EC8B3C /* Abilities */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */,
+				FF2ABB351ECE68D400EC8B3C /* BasicAttack.h */,
+				FF2ABB0F1ECCB72100EC8B3C /* Backstab.m */,
+				FF2ABB0E1ECCB71B00EC8B3C /* Backstab.h */,
+				FF2ABB111ECCB73D00EC8B3C /* Fireball.m */,
+				FF2ABB131ECCB74200EC8B3C /* Fireball.h */,
+				FF2ABB151ECCB76100EC8B3C /* Freezecone.m */,
+				FF2ABB141ECCB75900EC8B3C /* Freezecone.h */,
+				FF2ABB171ECCB77100EC8B3C /* Frenzy.m */,
+				FF2ABB191ECCB77700EC8B3C /* Frenzy.h */,
+				FF2ABB1A1ECCB78100EC8B3C /* Heal.m */,
+				FF2ABB1C1ECCB78500EC8B3C /* Heal.h */,
+				FF2ABB1D1ECCB78C00EC8B3C /* Rend.m */,
+				FF2ABB1F1ECCB79000EC8B3C /* Rend.h */,
+				FF2ABB201ECCB79A00EC8B3C /* Vanish.m */,
+				FF2ABB221ECCB79F00EC8B3C /* Vanish.h */,
+			);
+			name = Abilities;
+			sourceTree = "<group>";
+		};
+		FF2ABB291ECD0AD300EC8B3C /* Combats */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABB2A1ECD0AE000EC8B3C /* Combat.m */,
+				FF2ABB361ECE68F400EC8B3C /* Combat.h */,
+			);
+			name = Combats;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF2ABA1C1EC7CCDA00EC8B3C /* RPG */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF2ABA4D1EC7CCDA00EC8B3C /* Build configuration list for PBXNativeTarget "RPG" */;
+			buildPhases = (
+				FF2ABA191EC7CCDA00EC8B3C /* Sources */,
+				FF2ABA1A1EC7CCDA00EC8B3C /* Frameworks */,
+				FF2ABA1B1EC7CCDA00EC8B3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RPG;
+			productName = RPG;
+			productReference = FF2ABA1D1EC7CCDA00EC8B3C /* RPG.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FF2ABA381EC7CCDA00EC8B3C /* RPGTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF2ABA501EC7CCDA00EC8B3C /* Build configuration list for PBXNativeTarget "RPGTests" */;
+			buildPhases = (
+				FF2ABA351EC7CCDA00EC8B3C /* Sources */,
+				FF2ABA361EC7CCDA00EC8B3C /* Frameworks */,
+				FF2ABA371EC7CCDA00EC8B3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF2ABA3B1EC7CCDA00EC8B3C /* PBXTargetDependency */,
+			);
+			name = RPGTests;
+			productName = RPGTests;
+			productReference = FF2ABA391EC7CCDA00EC8B3C /* RPGTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FF2ABA431EC7CCDA00EC8B3C /* RPGUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF2ABA531EC7CCDA00EC8B3C /* Build configuration list for PBXNativeTarget "RPGUITests" */;
+			buildPhases = (
+				FF2ABA401EC7CCDA00EC8B3C /* Sources */,
+				FF2ABA411EC7CCDA00EC8B3C /* Frameworks */,
+				FF2ABA421EC7CCDA00EC8B3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF2ABA461EC7CCDA00EC8B3C /* PBXTargetDependency */,
+			);
+			name = RPGUITests;
+			productName = RPGUITests;
+			productReference = FF2ABA441EC7CCDA00EC8B3C /* RPGUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FF2ABA151EC7CCDA00EC8B3C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Ben Ferraro";
+				TargetAttributes = {
+					FF2ABA1C1EC7CCDA00EC8B3C = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					FF2ABA381EC7CCDA00EC8B3C = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = FF2ABA1C1EC7CCDA00EC8B3C;
+					};
+					FF2ABA431EC7CCDA00EC8B3C = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = FF2ABA1C1EC7CCDA00EC8B3C;
+					};
+				};
+			};
+			buildConfigurationList = FF2ABA181EC7CCDA00EC8B3C /* Build configuration list for PBXProject "RPG" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FF2ABA141EC7CCDA00EC8B3C;
+			productRefGroup = FF2ABA1E1EC7CCDA00EC8B3C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FF2ABA1C1EC7CCDA00EC8B3C /* RPG */,
+				FF2ABA381EC7CCDA00EC8B3C /* RPGTests */,
+				FF2ABA431EC7CCDA00EC8B3C /* RPGUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FF2ABA1B1EC7CCDA00EC8B3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF2ABA331EC7CCDA00EC8B3C /* LaunchScreen.storyboard in Resources */,
+				FF2ABA301EC7CCDA00EC8B3C /* Assets.xcassets in Resources */,
+				FF2ABA2B1EC7CCDA00EC8B3C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF2ABA371EC7CCDA00EC8B3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF2ABA421EC7CCDA00EC8B3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF2ABA191EC7CCDA00EC8B3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF2ABAE81ECB9DB700EC8B3C /* ItemDictionary.m in Sources */,
+				FF2ABB281ECCDBAA00EC8B3C /* Skill.m in Sources */,
+				FF2ABAF81ECBC8A300EC8B3C /* Coldstone.m in Sources */,
+				FF2ABB241ECCB81D00EC8B3C /* SkillDictionary.m in Sources */,
+				FF2ABAF61ECBC89D00EC8B3C /* Poisonstone.m in Sources */,
+				FF2ABAE51ECB593400EC8B3C /* Item.m in Sources */,
+				FF2ABAE41ECA7D7600EC8B3C /* Space.m in Sources */,
+				FF2ABB021ECC003E00EC8B3C /* WeaponDIctionary.m in Sources */,
+				FF2ABAFC1ECBDA6600EC8B3C /* XPBoost.m in Sources */,
+				FF2ABAD51ECA686E00EC8B3C /* Buff.m in Sources */,
+				FF2ABB041ECC072500EC8B3C /* EnemyDictionary.m in Sources */,
+				FF2ABB1E1ECCB78C00EC8B3C /* Rend.m in Sources */,
+				FF2ABAC81ECA448C00EC8B3C /* Barbarian.m in Sources */,
+				FF2ABACC1ECA4D3900EC8B3C /* Wizard.m in Sources */,
+				FF2ABAC31ECA323600EC8B3C /* Armor.m in Sources */,
+				FF2ABAC41ECA323600EC8B3C /* Weapon.m in Sources */,
+				FF2ABB161ECCB76100EC8B3C /* Freezecone.m in Sources */,
+				FF2ABB211ECCB79A00EC8B3C /* Vanish.m in Sources */,
+				FF2ABB321ECE688500EC8B3C /* Hero.m in Sources */,
+				FF2ABA281EC7CCDA00EC8B3C /* ViewController.m in Sources */,
+				FF2ABB2E1ECE609700EC8B3C /* BuffDictionary.m in Sources */,
+				FF2ABACE1ECA535F00EC8B3C /* Rogue.m in Sources */,
+				FF2ABB1B1ECCB78100EC8B3C /* Heal.m in Sources */,
+				FF2ABAFE1ECBEFB300EC8B3C /* ArmorDictionary.m in Sources */,
+				FF2ABB341ECE68BA00EC8B3C /* BasicAttack.m in Sources */,
+				FF2ABA2E1EC7CCDA00EC8B3C /* RPG.xcdatamodeld in Sources */,
+				FF2ABB2B1ECD0AE000EC8B3C /* Combat.m in Sources */,
+				FF2ABAF21ECBC88900EC8B3C /* Arcanestone.m in Sources */,
+				FF2ABB181ECCB77100EC8B3C /* Frenzy.m in Sources */,
+				FF2ABA251EC7CCDA00EC8B3C /* AppDelegate.m in Sources */,
+				FF2ABAEC1ECBAB4C00EC8B3C /* Firestone.m in Sources */,
+				FF2ABAD31ECA56A300EC8B3C /* Enemy.m in Sources */,
+				FF2ABB101ECCB72100EC8B3C /* Backstab.m in Sources */,
+				FF2ABA221EC7CCDA00EC8B3C /* main.m in Sources */,
+				FF2ABAF01ECBC87E00EC8B3C /* Lightningstone.m in Sources */,
+				FF2ABB121ECCB73D00EC8B3C /* Fireball.m in Sources */,
+				FF2ABADC1ECA6FD900EC8B3C /* Dungeon.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF2ABA351EC7CCDA00EC8B3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF2ABA3E1EC7CCDA00EC8B3C /* RPGTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF2ABA401EC7CCDA00EC8B3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF2ABA491EC7CCDA00EC8B3C /* RPGUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FF2ABA3B1EC7CCDA00EC8B3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF2ABA1C1EC7CCDA00EC8B3C /* RPG */;
+			targetProxy = FF2ABA3A1EC7CCDA00EC8B3C /* PBXContainerItemProxy */;
+		};
+		FF2ABA461EC7CCDA00EC8B3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF2ABA1C1EC7CCDA00EC8B3C /* RPG */;
+			targetProxy = FF2ABA451EC7CCDA00EC8B3C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FF2ABA291EC7CCDA00EC8B3C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF2ABA2A1EC7CCDA00EC8B3C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FF2ABA311EC7CCDA00EC8B3C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF2ABA321EC7CCDA00EC8B3C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FF2ABA4B1EC7CCDA00EC8B3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FF2ABA4C1EC7CCDA00EC8B3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FF2ABA4E1EC7CCDA00EC8B3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RPG/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = randome.RPG;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FF2ABA4F1EC7CCDA00EC8B3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RPG/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = randome.RPG;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FF2ABA511EC7CCDA00EC8B3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RPGTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = randome.RPGTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RPG.app/RPG";
+			};
+			name = Debug;
+		};
+		FF2ABA521EC7CCDA00EC8B3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RPGTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = randome.RPGTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RPG.app/RPG";
+			};
+			name = Release;
+		};
+		FF2ABA541EC7CCDA00EC8B3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RPGUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = randome.RPGUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RPG;
+			};
+			name = Debug;
+		};
+		FF2ABA551EC7CCDA00EC8B3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = RPGUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = randome.RPGUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RPG;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FF2ABA181EC7CCDA00EC8B3C /* Build configuration list for PBXProject "RPG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF2ABA4B1EC7CCDA00EC8B3C /* Debug */,
+				FF2ABA4C1EC7CCDA00EC8B3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF2ABA4D1EC7CCDA00EC8B3C /* Build configuration list for PBXNativeTarget "RPG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF2ABA4E1EC7CCDA00EC8B3C /* Debug */,
+				FF2ABA4F1EC7CCDA00EC8B3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF2ABA501EC7CCDA00EC8B3C /* Build configuration list for PBXNativeTarget "RPGTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF2ABA511EC7CCDA00EC8B3C /* Debug */,
+				FF2ABA521EC7CCDA00EC8B3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF2ABA531EC7CCDA00EC8B3C /* Build configuration list for PBXNativeTarget "RPGUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF2ABA541EC7CCDA00EC8B3C /* Debug */,
+				FF2ABA551EC7CCDA00EC8B3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FF2ABA2C1EC7CCDA00EC8B3C /* RPG.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FF2ABA2D1EC7CCDA00EC8B3C /* RPG.xcdatamodel */,
+			);
+			currentVersion = FF2ABA2D1EC7CCDA00EC8B3C /* RPG.xcdatamodel */;
+			path = RPG.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = FF2ABA151EC7CCDA00EC8B3C /* Project object */;
+}
