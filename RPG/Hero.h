@@ -98,6 +98,7 @@
 
 -(void)equipArmor:(Armor*)a;
 -(void)equipWeapon:(Weapon*)w;
+-(BOOL)canUseWeapon:(Weapon*)w;
 
 -(void)unequipHelm;
 -(void)unequipShoulders;

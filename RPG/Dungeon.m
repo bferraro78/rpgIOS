@@ -70,7 +70,6 @@ NSMutableArray *map;
         /* Add Item to Inventory if exists */
         Item *item = [self findLocationX:newX Y:newY Map:map].item;
         if (item != nil) {
-//            System.out.println("Picked up: " + getMap()[newX][newY].getItem().toString());
             [mainCharacter addToInventory:item];
         }
         /* Move hero */

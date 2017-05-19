@@ -19,6 +19,8 @@
 -(NSString*)getType;
 -(NSString*)getElement;
 -(int)getPotency;
+-(void)activateItem:(Hero*)mainCharacter;
+-(void)deactivateItem:(Hero*)mainCharacter;
 
 @end
 

@@ -11,18 +11,20 @@
 @implementation Item
 /* This class hold the structure for an Item */
 
-    NSString *itemDescription;
-    
-    -(id)inititemDescription:(NSString*)aDescription {
-        _itemDescription = aDescription;
-        return self;
-    }
-    
+NSString *itemDescription;
 
-    /* Methods*/
-    -(NSString*)toString { return @""; }
-    -(NSString*)getType { return @""; }
-    -(NSString*)getElement { return @""; }
-    -(int)getPotency { return 0; }
+-(id)inititemDescription:(NSString*)aDescription {
+    _itemDescription = aDescription;
+    return self;
+}
+
+
+/* Methods*/
+-(NSString*)toString { return @""; }
+-(NSString*)getType { return @""; }
+-(NSString*)getElement { return @""; }
+-(int)getPotency { return 0; }
+-(void)activateItem:(Hero*)mainCharacter { }
+-(void)deactivateItem:(Hero*)mainCharacter { }
 
 @end

@@ -26,4 +26,7 @@ int fireStonePotency;
 -(NSString*)getElement { return self.fireStoneElement; }
 -(int)getPotency { return self.fireStonePotency; }
 
+-(void)activateItem:(Hero*)mainCharacter {}
+-(void)deactivateItem:(Hero*)mainCharacter {}
+
 @end

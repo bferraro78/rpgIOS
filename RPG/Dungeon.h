@@ -23,7 +23,6 @@
 @property int heroY;
 
 
-
 -(id)initdungeonLevel:(int)aDungeonLevel heroX:(int)aHeroX heroY:(int)aHeroY;
 
 -(int)moveHeroDirection:(NSString*)dir Hero:(Hero*)mainCharacter;

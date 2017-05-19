@@ -13,9 +13,9 @@
 int rendResourceCost;
 
 -(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription resourceCost:(int)aResourceCost
-            spell:(BOOL)aSpell {
+            spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec {
     
-    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell];
+    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell ElementSpec:aElementSpec];
     _rendResourceCost = aResourceCost;
     
     return self;
@@ -28,7 +28,7 @@ int rendResourceCost;
     printf("Rend!!");
     
     /* Insert Rend Dot */
-    int damage = (mainCharacter.strn/2)+([mainCharacter getMH].attack+[mainCharacter getOH].attack);
+    int damage = (mainCharacter.strn/2)+([[mainCharacter getMH] getSwing]+[[mainCharacter getOH] getSwing]);
     
     mainCharacter.buffLibrary[@"rendDot"] = [[Buff alloc] initvalue:damage duration:3];
     

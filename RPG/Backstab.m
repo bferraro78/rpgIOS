@@ -13,9 +13,9 @@
 int backstabResourceCost;
 
 -(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription resourceCost:(int)aResourceCost
-            spell:(BOOL)aSpell {
+            spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec {
     
-    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell];
+    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell ElementSpec:aElementSpec];
     _backstabResourceCost = aResourceCost;
     
     return self;
@@ -28,7 +28,8 @@ int backstabResourceCost;
     printf("BackStab!!");
     
     /* Insert Damage */
-    int damage = ((mainCharacter.level*15)+mainCharacter.dext)+([mainCharacter getMH].attack+[mainCharacter getOH].attack);
+    int damage = ((mainCharacter.level*15)+mainCharacter.dext)+([[mainCharacter getMH] getSwing]+
+                                                                [[mainCharacter getOH] getSwing]);
     
     NSString *element = [mainCharacter getMH].weaponElement;
     elementMap[element] = [NSNumber numberWithInt:damage];

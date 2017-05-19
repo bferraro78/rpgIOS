@@ -13,9 +13,9 @@
 int freezeconeResourceCost;
 
 -(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription resourceCost:(int)aResourceCost
-            spell:(BOOL)aSpell {
+            spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec {
     
-    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell];
+    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell ElementSpec:aElementSpec];
     _freezeconeResourceCost = aResourceCost;
     
     return self;
@@ -28,7 +28,8 @@ int freezeconeResourceCost;
     printf("Freezecone!!");
     
     /* Insert Damage */
-    int damage = ((mainCharacter.level*5)+mainCharacter.inti)+([mainCharacter getMH].attack+[mainCharacter getOH].attack);
+    int damage = ((mainCharacter.level*5)+mainCharacter.inti)+([[mainCharacter getMH] getSwing]+
+                                                               [[mainCharacter getOH] getSwing]);
     
     elementMap[@"COLD"] = [NSNumber numberWithInt:damage];
     

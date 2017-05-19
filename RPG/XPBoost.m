@@ -24,4 +24,7 @@ int XPPotency;
 -(void)generate { self.XPPotency = arc4random_uniform(15)+5; }
 -(int)getPotency { return self.XPPotency; }
 
+-(void)activateItem:(Hero*)mainCharacter {}
+-(void)deactivateItem:(Hero*)mainCharacter {}
+
 @end

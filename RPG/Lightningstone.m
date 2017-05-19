@@ -26,4 +26,7 @@ int lightningStonePotency;
 -(NSString*)getElement { return self.lightningStoneElement; }
 -(int)getPotency { return self.lightningStonePotency; }
 
+-(void)activateItem:(Hero*)mainCharacter {}
+-(void)deactivateItem:(Hero*)mainCharacter {}
+
 @end

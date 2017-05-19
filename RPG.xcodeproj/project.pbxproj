@@ -34,7 +34,7 @@
 		FF2ABAF81ECBC8A300EC8B3C /* Coldstone.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAF71ECBC8A300EC8B3C /* Coldstone.m */; };
 		FF2ABAFC1ECBDA6600EC8B3C /* XPBoost.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAFB1ECBDA6600EC8B3C /* XPBoost.m */; };
 		FF2ABAFE1ECBEFB300EC8B3C /* ArmorDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABAFD1ECBEFB300EC8B3C /* ArmorDictionary.m */; };
-		FF2ABB021ECC003E00EC8B3C /* WeaponDIctionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB011ECC003E00EC8B3C /* WeaponDIctionary.m */; };
+		FF2ABB021ECC003E00EC8B3C /* WeaponDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB011ECC003E00EC8B3C /* WeaponDictionary.m */; };
 		FF2ABB041ECC072500EC8B3C /* EnemyDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB031ECC072500EC8B3C /* EnemyDictionary.m */; };
 		FF2ABB101ECCB72100EC8B3C /* Backstab.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB0F1ECCB72100EC8B3C /* Backstab.m */; };
 		FF2ABB121ECCB73D00EC8B3C /* Fireball.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB111ECCB73D00EC8B3C /* Fireball.m */; };
@@ -49,6 +49,8 @@
 		FF2ABB2E1ECE609700EC8B3C /* BuffDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB2D1ECE609700EC8B3C /* BuffDictionary.m */; };
 		FF2ABB321ECE688500EC8B3C /* Hero.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB311ECE688500EC8B3C /* Hero.m */; };
 		FF2ABB341ECE68BA00EC8B3C /* BasicAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */; };
+		FF2ABB381ECE720C00EC8B3C /* NPC.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB371ECE720C00EC8B3C /* NPC.m */; };
+		FF2ABB3B1ECEA1C000EC8B3C /* ElementScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB3A1ECEA1C000EC8B3C /* ElementScroll.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,7 +126,7 @@
 		FF2ABAFD1ECBEFB300EC8B3C /* ArmorDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArmorDictionary.m; sourceTree = "<group>"; };
 		FF2ABAFF1ECBEFB900EC8B3C /* ArmorDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArmorDictionary.h; sourceTree = "<group>"; };
 		FF2ABB001ECC003500EC8B3C /* WeaponDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeaponDictionary.h; sourceTree = "<group>"; };
-		FF2ABB011ECC003E00EC8B3C /* WeaponDIctionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeaponDIctionary.m; sourceTree = "<group>"; };
+		FF2ABB011ECC003E00EC8B3C /* WeaponDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeaponDictionary.m; sourceTree = "<group>"; };
 		FF2ABB031ECC072500EC8B3C /* EnemyDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyDictionary.m; sourceTree = "<group>"; };
 		FF2ABB051ECC072D00EC8B3C /* EnemyDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnemyDictionary.h; sourceTree = "<group>"; };
 		FF2ABB0E1ECCB71B00EC8B3C /* Backstab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Backstab.h; sourceTree = "<group>"; };
@@ -152,6 +154,10 @@
 		FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicAttack.m; sourceTree = "<group>"; };
 		FF2ABB351ECE68D400EC8B3C /* BasicAttack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicAttack.h; sourceTree = "<group>"; };
 		FF2ABB361ECE68F400EC8B3C /* Combat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Combat.h; sourceTree = "<group>"; };
+		FF2ABB371ECE720C00EC8B3C /* NPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPC.m; sourceTree = "<group>"; };
+		FF2ABB391ECE721200EC8B3C /* NPC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NPC.h; sourceTree = "<group>"; };
+		FF2ABB3A1ECEA1C000EC8B3C /* ElementScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementScroll.m; sourceTree = "<group>"; };
+		FF2ABB3C1ECEA1C600EC8B3C /* ElementScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElementScroll.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,8 +278,8 @@
 			children = (
 				FF2ABAAF1EC9548800EC8B3C /* Space.m */,
 				FF2ABAB11EC9549400EC8B3C /* Space.h */,
-				FF2ABAB21ECA1A8F00EC8B3C /* Item.h */,
 				FF2ABAB31ECA1A9A00EC8B3C /* Item.m */,
+				FF2ABAB21ECA1A8F00EC8B3C /* Item.h */,
 				FF2ABAD41ECA686E00EC8B3C /* Buff.m */,
 				FF2ABAD61ECA687700EC8B3C /* Buff.h */,
 				FF2ABB271ECCDBAA00EC8B3C /* Skill.m */,
@@ -298,6 +304,8 @@
 			children = (
 				FF2ABADB1ECA6FD900EC8B3C /* Dungeon.m */,
 				FF2ABADE1ECA6FEB00EC8B3C /* Dungeon.h */,
+				FF2ABB371ECE720C00EC8B3C /* NPC.m */,
+				FF2ABB391ECE721200EC8B3C /* NPC.h */,
 			);
 			name = Places;
 			sourceTree = "<group>";
@@ -309,7 +317,7 @@
 				FF2ABAE91ECB9DC400EC8B3C /* ItemDictionary.h */,
 				FF2ABAFD1ECBEFB300EC8B3C /* ArmorDictionary.m */,
 				FF2ABAFF1ECBEFB900EC8B3C /* ArmorDictionary.h */,
-				FF2ABB011ECC003E00EC8B3C /* WeaponDIctionary.m */,
+				FF2ABB011ECC003E00EC8B3C /* WeaponDictionary.m */,
 				FF2ABB001ECC003500EC8B3C /* WeaponDictionary.h */,
 				FF2ABB031ECC072500EC8B3C /* EnemyDictionary.m */,
 				FF2ABB051ECC072D00EC8B3C /* EnemyDictionary.h */,
@@ -324,6 +332,8 @@
 		FF2ABAEA1ECBA2BE00EC8B3C /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				FF2ABB3A1ECEA1C000EC8B3C /* ElementScroll.m */,
+				FF2ABB3C1ECEA1C600EC8B3C /* ElementScroll.h */,
 				FF2ABAEB1ECBAB4C00EC8B3C /* Firestone.m */,
 				FF2ABAED1ECBAB5200EC8B3C /* Firestone.h */,
 				FF2ABAEF1ECBC87E00EC8B3C /* Lightningstone.m */,
@@ -509,12 +519,13 @@
 				FF2ABAF61ECBC89D00EC8B3C /* Poisonstone.m in Sources */,
 				FF2ABAE51ECB593400EC8B3C /* Item.m in Sources */,
 				FF2ABAE41ECA7D7600EC8B3C /* Space.m in Sources */,
-				FF2ABB021ECC003E00EC8B3C /* WeaponDIctionary.m in Sources */,
+				FF2ABB021ECC003E00EC8B3C /* WeaponDictionary.m in Sources */,
 				FF2ABAFC1ECBDA6600EC8B3C /* XPBoost.m in Sources */,
 				FF2ABAD51ECA686E00EC8B3C /* Buff.m in Sources */,
 				FF2ABB041ECC072500EC8B3C /* EnemyDictionary.m in Sources */,
 				FF2ABB1E1ECCB78C00EC8B3C /* Rend.m in Sources */,
 				FF2ABAC81ECA448C00EC8B3C /* Barbarian.m in Sources */,
+				FF2ABB3B1ECEA1C000EC8B3C /* ElementScroll.m in Sources */,
 				FF2ABACC1ECA4D3900EC8B3C /* Wizard.m in Sources */,
 				FF2ABAC31ECA323600EC8B3C /* Armor.m in Sources */,
 				FF2ABAC41ECA323600EC8B3C /* Weapon.m in Sources */,
@@ -527,6 +538,7 @@
 				FF2ABB1B1ECCB78100EC8B3C /* Heal.m in Sources */,
 				FF2ABAFE1ECBEFB300EC8B3C /* ArmorDictionary.m in Sources */,
 				FF2ABB341ECE68BA00EC8B3C /* BasicAttack.m in Sources */,
+				FF2ABB381ECE720C00EC8B3C /* NPC.m in Sources */,
 				FF2ABA2E1EC7CCDA00EC8B3C /* RPG.xcdatamodeld in Sources */,
 				FF2ABB2B1ECD0AE000EC8B3C /* Combat.m in Sources */,
 				FF2ABAF21ECBC88900EC8B3C /* Arcanestone.m in Sources */,

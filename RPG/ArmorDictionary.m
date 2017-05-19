@@ -13,7 +13,7 @@
 NSMutableArray *armorLibrary;
 
 
-/* Load Items -- Called When Game is Started */
+/* Load Armors -- Called When Game is Started */
 +(void)loadArmor {
     printf("LOADING ARMORS...\n");
     

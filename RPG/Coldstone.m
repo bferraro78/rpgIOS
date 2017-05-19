@@ -26,4 +26,8 @@ int coldStonePotency;
 -(NSString*)getElement { return self.coldStoneElement; }
 -(int)getPotency { return self.coldStonePotency; }
 
+
+-(void)activateItem:(Hero*)mainCharacter {}
+-(void)deactivateItem:(Hero*)mainCharacter {}
+
 @end

@@ -35,7 +35,6 @@ NSMutableArray *enemyLibrary;
     int heroArmor = [mainCharacter getTotalArmor];
     int heroHeatlh = mainCharacter.health;
     
-    // TODO -- FIX ARMOR GENERATOR
     chosenEnemy.enemyStrn = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
     chosenEnemy.enemyInti = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
     chosenEnemy.enemyDext = arc4random_uniform(heroPrimaryStat/2)+heroLevel;

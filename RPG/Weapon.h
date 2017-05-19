@@ -16,11 +16,12 @@
 @property NSString *weaponName;
 @property int weaponRange;
 @property NSString *weaponElement;
+@property BOOL twoHand;
+@property BOOL isMainHand;
 
+-(id)initweaponID:(int)aID weaponName:(NSString*)aName weaponType:(NSString*)aType twoHand:(BOOL)aTwohand MH:(BOOL)aIsMainHand;
 
--(id)initweaponID:(int)aID weaponName:(NSString*)aName weaponType:(NSString*)aType;
-
-
+-(int)getSwing;
 
 @end
 #endif /* Weapon_h */

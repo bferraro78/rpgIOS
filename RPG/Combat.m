@@ -202,8 +202,47 @@
         crit = true;
     }
     
-    // TODO-- SET UP POISON DOT PASSIVE
-    
+    /** Elemental Spec - POISON POISON DOT PASSIVE **/
+    if ([mainCharacter.elementSpec isEqualToString:@"POSION"]) {
+        /** Handle Poison Passive Here **/
+        /* DOT IS 25% of what the damage is over two turns */
+        for(NSString* currentKey in mainCharacter.buffLibrary) {
+            Buff* b = (Buff*)[mainCharacter.buffLibrary objectForKey:currentKey];
+            int poisonDotDamage = (float)b.value*0.25;
+            printf("%i", poisonDotDamage);
+            if (poisonDotDamage > 0 && [currentKey rangeOfString:@"stone"].location != NSNotFound) {
+                // then this is a damage that is not a DOT and Not already A Poison Passive Dot
+                [mainCharacter.poisonPassiveDots addObject:[[Buff alloc] initvalue:poisonDotDamage duration:2]];
+            }
+        }
+        
+        /** Turn Damage from elements/physical into a dot **/
+        int damageFromTurn =  fireDamage + lightningDamage + coldDamage + poisonDamage + arcaneDamage + physicalDamage;
+        if (damageFromTurn > 0) {
+            int tmp = (float)damageFromTurn*0.25;
+            [mainCharacter.poisonPassiveDots addObject:[[Buff alloc] initvalue:tmp duration:2]];
+        }
+        
+        /* Carry Out Damage from Poison Passive Dots */
+        for (int i = 0; i < [mainCharacter.poisonPassiveDots count]; i++) {
+            Buff *passiveDot = [mainCharacter.poisonPassiveDots objectAtIndex:i];
+            printf( "%s", [[BuffDictionary getDescription:@"poisonPassiveDot"] UTF8String]);
+            printf("%i", (int)passiveDot.value);
+            poisonDamage += passiveDot.value;
+        }
+        /* Decrease Duration */
+        for (int i = 0; i < [mainCharacter.poisonPassiveDots count]; i++) {
+            Buff *passiveDot = [mainCharacter.poisonPassiveDots objectAtIndex:i];
+            [passiveDot decreaseDuration];
+        }
+        /* Remove if nessicary */
+        for (int i = 0; i < [mainCharacter.poisonPassiveDots count]; i++) {
+            Buff *passiveDot = [mainCharacter.poisonPassiveDots objectAtIndex:i];
+            if (passiveDot. duration == 0) {
+                [mainCharacter.poisonPassiveDots removeObjectAtIndex:i];
+            }
+        }
+    }
     
     
     /** HANDLE LINGERING SPELLS/ABILITIES **/

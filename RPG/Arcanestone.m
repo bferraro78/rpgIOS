@@ -26,4 +26,7 @@ int arcaneStonePotency;
 -(NSString*)getElement { return self.arcaneStoneElement; }
 -(int)getPotency { return self.arcaneStonePotency; }
 
+-(void)activateItem:(Hero*)mainCharacter {}
+-(void)deactivateItem:(Hero*)mainCharacter {}
+
 @end

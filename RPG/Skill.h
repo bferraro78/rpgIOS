@@ -15,8 +15,10 @@
 @property NSString *moveName;
 @property NSString *moveDescription;
 @property BOOL spell;
+@property NSString *skillElementSpec;
 
--(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription spell:(BOOL)aSpell;
+-(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription
+            spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec;
 
 -(int)getCombatResourceCost:(int)totalResource;
 -(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap;

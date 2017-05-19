@@ -26,4 +26,7 @@ int poisonStonePotency;
 -(NSString*)getElement { return self.poisonStoneElement; }
 -(int)getPotency { return self.poisonStonePotency; }
 
+-(void)activateItem:(Hero*)mainCharacter {}
+-(void)deactivateItem:(Hero*)mainCharacter {}
+
 @end

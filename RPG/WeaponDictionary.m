@@ -18,6 +18,8 @@ NSMutableArray *weaponLibrary;
     weaponLibrary = [[NSMutableArray alloc] init];
     
     // LOAD WEAPONS
+    
+    
 }
 
 +(Weapon*)generateRandomWeapon:(Hero*)mainCharacter {
@@ -29,7 +31,7 @@ NSMutableArray *weaponLibrary;
     /* Get Hero stats and generate Armor stats base on level */
     int heroLevel = mainCharacter.level;
     
-    // TODO - SET WEAPON ATTACK BETTER
+    // TODO - SET WEAPON ATTACK/RANGE BASED ON WEAPONTYPE BETTER
     if (heroLevel < 20) {
         chosenWeapon.attack = arc4random_uniform(heroLevel+10)+heroLevel;
     } else if (heroLevel < 60) {
@@ -37,6 +39,7 @@ NSMutableArray *weaponLibrary;
     } else {
         chosenWeapon.attack = arc4random_uniform(heroLevel+30)+(heroLevel-10);
     }
+    
     
     /* 20% Chance item is physical damage - *80% elemental*/
     int elementalOrPhysical = arc4random_uniform(100);

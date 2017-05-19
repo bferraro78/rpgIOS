@@ -16,7 +16,7 @@
 @property int basicattackResourceCost;
 
 -(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription resourceCost:(int)aResourceCost
-            spell:(BOOL)aSpell;
+            spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec;
 
 
 -(int)getCombatResourceCost:(int)totalResource;

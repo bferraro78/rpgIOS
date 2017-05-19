@@ -38,7 +38,7 @@ int main(int argc, char * argv[]) {
     printf("Hero STRENGTH number: %u\n", herooo.strn);
     
     
-    Dungeon *map = [[Dungeon alloc] initdungeonLevel:1 heroX:0 heroY:0];
+    Dungeon *map = [[Dungeon alloc] initdungeonLevel:30 heroX:0 heroY:0];
     [map printMap];
     
     [map moveHeroDirection:@"down" Hero:barb];

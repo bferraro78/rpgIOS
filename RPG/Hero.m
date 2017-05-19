@@ -342,7 +342,6 @@ int startY;
 
 /** Set Armor/Weapons **/
 
-
 -(void)equipArmor:(Armor*)a {
     if ([a.armorType isEqualToString:@"Helmet"]) {
         self.helm = a;
@@ -373,15 +372,59 @@ int startY;
 }
 
 -(void)equipWeapon:(Weapon*)w {
-    if ([w.weaponType isEqualToString:@"MH"]) {
-        self.mainHand = w;
+    if (w.isMainHand) {
+        if ([self canUseWeapon:w]) {
+            if (w.twoHand) {
+                // Unquip OffHand
+                [self unequipOH];
+                self.mainHand = w;
+            } else {
+                self.mainHand = w;
+            }
+        } else {
+            printf("Class can't use weapon");
+        }
     } else { // OH
-        self.offHand = w;
+        if ([self canUseWeapon:w]) {
+            self.offHand = w;
+        } else {
+            printf("Class can't use weapon");
+        }
     }
-    [self resetVariables];
+    
     [self removeFromInventory:w];
 }
 
+-(BOOL)canUseWeapon:(Weapon*)w {
+    if ([[self getClassName] isEqualToString:@"Barb"]) {
+        if (![w.weaponType isEqualToString:@"Wand"]) {
+            return true;
+        }
+    } else if ([[self getClassName] isEqualToString:@"Wizard"]) {
+        /* WIZARDS CAN'T DUAL WIELD */
+        if (w.isMainHand) { // MH
+            if ([w.weaponType isEqualToString:@"Wand"] || [w.weaponType isEqualToString:@"Staff"] ||
+                [w.weaponType isEqualToString:@"Sword"] || [w.weaponType isEqualToString:@"Dagger"] ||
+                [w.weaponType isEqualToString:@"Shield"]) {
+                return true;
+            }
+        } else { // OH
+            if ([w.weaponType isEqualToString:@"Shield"]) {
+                return true;
+            } else {
+                printf("Class Can't Dual Wield");
+            }
+        }
+    } else { // Rogue
+        if ([w.weaponType isEqualToString:@"Blunt"] || [w.weaponType isEqualToString:@"Axe"] ||
+            [w.weaponType isEqualToString:@"Sword"] || [w.weaponType isEqualToString:@"Dagger"]) {
+            return true;
+        }
+    }
+
+    return false;
+
+}
 
 /** Unequip Items **/
 -(void)unequipHelm {
@@ -741,14 +784,14 @@ int startY;
 /* Get Armor/Weapons */
 -(Weapon*)getMH {
     if (self.mainHand == nil) {
-        return [[Weapon alloc] initweaponID:0 weaponName:@"" weaponType:@""];
+        return [[Weapon alloc] initweaponID:0 weaponName:@"" weaponType:@"" twoHand:false MH:false];
     } else {
         return self.mainHand;
     }
 }
 -(Weapon*)getOH {
     if (self.offHand == nil) {
-        return [[Weapon alloc] initweaponID:0 weaponName:@"" weaponType:@""];
+        return [[Weapon alloc] initweaponID:0 weaponName:@"" weaponType:@"" twoHand:false MH:false];
     } else {
         return self.offHand;
     }
