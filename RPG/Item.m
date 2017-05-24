@@ -24,7 +24,6 @@ NSString *itemDescription;
 -(NSString*)getType { return @""; }
 -(NSString*)getElement { return @""; }
 -(int)getPotency { return 0; }
--(void)activateItem:(Hero*)mainCharacter { }
--(void)deactivateItem:(Hero*)mainCharacter { }
+-(void)generate { }
 
 @end

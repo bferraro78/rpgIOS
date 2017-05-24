@@ -17,7 +17,6 @@ int coldStonePotency;
 -(id)initdescription:(NSString*)aDescription Element:(NSString*)aElement {
     [super inititemDescription:aDescription];
     _coldStoneElement = aElement;
-    [self generate];
     return self;
 }
 
@@ -25,9 +24,11 @@ int coldStonePotency;
 -(void)generate { self.coldStonePotency = arc4random_uniform(15)+5;}
 -(NSString*)getElement { return self.coldStoneElement; }
 -(int)getPotency { return self.coldStonePotency; }
+-(NSString*)toString {
+    NSMutableString *ret = [[NSMutableString alloc] init];
+    [ret appendFormat:@"%s - %u%%", [[self getType] UTF8String], [self getPotency]];
+    return ret;
+}
 
-
--(void)activateItem:(Hero*)mainCharacter {}
--(void)deactivateItem:(Hero*)mainCharacter {}
 
 @end

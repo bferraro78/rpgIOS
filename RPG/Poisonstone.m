@@ -17,7 +17,6 @@ int poisonStonePotency;
 -(id)initdescription:(NSString*)aDescription Element:(NSString*)aElement {
     [super inititemDescription:aDescription];
     _poisonStoneElement = aElement;
-    [self generate];
     return self;
 }
 
@@ -25,8 +24,10 @@ int poisonStonePotency;
 -(void)generate { self.poisonStonePotency = arc4random_uniform(15)+5;}
 -(NSString*)getElement { return self.poisonStoneElement; }
 -(int)getPotency { return self.poisonStonePotency; }
-
--(void)activateItem:(Hero*)mainCharacter {}
--(void)deactivateItem:(Hero*)mainCharacter {}
+-(NSString*)toString {
+    NSMutableString *ret = [[NSMutableString alloc] init];
+    [ret appendFormat:@"%s - %u%%", [[self getType] UTF8String], [self getPotency]];
+    return ret;
+}
 
 @end

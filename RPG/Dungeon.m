@@ -41,7 +41,7 @@ NSMutableArray *map;
     return self;
 }
 
--(int)moveHeroDirection:(NSString*)dir Hero:(Hero*)mainCharacter {
+-(int)moveHeroDirection:(NSString*)dir Hero:(Hero*)mainCharacter itemPicked:(NSMutableString*)itemPicked {
     int newX = self.heroX;
     int newY = self.heroY;
     int code;
@@ -60,16 +60,17 @@ NSMutableArray *map;
     if (!(newX >= 0 && newX < self.size && newY >= 0 && newY < self.size) ||
         [self findLocationX:newX Y:newY Map:self.map].x == 3) {
         /* Fight monster, do nothing with hero */
-        // ADD SPOT TO ALREADY TRAVELED?
         printf("FIGHTT!!!!!\n");
         code = 2;
-    } else if (newX == self.end.x && newY == self.end.y) { // YOU WIIN
-//        System.out.println("VICTORY SCREEEECH!!");
+    } else if ([self findLocationX:newX Y:newY Map:self.map].x == 2) { // YOU WIIN
+        printf("VICTORY SCREEEECH!!");
         code = 3;
     } else {
         /* Add Item to Inventory if exists */
-        Item *item = [self findLocationX:newX Y:newY Map:map].item;
+        Item *item = [self findLocationX:newX Y:newY Map:self.map].item;
         if (item != nil) {
+            printf("PICKED UP ITEM %s", [[item toString] UTF8String]);
+            [itemPicked appendFormat:@"PICKED UP ITEM %s", [[item toString] UTF8String]];
             [mainCharacter addToInventory:item];
         }
         /* Move hero */
@@ -128,7 +129,7 @@ NSMutableArray *map;
             if (direction >= 0 && direction < 25) { // Create Space UP Direction
                 if (x-1 >= 0 && x-1 < self.size && y >= 0 && y < self.size && [self findLocationX:x-1 Y:y Map:tmpMap].x == 3) { // Check bounds, if not in bounds, try another move
                     if (isItem) {
-                        Item *i = [ItemDictionary generateRandomItem];
+                        Item *i = [ItemDictionary generateRandomItem:false];
                         [[tmpMap objectAtIndex:x-1] replaceObjectAtIndex:y withObject:[[Space alloc] initx:1 y:1 item:i]];
                     } else {
                         [[tmpMap objectAtIndex:x-1] replaceObjectAtIndex:y withObject:[[Space alloc] initx:1 y:1 item:nil]];
@@ -142,7 +143,7 @@ NSMutableArray *map;
             if (direction >= 26 && direction < 50) { // Create Space RIGHT Direction
                 if (x >= 0 && x < self.size && y+1 >= 0 && y+1 < self.size && [self findLocationX:x Y:y+1 Map:tmpMap].x == 3) { // Check bounds, if not in bounds, try another move
                     if (isItem) {
-                        Item *i = [ItemDictionary generateRandomItem];
+                        Item *i = [ItemDictionary generateRandomItem:false];
                         [[tmpMap objectAtIndex:x] replaceObjectAtIndex:y+1 withObject:[[Space alloc] initx:1 y:1 item:i]];
                     } else {
                         [[tmpMap objectAtIndex:x] replaceObjectAtIndex:y+1 withObject:[[Space alloc] initx:1 y:1 item:nil]];
@@ -155,7 +156,7 @@ NSMutableArray *map;
             if (direction >= 51 && direction < 75) { // Create Space LEFT Direction
                 if (x >= 0 && x < self.size && y-1 >= 0 && y-1 < self.size && [self findLocationX:x Y:y-1 Map:tmpMap].x == 3) { // Check bounds, if not in bounds, try another move
                     if (isItem) {
-                        Item *i = [ItemDictionary generateRandomItem];
+                        Item *i = [ItemDictionary generateRandomItem:false];
                         [[tmpMap objectAtIndex:x] replaceObjectAtIndex:y-1 withObject:[[Space alloc] initx:1 y:1 item:i]];
                     } else {
                         [[tmpMap objectAtIndex:x] replaceObjectAtIndex:y-1 withObject:[[Space alloc] initx:1 y:1 item:nil]];
@@ -168,7 +169,7 @@ NSMutableArray *map;
             if (direction >= 76 && direction <= 100) { // Create Space DOWN Direction
                 if (x+1 >= 0 && x+1 < self.size && y >= 0 && y < self.size && [self findLocationX:x+1 Y:y Map:tmpMap].x == 3) { // Check bounds, if not in bounds, try another move
                     if (isItem) {
-                        Item *i = [ItemDictionary generateRandomItem];
+                        Item *i = [ItemDictionary generateRandomItem:false];
                         [[tmpMap objectAtIndex:x+1] replaceObjectAtIndex:y withObject:[[Space alloc] initx:1 y:1 item:i]];
                     } else {
                         [[tmpMap objectAtIndex:x+1] replaceObjectAtIndex:y withObject:[[Space alloc] initx:1 y:1 item:nil]];
@@ -180,13 +181,17 @@ NSMutableArray *map;
             
             if (valid && count > 20) { // generator is stuck
                 if (x+1 >= 0 && x+1 < self.size && y >= 0 && y < self.size) {
-                    [[tmpMap objectAtIndex:x+1] replaceObjectAtIndex:y withObject:[[Space alloc] initx:3 y:3 item:nil]];
+                    [[tmpMap objectAtIndex:x+1] replaceObjectAtIndex:y withObject:
+                     [[Space alloc] initx:3 y:3 item:nil]];
                 } else if (x-1 >= 0 && x-1 < self.size && y >= 0 && y < self.size) {
-                    [[tmpMap objectAtIndex:x-1] replaceObjectAtIndex:y withObject:[[Space alloc] initx:3 y:3 item:nil]];
+                    [[tmpMap objectAtIndex:x-1] replaceObjectAtIndex:y withObject:
+                     [[Space alloc] initx:3 y:3 item:nil]];
                 } else if (x >= 0 && x < self.size && y+1 >= 0 && y+1 < self.size) {
-                   [[tmpMap objectAtIndex:x] replaceObjectAtIndex:y+1 withObject:[[Space alloc] initx:3 y:3 item:nil]];
+                    [[tmpMap objectAtIndex:x] replaceObjectAtIndex:y+1 withObject:
+                     [[Space alloc] initx:3 y:3 item:nil]];
                 } else {
-                    [[tmpMap objectAtIndex:x] replaceObjectAtIndex:y-1 withObject:[[Space alloc] initx:3 y:3 item:nil]];
+                    [[tmpMap objectAtIndex:x] replaceObjectAtIndex:y-1 withObject:
+                     [[Space alloc] initx:3 y:3 item:nil]];
                 }
             }
             
@@ -202,17 +207,28 @@ NSMutableArray *map;
     return tmpMap;
 }
 
--(void)printMap {
+-(NSMutableString*)printMap {
+    NSMutableString *mapprint = [[NSMutableString alloc]init];
     for (int x = 0; x < self.size; x++) {
         for (int y = 0; y < self.size; y++) {
-           Space *spot = [self findLocationX:x Y:y Map:self.map];
-            printf(" %u ", spot.x);
-//            printf( " %s ", [[spot.item getType] UTF8String]);
+            Space *spot = [self findLocationX:x Y:y Map:self.map];
+            if (spot.x == 4) {
+                [mapprint appendString:@" H "];
+            } else if (spot.x == 1) {
+                [mapprint appendString:@" P "];
+            } else if (spot.x == 3) {
+                [mapprint appendString:@" W "];
+            } else if (spot.x == 0) {
+                [mapprint appendString:@" S "];
+            } else { // END
+                [mapprint appendString:@" E "];
+            }
+            
         }
-        printf("\n");
+        [mapprint appendString:@"\n"];
     }
-    printf("\n");
-
+    [mapprint appendString:@"\n"];
+    return mapprint;
 }
 
 

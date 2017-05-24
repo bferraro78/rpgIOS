@@ -15,12 +15,13 @@
 #import "Poisonstone.h"
 #import "Arcanestone.h"
 #import "XPBoost.h"
+#import "ElementScroll.h"
 @interface ItemDictionary : NSObject
 
 @property NSMutableArray *itemLibrary;
 
 +(void)loadItems;
-+(Item*)generateRandomItem;
++(Item*)generateRandomItem:(BOOL)isLoot;
 +(Item*)findItem:(NSString*)s;
 @end
 

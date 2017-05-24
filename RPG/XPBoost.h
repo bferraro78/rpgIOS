@@ -9,6 +9,7 @@
 #ifndef XPBoost_h
 #define XPBoost_h
 #import "Item.h"
+#import "Hero.h"
 @interface XPBoost : Item
 
 @property int XPPotency;
@@ -17,8 +18,8 @@
 -(id)initdescription:(NSString*)aDescription;
 -(NSString*)getType;
 -(int)getPotency;
--(void)activateItem:(Hero*)mainCharacter;
--(void)deactivateItem:(Hero*)mainCharacter;
+-(NSString*)toString;
+-(void)generate;
 
 @end
 

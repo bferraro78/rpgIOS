@@ -51,6 +51,8 @@
 		FF2ABB341ECE68BA00EC8B3C /* BasicAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */; };
 		FF2ABB381ECE720C00EC8B3C /* NPC.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB371ECE720C00EC8B3C /* NPC.m */; };
 		FF2ABB3B1ECEA1C000EC8B3C /* ElementScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB3A1ECEA1C000EC8B3C /* ElementScroll.m */; };
+		FF6DE0431ED4AB9400A3C62F /* Inventory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF6DE0421ED4AB9400A3C62F /* Inventory.storyboard */; };
+		FF6DE0461ED4E95200A3C62F /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6DE0451ED4E95200A3C62F /* InventoryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +160,9 @@
 		FF2ABB391ECE721200EC8B3C /* NPC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NPC.h; sourceTree = "<group>"; };
 		FF2ABB3A1ECEA1C000EC8B3C /* ElementScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementScroll.m; sourceTree = "<group>"; };
 		FF2ABB3C1ECEA1C600EC8B3C /* ElementScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElementScroll.h; sourceTree = "<group>"; };
+		FF6DE0421ED4AB9400A3C62F /* Inventory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Inventory.storyboard; sourceTree = "<group>"; };
+		FF6DE0441ED4E95200A3C62F /* InventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
+		FF6DE0451ED4E95200A3C62F /* InventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,10 +221,13 @@
 				FF2ABAA81EC94A2300EC8B3C /* Equipment */,
 				FF2ABAA61EC9468200EC8B3C /* Misc */,
 				FF2ABAA31EC93B9000EC8B3C /* Classes */,
-				FF2ABA231EC7CCDA00EC8B3C /* AppDelegate.h */,
 				FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */,
-				FF2ABA261EC7CCDA00EC8B3C /* ViewController.h */,
+				FF2ABA231EC7CCDA00EC8B3C /* AppDelegate.h */,
+				FF6DE0451ED4E95200A3C62F /* InventoryViewController.m */,
+				FF6DE0441ED4E95200A3C62F /* InventoryViewController.h */,
+				FF6DE0421ED4AB9400A3C62F /* Inventory.storyboard */,
 				FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */,
+				FF2ABA261EC7CCDA00EC8B3C /* ViewController.h */,
 				FF2ABA291EC7CCDA00EC8B3C /* Main.storyboard */,
 				FF2ABA2F1EC7CCDA00EC8B3C /* Assets.xcassets */,
 				FF2ABA311EC7CCDA00EC8B3C /* LaunchScreen.storyboard */,
@@ -485,6 +493,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF6DE0431ED4AB9400A3C62F /* Inventory.storyboard in Resources */,
 				FF2ABA331EC7CCDA00EC8B3C /* LaunchScreen.storyboard in Resources */,
 				FF2ABA301EC7CCDA00EC8B3C /* Assets.xcassets in Resources */,
 				FF2ABA2B1EC7CCDA00EC8B3C /* Main.storyboard in Resources */,
@@ -512,15 +521,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF2ABAE51ECB593400EC8B3C /* Item.m in Sources */,
+				FF2ABAE41ECA7D7600EC8B3C /* Space.m in Sources */,
 				FF2ABAE81ECB9DB700EC8B3C /* ItemDictionary.m in Sources */,
 				FF2ABB281ECCDBAA00EC8B3C /* Skill.m in Sources */,
 				FF2ABAF81ECBC8A300EC8B3C /* Coldstone.m in Sources */,
 				FF2ABB241ECCB81D00EC8B3C /* SkillDictionary.m in Sources */,
 				FF2ABAF61ECBC89D00EC8B3C /* Poisonstone.m in Sources */,
-				FF2ABAE51ECB593400EC8B3C /* Item.m in Sources */,
-				FF2ABAE41ECA7D7600EC8B3C /* Space.m in Sources */,
 				FF2ABB021ECC003E00EC8B3C /* WeaponDictionary.m in Sources */,
 				FF2ABAFC1ECBDA6600EC8B3C /* XPBoost.m in Sources */,
+				FF6DE0461ED4E95200A3C62F /* InventoryViewController.m in Sources */,
 				FF2ABAD51ECA686E00EC8B3C /* Buff.m in Sources */,
 				FF2ABB041ECC072500EC8B3C /* EnemyDictionary.m in Sources */,
 				FF2ABB1E1ECCB78C00EC8B3C /* Rend.m in Sources */,

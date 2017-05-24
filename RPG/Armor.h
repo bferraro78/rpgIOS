@@ -23,7 +23,7 @@
 
 
 -(id)initarmorID:(int)aID  armorName:(NSString*)aName armorType:(NSString*)aType;
-
+-(NSMutableString*)toString;
 
 
 

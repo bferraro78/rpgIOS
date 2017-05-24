@@ -109,8 +109,9 @@
 -(void)unequipBoots;
 -(void)unequipMH;
 -(void)unequipOH;
+-(void)inventoryManagement:(NSObject*)invItem;
 
--(void)revealInventory;
+-(NSMutableString*)revealInventory;
 -(void)addToInventory:(id)o;
 -(void)removeFromInventory:(id)o;
 -(void)receiveLoot:(NSMutableArray*)loot;
@@ -143,7 +144,13 @@
 -(Armor*)getGloves;
 -(Armor*)getBracers;
 
-
+-(NSMutableString*)printBody;
+-(NSMutableString*)printStats;
+/** Print Resistance Maps **/
+-(NSMutableString*)printOffenseResMap;
+-(NSMutableString*)printDefenseResMap;
+/* Active Items */
+-(NSMutableString*)printActiveItems;
 
 
 

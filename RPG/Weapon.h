@@ -22,6 +22,7 @@
 -(id)initweaponID:(int)aID weaponName:(NSString*)aName weaponType:(NSString*)aType twoHand:(BOOL)aTwohand MH:(BOOL)aIsMainHand;
 
 -(int)getSwing;
+-(NSMutableString*)toString;
 
 @end
 #endif /* Weapon_h */

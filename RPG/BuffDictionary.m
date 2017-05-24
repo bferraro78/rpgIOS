@@ -24,7 +24,7 @@ NSMutableDictionary *buffLib;
     [buffLib setObject:@"rendDot" forKey:@"Rend: Enemey Gushing Blood "];
     [buffLib setObject:@"vanish" forKey:@"Vanish: Cannot Find You... " ];
 
-    [buffLib setObject:@"poisonPassiveDot" forKey:@"Poison Passive Dot: "];
+    [buffLib setObject:@"poisonPassiveDot" forKey:@"Poison Passive Dot "];
 }
 
 +(NSString*)getDescription:(NSString*)s {

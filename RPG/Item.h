@@ -8,7 +8,6 @@
 
 #ifndef Item_h
 #define Item_h
-#import "Hero.h"
 @class Item;
 @interface Item : NSObject
 
@@ -20,9 +19,8 @@
 -(NSString*)getType;
 -(NSString*)getElement;
 -(int)getPotency;
-/* Add or take away any buffs from an item (Such as a resistance from a stone */
--(void)activateItem:(Hero*)mainCharacter;
--(void)deactivateItem:(Hero*)mainCharacter;
+-(void)generate;
+
 @end
 
 #endif /* Item_h */

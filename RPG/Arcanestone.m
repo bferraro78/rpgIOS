@@ -17,7 +17,6 @@ int arcaneStonePotency;
 -(id)initdescription:(NSString*)aDescription Element:(NSString*)aElement {
     [super inititemDescription:aDescription];
     _arcaneStoneElement = aElement;
-    [self generate];
     return self;
 }
 
@@ -25,8 +24,10 @@ int arcaneStonePotency;
 -(void)generate { self.arcaneStonePotency = arc4random_uniform(15)+5;}
 -(NSString*)getElement { return self.arcaneStoneElement; }
 -(int)getPotency { return self.arcaneStonePotency; }
-
--(void)activateItem:(Hero*)mainCharacter {}
--(void)deactivateItem:(Hero*)mainCharacter {}
+-(NSString*)toString {
+    NSMutableString *ret = [[NSMutableString alloc] init];
+    [ret appendFormat:@"%s - %u%%", [[self getType] UTF8String], [self getPotency]];
+    return ret;
+}
 
 @end

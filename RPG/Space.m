@@ -10,9 +10,9 @@
 #import "Space.h"
 
 @implementation Space
-    int x;
-    int y;
-    Item *item;
+int x;
+int y;
+Item *item;
 
 -(id)initx:(int)aX y:(int)aY item:(Item*)aItem {
     _x = aX;

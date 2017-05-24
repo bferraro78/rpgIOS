@@ -26,9 +26,11 @@ NSMutableArray *enemyLibrary;
 +(Enemy*)generateRandomEnemy:(Hero*)mainCharacter {
     int size = (int)[enemyLibrary count];
     int choice = arc4random_uniform(size);
-    Enemy *chosenEnemy = [enemyLibrary objectAtIndex:choice];
-
     
+    /* Make copy of template from library */
+    Enemy *tmpEnemy = [enemyLibrary objectAtIndex:choice];
+    Enemy *chosenEnemy = [[Enemy alloc] initenemyName:tmpEnemy.enemyName enemyElement:tmpEnemy.enemyElement enemySkillSet:tmpEnemy.enemySkillSet enemyStrn:tmpEnemy.enemyStrn enemyInti:tmpEnemy.enemyInti enemyDext:tmpEnemy.enemyDext enemyHealth:tmpEnemy.enemyHealth enemyArmor:tmpEnemy.enemyArmor];
+
     /* Generate Random Enemy */
     int heroPrimaryStat = [mainCharacter getPrimaryStat];
     int heroLevel = mainCharacter.level;
@@ -38,7 +40,7 @@ NSMutableArray *enemyLibrary;
     chosenEnemy.enemyStrn = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
     chosenEnemy.enemyInti = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
     chosenEnemy.enemyDext = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
-    chosenEnemy.enemyHealth = (arc4random_uniform(heroHeatlh)+(heroLevel))+20;
+    [chosenEnemy setHealth:((arc4random_uniform(heroHeatlh)+(heroLevel))+20)];
     chosenEnemy.enemyArmor = arc4random_uniform(heroArmor)+heroLevel;
 
     

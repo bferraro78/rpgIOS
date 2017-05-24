@@ -21,7 +21,14 @@ NSMutableArray *armorLibrary;
     
     // LOAD ARMOR
     
+    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"HELM OF GAWDS" armorType:@"Helmet"]];
+    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"LEGS OF GAWDS" armorType:@"Legs"]];
+    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"BOOTS OF GAWDS" armorType:@"Boots"]];
+    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"TORSO OF GAWDS" armorType:@"Torso"]];
     
+
+    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"Leather Torso" armorType:@"Torso"]];
+    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"Leather Legs" armorType:@"Legs"]];
     
 }
 
@@ -30,8 +37,11 @@ NSMutableArray *armorLibrary;
 +(Armor*)generateRandomArmor:(Hero*)mainCharacter {
     int size = (int)[armorLibrary count];
     int choice = arc4random_uniform(size);
-    Armor *chosenArmor = [armorLibrary objectAtIndex:choice];
     
+    /* Make copy of template from library */
+    Armor *tmpArmor = [armorLibrary objectAtIndex:choice];
+    Armor *chosenArmor = [[Armor alloc] initarmorID:tmpArmor.armorID
+                                          armorName:tmpArmor.armorName armorType:tmpArmor.armorType];
     
     /* Get Hero stats and generate Armor stats base on level */
     int heroLevel = mainCharacter.level;

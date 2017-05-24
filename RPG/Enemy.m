@@ -43,7 +43,7 @@ NSMutableDictionary *enemyBuffLibrary;
 -(NSString*)selectAttack {
     int r = arc4random_uniform(100);
     int choice  = 0;
-    if (r < 99) {
+    if (r < 20) {
         choice = arc4random_uniform((unsigned int)[self.enemySkillSet count]-1)+1;
     }
     

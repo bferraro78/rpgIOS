@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ElementScroll.h"
-#import "Hero.h"
 @implementation ElementScroll
 
 -(id)initdescription:(NSString *)aDescription {
@@ -17,9 +16,8 @@
     return self;
 }
 
--(NSString*)getType { return @""; } // NO TYPE, FOR OTHER ITEMS
+-(NSString*)getType { return @"ElementScroll"; }
 
--(void)activateItem:(Hero*)mainCharacter {}
--(void)deactivateItem:(Hero*)mainCharacter {}
+-(NSString*)toString { return @"ElementScroll"; }
 
 @end

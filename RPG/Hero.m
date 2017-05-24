@@ -25,7 +25,7 @@ int dext;
 int vit;
 int Exp;
 int purse;
-NSString *elementSpec = @"PHYSICAL";
+NSString *elementSpec;
 
 /* Definite Libraries */
 NSMutableArray *skillSet;
@@ -77,17 +77,19 @@ int startY;
     _startY = aStartY;
     _dungeonLvl = aDungeonLvl;
     _purse = 0;
+    _elementSpec= @"PHYSICAL";
     
     _skillSet = [[NSMutableArray alloc] init];
     _inventory = [[NSMutableArray alloc] init];
-    activeItems = [[NSMutableArray alloc] init];
-    stepsTaken = [[NSMutableArray alloc] init];
+    _activeItems = [[NSMutableArray alloc] init];
+    _stepsTaken = [[NSMutableArray alloc] init];
     _poisonPassiveDots = [[NSMutableArray alloc] init];
     
+    _buffLibrary = [[NSMutableDictionary alloc] init];
     _resistanceDefenseMap = [[NSMutableDictionary alloc] init];
     _resistanceOffenseMap = [[NSMutableDictionary alloc] init];
     
-    _resistanceDefenseMap[@"FIRE"] = [NSNumber numberWithInt:0];
+    _resistanceDefenseMap[@"FIRE"] = [NSNumber numberWithInt:50];
     _resistanceDefenseMap[@"COlD"] = [NSNumber numberWithInt:0];
     _resistanceDefenseMap[@"ARCANE"] = [NSNumber numberWithInt:0];
     _resistanceDefenseMap[@"POISON"] = [NSNumber numberWithInt:0];
@@ -193,17 +195,7 @@ int startY;
 
 -(int)getCritical { return  (int)(((float)self.getPrimaryStat/(float)((self.strn+self.dext+self.inti)*2))*(100.00)); } // TODO -- REWORK
 
-
-/* Active Items */
-//    public void printActiveItems() {
-//        System.out.println("Active Items: ");
-//        int count = 1;
-//        for (Item i : getActiveItems()) {
-//            System.out.println(count + ". " + i.toString());
-//            count++;
-//        }
-//        System.out.println();
-//    }
+/** Active Items **/
 
 // This is done when a hero dies or a dungeon is completed */
 -(void)resetActiveItems {
@@ -341,24 +333,45 @@ int startY;
 
 
 /** Set Armor/Weapons **/
-
+/* Will unequip armor if slot is not empty */
 -(void)equipArmor:(Armor*)a {
     if ([a.armorType isEqualToString:@"Helmet"]) {
+        if (self.getHelm.armor != 0) {
+            [self unequipHelm];
+        }
         self.helm = a;
     } else if ([a.armorType isEqualToString:@"Torso"]) {
+        if (self.getTorso.armor != 0) {
+            [self unequipTorso];
+        }
         self.torso = a;
     } else if ([a.armorType isEqualToString:@"Shoulders"]) {
+        if (self.getShoulders.armor != 0) {
+            [self unequipShoulders];
+        }
         self.shoulders = a;
     } else if ([a.armorType isEqualToString:@"Bracers"]) {
+        if (self.getBracers.armor != 0) {
+            [self unequipBracers];
+        }
         self.bracers = a;
     } else if ([a.armorType isEqualToString:@"Gloves"]) {
+        if (self.getGloves.armor != 0) {
+            [self unequipGloves];
+        }
         self.gloves = a;
     } else if ([a.armorType isEqualToString:@"Legs"]) {
+        if (self.getLegs.armor != 0) {
+            [self unequipLegs];
+        }
         self.legs = a;
     } else if ([a.armorType isEqualToString:@"Boots"]) {
+        if (self.getBoots.armor != 0) {
+            [self unequipBoots];
+        }
         self.boots = a;
     } else {
-        //     System.out.println("GEAR DOESN'T EXIST");
+    
     }
     /* Increase stats */
     [self increaseStrn:a.armorStrn];
@@ -501,178 +514,102 @@ int startY;
 -(void)unequipMH { [self addToInventory:self.mainHand]; self.mainHand = nil; }
 -(void)unequipOH { [self addToInventory:self.offHand]; self.offHand = nil; }
 
-/**** TODO unequip Enters the Equip/unquip screen for inventory / on Hero selection ****/
-//    -(void)unequip {
-////        Scanner s = new Scanner(System.in);
-//
-////        System.out.println();
-////        System.out.println("\nSuit up");
-////        System.out.println("Type in the name of the slot you wish to unequip.\nOr Type in the number of an inventory slot to equip.\n");
-//
-//        boolean mode = true;
-//        while (mode) {
-//
-//            [self printBody]; // Show Equipment
-//            [self revealInventory]; // Show Inventory
-//
-////           String selection = s.next();
-//
-//            if (selection.equals("Helmet")) {
-//                if (getHelm().getArmor() != 0) {
-//                    unequipHelm();
-//                }
-//            } else if (selection.equals("Torso")) {
-//                if (getTorso().getArmor() != 0) {
-//                    unequipTorso();
-//                }
-//            } else if (selection.equals("Shoulders")) {
-//                if (getShoulders().getArmor() != 0) {
-//                    unequipShoulders();
-//                }
-//            } else if (selection.equals("Gloves")) {
-//                if (getGloves().getArmor() != 0) {
-//                    unequipGloves();
-//                }
-//            } else if (selection.equals("Bracers")) {
-//                if (getBracers().getArmor() != 0) {
-//                    unequipBracers();
-//                }
-//            } else if (selection.equals("Legs")) {
-//                if (getLegs().getArmor() != 0) {
-//                    unequipLegs();
-//                }
-//            } else if (selection.equals("Boots")) {
-//                if (getBoots().getArmor() != 0) {
-//                    unequipBoots();
-//                }
-//            } else if (selection.equals("MH")) {
-//                if (getMH().getAttack() != 0) {
-//                    unequipMH();
-//                }
-//            } else if (selection.equals("OH")) {
-//                if (getOH().getAttack() != 0) {
-//                    unequipOH();
-//                }
-//            } else if (selection.equals("quit") || selection.equals("q")) {
-//                break;
-//            } else { // I am equiping from inventory
-//                try {
-//                    int invSelection = Integer.parseInt(selection);
-//                    if (getInventory().get(invSelection) != nil) {
-//                        if (getInventory().get(invSelection).getClass().equals(getHelm().getClass())) { // Armor
-//                            Armor tmp = (Armor) getInventory().get(invSelection);
-//                            String type = tmp.getType();
-//                            // 1. get the type
-//                            // 2. use the getMethod to see if the slot is full
-//                            // 3. if it is, unequip, then equip the guy from the inventory
-//                            // 3.5. if the slot is empty, just equip jawn
-//                            if (type.equals("Helmet")) {
-//                                if (getHelm().getArmor() != 0) { // SLOT IS FULL
-//                                    unequipHelm(); // unequip
-//                                }
-//                                equipArmor(tmp); // Equip
-//                            } else if (type.equals("Torso")) {
-//                                if (getTorso().getArmor() != 0) {
-//                                    unequipTorso();
-//                                }
-//                                equipArmor(tmp);
-//                            } else if (type.equals("Shoulders")) {
-//                                if (getShoulders().getArmor() != 0) {
-//                                    unequipShoulders();
-//                                }
-//                                equipArmor(tmp);
-//                            } else if (type.equals("Gloves")) {
-//                                if (getGloves().getArmor() != 0) {
-//                                    unequipGloves();
-//                                }
-//                                equipArmor(tmp);
-//                            } else if (type.equals("Bracers")) {
-//                                if (getBracers().getArmor() != 0) {
-//                                    unequipBracers();
-//                                }
-//                                equipArmor(tmp);
-//                            } else if (type.equals("Legs")) {
-//                                if (getLegs().getArmor() != 0) {
-//                                    unequipLegs();
-//                                }
-//                                equipArmor(tmp);
-//                            } else if (type.equals("Boots")) {
-//                                if (getBoots().getArmor() != 0) {
-//                                    unequipBoots();
-//                                }
-//                                equipArmor(tmp);
-//                            }
-//                        } else if (getInventory().get(invSelection).getClass().equals(getMH().getClass())) { // Weapon
-//                            Weapon tmp = (Weapon) getInventory().get(invSelection);
-//                            String type = tmp.getType();
-//                            if (type.equals("MH")) { // MH
-//                                if (getMH().getAttack() != 0) {
-//                                    unequipMH();
-//                                }
-//                                equipWeapon(tmp);
-//                            } else { // OH
-//                                if (getOH().getAttack() != 0) {
-//                                    unequipOH();
-//                                }
-//                                equipWeapon(tmp);
-//                            }
-//                        } else { // ITEMS
-//                            Item tmp = (Item) getInventory().get(invSelection);
-//
-//                            /* Add active Item Buff to Hero's ActiveItem Array and Activate Buff */
-//                            if (tmp.getType().contains("stone")) { // Resistance stone
-//                                increaseResistance(tmp.getElement(), tmp.getPotency());
-//                            }
-//
-//                            /* Add to Active Item Buffs Array */
-//                            getActiveItems().add(tmp);
-//                            /* Remove from Inventory */
-//                            removeFromInventory(tmp);
-//
-//                            if (getActiveItems().size() > 4) {
-//                                /* CAN ONLY HAVE 4 BUFFS ACTIVE AT ONCE */
-//                                /* remove Resistance stone, decrease resistance */
-//                                System.out.println("Can Only Have 4 Active items...");
-//                                System.out.println("Pick one to eliminate:");
-//                                printActiveItems();
-//                                while (true) {
-//                                    try {
-//                                        int elim = s.nextInt();
-//                                        if (elim <= getActiveItems().size()) {
-//                                            decreaseResistance(getActiveItems().get(elim-1).getElement(), getActiveItems().get(elim-1).getPotency());
-//                                            getActiveItems().remove(elim-1);
-//                                            break;
-//                                        }
-//                                    } catch (Exception e) {
-//                                        String tmpStr = s.next();
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                } catch (Exception e) {
-//                    System.out.println("Enter an Eqiupment OR a Inventory Number");
-//                }
-//            }
-//        } // End while
-//
-//        resetVariables();
-//    }
+/**** inventoryManagement Enters the Equip/unquip screen for inventory / on Hero selection ****/
+-(void)inventoryManagement:(NSObject*)invItem {
+    
+    if ([invItem isKindOfClass:[Armor class]]) { // Armor
+        Armor *tmp = (Armor *) invItem;
+        
+        [self equipArmor:tmp];
+        
+        printf("%s",[[tmp toString] UTF8String]);
+        
+    } else if ([invItem isKindOfClass:[Weapon class]]) { // Wep
+        Weapon *tmp = (Weapon *) invItem;
+        
+        [self equipWeapon:tmp];
+        
+        printf("%s",[[tmp toString] UTF8String]);
+        
+    } else {
+        Item *tmp = (Item *) invItem;
+        printf("%s",[[tmp toString] UTF8String]);
+        
+        /* Activate Item */
+        [self activateItem:tmp];
+    }
 
-/** INENTORY **/
--(void)revealInventory {
-    for (int i = 0; i < [self.inventory count]; i++) {
-        if ([[self.inventory  objectAtIndex:i] isKindOfClass:[Armor class]]) { // Armor
-            Armor *tmp = (Armor *) [self.inventory objectAtIndex:i];
+
+
+}
+
+/** ITEM HANDLING **/
+-(void)activateItem:(Item*)item {
+    /* Add active Item Buff to Hero's ActiveItem Array and Activate Buff */
+    if([[item getType] rangeOfString:@"stone"].location != NSNotFound) {
+        [self increaseResistance:[item getElement] increaseBy:[item getPotency]];
+        /* Add to Active Item Buffs Array */
+        [self.activeItems addObject:item];
+        
+    } else if ([[item getType]isEqualToString:@"XPBoost"]) {
+        /* Add to Active Item Buffs Array */
+        [self.activeItems addObject:item];
+        
+    } else if ([[item getType]isEqualToString:@"ElementScroll"]) {
+        /* Select a random skill from that element (that is level approriate)
+         * Add it to mainCharcters skillSet */
+        if ([self.elementSpec isEqualToString:@"FIRE"]) {
             
-        } else if ([[self.inventory  objectAtIndex:i] isKindOfClass:[Weapon class]]) { // Wep
-            Weapon *tmp = (Weapon *) [self.inventory objectAtIndex:i];
+        } else if ([self.elementSpec isEqualToString:@"COLD"]) {
             
-        } else {
-            Item *tmp = (Item *) [self.inventory objectAtIndex:i];
+        } else if ([self.elementSpec isEqualToString:@"POISON"]) {
+            
+        } else if ([self.elementSpec isEqualToString:@"LIGHTNING"]) {
+            
+        } else if ([self.elementSpec isEqualToString:@"ARCANE"]) {
             
         }
     }
+    
+    /* Remove from Inventory */
+    [self removeFromInventory:item];
+    
+}
+
+-(void)deactivateItem:(Item*)item {
+    /* Remove active Item Buff to Hero's ActiveItem Array and Activate Buff */
+    if([[item getType] rangeOfString:@"stone"].location != NSNotFound) {
+        [self decreaseResistance:[item getElement] decreaseBy:[item getPotency]];
+        /* Add to Active Item Buffs Array */
+        [self.activeItems removeObject:item];
+        
+    } else if ([[item getType]isEqualToString:@"XPBoost"]) {
+        /* Add to Active Item Buffs Array */
+        [self.activeItems removeObject:item];
+    }
+    
+    
+    
+}
+
+/** INENTORY **/
+-(NSMutableString*)revealInventory {
+    NSMutableString *printInventory = [[NSMutableString alloc] init];
+    [printInventory appendString:@"INVENTORY\n\n"];
+    for (int i = 0; i < [self.inventory count]; i++) {
+        if ([[self.inventory  objectAtIndex:i] isKindOfClass:[Armor class]]) { // Armor
+            Armor *tmp = (Armor *) [self.inventory objectAtIndex:i];
+            [printInventory appendFormat:@"%u. %s\n", i, [[tmp toString] UTF8String]];
+            
+        } else if ([[self.inventory  objectAtIndex:i] isKindOfClass:[Weapon class]]) { // Wep
+            Weapon *tmp = (Weapon *) [self.inventory objectAtIndex:i];
+            [printInventory appendFormat:@"%u. %s\n", i, [[tmp toString] UTF8String]];
+        } else {
+            Item *tmp = (Item *) [self.inventory objectAtIndex:i];
+            [printInventory appendFormat:@"%u. %s\n", i, [[tmp toString] UTF8String]];
+        }
+    }
+    return printInventory;
 }
 
 -(void)addToInventory:(id)o {
@@ -682,12 +619,16 @@ int startY;
         [self.inventory removeLastObject]; // Remove
         [self.inventory addObject:o]; // Then add
     } else {
+        
         [self.inventory addObject:o];
     }
 }
 
 -(void)removeFromInventory:(id)o {
-    [self.inventory removeObject:o];
+
+    if ([self.inventory indexOfObject:o] != NSNotFound) {
+        [self.inventory removeObjectAtIndex:[self.inventory indexOfObject:o]];
+    }
 }
 
 -(void)receiveLoot:(NSMutableArray*)loot {
@@ -798,7 +739,7 @@ int startY;
 }
 
 -(Armor*)getTorso {
-    if (torso == nil) {
+    if (self.torso == nil) {
         return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.torso;
@@ -806,7 +747,7 @@ int startY;
 }
 
 -(Armor*)getShoulders {
-    if (shoulders == nil) {
+    if (self.shoulders == nil) {
         return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.shoulders;
@@ -814,7 +755,7 @@ int startY;
 }
 
 -(Armor*)getHelm {
-    if (helm == nil) {
+    if (self.helm == nil) {
         return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.helm;
@@ -830,7 +771,7 @@ int startY;
 }
 
 -(Armor*)getLegs {
-    if (legs == nil) {
+    if (self.legs == nil) {
         return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.legs;
@@ -846,7 +787,7 @@ int startY;
 }
 
 -(Armor*)getBracers {
-    if (bracers == nil) {
+    if (self.bracers == nil) {
         return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.bracers;
@@ -854,78 +795,130 @@ int startY;
 }
 
 /** Show Eqiupment/Weapons **/
-//    public void printBody() {
-//        System.out.println("-----------------------------EQUIPED-----------------------------");
-//        if (getMH() != null) {
-//            System.out.println("Main Hand: " + getMH().toString());
-//        } else {
-//            System.out.println("Main Hand: " );
-//        }
-//
-//        if (getOH() != null) {
-//            System.out.println("Off Hand: " + getOH().toString());
-//        } else {
-//            System.out.println("Off Hand: " );
-//        }
-//
-//        if (getHelm() != null) {
-//            System.out.println("Helmet: " + getHelm().toString());
-//        } else {
-//            System.out.println("Helmet: ");
-//        }
-//
-//        if (getShoulders() != null) {
-//            System.out.println("Shoulders: " + getShoulders().toString());
-//        } else {
-//            System.out.println("Shoulders: ");
-//        }
-//
-//
-//        if (getTorso() != null) {
-//            System.out.println("Torso: " + getTorso().toString());
-//        } else {
-//            System.out.println("Torso: ");
-//        }
-//
-//        if (getGloves() != null) {
-//            System.out.println("Gloves: " + getGloves().toString());
-//        } else {
-//            System.out.println("Gloves: ");
-//        }
-//
-//        if (getBracers() != null) {
-//            System.out.println("Bracers: " + getBracers().toString());
-//        } else {
-//            System.out.println("Bracers: ");
-//        }
-//
-//        if (getLegs() != null) {
-//            System.out.println("Legs: " + getLegs().toString());
-//        } else {
-//            System.out.println("Legs: ");
-//        }
-//
-//        if (getBoots() != null) {
-//            System.out.println("Boots: " + getBoots().toString());
-//        } else {
-//            System.out.println("Boots: ");
-//        }
-//        System.out.println("-----------------------------------------------------------------\n");
-//    }
+    -(NSMutableString*)printBody {
+        NSMutableString *body = [[NSMutableString alloc] init];
+        [body appendString:@"EQUIPED\n"];
+        if ([self getMH].attack != 0) {
+            [body appendFormat:@"Main Hand: %s\n", [[[self getMH] toString] UTF8String]];
+        } else {
+            [body appendFormat:@"Main Hand: %s\n", ""];
+        }
+
+        if ([self getOH].attack != 0) {
+            [body appendFormat:@"Off Hand: %s\n", [[[self getOH] toString] UTF8String]];
+        } else {
+            [body appendFormat:@"Off Hand: %s\n", ""];
+        }
+
+        if ([self getHelm ].armor != 0) {
+            [body appendFormat:@"Helmet: %s\n", [[[self getHelm] toString] UTF8String]];
+        } else {
+            [body appendFormat:@"Helmet: %s\n", ""];
+        }
+
+        if ([self getShoulders].armor != 0) {
+            [body appendFormat:@"Shoulders: %s\n", [[[self getShoulders] toString]UTF8String]];
+        } else {
+            [body appendFormat:@"Shoulders: %s\n", ""];
+        }
+
+        if ([self getTorso].armor != 0) {
+            [body appendFormat:@"Torso: %s\n", [[[self getTorso] toString] UTF8String]];
+        } else {
+            [body appendFormat:@"Torso: %s\n", ""];
+        }
+
+        if ([self getGloves].armor != 0) {
+            [body appendFormat:@"Gloves: %s\n", [[[self getGloves] toString] UTF8String]];
+        } else {
+            [body appendFormat:@"Gloves: %s\n", ""];
+        }
+
+        if ([self getBracers].armor != 0) {
+            [body appendFormat:@"Bracers: %s\n", [[[self getBracers] toString] UTF8String]];
+        } else {
+            [body appendFormat:@"Bracers: %s\n", ""];
+        }
+
+        if ([self getLegs].armor != 0) {
+            [body appendFormat:@"Legs: %s\n", [[[self getLegs] toString]UTF8String]];
+        } else {
+            [body appendFormat:@"Legs: %s\n", ""];
+        }
+
+        if ([self getBoots].armor != 0) {
+            [body appendFormat:@"Boots: %s\n", [[[self getBoots] toString] UTF8String]];
+        } else {
+            [body appendFormat:@"Boots: %s\n", ""];
+        }
+        return body;
+    }
+
+-(NSMutableString*)printStats {
+    NSMutableString *stats = [[NSMutableString alloc] init];
+    
+    [stats appendString:@"      Hero's Stats: \n"];
+
+    [stats appendFormat:@"Class: %s\n" , [[self getClassName] UTF8String]];
+    [stats appendFormat:@"Name: %s\n" , [self.name UTF8String]];
+    [stats appendFormat:@"Dungeon Level: %u\n" , self.dungeonLvl];
+    [stats appendFormat:@"Element Spec: %s\n" , [self.elementSpec UTF8String]];
+
+    [stats appendFormat:@"\nLevel: %u\n" , self.level];
+    [stats appendFormat:@"XP to Next Level: %u\n" , [self getLevelExp]];
+    [stats appendFormat:@"XP: %u\n" , self.Exp];
+    [stats appendFormat:@"Gold: %u\n" , self.purse];
+
+    [stats appendFormat:@"\n    STATS:%s\n" , ""];
+    
+    [stats appendFormat:@"Health: %u\n" , self.health];
+    [stats appendFormat:@"Armor: %u\n" , [self getTotalArmor]];
+    [stats appendFormat:@"Vitality: %u\n" , self.vit];
+    [stats appendFormat:@"Strength: %u\n" , self.strn];
+    [stats appendFormat:@"Initeligence: %u\n" , self.inti];
+    [stats appendFormat:@"Dexterity: %u\n" , self.dext];
+    [stats appendFormat:@"Critical Hit Chance: %u\n" , [self getCritical]];
+    
+    [stats appendString:@"\n    Resistances\n"];
+    [stats appendString:[self printOffenseResMap]];
+    [stats appendString:@"\n"];
+    [stats appendString:[self printDefenseResMap]];
+    [stats appendString:@"\n"];
+    [stats appendString:[self printActiveItems]];
+    
+    return stats;
+}
 
 /** Print Resistance Maps **/
-//    public void printOffenseResMap() {
-//        System.out.println("Elemental Damage Boost (%): ");
-//        for (Element res : getResistanceOffenseMap().keySet()) {
-//            System.out.print(res + ": " + getResistanceOffenseMap().get(res) + " ");
-//        }
-//        System.out.println("\n");
-//    }
-//    public void printDefenseResMap() {
-//        System.out.println("Elemental Damage Reduction (%): ");
-//        for (Element res : getResistanceOffenseMap().keySet()) {
-//            System.out.print(res + ": " + getResistanceDefenseMap().get(res) + " ");
-//        }
-//        System.out.println();
-//    }
+-(NSMutableString*)printOffenseResMap {
+    NSMutableString *resMap = [[NSMutableString alloc] init];
+    
+    for (NSString* dam in self.resistanceOffenseMap) {
+        NSInteger value = [[self.resistanceOffenseMap objectForKey:dam] integerValue];
+        [resMap appendFormat:@"%s: %ld\n", [dam UTF8String], (long)value];
+    }
+    
+    return resMap;
+}
+
+-(NSMutableString*)printDefenseResMap {
+    NSMutableString *resMap = [[NSMutableString alloc] init];
+    
+    for (NSString* dam in self.resistanceDefenseMap) {
+        NSInteger value = [[self.resistanceDefenseMap objectForKey:dam] integerValue];
+        [resMap appendFormat:@"%s: %ld\n", [dam UTF8String], (long)value];
+    }
+    
+    return resMap;
+}
+
+/* Active Items */
+-(NSMutableString*)printActiveItems {
+    NSMutableString *resMap = [[NSMutableString alloc] init];
+    for (Item *item in self.activeItems) {
+        [resMap appendFormat:@"%s ", [[item toString] UTF8String]];
+    }
+    return resMap;
+}
+
 @end

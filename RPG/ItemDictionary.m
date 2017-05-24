@@ -28,16 +28,45 @@ NSMutableArray *itemLibrary;
                                                              Element:@"POISON"]];
     [itemLibrary addObject:[[XPBoost alloc] initdescription:@"Boost XP Gain"]];
     
-    int size = (int)[itemLibrary count];
-    printf("Size of ItemLib: %i\n", size);
+    [itemLibrary addObject:[[ElementScroll alloc] initdescription:@"Gain a New Elemental Ability"]];
 }
 
 
 /* Generate Random Item */
-+(Item*)generateRandomItem {
++(Item*)generateRandomItem:(BOOL)isLoot {
+    /* Different items can be generated depening on if it is
+     * loot verses map item */
+    
     int size = (int)[itemLibrary count];
-    int choice = arc4random_uniform(size);
-    Item *chosenItem = [itemLibrary objectAtIndex:choice];
+    int choice;
+    if (isLoot) {
+        choice = arc4random_uniform(size)-1;
+        if (choice < 0) { choice = 0; }
+    } else {
+        choice = arc4random_uniform(size);
+    }
+    
+    /* Make copy of template from library */
+    Item *tmpItem = [itemLibrary objectAtIndex:choice];
+    Item *chosenItem;
+    if ([tmpItem isKindOfClass:[Firestone class]]) {
+        chosenItem = [[Firestone alloc] initdescription:tmpItem.description Element:@"FIRE"];
+    } else if ([tmpItem isKindOfClass:[Coldstone class]]) {
+        chosenItem = [[Coldstone alloc] initdescription:tmpItem.description Element:@"COLD"];
+    } else if ([tmpItem isKindOfClass:[Lightningstone class]]) {
+        chosenItem = [[Lightningstone alloc] initdescription:tmpItem.description Element:@"LIGHTNING"];
+    } else if ([tmpItem isKindOfClass:[Arcanestone class]]) {
+        chosenItem = [[Poisonstone alloc] initdescription:tmpItem.description Element:@"POISON"];
+    } else if ([tmpItem isKindOfClass:[Poisonstone class]]) {
+        chosenItem = [[Arcanestone alloc] initdescription:tmpItem.description Element:@"ARCANE"];
+    } else if ([tmpItem isKindOfClass:[XPBoost class]]) {
+        chosenItem = [[XPBoost alloc] initdescription:tmpItem.description];
+    } else { // elemental scroll
+        chosenItem = [[ElementScroll alloc] initdescription:tmpItem.description];
+    }
+    
+    
+    [chosenItem generate];
     
     return chosenItem;
 }

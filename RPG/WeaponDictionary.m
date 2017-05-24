@@ -17,6 +17,9 @@ NSMutableArray *weaponLibrary;
     
     weaponLibrary = [[NSMutableArray alloc] init];
     
+    [weaponLibrary addObject:[[Weapon alloc] initweaponID:10 weaponName:@"1000 Truths" weaponType:@"Sword" twoHand:false MH:true]];
+    
+    
     // LOAD WEAPONS
     
     
@@ -25,13 +28,22 @@ NSMutableArray *weaponLibrary;
 +(Weapon*)generateRandomWeapon:(Hero*)mainCharacter {
     int size = (int)[weaponLibrary count];
     int choice = arc4random_uniform(size);
-    Weapon *chosenWeapon = [weaponLibrary objectAtIndex:choice];
+    
+    /* Make copy of template from library */
+    Weapon *tmpWeapon = [weaponLibrary objectAtIndex:choice];
+    Weapon *chosenWeapon = [[Weapon alloc] initweaponID:tmpWeapon.weaponID weaponName:tmpWeapon.weaponName weaponType:tmpWeapon.weaponType twoHand:tmpWeapon.twoHand MH:tmpWeapon.isMainHand];
     
     
     /* Get Hero stats and generate Armor stats base on level */
     int heroLevel = mainCharacter.level;
     
-    // TODO - SET WEAPON ATTACK/RANGE BASED ON WEAPONTYPE BETTER
+    
+    /**** TODO 
+     
+    - SET WEAPON ATTACK/RANGE BASED ON WEAPONTYPE BETTER
+    - INCORPERATE ARMOR / WEAPON RATINGS TO HELP BETTER ARMOR BE BETTER THAN SHITTY ARMOR
+     
+     *****/
     if (heroLevel < 20) {
         chosenWeapon.attack = arc4random_uniform(heroLevel+10)+heroLevel;
     } else if (heroLevel < 60) {

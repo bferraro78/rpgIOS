@@ -46,9 +46,13 @@ BOOL isMainHand;
     return swing;
 }
 
-//public String toString() {
-//    if (getAttack() == 0)
-//        return "";
-//    return name + " | Attack: " + attack + " | Element: " + element; }
+-(NSMutableString*)toString {
+    NSMutableString *wepPrint = [[NSMutableString alloc] init];
+    
+    [wepPrint appendFormat:@"%s | Attack: %u | Element: %s" ,[_weaponName UTF8String],
+     _attack, [_weaponElement UTF8String]];
+    
+    return wepPrint;
+}
 
 @end

@@ -16,15 +16,16 @@ int XPPotency;
 
 -(id)initdescription:(NSString*)aDescription {
     [super inititemDescription:aDescription];
-    [self generate];
     return self;
 }
 
 -(NSString*)getType { return @"XPBoost"; }
 -(void)generate { self.XPPotency = arc4random_uniform(15)+5; }
 -(int)getPotency { return self.XPPotency; }
-
--(void)activateItem:(Hero*)mainCharacter {}
--(void)deactivateItem:(Hero*)mainCharacter {}
+-(NSString*)toString {
+    NSMutableString *ret = [[NSMutableString alloc] init];
+    [ret appendFormat:@"%s - %u%%", [[self getType] UTF8String], [self getPotency]];
+    return ret;
+}
 
 @end

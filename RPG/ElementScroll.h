@@ -13,8 +13,7 @@
 
 -(id)initdescription:(NSString*)aDescription;
 -(NSString*)getType;
--(void)activateItem:(Hero*)mainCharacter;
--(void)deactivateItem:(Hero*)mainCharacter;
+-(NSString*)toString;
 
 @end
 

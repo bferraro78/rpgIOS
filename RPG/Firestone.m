@@ -17,7 +17,6 @@ int fireStonePotency;
 -(id)initdescription:(NSString*)aDescription Element:(NSString*)aElement {
     [super inititemDescription:aDescription];
     _fireStoneElement = aElement;
-    [self generate];
     return self;
 }
 
@@ -26,7 +25,12 @@ int fireStonePotency;
 -(NSString*)getElement { return self.fireStoneElement; }
 -(int)getPotency { return self.fireStonePotency; }
 
--(void)activateItem:(Hero*)mainCharacter {}
--(void)deactivateItem:(Hero*)mainCharacter {}
+-(NSString*)toString {
+    NSMutableString *ret = [[NSMutableString alloc] init];
+    [ret appendFormat:@"%s - %u%%", [[self getType] UTF8String], [self getPotency]];
+    return ret;
+}
+
+
 
 @end

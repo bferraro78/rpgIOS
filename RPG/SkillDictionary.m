@@ -12,6 +12,7 @@
 
 NSMutableArray *skillLibrary;
 
+/**TODO --  write function that take in heroLevel/elementSpec adn returns a random skill from that spec ************/
 
 /* Load Items -- Called When Game is Started */
 +(void)loadSkills {

@@ -25,9 +25,9 @@
 
 -(id)initdungeonLevel:(int)aDungeonLevel heroX:(int)aHeroX heroY:(int)aHeroY;
 
--(int)moveHeroDirection:(NSString*)dir Hero:(Hero*)mainCharacter;
+-(int)moveHeroDirection:(NSString*)dir Hero:(Hero*)mainCharacter itemPicked:(NSMutableString*)itemPicked;
 -(Space*)findLocationX:(int)x Y:(int)y Map:(NSMutableArray*)tmpMap;
--(void)printMap;
+-(NSMutableString*)printMap;
 
 
 

@@ -20,6 +20,10 @@
     /* Generate Enemy */
     Enemy *e = [EnemyDictionary generateRandomEnemy:mainCharacter];
     
+    // DEBUGGGINNNNN
+    printf("ENEMY HEALTH %u\n", e.enemyHealth);
+    printf("HERO HEALTH %u\n", mainCharacter.health);
+    
     /* Start Combat Loop */
     BOOL death =  true;
     while (death) {
@@ -34,19 +38,22 @@
         NSMutableDictionary *enemyElementMap = [[NSMutableDictionary alloc] init];
         /* Load damages to 0 */
         heroElementMap[@"FIRE"] = [NSNumber numberWithInt:0];
-        heroElementMap[@"COlD"] = [NSNumber numberWithInt:0];
+        heroElementMap[@"COLD"] = [NSNumber numberWithInt:0];
         heroElementMap[@"ARCANE"] = [NSNumber numberWithInt:0];
         heroElementMap[@"POISON"] = [NSNumber numberWithInt:0];
         heroElementMap[@"LIGHTNING"] = [NSNumber numberWithInt:0];
         heroElementMap[@"PHYSICAL"] = [NSNumber numberWithInt:0];
         
         enemyElementMap[@"FIRE"] = [NSNumber numberWithInt:0];
-        enemyElementMap[@"COlD"] = [NSNumber numberWithInt:0];
+        enemyElementMap[@"COLD"] = [NSNumber numberWithInt:0];
         enemyElementMap[@"ARCANE"] = [NSNumber numberWithInt:0];
         enemyElementMap[@"POISON"] = [NSNumber numberWithInt:0];
         enemyElementMap[@"LIGHTNING"] = [NSNumber numberWithInt:0];
         enemyElementMap[@"PHYSICAL"] = [NSNumber numberWithInt:0];
         
+        
+/*** If lightning spec, start while loop here that goes one extra time *
+    * Calles genrateDamage twice and just keeps adding damage to element map. */
         
         /** Set up Moves **/
         // Basic Attack - skillSet[0]
@@ -54,25 +61,7 @@
         NSString *enemyMoveName = [e selectAttack];
     
 
-        
-        
-
-        
         [SkillDictionary generateDamage:mainCharacter Enemy:e heroMoveName:heroMoveName enemyMoveName:enemyMoveName heroElementMap:heroElementMap enemeyElementMap:enemyElementMap];
-        
-        printf("\nafter GENERATE DAMGE\n");
-        for (NSString* dam in heroElementMap) {
-            NSInteger value = [[heroElementMap objectForKey:dam] integerValue];
-            printf("%s ", [dam UTF8String]);
-            printf("%ld\n", (long)value);
-        }
-        
-        printf("Enemy after GENERATE DAMGE\n");
-        for (NSString* dam in enemyElementMap) {
-            NSInteger value = [[enemyElementMap objectForKey:dam] integerValue];
-            printf("%s ", [dam UTF8String]);
-            printf("%ld\n", (long)value);
-        }
         
         // Generate Damage will load hero and enemey
         //"elementMaps" - hold the damage for that turn.
@@ -87,22 +76,39 @@
         [self heroManageBuffs:mainCharacter ElementMap:heroElementMap];
         [self enemyManageBuffs:e ElementMap:enemyElementMap];
     
+        printf("\nHero after manageBUFF DAMGE\n");
+        for (NSString* dam in heroElementMap) {
+            NSInteger value = [[heroElementMap objectForKey:dam] integerValue];
+            printf("%s ", [dam UTF8String]);
+            printf("%ld\n", (long)value);
+        }
+        
+        printf("\nEnemy after manageBUFF DAMGE\n");
+        for (NSString* dam in heroElementMap) {
+            NSInteger value = [[enemyElementMap objectForKey:dam] integerValue];
+            printf("%s ", [dam UTF8String]);
+            printf("%ld\n", (long)value);
+        }
+        
+/** END LIGHTNING EXTRA TURN WHILE LOOP **/
     
         /*** Damage Reduction Stage -- Contains all abilities that reduce damage ***/
         
         /* Quickly total hero/enemy damage for certain buffs in reduction stage  (Like Vanish) */
         int heroDamage = 0;
         for (NSString* dam in heroElementMap) {
-            id value = [heroElementMap objectForKey:dam];
+            int value = [[heroElementMap objectForKey:dam] intValue];
             heroDamage += (int)value;
         }
         
         int enemyDamage = 0;
         for (NSString* dam in enemyElementMap) {
-            id value = [enemyElementMap objectForKey:dam];
+            int value = [[enemyElementMap objectForKey:dam] intValue];
             enemyDamage += (int)value;
         }
         
+        printf("Hero Dam before reduction %u\n", heroDamage);
+        printf("Enemy Dam before reduction %u\n", enemyDamage);
         
         /** This will reduce damage based on armor/resistances, then return a total damage **/
         /* Hero */
@@ -111,16 +117,18 @@
         
         
         /* Enemy */
-        int totalenemyDamageTaken =[self enemyDamageReduction:e HeroDamageMap:heroElementMap EnemyDamage:enemyDamage];
+        int totalEnemyDamageTaken =[self enemyDamageReduction:e HeroDamageMap:heroElementMap EnemyDamage:enemyDamage];
 
+        printf("Total Hero Damage Taken %u\n", totalHeroDamageTaken);
+        printf("Total Enemy Damage Taken %u\n", totalEnemyDamageTaken);
         
         /*** Final Take Damage Stage ***/
         /* enemy takes damage */
-        printf("Damage Done: %i", totalenemyDamageTaken);
-        [e takeDamage:totalenemyDamageTaken];
+        printf("Damage Done: %i\n", totalEnemyDamageTaken);
+        [e takeDamage:totalEnemyDamageTaken];
         
         /* Hero takes damage */
-        printf("Damage Taken: %i", totalHeroDamageTaken);
+        printf("Damage Taken: %i\n", totalHeroDamageTaken);
         [mainCharacter takeDamage:totalHeroDamageTaken];
         
         
@@ -142,17 +150,16 @@
         
         
         
-        
         /** DEATH **/
         if (e.enemyCombatHealth <= 0) {
             printf("Enemy Has Died!!!");
-            printf("\nLoot: ");
             
             [mainCharacter increaseExp:[e getExp:mainCharacter]]; // INCRESE HERO EXP
             [mainCharacter changePurse:[e goldDrop]]; // increase gold amount
             
+            printf("\nLoot: \n");
             NSMutableArray *loot = [[NSMutableArray alloc] init];
-            [loot addObject:[ItemDictionary generateRandomItem]];
+            [loot addObject:[ItemDictionary generateRandomItem:true]];
             [mainCharacter receiveLoot:loot]; // TODO -- RANDOMZIE LOOT WITH ITMES/ARMOR/WEPS
             
             death = false;
@@ -166,9 +173,12 @@
             death = false;
         }
         
-        
         // DEBUGGGIN
-        death = false;
+//        death = false;
+        
+        printf("\n\n---NEW TURN---\n\n");
+        
+        
     } // END COMBAT -- END death WHILE
 
 }
@@ -178,13 +188,13 @@
 /*** Apply damage/buffs/debuffs/armor/resistances ***/
 /** HERO DAMAGE/BUFFS **/
 +(void)heroManageBuffs:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap {
-
-    int fireDamage = (int)elementMap[@"FIRE"];
-    int lightningDamage = (int)elementMap[@"LIGHTNING"];
-    int coldDamage =(int)elementMap[@"COLD"];
-    int poisonDamage = (int)elementMap[@"POISON"];
-    int arcaneDamage = (int)elementMap[@"ARCANE"];
-    int physicalDamage = (int)elementMap[@"PHYSICAL"];
+    
+    int fireDamage = [elementMap[@"FIRE"] intValue];
+    int lightningDamage = [elementMap[@"LIGHTNING"] intValue];
+    int coldDamage = [elementMap[@"COLD"] intValue];
+    int poisonDamage = [elementMap[@"POISON"] intValue];
+    int arcaneDamage = [elementMap[@"ARCANE"] intValue];
+    int physicalDamage = [elementMap[@"PHYSICAL"] intValue];
     
     /* Take into account extra crit Chance */
     Buff *critExtraChance = (Buff*)mainCharacter.buffLibrary[@"critDamage"];
@@ -204,14 +214,15 @@
     
     /** Elemental Spec - POISON POISON DOT PASSIVE **/
     if ([mainCharacter.elementSpec isEqualToString:@"POSION"]) {
-        /** Handle Poison Passive Here **/
-        /* DOT IS 25% of what the damage is over two turns */
+        /** DOT IS 25% of what the damage is over two turns **/
+        
+        /* Handle Damage from Buff Library */
         for(NSString* currentKey in mainCharacter.buffLibrary) {
             Buff* b = (Buff*)[mainCharacter.buffLibrary objectForKey:currentKey];
             int poisonDotDamage = (float)b.value*0.25;
             printf("%i", poisonDotDamage);
             if (poisonDotDamage > 0 && [currentKey rangeOfString:@"stone"].location != NSNotFound) {
-                // then this is a damage that is not a DOT and Not already A Poison Passive Dot
+                // Then this is a damage that is not a DOT and Not already A Poison Passive Dot
                 [mainCharacter.poisonPassiveDots addObject:[[Buff alloc] initvalue:poisonDotDamage duration:2]];
             }
         }
@@ -227,7 +238,7 @@
         for (int i = 0; i < [mainCharacter.poisonPassiveDots count]; i++) {
             Buff *passiveDot = [mainCharacter.poisonPassiveDots objectAtIndex:i];
             printf( "%s", [[BuffDictionary getDescription:@"poisonPassiveDot"] UTF8String]);
-            printf("%i", (int)passiveDot.value);
+            printf("%u", (int)passiveDot.value);
             poisonDamage += passiveDot.value;
         }
         /* Decrease Duration */
@@ -325,7 +336,7 @@
     /* PRINT UP ALL ELEMENTAL/PHYSICAL damage */
     
     /* Put elemental damage into hashmap */
-    elementMap[@"FIRE"] = [NSNumber numberWithInt:fireDamage];
+    elementMap[@"FIRE"] = [NSNumber numberWithInt: fireDamage];
     elementMap[@"LIGHTNING"] = [NSNumber numberWithInt:lightningDamage];
     elementMap[@"COLD"] = [NSNumber numberWithInt:coldDamage];
     elementMap[@"POISON"] = [NSNumber numberWithInt:poisonDamage];
@@ -358,12 +369,12 @@
 /** enemy DAMAGE/BUFFS **/
 +(void)enemyManageBuffs:(Enemy*)e ElementMap:(NSMutableDictionary*)elementMap {
     
-    int fireDamage = (int)elementMap[@"FIRE"];
-    int lightningDamage = (int)elementMap[@"LIGHTNING"];
-    int coldDamage =(int)elementMap[@"COLD"];
-    int poisonDamage = (int)elementMap[@"POISON"];
-    int arcaneDamage = (int)elementMap[@"ARCANE"];
-    int physicalDamage = (int)elementMap[@"PHYSICAL"];
+    int fireDamage = [elementMap[@"FIRE"] intValue];
+    int lightningDamage = [elementMap[@"LIGHTNING"] intValue];
+    int coldDamage = [elementMap[@"COLD"] intValue];
+    int poisonDamage = [elementMap[@"POISON"] intValue];
+    int arcaneDamage = [elementMap[@"ARCANE"] intValue];
+    int physicalDamage = [elementMap[@"PHYSICAL"] intValue];
     
     /** HANDLE LINGERING SPELLS/ABILITIES **/
     // Rend Dot
@@ -434,12 +445,20 @@
 +(int)heroDamageReduction:(Hero*)mainCharacter EnemyDamageMap:(NSMutableDictionary*)enemyDamageMap
                HeroDamage:(int) heroDamage {
     
-    int fireDamage = (int)enemyDamageMap[@"FIRE"];
-    int lightningDamage = (int)enemyDamageMap[@"LIGHTNING"];
-    int coldDamage =(int)enemyDamageMap[@"COLD"];
-    int poisonDamage = (int)enemyDamageMap[@"POISON"];
-    int arcaneDamage = (int)enemyDamageMap[@"ARCANE"];
-    int physicalDamage = (int)enemyDamageMap[@"PHYSICAL"];
+    int fireDamage = [enemyDamageMap[@"FIRE"] intValue];
+    int lightningDamage = [enemyDamageMap[@"LIGHTNING"] intValue];
+    int coldDamage = [enemyDamageMap[@"COLD"] intValue];
+    int poisonDamage = [enemyDamageMap[@"POISON"] intValue];
+    int arcaneDamage = [enemyDamageMap[@"ARCANE"] intValue];
+    int physicalDamage = [enemyDamageMap[@"PHYSICAL"] intValue];
+    
+    printf("\n\nDAMAGES IN HERO DAM REDUCTiON\n");
+    printf("Fire: %u\n", fireDamage);
+    printf("%u\n", lightningDamage);
+    printf("%u\n", coldDamage);
+    printf("%u\n", poisonDamage);
+    printf("%u\n", arcaneDamage);
+    printf("%u\n", physicalDamage);
     
     
     /* Armor Reduction */
@@ -453,6 +472,16 @@
     coldDamage = (coldDamage-(int)(([mainCharacter.resistanceDefenseMap[@"COLD"] floatValue]/(float)100.00)*(float)coldDamage));
     poisonDamage = (poisonDamage-(int)(([mainCharacter.resistanceDefenseMap[@"POISON"] floatValue]/(float)100.00)*(float)poisonDamage));
     arcaneDamage = (arcaneDamage-(int)(([mainCharacter.resistanceDefenseMap[@"ARCANE"] floatValue]/(float)100.00)*(float)arcaneDamage));
+    
+    
+    
+    printf("\n%i\n", fireDamage);
+    printf("%i\n", lightningDamage);
+    printf("%i\n", coldDamage);
+    printf("%i\n", poisonDamage);
+    printf("%i\n", arcaneDamage);
+    printf("%i\n", physicalDamage);
+    printf("\n\n");
     
     
     /* Total damage reduction */
@@ -491,13 +520,13 @@
 
 
 +(int)enemyDamageReduction:(Enemy*)e HeroDamageMap:(NSMutableDictionary*)heroDamageMap EnemyDamage:(int)enemyDamage {
-    int fireDamage = (int)heroDamageMap[@"FIRE"];
-    int lightningDamage = (int)heroDamageMap[@"LIGHTNING"];
-    int coldDamage =(int)heroDamageMap[@"COLD"];
-    int poisonDamage = (int)heroDamageMap[@"POISON"];
-    int arcaneDamage = (int)heroDamageMap[@"ARCANE"];
-    int physicalDamage = (int)heroDamageMap[@"PHYSICAL"];
     
+    int fireDamage = [heroDamageMap[@"FIRE"] intValue];
+    int lightningDamage = [heroDamageMap[@"LIGHTNING"] intValue];
+    int coldDamage = [heroDamageMap[@"COLD"] intValue];
+    int poisonDamage = [heroDamageMap[@"POISON"] intValue];
+    int arcaneDamage = [heroDamageMap[@"ARCANE"] intValue];
+    int physicalDamage = [heroDamageMap[@"PHYSICAL"] intValue];
     
     /* Armor Reduction */
     float floatFinalDamage = (float)physicalDamage * (float)([e getArmorRating]/100.0);
@@ -542,7 +571,7 @@
 +(BOOL)critChance:(int)extraChance Hero:(Hero*)mainCharacter {
     int critChance = arc4random_uniform(100);
     if (critChance < ([mainCharacter getCritical]+extraChance)) {
-        printf("~~~~~~~~~~~~CRITICAL HIT~~~~~~~~~~~~");
+        printf("\n~~~~~~~~~~~~CRITICAL HIT~~~~~~~~~~~~");
         return true;
     }
     return false;
