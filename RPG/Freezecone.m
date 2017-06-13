@@ -24,7 +24,7 @@ int freezeconeResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.freezeconeResourceCost/100.0)*(float)totalResource); }
 
--(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap {
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("Freezecone!!");
     
     /* Insert Damage */
@@ -34,7 +34,7 @@ int freezeconeResourceCost;
     elementMap[@"COLD"] = [NSNumber numberWithInt:damage];
     
     /* Take reduceed damage from enemy */
-    mainCharacter.buffLibrary[@"frozen"] = [[Buff alloc] initvalue:0 duration:3];
+    e.enemyDebuffLibrary[@"frozen"] = [[Buff alloc] initvalue:0 duration:3];
 }
 
 -(void)activateEnemyMove:(Enemy*)e ElementMap:(NSMutableDictionary*)elementMap Hero:(Hero*)mainCharacter {
@@ -46,7 +46,7 @@ int freezeconeResourceCost;
     elementMap[@"COLD"] = [NSNumber numberWithInt:damage];
     
     /* Take reduceed damage from enemy */
-    e.enemyBuffLibrary[@"frozen"] = [[Buff alloc] initvalue:0 duration:3];
+    mainCharacter.debuffLibrary[@"frozen"] = [[Buff alloc] initvalue:0 duration:3];
 }
 
 @end

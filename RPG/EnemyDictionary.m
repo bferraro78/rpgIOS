@@ -40,7 +40,7 @@ NSMutableArray *enemyLibrary;
     chosenEnemy.enemyStrn = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
     chosenEnemy.enemyInti = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
     chosenEnemy.enemyDext = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
-    [chosenEnemy setHealth:((arc4random_uniform(heroHeatlh)+(heroLevel))+20)];
+    [chosenEnemy setHealth:10000];//((arc4random_uniform(heroHeatlh)+(heroLevel))+20)];
     chosenEnemy.enemyArmor = arc4random_uniform(heroArmor)+heroLevel;
 
     

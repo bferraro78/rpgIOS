@@ -29,11 +29,13 @@ NSString *elementSpec;
 
 /* Definite Libraries */
 NSMutableArray *skillSet;
+NSMutableArray *activeSkillSet;
 NSMutableArray *inventory;
 NSMutableArray *activeItems;
 
 /* Tempory libraries */
 NSMutableDictionary *buffLibrary; //<String, Buff>;
+NSMutableDictionary *debuffLibrary;
 NSMutableArray *stepsTaken;
 
 
@@ -80,12 +82,14 @@ int startY;
     _elementSpec= @"PHYSICAL";
     
     _skillSet = [[NSMutableArray alloc] init];
+    _activeSkillSet = [[NSMutableArray alloc] initWithCapacity:4];
     _inventory = [[NSMutableArray alloc] init];
     _activeItems = [[NSMutableArray alloc] init];
     _stepsTaken = [[NSMutableArray alloc] init];
     _poisonPassiveDots = [[NSMutableArray alloc] init];
     
     _buffLibrary = [[NSMutableDictionary alloc] init];
+    _debuffLibrary = [[NSMutableDictionary alloc] init];
     _resistanceDefenseMap = [[NSMutableDictionary alloc] init];
     _resistanceOffenseMap = [[NSMutableDictionary alloc] init];
     
@@ -137,7 +141,7 @@ int startY;
 
 
 /** ATTACKS and ABILITIES**/
-
+/* Add Skill to skillSet */
 -(void)addSkill:(NSString*)ability {
     int count = 0;
     for (NSString *s in self.skillSet) {
@@ -148,22 +152,20 @@ int startY;
     if (count == 0) { [self.skillSet addObject:ability]; }
 }
 
-//    public void toStringSkills() {
-//        for (int i = 0; i < skillSet.size(); i++) {
-//            int combatCost = SkillLibrary.findSkill(skillSet.get(i)).getCombatResourceCost(getResource());
-//            if (skillSet.get(i).equals("BasicAttack")) {
-//                if (getClassName().equals("Barb")) {
-//                    System.out.println(i + ". " + "Swing | " + 0);
-//                } else if (getClassName().equals("Wizard")) {
-//                    System.out.println(i + ". " + "Shoot | " + combatCost);
-//                } else { // Rogue
-//                    System.out.println(i + ". " + "Shank | " + combatCost);
-//                }
-//            } else {
-//                System.out.println(i + ". " + SkillLibrary.findSkill(getSkillSet().get(i)).toString() + " | Cost: " + combatCost);
-//            }
-//        }
-//    }
+/* Load Up Active Skill Set With First Four Skills in skillSet */
+-(void)setActiveSkills {
+    self.activeSkillSet = nil;
+    self.activeSkillSet = [[NSMutableArray alloc] initWithCapacity:4];
+    
+    [self.activeSkillSet addObject:[self.skillSet objectAtIndex:0]];
+    [self.activeSkillSet addObject:[self.skillSet objectAtIndex:1]];
+    [self.activeSkillSet addObject:[self.skillSet objectAtIndex:2]];
+    if ([self.skillSet objectAtIndex:3] != nil) {
+        [self.activeSkillSet addObject:[self.skillSet objectAtIndex:3]];
+    }
+    
+    
+}
 
 
 /** Get Classes name based on ClassID **/
@@ -211,6 +213,7 @@ int startY;
 /* Buff Library */
 -(void)resetLibraries {
     [self.buffLibrary removeAllObjects];
+    [self.debuffLibrary removeAllObjects];
     [self.poisonPassiveDots removeAllObjects];
 }
 
@@ -440,12 +443,16 @@ int startY;
 }
 
 /** Unequip Items **/
+/* Removes any: 
+ * Stat boosts, Resistance Boosts, resets health/resource,
+ * Add to Inventory, Make slot nil */
 -(void)unequipHelm {
     [self decreaseStrn:self.helm.armorStrn];
     [self decreaseInti:self.helm.armorInti];
     [self decreaseDext:self.helm.armorDext];
     [self decreaseVit:self.helm.armorVit];
     [self decreaseResistance:self.helm.armorElement decreaseBy:self.helm.armorResistance];
+    [self resetVariables];
     [self addToInventory:self.helm];
     self.helm = nil;
 }
@@ -456,6 +463,7 @@ int startY;
     [self decreaseDext:self.shoulders.armorDext];
     [self decreaseVit:self.shoulders.armorVit];
     [self decreaseResistance:self.shoulders.armorElement decreaseBy:self.shoulders.armorResistance];
+    [self resetVariables];
     [self addToInventory:self.shoulders];
     self.shoulders = nil;
 }
@@ -466,6 +474,7 @@ int startY;
     [self decreaseDext:self.bracers.armorDext];
     [self decreaseVit:self.bracers.armorVit];
     [self decreaseResistance:self.bracers.armorElement decreaseBy:self.bracers.armorResistance];
+    [self resetVariables];
     [self addToInventory:self.bracers];
     self.bracers = nil;
 }
@@ -476,6 +485,7 @@ int startY;
     [self decreaseDext:self.gloves.armorDext];
     [self decreaseVit:self.gloves.armorVit];
     [self decreaseResistance:self.gloves.armorElement decreaseBy:self.gloves.armorResistance];
+    [self resetVariables];
     [self addToInventory:self.gloves];
     self.gloves = nil;
 }
@@ -486,6 +496,7 @@ int startY;
     [self decreaseDext:self.torso.armorDext];
     [self decreaseVit:self.torso.armorVit];
     [self decreaseResistance:self.torso.armorElement decreaseBy:self.torso.armorResistance];
+    [self resetVariables];
     [self addToInventory:self.torso];
     self.torso = nil;
 }
@@ -496,6 +507,7 @@ int startY;
     [self decreaseDext:self.legs.armorDext];
     [self decreaseVit:self.legs.armorVit];
     [self decreaseResistance:self.legs.armorElement decreaseBy:self.legs.armorResistance];
+    [self resetVariables];
     [self addToInventory:self.legs];
     self.legs = nil;
 }
@@ -506,6 +518,7 @@ int startY;
     [self decreaseDext:self.boots.armorDext];
     [self decreaseVit:self.boots.armorVit];
     [self decreaseResistance:self.boots.armorElement decreaseBy:self.boots.armorResistance];
+    [self resetVariables];
     [self addToInventory:self.boots];
     self.boots = nil;
 }
@@ -763,7 +776,7 @@ int startY;
 }
 
 -(Armor*)getBoots {
-    if (boots == nil) {
+    if (self.boots == nil) {
         return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.boots;
@@ -872,6 +885,7 @@ int startY;
     [stats appendFormat:@"\n    STATS:%s\n" , ""];
     
     [stats appendFormat:@"Health: %u\n" , self.health];
+    [stats appendFormat:@"%s: %u\n" , [[self getResourceName] UTF8String], [self getResource]];
     [stats appendFormat:@"Armor: %u\n" , [self getTotalArmor]];
     [stats appendFormat:@"Vitality: %u\n" , self.vit];
     [stats appendFormat:@"Strength: %u\n" , self.strn];

@@ -25,7 +25,7 @@ startX:(int)aStartX startY:(int)aStartY dungeonLvl:(int)aDungeonLvl {
 }
 
 -(void)loadSkills {
-    [super addSkill:@"BasicAttack"];
+    [super addSkill:@"Basic Attack"];
     [super addSkill:@"Backstab"];
     [super addSkill:@"Heal"];
     

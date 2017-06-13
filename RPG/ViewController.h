@@ -19,7 +19,10 @@
 #import "WeaponDictionary.h"
 #import "ArmorDictionary.h"
 
+#import "CombatViewController.h"
 #import "InventoryViewController.h"
+#import "EquipViewController.h"
+#import "SkillViewController.h"
 
 @interface ViewController : UIViewController
 
@@ -32,10 +35,11 @@
 @property (strong, nonatomic) IBOutlet UIView *left;
 @property (strong, nonatomic) IBOutlet UIView *right;
 @property (strong, nonatomic) IBOutlet UIButton *inventory;
+@property (strong, nonatomic) IBOutlet UIButton *SkillButton;
 
+@property NSMutableString *mainText;
 
-
-@property Barbarian *mainCharacter;
+@property Hero *mainCharacter;
 @property Dungeon *currMap;
 
 

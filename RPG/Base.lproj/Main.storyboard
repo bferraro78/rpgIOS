@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6Q1-pB-4t8">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--NavView-->
+        <scene sceneID="hSd-qN-G8B">
+            <objects>
+                <navigationController storyboardIdentifier="NavView" title="NavView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6Q1-pB-4t8" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="idZ-dT-8Zg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="qq2-el-Hlo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t99-LR-MGT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-476" y="365"/>
+        </scene>
+        <!--SkillViewController-->
+        <scene sceneID="2bp-MG-fIf">
+            <objects>
+                <tableViewController storyboardIdentifier="SkillViewController" title="SkillViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DKO-8v-rIZ" customClass="SkillViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="lE3-b1-JKt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="rEG-ge-dUg">
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rEG-ge-dUg" id="N0I-Ad-CoL">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="DKO-8v-rIZ" id="aV9-m6-f6e"/>
+                            <outlet property="delegate" destination="DKO-8v-rIZ" id="CLJ-fe-qhj"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="7FC-0g-jfa"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="psG-YL-oGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="40" y="-350"/>
+        </scene>
+        <!--MainView-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainView" title="MainView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -19,19 +64,14 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEm-zR-KWi">
                                 <rect key="frame" x="214" y="516.5" width="106" height="51.5"/>
-                                <state key="normal" title="Print Hero"/>
+                                <state key="normal" title="Hero"/>
                                 <connections>
                                     <action selector="printHero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qnj-aI-NfA"/>
+                                    <segue destination="0b2-mO-3VG" kind="push" identifier="equipSegue" id="1k1-xj-fe7"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0Bc-oO-J9M">
-                                <rect key="frame" x="0.0" y="13" width="320" height="129"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zXY-ze-wF0">
-                                <rect key="frame" x="0.0" y="137" width="320" height="293"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="129"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -44,28 +84,28 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9d-38-edw">
-                                <rect key="frame" x="145" y="440" width="30" height="30"/>
+                                <rect key="frame" x="145" y="456" width="30" height="30"/>
                                 <state key="normal" title="Up"/>
                                 <connections>
                                     <action selector="up:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VCF-ko-BuH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ITE-xF-Dqf">
-                                <rect key="frame" x="141" y="478" width="39" height="30"/>
+                                <rect key="frame" x="141" y="494" width="39" height="30"/>
                                 <state key="normal" title="Down"/>
                                 <connections>
                                     <action selector="down:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QPX-c9-lrz"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jpb-cO-amL">
-                                <rect key="frame" x="103" y="463" width="30" height="30"/>
+                                <rect key="frame" x="103" y="479" width="30" height="30"/>
                                 <state key="normal" title="Left"/>
                                 <connections>
                                     <action selector="left:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JxC-Zm-yf4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gps-hy-gU5">
-                                <rect key="frame" x="188" y="463" width="36" height="30"/>
+                                <rect key="frame" x="188" y="479" width="36" height="30"/>
                                 <state key="normal" title="Right"/>
                                 <connections>
                                     <action selector="right:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kPR-U9-r34"/>
@@ -76,29 +116,267 @@
                                 <state key="normal" title="Inventory"/>
                                 <connections>
                                     <action selector="inventory:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u97-gb-hV1"/>
+                                    <segue destination="hxk-uP-mMC" kind="push" identifier="inventorySegue" id="g76-Pf-BYd"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zXY-ze-wF0">
+                                <rect key="frame" x="0.0" y="207" width="320" height="251"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="1WN-Bc-hqX"/>
+                                </connections>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BP-cy-gPw">
+                                <rect key="frame" x="25" y="485" width="36" height="30"/>
+                                <state key="normal" title="Skills"/>
+                                <connections>
+                                    <segue destination="DKO-8v-rIZ" kind="push" identifier="skillSegue" id="9g7-e1-VhP"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Main Menu" id="xuL-XN-tl9"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="HeroStats" destination="GNw-Lp-8Z4" id="4NP-49-ijy"/>
                         <outlet property="MainTextField" destination="zXY-ze-wF0" id="6cN-Ip-kux"/>
                         <outlet property="MapTextField" destination="0Bc-oO-J9M" id="Fit-mJ-00m"/>
+                        <outlet property="SkillButton" destination="0BP-cy-gPw" id="gpg-lb-Oyk"/>
                         <outlet property="down" destination="8bC-Xf-vdC" id="oEX-mD-4Gx"/>
                         <outlet property="inventory" destination="p7j-lA-eeh" id="Fkn-xd-ZJg"/>
                         <outlet property="left" destination="8bC-Xf-vdC" id="E6D-Oa-ufy"/>
                         <outlet property="printHero" destination="kEm-zR-KWi" id="Ubj-Fh-miA"/>
                         <outlet property="right" destination="8bC-Xf-vdC" id="nqB-NS-zDY"/>
                         <outlet property="up" destination="8bC-Xf-vdC" id="oNs-iA-cAd"/>
+                        <segue destination="CRI-Ba-44U" kind="push" identifier="combatSegue" id="LZY-PC-y1I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="180" y="397"/>
+            <point key="canvasLocation" x="40" y="323"/>
+        </scene>
+        <!--InventoryView-->
+        <scene sceneID="t9H-IM-H61">
+            <objects>
+                <tableViewController storyboardIdentifier="InventoryViewController" title="InventoryView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hxk-uP-mMC" customClass="InventoryViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Mj9-w0-uqV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="jdN-Cv-k2O">
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jdN-Cv-k2O" id="gUl-El-y9a">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hxk-uP-mMC" id="EkY-i3-QkU"/>
+                            <outlet property="delegate" destination="hxk-uP-mMC" id="5gV-T2-PA9"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Inventory" id="nBF-S8-l6q"/>
+                    <connections>
+                        <outlet property="view" destination="Mj9-w0-uqV" id="jcc-2R-G6v"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qdS-8H-2Gf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="621" y="1096"/>
+        </scene>
+        <!--EquipViewController-->
+        <scene sceneID="XCN-Cu-fSS">
+            <objects>
+                <viewController storyboardIdentifier="EquipViewController" title="EquipViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0b2-mO-3VG" customClass="EquipViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h8u-ON-lx5"/>
+                        <viewControllerLayoutGuide type="bottom" id="heb-y4-crC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yFz-Ow-ehV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="px9-rv-Ua4">
+                                <rect key="frame" x="95" y="64" width="131" height="60"/>
+                                <state key="normal" title="Helmet"/>
+                                <connections>
+                                    <action selector="HelmetButton:" destination="0b2-mO-3VG" eventType="touchUpInside" id="qzm-xy-PdN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGG-mB-kQx">
+                                <rect key="frame" x="0.0" y="132" width="131" height="60"/>
+                                <state key="normal" title="Shoulders"/>
+                                <connections>
+                                    <action selector="ShouldersButton:" destination="0b2-mO-3VG" eventType="touchUpInside" id="bGq-kr-V9P"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60f-eb-2U0">
+                                <rect key="frame" x="95" y="200" width="131" height="60"/>
+                                <state key="normal" title="Torso"/>
+                                <connections>
+                                    <action selector="TorsoButton:" destination="0b2-mO-3VG" eventType="touchUpInside" id="K5I-ET-2sJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RwD-hQ-svs">
+                                <rect key="frame" x="169" y="268" width="131" height="60"/>
+                                <state key="normal" title="Gloves"/>
+                                <connections>
+                                    <action selector="GlovesButton:" destination="0b2-mO-3VG" eventType="touchUpInside" id="jt7-Mf-Aaw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qf0-QJ-tUr">
+                                <rect key="frame" x="0.0" y="268" width="131" height="60"/>
+                                <state key="normal" title="Bracers"/>
+                                <connections>
+                                    <action selector="BracersButton:" destination="0b2-mO-3VG" eventType="touchUpInside" id="z9u-fe-oaB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yo2-Bh-3UF">
+                                <rect key="frame" x="95" y="336" width="131" height="60"/>
+                                <state key="normal" title="Legs"/>
+                                <connections>
+                                    <action selector="LegsButton:" destination="0b2-mO-3VG" eventType="touchUpInside" id="EDD-LR-TUg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v60-fu-9hm">
+                                <rect key="frame" x="95" y="404" width="131" height="60"/>
+                                <state key="normal" title="Boots"/>
+                                <connections>
+                                    <action selector="BootsButton:" destination="0b2-mO-3VG" eventType="touchUpInside" id="W7u-BV-CZU"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ojM-7a-FSx">
+                                <rect key="frame" x="40" y="460" width="240" height="108"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Hero" id="vTN-2H-pjA"/>
+                    <connections>
+                        <outlet property="BootsButton" destination="v60-fu-9hm" id="0tK-Sb-ooS"/>
+                        <outlet property="BracersButton" destination="Qf0-QJ-tUr" id="MQe-Ip-27p"/>
+                        <outlet property="EquipmentText" destination="ojM-7a-FSx" id="ebA-w9-w8n"/>
+                        <outlet property="GlovesButton" destination="RwD-hQ-svs" id="cNT-Ow-tGD"/>
+                        <outlet property="HelmetButton" destination="px9-rv-Ua4" id="JJC-7s-Or5"/>
+                        <outlet property="LegsButton" destination="yo2-Bh-3UF" id="Zpz-7I-0hd"/>
+                        <outlet property="ShouldersButton" destination="yGG-mB-kQx" id="nnM-f3-vdA"/>
+                        <outlet property="TorsoButton" destination="60f-eb-2U0" id="7cP-WZ-fvb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cMI-1S-WzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="580" y="323"/>
+        </scene>
+        <!--Combat View Controller-->
+        <scene sceneID="DPL-WK-AZZ">
+            <objects>
+                <viewController storyboardIdentifier="CombatView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CRI-Ba-44U" customClass="CombatViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T8S-4A-5Lw"/>
+                        <viewControllerLayoutGuide type="bottom" id="2tZ-bo-Mce"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Ap-NG-TeB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FZc-aT-Lpz">
+                                <rect key="frame" x="0.0" y="20" width="320" height="258"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="CRI-Ba-44U" id="I5X-aE-FMh"/>
+                                </connections>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Hero Buffs/Debuffs" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qfi-xM-bMX">
+                                <rect key="frame" x="0.0" y="328" width="147" height="135"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVG-Up-Sfm">
+                                <rect key="frame" x="49" y="286" width="49" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enemy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9H-tW-t3c">
+                                <rect key="frame" x="211" y="286" width="52" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Enemy Buffs/Debuffs" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CQe-o0-4pS">
+                                <rect key="frame" x="155" y="328" width="165" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rV-uE-5W1">
+                                <rect key="frame" x="35" y="501" width="85" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="SkillThree:" destination="CRI-Ba-44U" eventType="touchUpInside" id="Zsi-cO-Ob9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tL-Zz-G7e">
+                                <rect key="frame" x="186" y="500" width="85" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="SkillFour:" destination="CRI-Ba-44U" eventType="touchUpInside" id="lO1-by-4n7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ak-c1-9B3">
+                                <rect key="frame" x="35" y="462" width="85" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="SkillOne:" destination="CRI-Ba-44U" eventType="touchUpInside" id="n36-eE-hrw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcR-Xy-oN7">
+                                <rect key="frame" x="186" y="462" width="85" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="SkillTwo:" destination="CRI-Ba-44U" eventType="touchUpInside" id="gtc-qz-ppF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPD-3Q-rGG">
+                                <rect key="frame" x="49" y="484" width="214" height="30"/>
+                                <state key="normal" title="Critical Hit"/>
+                                <connections>
+                                    <action selector="critButton:" destination="CRI-Ba-44U" eventType="touchUpInside" id="Klv-aT-zSw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="k7a-Wu-dRA"/>
+                    <connections>
+                        <outlet property="CombatText" destination="FZc-aT-Lpz" id="6M1-lI-x76"/>
+                        <outlet property="EnemyBuffsDebuffs" destination="CQe-o0-4pS" id="5vp-Yw-XqG"/>
+                        <outlet property="EnemyLabel" destination="X9H-tW-t3c" id="RU1-zK-I74"/>
+                        <outlet property="HeroBuffsDebuffs" destination="qfi-xM-bMX" id="1lY-my-GV3"/>
+                        <outlet property="SkillFour" destination="5tL-Zz-G7e" id="Qlt-Rd-Rmx"/>
+                        <outlet property="SkillOne" destination="5ak-c1-9B3" id="xt6-1B-Mbn"/>
+                        <outlet property="SkillThree" destination="4rV-uE-5W1" id="Ges-6e-0BZ"/>
+                        <outlet property="SkillTwo" destination="UcR-Xy-oN7" id="WsI-sG-AqL"/>
+                        <outlet property="critButton" destination="QPD-3Q-rGG" id="yoI-as-qAy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ln-4f-KDl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="55" y="1183"/>
         </scene>
     </scenes>
 </document>

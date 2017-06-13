@@ -12,7 +12,7 @@
 
 NSMutableArray *skillLibrary;
 
-/**TODO --  write function that take in heroLevel/elementSpec adn returns a random skill from that spec ************/
+/**TODO --  write function that take in heroLevel/elementSpec and returns a random skill from that spec ************/
 
 /* Load Items -- Called When Game is Started */
 +(void)loadSkills {
@@ -37,14 +37,22 @@ NSMutableArray *skillLibrary;
         enemyMoveName:(NSString*)enemyMoveName heroElementMap:(NSMutableDictionary*)heroElementMap
      enemeyElementMap:(NSMutableDictionary*)enemeyElementMap {
 
+    
+    /* Strips White Space -- That is how moved is saved in Dictonary */
+    heroMoveName = [heroMoveName stringByReplacingOccurrencesOfString:@"\\s"
+                                            withString:@""
+                                               options:NSRegularExpressionSearch
+                                                 range:NSMakeRange(0, [heroMoveName length])];
+    
     Skill *heroSkill = [self findSkill:heroMoveName];
     Skill *enemySkill = [self findSkill:enemyMoveName];
+    
     
 //    printf("Selected Hero Skill: %s\n", [[heroSkill moveName] UTF8String]);
 //    printf("Selected Enemy Skill: %s\n", [[enemySkill moveName] UTF8String]);
    
     /* This will do all heavy work inside the Abilitie's class, and load Buff/Element Maps */
-    [heroSkill activateHeroMove:mainCharacter ElementMap:heroElementMap];
+    [heroSkill activateHeroMove:mainCharacter ElementMap:heroElementMap Enemy:e];
     [enemySkill activateEnemyMove:e ElementMap:enemeyElementMap Hero:mainCharacter];
     
     
@@ -52,9 +60,10 @@ NSMutableArray *skillLibrary;
 
 
 +(Skill*)findSkill:(NSString*)s {
+    /* Trim White Space */
+    s = [s stringByReplacingOccurrencesOfString:@" " withString:@""];
     for (int i = 0; i < [skillLibrary count]; i++) {
         Skill *tmp = [skillLibrary objectAtIndex:i];
-
         if ([[tmp moveName] isEqualToString:s]) {
             return tmp;
         }

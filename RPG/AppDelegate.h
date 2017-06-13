@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "ViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -20,6 +21,8 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+@property (nonatomic,retain) UINavigationController *navigationController;
+@property (nonatomic, strong) ViewController *root;
 
 @end
 

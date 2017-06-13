@@ -12,7 +12,6 @@
 int value;
 int duration;
 
-
 -(id)initvalue:(int)aValue duration:(int)aDuration {
     _value = aValue;
     _duration = aDuration;

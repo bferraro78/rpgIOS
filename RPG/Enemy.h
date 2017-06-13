@@ -24,6 +24,7 @@
 
 @property NSMutableArray *enemySkillSet;
 @property NSMutableDictionary *enemyBuffLibrary;
+@property NSMutableDictionary *enemyDebuffLibrary;
 
 
 -(id)initenemyName:(NSString*)aEnemyName enemyElement:(NSString*)aEnemyElement enemySkillSet:(NSMutableArray*)aEnemySkillSet
@@ -43,7 +44,7 @@
 
 -(void)takeDamage:(int)healthReductionOrIncrease;
 
-
+-(NSMutableString*)printStats;
 
 @end
 

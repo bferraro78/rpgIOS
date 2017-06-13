@@ -30,6 +30,8 @@ NSMutableArray *armorLibrary;
     [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"Leather Torso" armorType:@"Torso"]];
     [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"Leather Legs" armorType:@"Legs"]];
     
+    
+    
 }
 
 
@@ -70,9 +72,9 @@ NSMutableArray *armorLibrary;
     
     
     
-    /* 20% Chance item is physical damage - *80% elemental*/
+    /* 50% Chance item is physical damage - 50% elemental */
     int elementalOrPhysical = arc4random_uniform(100);
-    if (elementalOrPhysical < 19) {
+    if (elementalOrPhysical < 49) {
         chosenArmor.armorElement = @"PHYSICAL";
     } else {
         int elementChoice = arc4random_uniform(4);

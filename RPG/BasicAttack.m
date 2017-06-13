@@ -24,7 +24,7 @@ int basicattackResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.basicattackResourceCost/100.0)*(float)totalResource); }
 
--(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap {
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("BasicAttack\n");
     
     /* Insert Damage */

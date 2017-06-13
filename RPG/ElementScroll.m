@@ -18,6 +18,6 @@
 
 -(NSString*)getType { return @"ElementScroll"; }
 
--(NSString*)toString { return @"ElementScroll"; }
+-(NSString*)toString { return [[NSMutableString alloc] initWithString:@"ElementScroll"]; }
 
 @end

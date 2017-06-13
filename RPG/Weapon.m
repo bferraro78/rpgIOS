@@ -55,4 +55,6 @@ BOOL isMainHand;
     return wepPrint;
 }
 
+-(NSString*)getName { return self.weaponName; }
+
 @end

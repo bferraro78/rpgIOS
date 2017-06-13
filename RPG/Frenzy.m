@@ -24,7 +24,7 @@ int frenzyResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.frenzyResourceCost/100.0)*(float)totalResource); }
 
--(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap {
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("Frenzy!!");
     
     /* Insert Damage */

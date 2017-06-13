@@ -22,6 +22,7 @@ NSString *enemyElement;
 
 NSMutableArray *enemySkillSet;
 NSMutableDictionary *enemyBuffLibrary;
+NSMutableDictionary *enemyDebuffLibrary;
 
 
 -(id)initenemyName:(NSString*)aEnemyName enemyElement:(NSString*)aEnemyElement enemySkillSet:(NSMutableArray*)aEnemySkillSet enemyStrn:(int)aEnemyStrn enemyInti:(int) aEnemyInti enemyDext:(int)aEnemyDext enemyHealth:(int)aEnemyHealth
@@ -34,7 +35,8 @@ NSMutableDictionary *enemyBuffLibrary;
     _enemyHealth = aEnemyHealth;
     _enemyArmor = aEnemyArmor;
     _enemySkillSet = [[NSMutableArray alloc] init];
-    _enemyBuffLibrary= [[NSMutableDictionary alloc] init];
+    _enemyBuffLibrary = [[NSMutableDictionary alloc] init];
+    _enemyDebuffLibrary = [[NSMutableDictionary alloc] init];
     [self setSkills:aEnemySkillSet];
     
     return self;
@@ -43,7 +45,8 @@ NSMutableDictionary *enemyBuffLibrary;
 -(NSString*)selectAttack {
     int r = arc4random_uniform(100);
     int choice  = 0;
-    if (r < 20) {
+    ///// DEBUG!!! CHANGE BACK TO r < 20
+    if (r < 99) {
         choice = arc4random_uniform((unsigned int)[self.enemySkillSet count]-1)+1;
     }
     
@@ -86,6 +89,24 @@ NSMutableDictionary *enemyBuffLibrary;
     if (self.enemyCombatHealth > self.enemyHealth) {
         self.enemyCombatHealth = self.enemyHealth;
     }
+}
+
+-(NSMutableString*)printStats {
+    NSMutableString *stats = [[NSMutableString alloc] init];
+    
+    [stats appendString:@"Enemy's Stats: \n"];
+    [stats appendFormat:@"Name: %s\n" , [self.enemyName UTF8String]];
+    [stats appendFormat:@"Element Spec: %s\n" , [self.enemyElement UTF8String]];
+    
+    [stats appendFormat:@"\n    STATS:%s\n" , ""];
+
+    [stats appendFormat:@"Health: %u\n" , self.enemyHealth];
+    [stats appendFormat:@"Armor: %u\n" , self.enemyArmor];
+    [stats appendFormat:@"Strength: %u\n" , self.enemyStrn];
+    [stats appendFormat:@"Initeligence: %u\n" , self.enemyInti];
+    [stats appendFormat:@"Dexterity: %u\n" , self.enemyDext];
+    
+    return stats;
 }
 
 

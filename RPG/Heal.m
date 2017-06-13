@@ -24,7 +24,7 @@ int healResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.healResourceCost/100.0)*(float)totalResource); }
 
--(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap {
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("Heal!!");
     
     /* Insert Heal Dot */
@@ -40,7 +40,7 @@ int healResourceCost;
     /* Insert Heal Dot */
     int heal = -(e.enemyInti/2);
     
-    mainCharacter.buffLibrary[@"healDot"] = [[Buff alloc] initvalue:heal duration:3];
+    e.enemyBuffLibrary[@"healDot"] = [[Buff alloc] initvalue:heal duration:3];
     
 }
 

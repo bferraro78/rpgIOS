@@ -25,7 +25,7 @@ int combatMana;
 }
 
 -(void)loadSkills {
-    [super addSkill:@"BasicAttack"];
+    [super addSkill:@"Basic Attack"];
     [super addSkill:@"Fireball"];
     [super addSkill:@"Heal"];
     

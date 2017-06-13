@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Barbarian.h"
+#import "Hero.h"
 
-@interface InventoryViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface InventoryViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableView *InventoryTable;
-@property (strong, nonatomic) IBOutlet UITextView *HeroTextField;
 
 @property(nonatomic) Hero *mainCharacter;
-
+@property (strong, nonatomic) UITextView *moveView; // Pop up box Long Press
+@property NSMutableString *textBox; // Holds Item Data
 
 @end

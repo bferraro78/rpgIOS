@@ -21,7 +21,7 @@
             spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec;
 
 -(int)getCombatResourceCost:(int)totalResource;
--(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap;
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap Enemy:(Enemy*)e;
 -(void)activateEnemyMove:(Enemy*)e ElementMap:(NSMutableDictionary*)elementMap Hero:(Hero*)mainCharacter;
 
 @end

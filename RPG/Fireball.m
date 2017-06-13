@@ -24,7 +24,7 @@ int fireballResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.fireballResourceCost/100.0)*(float)totalResource); }
 
--(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap {
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("Fireball!!");
     
     /* Insert Damage */
@@ -37,7 +37,7 @@ int fireballResourceCost;
     int isDot = arc4random_uniform(100);
     if (isDot < 20) {
         int dotDamage = mainCharacter.inti/2;
-        mainCharacter.buffLibrary[@"fireDot"] = [[Buff alloc] initvalue:dotDamage duration:3];
+        e.enemyDebuffLibrary[@"fireDot"] = [[Buff alloc] initvalue:dotDamage duration:3];
     }
 }
 
@@ -53,7 +53,7 @@ int fireballResourceCost;
     int isDot = arc4random_uniform(100);
     if (isDot < 20) {
         int dotDamage = e.enemyInti/2;
-        e.enemyBuffLibrary[@"fireDot"] = [[Buff alloc] initvalue:dotDamage duration:3];
+        mainCharacter.debuffLibrary[@"fireDot"] = [[Buff alloc] initvalue:dotDamage duration:3];
     }
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF110E811ED5D74E00C1554E /* CombatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF110E801ED5D74E00C1554E /* CombatViewController.m */; };
 		FF2ABA221EC7CCDA00EC8B3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA211EC7CCDA00EC8B3C /* main.m */; };
 		FF2ABA251EC7CCDA00EC8B3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */; };
 		FF2ABA281EC7CCDA00EC8B3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */; };
@@ -51,8 +52,9 @@
 		FF2ABB341ECE68BA00EC8B3C /* BasicAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */; };
 		FF2ABB381ECE720C00EC8B3C /* NPC.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB371ECE720C00EC8B3C /* NPC.m */; };
 		FF2ABB3B1ECEA1C000EC8B3C /* ElementScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB3A1ECEA1C000EC8B3C /* ElementScroll.m */; };
-		FF6DE0431ED4AB9400A3C62F /* Inventory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF6DE0421ED4AB9400A3C62F /* Inventory.storyboard */; };
+		FF5F8FEF1ED734B1000842C6 /* EquipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5F8FEE1ED734B1000842C6 /* EquipViewController.m */; };
 		FF6DE0461ED4E95200A3C62F /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6DE0451ED4E95200A3C62F /* InventoryViewController.m */; };
+		FFA0A0891ED838780063ADBE /* SkillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0A0881ED838780063ADBE /* SkillViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF110E7F1ED5D74E00C1554E /* CombatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombatViewController.h; sourceTree = "<group>"; };
+		FF110E801ED5D74E00C1554E /* CombatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CombatViewController.m; sourceTree = "<group>"; };
 		FF2ABA1D1EC7CCDA00EC8B3C /* RPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF2ABA211EC7CCDA00EC8B3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FF2ABA231EC7CCDA00EC8B3C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -160,9 +164,12 @@
 		FF2ABB391ECE721200EC8B3C /* NPC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NPC.h; sourceTree = "<group>"; };
 		FF2ABB3A1ECEA1C000EC8B3C /* ElementScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementScroll.m; sourceTree = "<group>"; };
 		FF2ABB3C1ECEA1C600EC8B3C /* ElementScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElementScroll.h; sourceTree = "<group>"; };
-		FF6DE0421ED4AB9400A3C62F /* Inventory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Inventory.storyboard; sourceTree = "<group>"; };
+		FF5F8FED1ED734B1000842C6 /* EquipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipViewController.h; sourceTree = "<group>"; };
+		FF5F8FEE1ED734B1000842C6 /* EquipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipViewController.m; sourceTree = "<group>"; };
 		FF6DE0441ED4E95200A3C62F /* InventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
 		FF6DE0451ED4E95200A3C62F /* InventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
+		FFA0A0871ED838780063ADBE /* SkillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillViewController.h; sourceTree = "<group>"; };
+		FFA0A0881ED838780063ADBE /* SkillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,14 +228,19 @@
 				FF2ABAA81EC94A2300EC8B3C /* Equipment */,
 				FF2ABAA61EC9468200EC8B3C /* Misc */,
 				FF2ABAA31EC93B9000EC8B3C /* Classes */,
-				FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */,
-				FF2ABA231EC7CCDA00EC8B3C /* AppDelegate.h */,
+				FF110E801ED5D74E00C1554E /* CombatViewController.m */,
+				FF110E7F1ED5D74E00C1554E /* CombatViewController.h */,
+				FF5F8FEE1ED734B1000842C6 /* EquipViewController.m */,
+				FF5F8FED1ED734B1000842C6 /* EquipViewController.h */,
 				FF6DE0451ED4E95200A3C62F /* InventoryViewController.m */,
 				FF6DE0441ED4E95200A3C62F /* InventoryViewController.h */,
-				FF6DE0421ED4AB9400A3C62F /* Inventory.storyboard */,
+				FFA0A0881ED838780063ADBE /* SkillViewController.m */,
+				FFA0A0871ED838780063ADBE /* SkillViewController.h */,
 				FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */,
 				FF2ABA261EC7CCDA00EC8B3C /* ViewController.h */,
 				FF2ABA291EC7CCDA00EC8B3C /* Main.storyboard */,
+				FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */,
+				FF2ABA231EC7CCDA00EC8B3C /* AppDelegate.h */,
 				FF2ABA2F1EC7CCDA00EC8B3C /* Assets.xcassets */,
 				FF2ABA311EC7CCDA00EC8B3C /* LaunchScreen.storyboard */,
 				FF2ABA341EC7CCDA00EC8B3C /* Info.plist */,
@@ -493,7 +505,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF6DE0431ED4AB9400A3C62F /* Inventory.storyboard in Resources */,
 				FF2ABA331EC7CCDA00EC8B3C /* LaunchScreen.storyboard in Resources */,
 				FF2ABA301EC7CCDA00EC8B3C /* Assets.xcassets in Resources */,
 				FF2ABA2B1EC7CCDA00EC8B3C /* Main.storyboard in Resources */,
@@ -534,6 +545,7 @@
 				FF2ABAD51ECA686E00EC8B3C /* Buff.m in Sources */,
 				FF2ABB041ECC072500EC8B3C /* EnemyDictionary.m in Sources */,
 				FF2ABB1E1ECCB78C00EC8B3C /* Rend.m in Sources */,
+				FF5F8FEF1ED734B1000842C6 /* EquipViewController.m in Sources */,
 				FF2ABAC81ECA448C00EC8B3C /* Barbarian.m in Sources */,
 				FF2ABB3B1ECEA1C000EC8B3C /* ElementScroll.m in Sources */,
 				FF2ABACC1ECA4D3900EC8B3C /* Wizard.m in Sources */,
@@ -559,8 +571,10 @@
 				FF2ABB101ECCB72100EC8B3C /* Backstab.m in Sources */,
 				FF2ABA221EC7CCDA00EC8B3C /* main.m in Sources */,
 				FF2ABAF01ECBC87E00EC8B3C /* Lightningstone.m in Sources */,
+				FF110E811ED5D74E00C1554E /* CombatViewController.m in Sources */,
 				FF2ABB121ECCB73D00EC8B3C /* Fireball.m in Sources */,
 				FF2ABADC1ECA6FD900EC8B3C /* Dungeon.m in Sources */,
+				FFA0A0891ED838780063ADBE /* SkillViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

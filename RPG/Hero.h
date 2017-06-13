@@ -30,11 +30,13 @@
 @property int purse;
 @property NSString *elementSpec;
 
-@property NSMutableArray *skillSet;
+@property NSMutableArray *skillSet; // All Skills to Hero
+@property NSMutableArray *activeSkillSet; // The 4 active Skills Possible
 @property NSMutableArray *inventory;
 @property NSMutableArray *activeItems;
 
 @property NSMutableDictionary *buffLibrary; //<String, Buff>;
+@property NSMutableDictionary *debuffLibrary;
 @property NSMutableArray *stepsTaken;
 
 
@@ -67,6 +69,7 @@
 -(BOOL)containsSpace:(Space*)s;
 
 -(void)addSkill:(NSString*)ability;
+-(void)setActiveSkills;
 
 -(NSString*)getClassName;
 

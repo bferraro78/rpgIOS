@@ -50,4 +50,7 @@ int armorResistance;
     return armorPrint;
 }
 
+-(NSString*)getName { return self.armorName; }
+
+
 @end

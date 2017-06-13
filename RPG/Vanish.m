@@ -24,19 +24,18 @@ int vanishResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.vanishResourceCost/100.0)*(float)totalResource); }
 
--(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap {
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("Vanish!!");
     
     /* Insert Vanish Dot */
     mainCharacter.buffLibrary[@"vanish"] = [[Buff alloc] initvalue:0 duration:2];
-    
 }
 
 -(void)activateEnemyMove:(Enemy*)e ElementMap:(NSMutableDictionary*)elementMap Hero:(Hero*)mainCharacter {
     printf("Enemey uses Vanish...");
     
     /* Insert Vanish Dot */
-    mainCharacter.buffLibrary[@"vanish"] = [[Buff alloc] initvalue:0 duration:2];
+    e.enemyBuffLibrary[@"vanish"] = [[Buff alloc] initvalue:0 duration:2];
     
 }
 

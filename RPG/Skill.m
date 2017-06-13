@@ -25,7 +25,7 @@ NSString *skillElementSpec;
 
 /* Actual bodies are put in the Ability Class */
 -(int)getCombatResourceCost:(int)totalResource { return 0; }
--(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap { }
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap Enemy:(Enemy*)e { }
 -(void)activateEnemyMove:(Enemy*)e ElementMap:(NSMutableDictionary*)elementMap Hero:(Hero*)mainCharacter { }
 
 

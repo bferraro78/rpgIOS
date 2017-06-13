@@ -24,13 +24,13 @@ int rendResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.rendResourceCost/100.0)*(float)totalResource); }
 
--(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap {
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("Rend!!");
     
     /* Insert Rend Dot */
     int damage = (mainCharacter.strn/2)+([[mainCharacter getMH] getSwing]+[[mainCharacter getOH] getSwing]);
     
-    mainCharacter.buffLibrary[@"rendDot"] = [[Buff alloc] initvalue:damage duration:3];
+    e.enemyDebuffLibrary[@"rendDot"] = [[Buff alloc] initvalue:damage duration:3];
     
 }
 
@@ -40,7 +40,7 @@ int rendResourceCost;
     /* Insert Rend Dot */
     int damage = (e.enemyStrn/2)+(mainCharacter.level*3);
     
-    mainCharacter.buffLibrary[@"rendDot"] = [[Buff alloc] initvalue:damage duration:3];
+    mainCharacter.debuffLibrary[@"rendDot"] = [[Buff alloc] initvalue:damage duration:3];
     
 }
 

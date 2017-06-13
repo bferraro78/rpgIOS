@@ -24,7 +24,7 @@ int backstabResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.backstabResourceCost/100.0)*(float)totalResource); }
 
--(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap {
+-(void)activateHeroMove:(Hero*)mainCharacter ElementMap:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("BackStab!!");
     
     /* Insert Damage */

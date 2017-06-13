@@ -46,7 +46,7 @@ NSMutableArray *itemLibrary;
         choice = arc4random_uniform(size);
     }
     
-    /* Make copy of template from library */
+    /* Make copy of template from library (SO we do not change the actual item in the library) */
     Item *tmpItem = [itemLibrary objectAtIndex:choice];
     Item *chosenItem;
     if ([tmpItem isKindOfClass:[Firestone class]]) {
@@ -65,7 +65,7 @@ NSMutableArray *itemLibrary;
         chosenItem = [[ElementScroll alloc] initdescription:tmpItem.description];
     }
     
-    
+    /* Generates Potency of Item */
     [chosenItem generate];
     
     return chosenItem;

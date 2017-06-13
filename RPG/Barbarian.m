@@ -25,7 +25,7 @@ int combatRage;
 }
 
 -(void)loadSkills {
-    [super addSkill:@"BasicAttack"];
+    [super addSkill:@"Basic Attack"];
     [super addSkill:@"Frenzy"];
     [super addSkill:@"Heal"];
     

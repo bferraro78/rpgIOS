@@ -12,9 +12,11 @@
 
 
 @property NSMutableDictionary *buffLibrary;
+@property NSMutableDictionary *buffLibToName;
 
 +(void)loadBuffLibrary;
 +(NSString*)getDescription:(NSString*)s;
++(NSString*)getName:(NSString*)s;
 
 @end
 
