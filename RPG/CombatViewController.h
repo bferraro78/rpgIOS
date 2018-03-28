@@ -15,6 +15,12 @@
 #import "BuffDictionary.h"
 @interface CombatViewController : UIViewController
 
+/* Hero Spec */
+@property BOOL lightningSpecAdditionalTurn;
+
+@property NSMutableDictionary *heroElementMap;
+@property NSMutableDictionary *enemyElementMap;
+
 // Timer
 @property NSUInteger critTimerCount;
 @property NSTimer *timer;

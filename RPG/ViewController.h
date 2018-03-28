@@ -15,7 +15,6 @@
 #import "Rogue.h"
 #import "Dungeon.h"
 #import "Space.h"
-#import "Combat.h"
 #import "WeaponDictionary.h"
 #import "ArmorDictionary.h"
 

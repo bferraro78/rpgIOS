@@ -52,7 +52,7 @@ NSMutableArray *weaponLibrary;
         chosenWeapon.attack = arc4random_uniform(heroLevel+30)+(heroLevel-10);
     }
     
-    
+     
     /* 20% Chance item is physical damage - *80% elemental*/
     int elementalOrPhysical = arc4random_uniform(100);
     if (elementalOrPhysical < 19) {

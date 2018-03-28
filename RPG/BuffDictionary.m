@@ -31,7 +31,7 @@ NSMutableDictionary *buffLibToName;
     buffLibToName = [[NSMutableDictionary alloc] init];
     
     [buffLib setObject:@"Frozen: Take 25% Less Damage" forKey:@"frozen" ];
-    [buffLibToName setObject:@"Frozen" forKey:@"frozen" ];
+    [buffLibToName setObject:@"Frozen" forKey:@"frozen"];
     
     [buffLib setObject:@"Burning: Take Dot Damage" forKey:@"fireDot"];
     [buffLibToName setObject:@"Burning" forKey:@"fireDot"];
@@ -42,9 +42,8 @@ NSMutableDictionary *buffLibToName;
     [buffLib setObject:@"Rend: Enemey Gushing Blood" forKey:@"rendDot"];
     [buffLibToName setObject:@"Rend" forKey:@"rendDot"];
     
-    
-    [buffLib setObject:@"Vanish: Cannot Find You..." forKey:@"vanish" ];
-    [buffLibToName setObject:@"Vanish" forKey:@"vanish" ];
+    [buffLib setObject:@"Vanish: Cannot Find You..." forKey:@"vanish"];
+    [buffLibToName setObject:@"Vanish" forKey:@"vanish"];
 
     [buffLib setObject:@"Poison Passive Dot" forKey:@"poisonPassiveDot"];
     [buffLibToName setObject:@"Poison Passive" forKey:@"poisonPassiveDot"];

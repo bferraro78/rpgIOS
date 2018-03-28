@@ -33,12 +33,13 @@ NSMutableArray *skillLibrary;
     
 }
 
-+(void)generateDamage:(Hero*)mainCharacter  Enemy:(Enemy*)e heroMoveName:(NSString*)heroMoveName
++(BOOL)generateDamage:(Hero*)mainCharacter  Enemy:(Enemy*)e heroMoveName:(NSString*)heroMoveName
         enemyMoveName:(NSString*)enemyMoveName heroElementMap:(NSMutableDictionary*)heroElementMap
      enemeyElementMap:(NSMutableDictionary*)enemeyElementMap {
 
+    BOOL validAttack = false;
     
-    /* Strips White Space -- That is how moved is saved in Dictonary */
+    /* Strips White Space -- That is how move is saved in Dictonary */
     heroMoveName = [heroMoveName stringByReplacingOccurrencesOfString:@"\\s"
                                             withString:@""
                                                options:NSRegularExpressionSearch
@@ -46,18 +47,25 @@ NSMutableArray *skillLibrary;
     
     Skill *heroSkill = [self findSkill:heroMoveName];
     Skill *enemySkill = [self findSkill:enemyMoveName];
-    
-    
-//    printf("Selected Hero Skill: %s\n", [[heroSkill moveName] UTF8String]);
-//    printf("Selected Enemy Skill: %s\n", [[enemySkill moveName] UTF8String]);
    
-    /* This will do all heavy work inside the Abilitie's class, and load Buff/Element Maps */
-    [heroSkill activateHeroMove:mainCharacter ElementMap:heroElementMap Enemy:e];
-    [enemySkill activateEnemyMove:e ElementMap:enemeyElementMap Hero:mainCharacter];
+    int heroTotalResource = [mainCharacter getResource];
+    int combatCost = [heroSkill getCombatResourceCost:heroTotalResource];
     
-    
+    if ([self checkVaildAttack:combatCost heroTotalResource:heroTotalResource]) {
+        validAttack = true;
+        /* This will do all heavy work inside the Abilitie's class, and load Buff/Element Maps */
+        [heroSkill activateHeroMove:mainCharacter ElementMap:heroElementMap Enemy:e];
+        [enemySkill activateEnemyMove:e ElementMap:enemeyElementMap Hero:mainCharacter];
+        [mainCharacter useCombatResource:combatCost];
+    }
+
+    return validAttack;
 }
 
+/* Check resource availability */
++(BOOL)checkVaildAttack:(int)combatCost heroTotalResource:(int)heroTotalResource {
+    return (heroTotalResource >= combatCost) ? true : false;
+}
 
 +(Skill*)findSkill:(NSString*)s {
     /* Trim White Space */

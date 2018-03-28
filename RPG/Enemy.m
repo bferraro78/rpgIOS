@@ -34,9 +34,9 @@ NSMutableDictionary *enemyDebuffLibrary;
     _enemyDext = aEnemyDext;
     _enemyHealth = aEnemyHealth;
     _enemyArmor = aEnemyArmor;
-    _enemySkillSet = [[NSMutableArray alloc] init];
     _enemyBuffLibrary = [[NSMutableDictionary alloc] init];
     _enemyDebuffLibrary = [[NSMutableDictionary alloc] init];
+    _enemySkillSet = [[NSMutableArray alloc] init];
     [self setSkills:aEnemySkillSet];
     
     return self;
@@ -45,7 +45,7 @@ NSMutableDictionary *enemyDebuffLibrary;
 -(NSString*)selectAttack {
     int r = arc4random_uniform(100);
     int choice  = 0;
-    ///// DEBUG!!! CHANGE BACK TO r < 20
+    // TODO!!! CHANGE BACK TO r < 20
     if (r < 99) {
         choice = arc4random_uniform((unsigned int)[self.enemySkillSet count]-1)+1;
     }

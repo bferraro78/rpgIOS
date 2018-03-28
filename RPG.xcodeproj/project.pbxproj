@@ -46,7 +46,6 @@
 		FF2ABB211ECCB79A00EC8B3C /* Vanish.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB201ECCB79A00EC8B3C /* Vanish.m */; };
 		FF2ABB241ECCB81D00EC8B3C /* SkillDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB231ECCB81D00EC8B3C /* SkillDictionary.m */; };
 		FF2ABB281ECCDBAA00EC8B3C /* Skill.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB271ECCDBAA00EC8B3C /* Skill.m */; };
-		FF2ABB2B1ECD0AE000EC8B3C /* Combat.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB2A1ECD0AE000EC8B3C /* Combat.m */; };
 		FF2ABB2E1ECE609700EC8B3C /* BuffDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB2D1ECE609700EC8B3C /* BuffDictionary.m */; };
 		FF2ABB321ECE688500EC8B3C /* Hero.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB311ECE688500EC8B3C /* Hero.m */; };
 		FF2ABB341ECE68BA00EC8B3C /* BasicAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */; };
@@ -153,13 +152,11 @@
 		FF2ABB251ECCB82300EC8B3C /* SkillDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkillDictionary.h; sourceTree = "<group>"; };
 		FF2ABB261ECCDBA300EC8B3C /* Skill.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Skill.h; sourceTree = "<group>"; };
 		FF2ABB271ECCDBAA00EC8B3C /* Skill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skill.m; sourceTree = "<group>"; };
-		FF2ABB2A1ECD0AE000EC8B3C /* Combat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Combat.m; sourceTree = "<group>"; };
 		FF2ABB2D1ECE609700EC8B3C /* BuffDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuffDictionary.m; sourceTree = "<group>"; };
 		FF2ABB2F1ECE60A000EC8B3C /* BuffDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuffDictionary.h; sourceTree = "<group>"; };
 		FF2ABB311ECE688500EC8B3C /* Hero.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hero.m; sourceTree = "<group>"; };
 		FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicAttack.m; sourceTree = "<group>"; };
 		FF2ABB351ECE68D400EC8B3C /* BasicAttack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicAttack.h; sourceTree = "<group>"; };
-		FF2ABB361ECE68F400EC8B3C /* Combat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Combat.h; sourceTree = "<group>"; };
 		FF2ABB371ECE720C00EC8B3C /* NPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPC.m; sourceTree = "<group>"; };
 		FF2ABB391ECE721200EC8B3C /* NPC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NPC.h; sourceTree = "<group>"; };
 		FF2ABB3A1ECEA1C000EC8B3C /* ElementScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementScroll.m; sourceTree = "<group>"; };
@@ -220,7 +217,6 @@
 		FF2ABA1F1EC7CCDA00EC8B3C /* RPG */ = {
 			isa = PBXGroup;
 			children = (
-				FF2ABB291ECD0AD300EC8B3C /* Combats */,
 				FF2ABB061ECC8F3A00EC8B3C /* Abilities */,
 				FF2ABAEA1ECBA2BE00EC8B3C /* Items */,
 				FF2ABAE61ECB630200EC8B3C /* Dictionaries */,
@@ -393,15 +389,6 @@
 			name = Abilities;
 			sourceTree = "<group>";
 		};
-		FF2ABB291ECD0AD300EC8B3C /* Combats */ = {
-			isa = PBXGroup;
-			children = (
-				FF2ABB2A1ECD0AE000EC8B3C /* Combat.m */,
-				FF2ABB361ECE68F400EC8B3C /* Combat.h */,
-			);
-			name = Combats;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -562,7 +549,6 @@
 				FF2ABB341ECE68BA00EC8B3C /* BasicAttack.m in Sources */,
 				FF2ABB381ECE720C00EC8B3C /* NPC.m in Sources */,
 				FF2ABA2E1EC7CCDA00EC8B3C /* RPG.xcdatamodeld in Sources */,
-				FF2ABB2B1ECD0AE000EC8B3C /* Combat.m in Sources */,
 				FF2ABAF21ECBC88900EC8B3C /* Arcanestone.m in Sources */,
 				FF2ABB181ECCB77100EC8B3C /* Frenzy.m in Sources */,
 				FF2ABA251EC7CCDA00EC8B3C /* AppDelegate.m in Sources */,

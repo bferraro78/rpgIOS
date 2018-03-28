@@ -63,8 +63,6 @@ int dungeonLvl;
 int startX;
 int startY;
 
-
-
 /** START OF CLASS METHODS **/
 -(id)initname:(NSString *)aName classID:(int)aClassID vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext startX:(int)aStartX startY:(int)aStartY dungeonLvl:(int)aDungeonLvl {
     _name = aName;
@@ -192,7 +190,6 @@ int startY;
         return self.dext;
     }
 }
-
 
 
 -(int)getCritical { return  (int)(((float)self.getPrimaryStat/(float)((self.strn+self.dext+self.inti)*2))*(100.00)); } // TODO -- REWORK
@@ -894,8 +891,9 @@ int startY;
     [stats appendFormat:@"Critical Hit Chance: %u\n" , [self getCritical]];
     
     [stats appendString:@"\n    Resistances\n"];
+    [stats appendString:@"\nOffense:\n"];
     [stats appendString:[self printOffenseResMap]];
-    [stats appendString:@"\n"];
+    [stats appendString:@"\n\nDefense:\n"];
     [stats appendString:[self printDefenseResMap]];
     [stats appendString:@"\n"];
     [stats appendString:[self printActiveItems]];

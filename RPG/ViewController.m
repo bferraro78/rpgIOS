@@ -33,18 +33,11 @@ NSMutableString *mainText;
     [ArmorDictionary loadArmor];
     [BuffDictionary loadBuffLibrary];
     
-    
     _mainCharacter = [[Barbarian alloc] initname:@"BEANOOOOOOOOOO!" classID:1 vit:40 strn:10 inti:20 dext:10 startX:0 startY:0 dungeonLvl:0];
     
+    // Generate Dungeon / TODO - Load dungeon
     _currMap = [[Dungeon alloc] initdungeonLevel:1 heroX:0 heroY:0];
     self.MapTextField.text = [_currMap printMap];
-    
-    
-    NSString *resourceName = [_mainCharacter getResourceName];
-    printf("\n%s", [resourceName UTF8String]);
-    printf("\n%s", [[_mainCharacter getClassName] UTF8String]);
-    NSInteger rageNum = [_mainCharacter getResource];
-    printf("\nWizard Mana number: %ld\n", (long)rageNum);
     
     
     /* Change Name of Buttons */
@@ -53,7 +46,7 @@ NSMutableString *mainText;
     Weapon *wep = [WeaponDictionary generateRandomWeapon:_mainCharacter];
     [_mainCharacter equipWeapon:wep];
     
-    // ADD HEALTH PIECE
+    // ADD HEALTH PIECE -- TODO DEBUG
     Armor *healthPiece = [[Armor alloc] initarmorID:999 armorName:@"Health piece" armorType:@"Torso"];
     healthPiece.armorVit = 1000;
     [_mainCharacter addToInventory:healthPiece];
@@ -72,6 +65,9 @@ NSMutableString *mainText;
     [_mainCharacter addToInventory:[ArmorDictionary generateRandomArmor:_mainCharacter]];
     [_mainCharacter addToInventory:[ArmorDictionary generateRandomArmor:_mainCharacter]];
     [_mainCharacter addToInventory:[ArmorDictionary generateRandomArmor:_mainCharacter]];
+    [_mainCharacter addToInventory:[WeaponDictionary generateRandomWeapon:_mainCharacter]];
+    [_mainCharacter addToInventory:[WeaponDictionary generateRandomWeapon:_mainCharacter]];
+    [_mainCharacter addToInventory:[WeaponDictionary generateRandomWeapon:_mainCharacter]];
 }
 
 - (IBAction)printHero:(id)sender { }

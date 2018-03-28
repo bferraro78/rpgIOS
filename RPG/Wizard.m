@@ -32,7 +32,7 @@ int combatMana;
     if (super.level >= 5) {
         [super addSkill:@"FreezeCone"];
     }
-    // ElementAbilites.getElementalAbilities(this);
+    
 }
 
 

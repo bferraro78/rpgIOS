@@ -22,7 +22,7 @@
 @property NSMutableArray *skillLibrary;
 
 +(void)loadSkills;
-+(void)generateDamage:(Hero*)mainCharacter  Enemy:(Enemy*)e heroMoveName:(NSString*)aHeroMoveName
++(BOOL)generateDamage:(Hero*)mainCharacter  Enemy:(Enemy*)e heroMoveName:(NSString*)aHeroMoveName
     enemyMoveName:(NSString*)aEnemyMoveName heroElementMap:(NSMutableDictionary*)aHeroElementMap
     enemeyElementMap:(NSMutableDictionary*)aEnemeyElementMap;
 +(Skill*)findSkill:(NSString*)s;

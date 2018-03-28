@@ -31,7 +31,7 @@ NSString *heroMoveName;
     _EnemyBuffsDebuffs.editable = false;
     
     /* Long Press Enemy */
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]      initWithTarget:self action:@selector(LabelLongPressed:)];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(LabelLongPressed:)];
     longPress.minimumPressDuration = 0.5;  // Seconds
     longPress.numberOfTapsRequired = 0;
     [_EnemyLabel addGestureRecognizer:longPress];
@@ -41,7 +41,7 @@ NSString *heroMoveName;
     /* Generate Enemy */
     _e = [EnemyDictionary generateRandomEnemy:_mainCharacter];
     
-    /* Set Active Skills */
+    /* Set Active Skills based on top four in skill set */
     [_mainCharacter setActiveSkills];
     
     /* Set Buttons */
@@ -59,108 +59,150 @@ NSString *heroMoveName;
     [_mainCharacter resetLibraries]; // resets buff libraries (Buffs, poisonPassive)
     [_mainCharacter resetCombatResource]; // Sets combat resource to start of combat
     
+    /* ELEMENT SPECS helpers set */
+    self.lightningSpecAdditionalTurn = false;
     
+    /* Set Up Elemental Maps*/
+    _heroElementMap = [[NSMutableDictionary alloc] init];
+    _enemyElementMap = [[NSMutableDictionary alloc] init];
     
     // INITAL START FIGHT TEXT
     NSMutableString *startString = [[NSMutableString alloc] initWithFormat:@"%@ VS %@\n\n-----FIGHT!-----\n\n", _mainCharacter.name, self.e.enemyName];
     NSAttributedString *tmp = [[NSAttributedString alloc] initWithString:startString];
     [self.combatSetText appendAttributedString:tmp];
     self.CombatText.attributedText = self.combatSetText;
+    
+    /***
+     
+     COMBAT PHASES
+     1. Hero combat health/resources, buff/debuff libs are reset
+     2. Enemy Generated
+     3. Hero active skills are set
+     
+     When a move button is pressed, the combat turn is initiated
+     
+     ***/
 }
 
+/* Ability move buttons. Check if there is available resources to cast move */
 - (IBAction)SkillOne:(id)sender {
-    self.heroMoveName = [[NSString alloc] init];
-    self.heroMoveName = [self.mainCharacter.skillSet objectAtIndex:0];
-    /* INIT COMBAT TURN */
-    [self initCombat:_mainCharacter];
-
+    [self checkValidAttack:[self.mainCharacter.skillSet objectAtIndex:0]];
 }
 
 - (IBAction)SkillTwo:(id)sender {
-    self.heroMoveName = [[NSString alloc] init];
-    self.heroMoveName = [self.mainCharacter.skillSet objectAtIndex:1];
-    /* INIT COMBAT TURN */
-    [self initCombat:_mainCharacter];
-    
+    [self checkValidAttack:[self.mainCharacter.skillSet objectAtIndex:1]];
 }
 
 - (IBAction)SkillThree:(id)sender {
-    self.heroMoveName = [[NSString alloc] init];
-    self.heroMoveName = [self.mainCharacter.skillSet objectAtIndex:2];
-    /* INIT COMBAT TURN */
-    [self initCombat:_mainCharacter];
+    [self checkValidAttack:[self.mainCharacter.skillSet objectAtIndex:2]];
 }
-
 
 - (IBAction)SkillFour:(id)sender {
-    self.heroMoveName = [[NSString alloc] init];
-    self.heroMoveName = [self.mainCharacter.skillSet objectAtIndex:3];
-    /* INIT COMBAT TURN */
-    [self initCombat:_mainCharacter];
-    
+    [self checkValidAttack:[self.mainCharacter.skillSet objectAtIndex:3]];
 }
 
+-(void)checkValidAttack:(NSString*) abilityName {
+    self.heroMoveName = [[NSString alloc] init];
+    self.heroMoveName = abilityName;
+    /* INIT COMBAT TURN */
+    [self initCombat:_mainCharacter];
+        
+}
+
+
+/* INIT COMBAT TURN */
 -(void)initCombat:(Hero*)mainCharacter {
  
     // DEBUGGGINNNNN
     printf("ENEMY HEALTH %u\n", self.e.enemyHealth);
     printf("HERO HEALTH %u\n", mainCharacter.health);
+
     
-    /* DEATH BOOLEAN */
-    BOOL death =  true;
-        
     /** Print Health Bars **/
+    // TODO -- resource bars as well as determine resource usage for each spell  ^^
     
+    /* Load elemental maps */
+    if (!_lightningSpecAdditionalTurn) {
+        /* Load damages to 0 */
+        _heroElementMap[@"FIRE"] = [NSNumber numberWithInt:0];
+        _heroElementMap[@"COLD"] = [NSNumber numberWithInt:0];
+        _heroElementMap[@"ARCANE"] = [NSNumber numberWithInt:0];
+        _heroElementMap[@"POISON"] = [NSNumber numberWithInt:0];
+        _heroElementMap[@"LIGHTNING"] = [NSNumber numberWithInt:0];
+        _heroElementMap[@"PHYSICAL"] = [NSNumber numberWithInt:0];
+        
+        _enemyElementMap[@"FIRE"] = [NSNumber numberWithInt:0];
+        _enemyElementMap[@"COLD"] = [NSNumber numberWithInt:0];
+        _enemyElementMap[@"ARCANE"] = [NSNumber numberWithInt:0];
+        _enemyElementMap[@"POISON"] = [NSNumber numberWithInt:0];
+        _enemyElementMap[@"LIGHTNING"] = [NSNumber numberWithInt:0];
+        _enemyElementMap[@"PHYSICAL"] = [NSNumber numberWithInt:0];
+    } else {
+        _lightningSpecAdditionalTurn = false;
+    }
     
     /*** Damage Gathering Stage -- Contains all abilities that deal damage ***/
+
+    /* Generate Damage will load hero and enemey
+       1. Resource Check, vaid move checked
+       2. elementMaps - hold the damage for that turn for each element and physical damage.
+       3. Buffs libraries will be loaded.
+       4. Combat Resource is used
+     */
     
-    /** Element Damage hasmaps -- stores damage for the turn **/
-    NSMutableDictionary *heroElementMap = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *enemyElementMap = [[NSMutableDictionary alloc] init];
-    /* Load damages to 0 */
-    heroElementMap[@"FIRE"] = [NSNumber numberWithInt:0];
-    heroElementMap[@"COLD"] = [NSNumber numberWithInt:0];
-    heroElementMap[@"ARCANE"] = [NSNumber numberWithInt:0];
-    heroElementMap[@"POISON"] = [NSNumber numberWithInt:0];
-    heroElementMap[@"LIGHTNING"] = [NSNumber numberWithInt:0];
-    heroElementMap[@"PHYSICAL"] = [NSNumber numberWithInt:0];
+    /* Set up Enemy Move */
+    NSString *enemyMoveName = [self.e selectAttack]; // generates random attack from a specific enemy's skill set array
+    BOOL validAbilityCast = [SkillDictionary generateDamage:mainCharacter Enemy:self.e heroMoveName:self.heroMoveName enemyMoveName:enemyMoveName heroElementMap:_heroElementMap enemeyElementMap:_enemyElementMap];
     
-    enemyElementMap[@"FIRE"] = [NSNumber numberWithInt:0];
-    enemyElementMap[@"COLD"] = [NSNumber numberWithInt:0];
-    enemyElementMap[@"ARCANE"] = [NSNumber numberWithInt:0];
-    enemyElementMap[@"POISON"] = [NSNumber numberWithInt:0];
-    enemyElementMap[@"LIGHTNING"] = [NSNumber numberWithInt:0];
-    enemyElementMap[@"PHYSICAL"] = [NSNumber numberWithInt:0];
-    
-    
-    /*** If lightning spec, start while loop here that goes one extra time *
-     * Calles genrateDamage twice and just keeps adding damage to element map. */
-    
-    /** Set up Enemy Move **/
-    NSString *enemyMoveName = [self.e selectAttack];
+    if (validAbilityCast) {
         
-    // PRINT ATTACK NAME
+        // Lightning Spec, get another turn -- TODO -- determine a chance for this to happen
+        // Don't let the chance of another turn happen every time? maybe decrease by half every time
+        if ([mainCharacter.elementSpec isEqualToString:@"LIGHTING"]) {
+            _lightningSpecAdditionalTurn = true;
+        } else {
+            // Print attacks to UI
+            [self updateUIWithAttacks:enemyMoveName];
+            
+            /** Manage Buff/Debuff/Armor/Resistances Stage **/
+            [self manageBuffDebuffStage:mainCharacter heroElementMap:_heroElementMap enemyElementMap:_enemyElementMap];
+            
+            /** Damage Reduction Stage/ Take Damage Stage -- Contains all abilities that reduce damage **/
+            [self reductionStage:mainCharacter heroElementMap:_heroElementMap enemyElementMap:_enemyElementMap];
+            
+            /** Reduce Buff Stage **/
+            [self reduceBuffStage:mainCharacter];
+            
+            /** Death Check Stage **/
+            [self deathStage:mainCharacter];
+        }
+    } else {
+        [self updateUIWithInvalidMove];
+    }
+}
+
+-(void)updateUIWithInvalidMove {
+    NSMutableString *invalidMoveString = [[NSMutableString alloc] initWithFormat:@"Not enough %s\n", [[_mainCharacter getResourceName] UTF8String]];
+    NSAttributedString *tmp = [[NSAttributedString alloc] initWithString:invalidMoveString];
+    [self.combatSetText appendAttributedString:tmp];
+    self.CombatText.attributedText = self.combatSetText;
+}
+
+-(void)updateUIWithAttacks:(NSString*)enemyMoveName {
     NSMutableString *attackString = [[NSMutableString alloc] initWithFormat:@"Hero Attack: %s\nEnemy Attack: %s\n", [self.heroMoveName UTF8String], [enemyMoveName UTF8String]];
     NSAttributedString *tmp = [[NSAttributedString alloc] initWithString:attackString];
     [self.combatSetText appendAttributedString:tmp];
     self.CombatText.attributedText = self.combatSetText;
+}
 
-    
-    [SkillDictionary generateDamage:mainCharacter Enemy:self.e heroMoveName:self.heroMoveName enemyMoveName:enemyMoveName heroElementMap:heroElementMap enemeyElementMap:enemyElementMap];
-    
-    // Generate Damage will load hero and enemey
-    //"elementMaps" - hold the damage for that turn.
-    // Then passed into the manageBuffs to handle any buffLibrary spells.
-    // Buffs libraries will be loaded.
-    // Everything that happens in Move.java/ManageBuffs() that is not a lingering spell
-    // will be handled in the splles specifc class
-    
-    
+-(void)manageBuffDebuffStage:mainCharacter heroElementMap:(NSMutableDictionary*)heroElementMap
+             enemyElementMap:(NSMutableDictionary*)enemyElementMap {
     
     /** Apply damage/buffs/debuffs for both hero and enemy **/
     [self heroManageBuffs:mainCharacter ElementMap:heroElementMap Enemy:(Enemy*)self.e];
     [self enemyManageBuffs:self.e ElementMap:enemyElementMap Hero:mainCharacter];
     
+    // DEBUG
     printf("\nHero after manageBUFF DAMGE\n");
     for (NSString* dam in heroElementMap) {
         NSInteger value = [[heroElementMap objectForKey:dam] integerValue];
@@ -175,159 +217,7 @@ NSString *heroMoveName;
         printf("%ld\n", (long)value);
     }
     
-    /** END LIGHTNING EXTRA TURN WHILE LOOP **/
-    
-    /*** Damage Reduction Stage -- Contains all abilities that reduce damage ***/
-    
-    /* Quickly total hero/enemy damage for certain buffs in reduction stage  (Like Vanish) */
-    int heroDamage = 0;
-    for (NSString* dam in heroElementMap) {
-        int value = [[heroElementMap objectForKey:dam] intValue];
-        heroDamage += (int)value;
-    }
-    
-    int enemyDamage = 0;
-    for (NSString* dam in enemyElementMap) {
-        int value = [[enemyElementMap objectForKey:dam] intValue];
-        enemyDamage += (int)value;
-    }
-    
-    printf("Hero Dam before reduction %u\n", heroDamage);
-    printf("Enemy Dam before reduction %u\n", enemyDamage);
-    
-    /** This will reduce damage based on armor/resistances, then return a total damage **/
-    /* Hero */
-    int totalHeroDamageTaken = [self heroDamageReduction:mainCharacter EnemyDamageMap:enemyElementMap HeroDamage:heroDamage Enemy:self.e];
-    
-    /* Enemy */
-    int totalEnemyDamageTaken =[self enemyDamageReduction:self.e HeroDamageMap:heroElementMap EnemyDamage:enemyDamage Hero:mainCharacter];
-    
-    
-    // PRINT DAMAGE
-    NSMutableString *damageString = [[NSMutableString alloc] initWithFormat:@"Damage Done: %i\nDamage Taken: %i\n", totalEnemyDamageTaken, totalHeroDamageTaken];
-    tmp = [[NSAttributedString alloc] initWithString:damageString];
-    [self.combatSetText appendAttributedString:tmp];
-    self.CombatText.attributedText = self.combatSetText;
-    
-    
-    /*** Final Take Damage Stage ***/
-    /* enemy takes damage */
-    printf("Damage Done: %i\n", totalEnemyDamageTaken);
-    [self.e takeDamage:totalEnemyDamageTaken];
-    
-    /* Hero takes damage */
-    printf("Damage Taken: %i\n", totalHeroDamageTaken);
-    [mainCharacter takeDamage:totalHeroDamageTaken];
-    
-    
-    /** Print Hero/Enemy Buff/Debuffs **/
-    NSMutableString *HeroBuffs = [[NSMutableString alloc] init];
-    NSMutableString *EnemyBuffs = [[NSMutableString alloc] init];
-    
-    /* Clear Buff/Debuff Text */
-    self.HeroBuffsDebuffs.text = @"";
-    self.EnemyBuffsDebuffs.text = @"";
-    
-    
-    for(NSString* heroBuff in mainCharacter.buffLibrary) {
-        Buff *tmpBuff = (Buff*) mainCharacter.buffLibrary[heroBuff];
-printf("Hero BUFF duration: %i", tmpBuff.duration);
-        [HeroBuffs appendFormat:@"%@ - %i\n", [BuffDictionary getName:heroBuff], tmpBuff.value];
-    }
-    
-    for(NSString* heroDebuff in mainCharacter.debuffLibrary) {
-        Buff *tmpDebuff = (Buff*) mainCharacter.debuffLibrary[heroDebuff];
-
-        [HeroBuffs appendFormat:@"%@ - %i\n", [BuffDictionary getName:heroDebuff], tmpDebuff.value];
-    }
-    
-    for(NSString* enemyBuff in self.e.enemyBuffLibrary) {
-        Buff *tmpEnemyBuff = (Buff*) self.e.enemyBuffLibrary[enemyBuff];
-
-        [EnemyBuffs appendFormat:@"%@ - %i\n", [BuffDictionary getName:enemyBuff], tmpEnemyBuff.value];
-    }
-    
-    for(NSString* enemyDebuff in self.e.enemyDebuffLibrary) {
-        Buff *tmpEnemyDebuff = (Buff*) self.e.enemyDebuffLibrary[enemyDebuff];
-printf("EnemydurationREND: %i\n", tmpEnemyDebuff.duration);
-        [EnemyBuffs appendFormat:@"%@ - %i\n", [BuffDictionary getName:enemyDebuff], tmpEnemyDebuff.value];
-    }
-    
-    self.HeroBuffsDebuffs.text = HeroBuffs;
-    self.EnemyBuffsDebuffs.text = EnemyBuffs;
-    
-
-    
-    
-    /** Reduce Durations **/
-    /* Hero */
-    for(NSString* currentKey in mainCharacter.buffLibrary) {
-        [[self.mainCharacter.buffLibrary objectForKey:currentKey] decreaseDuration];
-    }
-    for(NSString* currentKey in mainCharacter.debuffLibrary) {
-        [[self.mainCharacter.debuffLibrary objectForKey:currentKey] decreaseDuration];
-    }
-    /* Enemy */
-    for(NSString* currentKey in self.e.enemyBuffLibrary) {
-        [[self.e.enemyBuffLibrary objectForKey:currentKey] decreaseDuration];
-    }
-    for(NSString* currentKey in self.e.enemyDebuffLibrary) {
-        [[self.e.enemyDebuffLibrary objectForKey:currentKey] decreaseDuration];
-    }
-    
-    
-    /** DEATH **/
-    if (self.e.enemyCombatHealth <= 0) {
-        printf("Enemy Has Died!!!");
-        
-        [mainCharacter increaseExp:[self.e getExp:mainCharacter]]; // INCRESE HERO EXP
-        [mainCharacter changePurse:[self.e goldDrop]]; // increase gold amount
-        
-        printf("\nLoot: \n");
-        NSMutableArray *loot = [[NSMutableArray alloc] init];
-        [loot addObject:[ItemDictionary generateRandomItem:true]];
-        [mainCharacter receiveLoot:loot]; // TODO -- RANDOMZIE LOOT WITH ITMES/ARMOR/WEPS
-        
-        death = false;
-        [[self navigationController] setNavigationBarHidden:NO animated:YES];
-        /* Hide Skill Buttons */
-        self.SkillOne.hidden = true;
-        self.SkillTwo.hidden = true;
-        self.SkillThree.hidden = true;
-        self.SkillFour.hidden = true;
-
-    }
-    
-    /* TODO WHAT TO DO IN TIE */
-    /* Hero dies, reset active Items */
-    if (mainCharacter.combatHealth <= 0)  {
-        printf("Hero Has Died :(");
-        [mainCharacter resetActiveItems];
-        
-        death = false;
-        [[self navigationController] setNavigationBarHidden:NO animated:YES];
-        /* Hide Skill Buttons */
-        self.SkillOne.hidden = true;
-        self.SkillTwo.hidden = true;
-        self.SkillThree.hidden = true;
-        self.SkillFour.hidden = true;
-    }
-    
-    /* AUTO ROLL DOWN */
-    NSRange range = NSMakeRange(self.CombatText.text.length - 1, 1);
-    [self.CombatText scrollRangeToVisible:range];
-    
-    // PRINTING -- NEW TURN --
-    if (death) {
-        printf("\nNEW TURN");
-        NSAttributedString *tmp = [[NSAttributedString alloc] initWithString:@"\n\n---NEW TURN---\n"];
-        [self.combatSetText appendAttributedString:tmp];
-        self.CombatText.attributedText = self.combatSetText;
-    }
-    
 }
-
-
 
 /*** Apply damage/buffs/debuffs/armor/resistances ***/
 /** HERO DAMAGE/BUFFS **/
@@ -360,16 +250,16 @@ printf("EnemydurationREND: %i\n", tmpEnemyDebuff.duration);
     if ([mainCharacter.elementSpec isEqualToString:@"POSION"]) {
         /** DOT IS 25% of what the damage is over two turns **/
         
-        /* Handle Damage from Buff Library */
-        for(NSString* currentKey in mainCharacter.buffLibrary) {
-            Buff* b = (Buff*)[e.enemyDebuffLibrary objectForKey:currentKey];
-            int poisonDotDamage = (float)b.value*0.25;
-            printf("%i", poisonDotDamage);
-            if (poisonDotDamage > 0 && [currentKey rangeOfString:@"Dot"].location != NSNotFound) {
-                // Then this is a damage that is not a DOT and Not already A Poison Passive Dot
-                [mainCharacter.poisonPassiveDots addObject:[[Buff alloc] initvalue:poisonDotDamage duration:2]];
-            }
-        }
+        //        /* Handle Damage from Buff Library */
+        //        for(NSString* currentKey in mainCharacter.buffLibrary) {
+        //            Buff* b = (Buff*)[e.enemyDebuffLibrary objectForKey:currentKey];
+        //            int poisonDotDamage = (float)b.value*0.25;
+        //            printf("%i", poisonDotDamage);
+        //            if (poisonDotDamage > 0 && [currentKey rangeOfString:@"Dot"].location != NSNotFound) {
+        //                // Then this is a damage that is not a DOT and Not already A Poison Passive Dot
+        //                [mainCharacter.poisonPassiveDots addObject:[[Buff alloc] initvalue:poisonDotDamage duration:2]];
+        //            }
+        //        }
         
         /** Turn Damage from elements/physical into a dot **/
         int damageFromTurn =  fireDamage + lightningDamage + coldDamage + poisonDamage + arcaneDamage + physicalDamage;
@@ -385,92 +275,60 @@ printf("EnemydurationREND: %i\n", tmpEnemyDebuff.duration);
             printf("%u", (int)passiveDot.value);
             poisonDamage += passiveDot.value;
         }
-        /* Decrease Duration */
-        for (int i = 0; i < [mainCharacter.poisonPassiveDots count]; i++) {
-            Buff *passiveDot = [mainCharacter.poisonPassiveDots objectAtIndex:i];
-            [passiveDot decreaseDuration];
-        }
-        /* Remove if nessicary */
-        for (int i = 0; i < [mainCharacter.poisonPassiveDots count]; i++) {
-            Buff *passiveDot = [mainCharacter.poisonPassiveDots objectAtIndex:i];
-            if (passiveDot. duration == 0) {
-                [mainCharacter.poisonPassiveDots removeObjectAtIndex:i];
-            }
-        }
     }
     
-    
-    /** HANDLE LINGERING SPELLS/ABILITIES **/
+    /** HANDLE BUFFS / DEBUFFS **/
     // Rend Dot
     Buff *rendDot = (Buff*)e.enemyDebuffLibrary[@"rendDot"];
     if (rendDot != nil) {
         int rendDamage = rendDot.value;
         
-        /* Remove */
-        if (rendDot.duration == 0) {
-            [e.enemyDebuffLibrary removeObjectForKey:@"rendDot"];
-        } else {
-            /* Deal Rend DOT Damage */
-            if ([mainCharacter.getMH.weaponElement  isEqualToString:@"FIRE"]) {
-                fireDamage += rendDamage;
-            } else if ([mainCharacter.getMH.weaponElement  isEqualToString:@"COLD"]) {
-                coldDamage += rendDamage;
-            } else if ([mainCharacter.getMH.weaponElement  isEqualToString:@"ARCANE"]) {
-                arcaneDamage += rendDamage;
-            } else if ([mainCharacter.getMH.weaponElement  isEqualToString:@"POISON"]) {
-                poisonDamage += rendDamage;
-            } else if ([mainCharacter.getMH.weaponElement  isEqualToString:@"LIGHTNING"]) {
-                lightningDamage += rendDamage;
-            } else { // NO ELEMENT
-                physicalDamage += rendDamage;
-            }
-
+        /* Deal Rend DOT Damage */
+        if ([mainCharacter.getMH.weaponElement isEqualToString:@"FIRE"]) {
+            fireDamage += rendDamage;
+        } else if ([mainCharacter.getMH.weaponElement isEqualToString:@"COLD"]) {
+            coldDamage += rendDamage;
+        } else if ([mainCharacter.getMH.weaponElement isEqualToString:@"ARCANE"]) {
+            arcaneDamage += rendDamage;
+        } else if ([mainCharacter.getMH.weaponElement isEqualToString:@"POISON"]) {
+            poisonDamage += rendDamage;
+        } else if ([mainCharacter.getMH.weaponElement isEqualToString:@"LIGHTNING"]) {
+            lightningDamage += rendDamage;
+        } else { // NO ELEMENT
+            physicalDamage += rendDamage;
         }
+        
     }
     
     // Fireball Dot
     Buff *fireDot = (Buff*)e.enemyDebuffLibrary[@"fireDot"];
     if (fireDot != nil) {
         int fireDotDamage = fireDot.value;
-        
-        /* Remove */
-        if (fireDot.duration == 0) {
-            [e.enemyDebuffLibrary removeObjectForKey:@"fireDot"];
-        } else {
-            /* Take FIREDOT Damage */
-            fireDamage += fireDotDamage;
-
-        }
+        /* Take FIREDOT Damage */
+        fireDamage += fireDotDamage;
     }
     
     // Heal Dot
     Buff *healDot = (Buff*)mainCharacter.buffLibrary[@"healDot"];
     if (healDot != nil) {
         int healDamage = healDot.value;
-        
-        /* Remove if times is up */
-        if (healDot.duration == 0) {
-            [mainCharacter.buffLibrary removeObjectForKey:@"healDot"];
+        /* Heal Player*/
+        if (self.critHit) {
+            [mainCharacter takeDamage:(healDamage*2)];
         } else {
-            /* Heal Player*/
-            if (self.critHit) {
-                [mainCharacter takeDamage:(healDamage*2)];
-            } else {
-                [mainCharacter takeDamage:healDamage];
-            }
+            [mainCharacter takeDamage:healDamage];
         }
     }
     
     /* Resistance damage bonus, this this from resistanceOffenseMap. Use those elemental numbers to increase that elements damage by percentage */
     fireDamage = (fireDamage+(int)(([mainCharacter.resistanceOffenseMap[@"FIRE"] floatValue]/(float)100.00)*(float)fireDamage));
-    
     lightningDamage = (lightningDamage+(int)(([mainCharacter.resistanceOffenseMap[@"LIGHTNING"] floatValue]/(float)100.00)*(float)lightningDamage));
     coldDamage = (coldDamage+(int)(([mainCharacter.resistanceOffenseMap[@"COLD"] floatValue]/(float)100.00)*(float)coldDamage));
     poisonDamage = (poisonDamage+(int)(([mainCharacter.resistanceOffenseMap[@"POISON"] floatValue]/(float)100.00)*(float)poisonDamage));
     arcaneDamage = (arcaneDamage+(int)(([mainCharacter.resistanceOffenseMap[@"ARCANE"] floatValue]/(float)100.00)*(float)arcaneDamage));
     
     /* Applys crits */
-printf("\n\nVALUE IS : %d\n\n", self.critHit);
+    printf("\n\nCrit Chance: %d\n\n", self.critHit);
     if (self.critHit) {
         fireDamage = fireDamage*2;
         lightningDamage = lightningDamage*2;
@@ -479,8 +337,6 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
         arcaneDamage = arcaneDamage*2;
         physicalDamage = physicalDamage*2;
     }
-    
-    /* PRINT UP ALL ELEMENTAL/PHYSICAL damage */
     
     /* Put elemental damage into hashmap */
     elementMap[@"FIRE"] = [NSNumber numberWithInt: fireDamage];
@@ -491,6 +347,11 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
     elementMap[@"PHYSICAL"] = [NSNumber numberWithInt:physicalDamage];
     
     /** Resource Regain **/
+    [self regainResources:mainCharacter];
+    
+}
+
+-(void)regainResources:(Hero*)mainCharacter {
     /* INCREASE RESOURCES ONLY IF IT IS BELOW THEIR MAX RESOURCE */
     if ([[mainCharacter getResourceName] isEqualToString:@"Mana"]) {
         int regen = mainCharacter.inti/2;
@@ -510,6 +371,7 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
             [mainCharacter resetCombatResource];
         }
     }
+    
 }
 
 /*** Apply damage/buffs/debuffs/armor/resistances ***/
@@ -529,24 +391,18 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
     if (rendDot != nil) {
         int rendDamage = rendDot.value;
         
-        /* Remove */
-        if (rendDot.duration == 0) {
-            [mainCharacter.debuffLibrary removeObjectForKey:@"rendDot"];
-        } else {
-            /* Deal Rend DOT Damage */
-            if ([e.enemyElement  isEqualToString:@"FIRE"]) {
-                fireDamage += rendDamage;
-            } else if ([e.enemyElement  isEqualToString:@"COLD"]) {
-                coldDamage += rendDamage;
-            } else if ([e.enemyElement  isEqualToString:@"ARCANE"]) {
-                arcaneDamage += rendDamage;
-            } else if ([e.enemyElement  isEqualToString:@"POISON"]) {
-                poisonDamage += rendDamage;
-            } else if ([e.enemyElement  isEqualToString:@"LIGHTNING"]) {
-                lightningDamage += rendDamage;
-            } else { // NO ELEMENT
-                physicalDamage += rendDamage;
-            }
+        if ([e.enemyElement  isEqualToString:@"FIRE"]) {
+            fireDamage += rendDamage;
+        } else if ([e.enemyElement  isEqualToString:@"COLD"]) {
+            coldDamage += rendDamage;
+        } else if ([e.enemyElement  isEqualToString:@"ARCANE"]) {
+            arcaneDamage += rendDamage;
+        } else if ([e.enemyElement  isEqualToString:@"POISON"]) {
+            poisonDamage += rendDamage;
+        } else if ([e.enemyElement  isEqualToString:@"LIGHTNING"]) {
+            lightningDamage += rendDamage;
+        } else { // NO ELEMENT
+            physicalDamage += rendDamage;
         }
     }
     
@@ -554,28 +410,16 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
     Buff *fireDot = (Buff*)mainCharacter.debuffLibrary[@"fireDot"];
     if (fireDot != nil) {
         int fireDotDamage = fireDot.value;
-        
-        /* Remove */
-        if (fireDot.duration == 0) {
-            [mainCharacter.debuffLibrary removeObjectForKey:@"fireDot"];
-        } else {
-            /* Take FIREDOT Damage */
-            fireDamage += fireDotDamage;
-        }
+        /* Take FIREDOT Damage */
+        fireDamage += fireDotDamage;
     }
     
     // Heal Dot
     Buff *healDot = (Buff*)e.enemyBuffLibrary[@"healDot"];
     if (healDot != nil) {
         int healDamage = healDot.value;
-        
-        /* Remove if times is up */
-        if (healDot.duration == 0) {
-            [e.enemyBuffLibrary removeObjectForKey:@"healDot"];
-        } else {
-            /* Heal Player*/
-            [e takeDamage:healDamage];
-        }
+        /* Heal Enemy */
+        [e takeDamage:healDamage];
     }
     
     /* Put elemental damage into hashmap */
@@ -587,8 +431,39 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
     elementMap[@"PHYSICAL"] = [NSNumber numberWithInt:physicalDamage];
 }
 
-
 /** Determine Damage Reduction **/
+-(void)reductionStage:(Hero*)mainCharacter heroElementMap:(NSMutableDictionary*)heroElementMap
+      enemyElementMap:(NSMutableDictionary*)enemyElementMap {
+    /* Quickly total hero/enemy damage for certain buffs in reduction stage  (Like Vanish) */
+    int heroDamage = 0;
+    for (NSString* dam in heroElementMap) {
+        int value = [[heroElementMap objectForKey:dam] intValue];
+        heroDamage += (int)value;
+    }
+    
+    int enemyDamage = 0;
+    for (NSString* dam in enemyElementMap) {
+        int value = [[enemyElementMap objectForKey:dam] intValue];
+        enemyDamage += (int)value;
+    }
+    
+    printf("Hero Dam before reduction %u\n", heroDamage);
+    printf("Enemy Dam before reduction %u\n", enemyDamage);
+    
+    /** This will reduce damage based on armor/resistances, then return a total damage **/
+    /* Hero */
+    int totalHeroDamageTaken = [self heroDamageReduction:mainCharacter EnemyDamageMap:enemyElementMap HeroDamage:heroDamage Enemy:self.e];
+    
+    /* Enemy */
+    int totalEnemyDamageTaken =[self enemyDamageReduction:self.e HeroDamageMap:heroElementMap EnemyDamage:enemyDamage Hero:mainCharacter];
+    
+    
+    /** Damage Reduction Stage -- Contains all abilities that reduce damage **/
+    [self damageStage:mainCharacter totalHeroDamageTaken:totalHeroDamageTaken totalEnemyDamageTaken:totalEnemyDamageTaken];
+
+    
+}
+
 -(int)heroDamageReduction:(Hero*)mainCharacter EnemyDamageMap:(NSMutableDictionary*)enemyDamageMap
                HeroDamage:(int) heroDamage Enemy:(Enemy *)e {
     
@@ -621,41 +496,33 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
     arcaneDamage = (arcaneDamage-(int)(([mainCharacter.resistanceDefenseMap[@"ARCANE"] floatValue]/(float)100.00)*(float)arcaneDamage));
     
     
-    
     printf("\n%i\n", fireDamage);
     printf("%i\n", lightningDamage);
     printf("%i\n", coldDamage);
     printf("%i\n", poisonDamage);
     printf("%i\n", arcaneDamage);
-    printf("%i\n", physicalDamage);
-    printf("\n\n");
-    
+    printf("%i\n\n", physicalDamage);
     
     /* Total damage reduction */
     intFinalDamageReduce += (fireDamage + lightningDamage + coldDamage + poisonDamage + arcaneDamage);
     
-    /* Freeze Cone Reduction */
+    /* Freeze Cone Reduction, enemy is frozen */
     Buff *frozen = (Buff*)e.enemyDebuffLibrary[@"frozen"];
     if (frozen != nil) {
-        
-        /* Remove */
-        if (frozen.duration == 0) {
-            [e.enemyDebuffLibrary removeObjectForKey:@"frozen"];
-        } else {
-            intFinalDamageReduce -= (int)((float)intFinalDamageReduce*(float).25);
-        }
+        intFinalDamageReduce -= (int)((float)intFinalDamageReduce*(float).25);
     }
     
     // Vanish Buff, take no damage for 2 turns
     Buff *vanish = (Buff*)mainCharacter.buffLibrary[@"vanish"];
     if (vanish != nil) {
-        /* Remove */
-        if (vanish.duration == 0 || heroDamage != 0) {
-            [mainCharacter.buffLibrary removeObjectForKey:@"vanish"];
+        /* Remove b/c hero did damage */
+        if (heroDamage != 0) {
+            [e.enemyBuffLibrary removeObjectForKey:@"vanish"];
         } else {
             // HERO TAKES NO DAMAGE
             intFinalDamageReduce = 0;
         }
+        
     }
     
     if (intFinalDamageReduce < 0) {
@@ -687,20 +554,14 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
     /* Freeze Cone Reduction */
     Buff *frozen = (Buff*)mainCharacter.debuffLibrary[@"frozen"];
     if (frozen != nil) {
-        
-        /* Remove */
-        if (frozen.duration == 0) {
-            [mainCharacter.debuffLibrary removeObjectForKey:@"frozen"];
-        } else {
-            intFinalDamageReduce -= (int)((float)intFinalDamageReduce*(float).25);
-        }
+        intFinalDamageReduce -= (int)((float)intFinalDamageReduce*(float).25);
     }
     
     // Vanish Buff, take no damage for 2 turns
     Buff *vanish = (Buff*)e.enemyBuffLibrary[@"vanish"];
     if (vanish != nil) {
-        /* Remove */
-        if (vanish.duration == 0 || enemyDamage != 0) {
+        /* Remove if enemy did damage */
+        if (enemyDamage != 0) {
             [e.enemyBuffLibrary removeObjectForKey:@"vanish"];
         } else {
             // Enemy TAKES NO DAMAGE
@@ -715,8 +576,157 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
     return intFinalDamageReduce;
 }
 
+/** Damage Stage **/
+-(void)damageStage:(Hero*)mainCharacter totalHeroDamageTaken:(int)totalHeroDamageTaken totalEnemyDamageTaken:(int)totalEnemyDamageTaken {
+    /* Enemy takes damage */
+    printf("Damage Done: %i\n", totalEnemyDamageTaken);
+    [self.e takeDamage:totalEnemyDamageTaken];
+    
+    /* Hero takes damage */
+    printf("Damage Taken: %i\n", totalHeroDamageTaken);
+    [mainCharacter takeDamage:totalHeroDamageTaken];
+    
+    /* Print Damage to UI */
+    [self updateUIWithDamage:totalHeroDamageTaken totalEnemyDamageTaken:totalEnemyDamageTaken];
+}
 
 
+-(void)updateUIWithDamage:(int)totalHeroDamageTaken totalEnemyDamageTaken:(int)totalEnemyDamageTaken {
+    // PRINT DAMAGE
+    NSMutableString *damageString = [[NSMutableString alloc] initWithFormat:@"Damage Done: %i\nDamage Taken: %i\n", totalEnemyDamageTaken, totalHeroDamageTaken];
+    NSAttributedString *tmp = [[NSAttributedString alloc] initWithString:damageString];
+    [self.combatSetText appendAttributedString:tmp];
+    self.CombatText.attributedText = self.combatSetText;
+}
+
+
+/** Reduce Buff Stage **/
+-(void)reduceBuffStage:(Hero*)mainCharacter {
+    
+    /** Reduce Durations && Remove Buffs/Debuffs from libraries **/
+    
+    NSMutableString *HeroBuffs = [[NSMutableString alloc] init];
+    NSMutableString *EnemyBuffs = [[NSMutableString alloc] init];
+    
+    /* Clear Buff/Debuff Text */
+    self.HeroBuffsDebuffs.text = @"";
+    self.EnemyBuffsDebuffs.text = @"";
+    
+    /* Hero */
+    for(NSString* currentKey in mainCharacter.buffLibrary) {
+        Buff *heroBuff = [self.mainCharacter.buffLibrary objectForKey:currentKey];
+        
+        printf("Hero BUFF duration: %i", heroBuff.duration);
+        [HeroBuffs appendFormat:@"%@ - %i\n", [BuffDictionary getName:currentKey], heroBuff.value];
+        
+        [heroBuff decreaseDuration];
+        if (heroBuff.duration == 0) {
+            [self.mainCharacter.buffLibrary removeObjectForKey:currentKey];
+        }
+    }
+    
+    for(NSString* currentKey in mainCharacter.debuffLibrary) {
+        Buff *heroDebuff = [self.mainCharacter.debuffLibrary objectForKey:currentKey];
+        
+        [HeroBuffs appendFormat:@"%@ - %i\n", [BuffDictionary getName:currentKey], heroDebuff.value];
+        
+        [heroDebuff decreaseDuration];
+        if (heroDebuff.duration == 0) {
+            [self.mainCharacter.debuffLibrary removeObjectForKey:currentKey];
+        }
+    }
+    
+    /* Enemy */
+    for(NSString* currentKey in self.e.enemyBuffLibrary) {
+        Buff *enemyBuff = [self.e.enemyBuffLibrary objectForKey:currentKey];
+        
+        [EnemyBuffs appendFormat:@"%@ - %i\n", [BuffDictionary getName:currentKey], enemyBuff.value];
+        
+        [enemyBuff decreaseDuration];
+        if (enemyBuff.duration == 0) {
+            [self.e.enemyBuffLibrary removeObjectForKey:currentKey];
+        }
+    }
+    
+    for(NSString* currentKey in self.e.enemyDebuffLibrary) {
+        Buff *enemyDebuff = [self.e.enemyDebuffLibrary objectForKey:currentKey];
+        
+        [EnemyBuffs appendFormat:@"%@ - %i\n", [BuffDictionary getName:currentKey], enemyDebuff.value];
+        
+        [enemyDebuff decreaseDuration];
+        if (enemyDebuff.duration == 0) {
+            [self.e.enemyDebuffLibrary removeObjectForKey:currentKey];
+        }
+        
+    }
+    
+    /* POISION SPEC BUFF HANDLE */
+    for (int i = 0; i < [mainCharacter.poisonPassiveDots count]; i++) {
+        Buff *passiveDot = [mainCharacter.poisonPassiveDots objectAtIndex:i];
+        [passiveDot decreaseDuration];
+        if (passiveDot. duration == 0) {
+            [mainCharacter.poisonPassiveDots removeObjectAtIndex:i];
+        }
+    }
+    
+    // Set UI Text
+    self.HeroBuffsDebuffs.text = HeroBuffs;
+    self.EnemyBuffsDebuffs.text = EnemyBuffs;
+}
+
+
+/** Death Stage **/
+-(void)deathStage:(Hero*)mainCharacter {
+    BOOL death =  false;
+    if (self.e.enemyCombatHealth <= 0) {
+        printf("Enemy Has Died!!!");
+        
+        [mainCharacter increaseExp:[self.e getExp:mainCharacter]]; // INCRESE HERO EXP
+        [mainCharacter changePurse:[self.e goldDrop]]; // increase gold amount
+        
+        printf("\nLoot: \n");
+        NSMutableArray *loot = [[NSMutableArray alloc] init];
+        [loot addObject:[ItemDictionary generateRandomItem:true]];
+        [mainCharacter receiveLoot:loot]; // TODO -- RANDOMZIE LOOT WITH ITMES/ARMOR/WEPS
+        
+        death = true;
+        [[self navigationController] setNavigationBarHidden:NO animated:YES];
+        /* Hide Skill Buttons */
+        self.SkillOne.hidden = true;
+        self.SkillTwo.hidden = true;
+        self.SkillThree.hidden = true;
+        self.SkillFour.hidden = true;
+    } else if (mainCharacter.combatHealth <= 0)  {
+        /* Hero dies, reset active Items */
+        
+        printf("Hero Has Died :(");
+        [mainCharacter resetActiveItems];
+        
+        death = true;
+        [[self navigationController] setNavigationBarHidden:NO animated:YES];
+        /* Hide Skill Buttons */
+        self.SkillOne.hidden = true;
+        self.SkillTwo.hidden = true;
+        self.SkillThree.hidden = true;
+        self.SkillFour.hidden = true;
+    }
+    
+    /* AUTO ROLL DOWN */
+    NSRange range = NSMakeRange(self.CombatText.text.length - 1, 1);
+    [self.CombatText scrollRangeToVisible:range];
+    
+    // PRINTING -- NEW TURN --
+    if (!death) {
+        printf("\nNEW TURN");
+        NSAttributedString *tmp = [[NSAttributedString alloc] initWithString:@"\n\n---NEW TURN---\n"];
+        [self.combatSetText appendAttributedString:tmp];
+        self.CombatText.attributedText = self.combatSetText;
+    }
+    
+}
+
+
+/** Crit Chance **/
 -(void)critChance:(int)extraChance Hero:(Hero*)mainCharacter {
     int critChance = arc4random_uniform(100);
     if (critChance < ([mainCharacter getCritical]+extraChance)) {
@@ -733,10 +743,7 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
         
         /* Sleep Main Thread While Crit button is flashing */
         [NSThread sleepForTimeInterval:1.1];
-        
-        
-
-        
+   
     }
 }
 
@@ -774,8 +781,6 @@ printf("\n\nVALUE IS : %d\n\n", self.critHit);
     self.SkillThree.hidden = true;
     self.SkillFour.hidden = true;
     
-
-    
     if (self.critTimerCount == 2) {
         /* Invalidate Counter */
         [self.timer invalidate];
@@ -807,7 +812,7 @@ printf("\n~~~~~~~~~~~~CRITICAL HIT~~~~~~~~~~~~\n");
     
 }
 
-
+/** GESTURES **/
 -(void)LabelLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
 
     
@@ -837,9 +842,6 @@ printf("\n~~~~~~~~~~~~CRITICAL HIT~~~~~~~~~~~~\n");
         self.moveView.layer.borderColor = [[UIColor redColor] CGColor];
         [self.view addSubview:self.moveView];
         
-//        printf("X: %f | ", newPoint.x);
-//        printf("Y: %f\n",newPoint.y);
-//        printf("MOVING BOXES");
     }
     
     if (gestureRecognizer.state == 3) {
@@ -847,13 +849,6 @@ printf("\n~~~~~~~~~~~~CRITICAL HIT~~~~~~~~~~~~\n");
         self.moveView = nil;
     }
 }
-
-
-
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
