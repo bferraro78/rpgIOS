@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B50521A2075104700533F8E /* ResourceBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5052192075104700533F8E /* ResourceBar.m */; };
+		6B5AD6B22072F60700AF48DD /* HealthBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AD6B12072F60700AF48DD /* HealthBar.m */; };
+		6B5BE2DC207C151700678ECB /* PartyMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5BE2DB207C151700678ECB /* PartyMember.m */; };
+		6B61D7B9207BAB39006EF040 /* MCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7B8207BAB39006EF040 /* MCManager.m */; };
+		6B61D7BB207BAD33006EF040 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7BA207BAD33006EF040 /* Constants.m */; };
+		6B61D7BF207BB80C006EF040 /* LoadCharacterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7BE207BB80C006EF040 /* LoadCharacterController.m */; };
+		6B61D7C1207BBBD0006EF040 /* EnterDungeonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7C0207BBBD0006EF040 /* EnterDungeonController.m */; };
+		6B61D7C5207BC57C006EF040 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7C4207BC57C006EF040 /* Party.m */; };
+		6BF4C32520740826002DFC35 /* LootManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C32420740826002DFC35 /* LootManager.m */; };
+		6BF4C3292074127D002DFC35 /* InventoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C3282074127D002DFC35 /* InventoryManager.m */; };
+		6BF4C32B20741EB3002DFC35 /* MainCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C32A20741EB3002DFC35 /* MainCharacter.m */; };
+		6BF4C32F207429AD002DFC35 /* EquipmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C32E207429AD002DFC35 /* EquipmentManager.m */; };
 		FF110E811ED5D74E00C1554E /* CombatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF110E801ED5D74E00C1554E /* CombatViewController.m */; };
 		FF2ABA221EC7CCDA00EC8B3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA211EC7CCDA00EC8B3C /* main.m */; };
 		FF2ABA251EC7CCDA00EC8B3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */; };
@@ -74,6 +86,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B5052192075104700533F8E /* ResourceBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResourceBar.m; sourceTree = "<group>"; };
+		6B50521B2075104C00533F8E /* ResourceBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourceBar.h; sourceTree = "<group>"; };
+		6B5AD6B02072F60000AF48DD /* HealthBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthBar.h; sourceTree = "<group>"; };
+		6B5AD6B12072F60700AF48DD /* HealthBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthBar.m; sourceTree = "<group>"; };
+		6B5BE2DB207C151700678ECB /* PartyMember.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PartyMember.m; sourceTree = "<group>"; };
+		6B5BE2DD207C152400678ECB /* PartyMember.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartyMember.h; sourceTree = "<group>"; };
+		6B61D7B7207BAB07006EF040 /* MCManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCManager.h; sourceTree = "<group>"; };
+		6B61D7B8207BAB39006EF040 /* MCManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCManager.m; sourceTree = "<group>"; };
+		6B61D7BA207BAD33006EF040 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		6B61D7BC207BAD39006EF040 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		6B61D7BD207BB802006EF040 /* LoadCharacterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadCharacterController.h; sourceTree = "<group>"; };
+		6B61D7BE207BB80C006EF040 /* LoadCharacterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoadCharacterController.m; sourceTree = "<group>"; };
+		6B61D7C0207BBBD0006EF040 /* EnterDungeonController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterDungeonController.m; sourceTree = "<group>"; };
+		6B61D7C2207BBBD6006EF040 /* EnterDungeonController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterDungeonController.h; sourceTree = "<group>"; };
+		6B61D7C3207BC576006EF040 /* Party.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
+		6B61D7C4207BC57C006EF040 /* Party.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
+		6BF4C32420740826002DFC35 /* LootManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LootManager.m; sourceTree = "<group>"; };
+		6BF4C3262074082B002DFC35 /* LootManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LootManager.h; sourceTree = "<group>"; };
+		6BF4C32720741276002DFC35 /* InventoryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryManager.h; sourceTree = "<group>"; };
+		6BF4C3282074127D002DFC35 /* InventoryManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryManager.m; sourceTree = "<group>"; };
+		6BF4C32A20741EB3002DFC35 /* MainCharacter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainCharacter.m; sourceTree = "<group>"; };
+		6BF4C32C20741EBA002DFC35 /* MainCharacter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainCharacter.h; sourceTree = "<group>"; };
+		6BF4C32D207429A6002DFC35 /* EquipmentManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EquipmentManager.h; sourceTree = "<group>"; };
+		6BF4C32E207429AD002DFC35 /* EquipmentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EquipmentManager.m; sourceTree = "<group>"; };
 		FF110E7F1ED5D74E00C1554E /* CombatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombatViewController.h; sourceTree = "<group>"; };
 		FF110E801ED5D74E00C1554E /* CombatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CombatViewController.m; sourceTree = "<group>"; };
 		FF2ABA1D1EC7CCDA00EC8B3C /* RPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +230,190 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B5BE2DF207C25DD00678ECB /* Party */ = {
+			isa = PBXGroup;
+			children = (
+				6B61D7C3207BC576006EF040 /* Party.h */,
+				6B61D7C4207BC57C006EF040 /* Party.m */,
+				6B5BE2DD207C152400678ECB /* PartyMember.h */,
+				6B5BE2DB207C151700678ECB /* PartyMember.m */,
+			);
+			path = Party;
+			sourceTree = "<group>";
+		};
+		6B5BE2E0207C261600678ECB /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				6B61D7BC207BAD39006EF040 /* Constants.h */,
+				6B61D7BA207BAD33006EF040 /* Constants.m */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		6B5BE2E1207C262E00678ECB /* ConnectionManager */ = {
+			isa = PBXGroup;
+			children = (
+				6B61D7B7207BAB07006EF040 /* MCManager.h */,
+				6B61D7B8207BAB39006EF040 /* MCManager.m */,
+			);
+			path = ConnectionManager;
+			sourceTree = "<group>";
+		};
+		6B5BE2E4207C26A500678ECB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FF110E7F1ED5D74E00C1554E /* CombatViewController.h */,
+				FF110E801ED5D74E00C1554E /* CombatViewController.m */,
+				FF5F8FED1ED734B1000842C6 /* EquipViewController.h */,
+				FF5F8FEE1ED734B1000842C6 /* EquipViewController.m */,
+				FF6DE0441ED4E95200A3C62F /* InventoryViewController.h */,
+				FF6DE0451ED4E95200A3C62F /* InventoryViewController.m */,
+				FFA0A0871ED838780063ADBE /* SkillViewController.h */,
+				FFA0A0881ED838780063ADBE /* SkillViewController.m */,
+				FF2ABA261EC7CCDA00EC8B3C /* ViewController.h */,
+				FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */,
+				6B61D7BD207BB802006EF040 /* LoadCharacterController.h */,
+				6B61D7BE207BB80C006EF040 /* LoadCharacterController.m */,
+				6B61D7C2207BBBD6006EF040 /* EnterDungeonController.h */,
+				6B61D7C0207BBBD0006EF040 /* EnterDungeonController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6B5BE2E5207C26CD00678ECB /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				6BF4C3262074082B002DFC35 /* LootManager.h */,
+				6BF4C32420740826002DFC35 /* LootManager.m */,
+				6BF4C32720741276002DFC35 /* InventoryManager.h */,
+				6BF4C3282074127D002DFC35 /* InventoryManager.m */,
+				6BF4C32D207429A6002DFC35 /* EquipmentManager.h */,
+				6BF4C32E207429AD002DFC35 /* EquipmentManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		6B5BE2E6207C26F600678ECB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABA9E1EC8D52000EC8B3C /* Hero.h */,
+				FF2ABB311ECE688500EC8B3C /* Hero.m */,
+				FF2ABAC91ECA449600EC8B3C /* Barbarian.h */,
+				FF2ABAC71ECA448C00EC8B3C /* Barbarian.m */,
+				FF2ABACA1ECA4D3200EC8B3C /* Wizard.h */,
+				FF2ABACB1ECA4D3900EC8B3C /* Wizard.m */,
+				FF2ABACF1ECA536900EC8B3C /* Rogue.h */,
+				FF2ABACD1ECA535F00EC8B3C /* Rogue.m */,
+				FF2ABAD11ECA569A00EC8B3C /* Enemy.h */,
+				FF2ABAD21ECA56A300EC8B3C /* Enemy.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6B5BE2E7207C272300678ECB /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABAB11EC9549400EC8B3C /* Space.h */,
+				FF2ABAAF1EC9548800EC8B3C /* Space.m */,
+				FF2ABAB21ECA1A8F00EC8B3C /* Item.h */,
+				FF2ABAB31ECA1A9A00EC8B3C /* Item.m */,
+				FF2ABAD61ECA687700EC8B3C /* Buff.h */,
+				FF2ABAD41ECA686E00EC8B3C /* Buff.m */,
+				FF2ABB261ECCDBA300EC8B3C /* Skill.h */,
+				FF2ABB271ECCDBAA00EC8B3C /* Skill.m */,
+				6B5AD6B02072F60000AF48DD /* HealthBar.h */,
+				6B5AD6B12072F60700AF48DD /* HealthBar.m */,
+				6B50521B2075104C00533F8E /* ResourceBar.h */,
+				6B5052192075104700533F8E /* ResourceBar.m */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		6B5BE2EA207C278C00678ECB /* Equipment */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABAA91EC94A3E00EC8B3C /* Armor.h */,
+				FF2ABAAA1EC94A4900EC8B3C /* Armor.m */,
+				FF2ABAAC1EC94A5600EC8B3C /* Weapon.h */,
+				FF2ABAAD1EC94A6100EC8B3C /* Weapon.m */,
+			);
+			path = Equipment;
+			sourceTree = "<group>";
+		};
+		6B5BE2EB207C279E00678ECB /* Places */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABADE1ECA6FEB00EC8B3C /* Dungeon.h */,
+				FF2ABADB1ECA6FD900EC8B3C /* Dungeon.m */,
+				FF2ABB391ECE721200EC8B3C /* NPC.h */,
+				FF2ABB371ECE720C00EC8B3C /* NPC.m */,
+			);
+			path = Places;
+			sourceTree = "<group>";
+		};
+		6B5BE2ED207C27D000678ECB /* Abilities */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABB351ECE68D400EC8B3C /* BasicAttack.h */,
+				FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */,
+				FF2ABB131ECCB74200EC8B3C /* Fireball.h */,
+				FF2ABB111ECCB73D00EC8B3C /* Fireball.m */,
+				FF2ABB141ECCB75900EC8B3C /* Freezecone.h */,
+				FF2ABB151ECCB76100EC8B3C /* Freezecone.m */,
+				FF2ABB1C1ECCB78500EC8B3C /* Heal.h */,
+				FF2ABB1A1ECCB78100EC8B3C /* Heal.m */,
+				FF2ABB191ECCB77700EC8B3C /* Frenzy.h */,
+				FF2ABB171ECCB77100EC8B3C /* Frenzy.m */,
+				FF2ABB1F1ECCB79000EC8B3C /* Rend.h */,
+				FF2ABB1D1ECCB78C00EC8B3C /* Rend.m */,
+				FF2ABB0E1ECCB71B00EC8B3C /* Backstab.h */,
+				FF2ABB0F1ECCB72100EC8B3C /* Backstab.m */,
+				FF2ABB221ECCB79F00EC8B3C /* Vanish.h */,
+				FF2ABB201ECCB79A00EC8B3C /* Vanish.m */,
+			);
+			path = Abilities;
+			sourceTree = "<group>";
+		};
+		6B5BE2EE207C27E400678ECB /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABB3A1ECEA1C000EC8B3C /* ElementScroll.m */,
+				FF2ABB3C1ECEA1C600EC8B3C /* ElementScroll.h */,
+				FF2ABAEB1ECBAB4C00EC8B3C /* Firestone.m */,
+				FF2ABAED1ECBAB5200EC8B3C /* Firestone.h */,
+				FF2ABAEF1ECBC87E00EC8B3C /* Lightningstone.m */,
+				FF2ABAEE1ECBC87500EC8B3C /* Lightningstone.h */,
+				FF2ABAF11ECBC88900EC8B3C /* Arcanestone.m */,
+				FF2ABAF31ECBC88F00EC8B3C /* Arcanestone.h */,
+				FF2ABAF51ECBC89D00EC8B3C /* Poisonstone.m */,
+				FF2ABAF41ECBC89500EC8B3C /* Poisonstone.h */,
+				FF2ABAF71ECBC8A300EC8B3C /* Coldstone.m */,
+				FF2ABAF91ECBC8A800EC8B3C /* Coldstone.h */,
+				FF2ABAFB1ECBDA6600EC8B3C /* XPBoost.m */,
+				FF2ABAFA1ECBDA5F00EC8B3C /* XPBoost.h */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
+		6B5BE2EF207C27F500678ECB /* Dictionaries */ = {
+			isa = PBXGroup;
+			children = (
+				FF2ABAE91ECB9DC400EC8B3C /* ItemDictionary.h */,
+				FF2ABAE71ECB9DB700EC8B3C /* ItemDictionary.m */,
+				FF2ABAFF1ECBEFB900EC8B3C /* ArmorDictionary.h */,
+				FF2ABAFD1ECBEFB300EC8B3C /* ArmorDictionary.m */,
+				FF2ABB001ECC003500EC8B3C /* WeaponDictionary.h */,
+				FF2ABB011ECC003E00EC8B3C /* WeaponDictionary.m */,
+				FF2ABB051ECC072D00EC8B3C /* EnemyDictionary.h */,
+				FF2ABB031ECC072500EC8B3C /* EnemyDictionary.m */,
+				FF2ABB251ECCB82300EC8B3C /* SkillDictionary.h */,
+				FF2ABB231ECCB81D00EC8B3C /* SkillDictionary.m */,
+				FF2ABB2F1ECE60A000EC8B3C /* BuffDictionary.h */,
+				FF2ABB2D1ECE609700EC8B3C /* BuffDictionary.m */,
+			);
+			path = Dictionaries;
+			sourceTree = "<group>";
+		};
 		FF2ABA141EC7CCDA00EC8B3C = {
 			isa = PBXGroup;
 			children = (
@@ -217,26 +437,23 @@
 		FF2ABA1F1EC7CCDA00EC8B3C /* RPG */ = {
 			isa = PBXGroup;
 			children = (
-				FF2ABB061ECC8F3A00EC8B3C /* Abilities */,
-				FF2ABAEA1ECBA2BE00EC8B3C /* Items */,
-				FF2ABAE61ECB630200EC8B3C /* Dictionaries */,
-				FF2ABADD1ECA6FDE00EC8B3C /* Places */,
-				FF2ABAA81EC94A2300EC8B3C /* Equipment */,
-				FF2ABAA61EC9468200EC8B3C /* Misc */,
-				FF2ABAA31EC93B9000EC8B3C /* Classes */,
-				FF110E801ED5D74E00C1554E /* CombatViewController.m */,
-				FF110E7F1ED5D74E00C1554E /* CombatViewController.h */,
-				FF5F8FEE1ED734B1000842C6 /* EquipViewController.m */,
-				FF5F8FED1ED734B1000842C6 /* EquipViewController.h */,
-				FF6DE0451ED4E95200A3C62F /* InventoryViewController.m */,
-				FF6DE0441ED4E95200A3C62F /* InventoryViewController.h */,
-				FFA0A0881ED838780063ADBE /* SkillViewController.m */,
-				FFA0A0871ED838780063ADBE /* SkillViewController.h */,
-				FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */,
-				FF2ABA261EC7CCDA00EC8B3C /* ViewController.h */,
+				6B5BE2ED207C27D000678ECB /* Abilities */,
+				6B5BE2EE207C27E400678ECB /* Items */,
+				6B5BE2EB207C279E00678ECB /* Places */,
+				6B5BE2EF207C27F500678ECB /* Dictionaries */,
 				FF2ABA291EC7CCDA00EC8B3C /* Main.storyboard */,
-				FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */,
+				6B5BE2EA207C278C00678ECB /* Equipment */,
+				6B5BE2E7207C272300678ECB /* Misc */,
+				6B5BE2E6207C26F600678ECB /* Classes */,
+				6B5BE2E5207C26CD00678ECB /* Managers */,
+				6B5BE2E4207C26A500678ECB /* ViewControllers */,
+				6B5BE2E1207C262E00678ECB /* ConnectionManager */,
+				6B5BE2E0207C261600678ECB /* Constants */,
+				6B5BE2DF207C25DD00678ECB /* Party */,
+				6BF4C32C20741EBA002DFC35 /* MainCharacter.h */,
+				6BF4C32A20741EB3002DFC35 /* MainCharacter.m */,
 				FF2ABA231EC7CCDA00EC8B3C /* AppDelegate.h */,
+				FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */,
 				FF2ABA2F1EC7CCDA00EC8B3C /* Assets.xcassets */,
 				FF2ABA311EC7CCDA00EC8B3C /* LaunchScreen.storyboard */,
 				FF2ABA341EC7CCDA00EC8B3C /* Info.plist */,
@@ -270,123 +487,6 @@
 				FF2ABA4A1EC7CCDA00EC8B3C /* Info.plist */,
 			);
 			path = RPGUITests;
-			sourceTree = "<group>";
-		};
-		FF2ABAA31EC93B9000EC8B3C /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				FF2ABB311ECE688500EC8B3C /* Hero.m */,
-				FF2ABA9E1EC8D52000EC8B3C /* Hero.h */,
-				FF2ABAC71ECA448C00EC8B3C /* Barbarian.m */,
-				FF2ABAC91ECA449600EC8B3C /* Barbarian.h */,
-				FF2ABACB1ECA4D3900EC8B3C /* Wizard.m */,
-				FF2ABACA1ECA4D3200EC8B3C /* Wizard.h */,
-				FF2ABACD1ECA535F00EC8B3C /* Rogue.m */,
-				FF2ABACF1ECA536900EC8B3C /* Rogue.h */,
-				FF2ABAD21ECA56A300EC8B3C /* Enemy.m */,
-				FF2ABAD11ECA569A00EC8B3C /* Enemy.h */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		FF2ABAA61EC9468200EC8B3C /* Misc */ = {
-			isa = PBXGroup;
-			children = (
-				FF2ABAAF1EC9548800EC8B3C /* Space.m */,
-				FF2ABAB11EC9549400EC8B3C /* Space.h */,
-				FF2ABAB31ECA1A9A00EC8B3C /* Item.m */,
-				FF2ABAB21ECA1A8F00EC8B3C /* Item.h */,
-				FF2ABAD41ECA686E00EC8B3C /* Buff.m */,
-				FF2ABAD61ECA687700EC8B3C /* Buff.h */,
-				FF2ABB271ECCDBAA00EC8B3C /* Skill.m */,
-				FF2ABB261ECCDBA300EC8B3C /* Skill.h */,
-			);
-			name = Misc;
-			sourceTree = "<group>";
-		};
-		FF2ABAA81EC94A2300EC8B3C /* Equipment */ = {
-			isa = PBXGroup;
-			children = (
-				FF2ABAAA1EC94A4900EC8B3C /* Armor.m */,
-				FF2ABAA91EC94A3E00EC8B3C /* Armor.h */,
-				FF2ABAAD1EC94A6100EC8B3C /* Weapon.m */,
-				FF2ABAAC1EC94A5600EC8B3C /* Weapon.h */,
-			);
-			name = Equipment;
-			sourceTree = "<group>";
-		};
-		FF2ABADD1ECA6FDE00EC8B3C /* Places */ = {
-			isa = PBXGroup;
-			children = (
-				FF2ABADB1ECA6FD900EC8B3C /* Dungeon.m */,
-				FF2ABADE1ECA6FEB00EC8B3C /* Dungeon.h */,
-				FF2ABB371ECE720C00EC8B3C /* NPC.m */,
-				FF2ABB391ECE721200EC8B3C /* NPC.h */,
-			);
-			name = Places;
-			sourceTree = "<group>";
-		};
-		FF2ABAE61ECB630200EC8B3C /* Dictionaries */ = {
-			isa = PBXGroup;
-			children = (
-				FF2ABAE71ECB9DB700EC8B3C /* ItemDictionary.m */,
-				FF2ABAE91ECB9DC400EC8B3C /* ItemDictionary.h */,
-				FF2ABAFD1ECBEFB300EC8B3C /* ArmorDictionary.m */,
-				FF2ABAFF1ECBEFB900EC8B3C /* ArmorDictionary.h */,
-				FF2ABB011ECC003E00EC8B3C /* WeaponDictionary.m */,
-				FF2ABB001ECC003500EC8B3C /* WeaponDictionary.h */,
-				FF2ABB031ECC072500EC8B3C /* EnemyDictionary.m */,
-				FF2ABB051ECC072D00EC8B3C /* EnemyDictionary.h */,
-				FF2ABB231ECCB81D00EC8B3C /* SkillDictionary.m */,
-				FF2ABB251ECCB82300EC8B3C /* SkillDictionary.h */,
-				FF2ABB2D1ECE609700EC8B3C /* BuffDictionary.m */,
-				FF2ABB2F1ECE60A000EC8B3C /* BuffDictionary.h */,
-			);
-			name = Dictionaries;
-			sourceTree = "<group>";
-		};
-		FF2ABAEA1ECBA2BE00EC8B3C /* Items */ = {
-			isa = PBXGroup;
-			children = (
-				FF2ABB3A1ECEA1C000EC8B3C /* ElementScroll.m */,
-				FF2ABB3C1ECEA1C600EC8B3C /* ElementScroll.h */,
-				FF2ABAEB1ECBAB4C00EC8B3C /* Firestone.m */,
-				FF2ABAED1ECBAB5200EC8B3C /* Firestone.h */,
-				FF2ABAEF1ECBC87E00EC8B3C /* Lightningstone.m */,
-				FF2ABAEE1ECBC87500EC8B3C /* Lightningstone.h */,
-				FF2ABAF11ECBC88900EC8B3C /* Arcanestone.m */,
-				FF2ABAF31ECBC88F00EC8B3C /* Arcanestone.h */,
-				FF2ABAF51ECBC89D00EC8B3C /* Poisonstone.m */,
-				FF2ABAF41ECBC89500EC8B3C /* Poisonstone.h */,
-				FF2ABAF71ECBC8A300EC8B3C /* Coldstone.m */,
-				FF2ABAF91ECBC8A800EC8B3C /* Coldstone.h */,
-				FF2ABAFB1ECBDA6600EC8B3C /* XPBoost.m */,
-				FF2ABAFA1ECBDA5F00EC8B3C /* XPBoost.h */,
-			);
-			name = Items;
-			sourceTree = "<group>";
-		};
-		FF2ABB061ECC8F3A00EC8B3C /* Abilities */ = {
-			isa = PBXGroup;
-			children = (
-				FF2ABB331ECE68BA00EC8B3C /* BasicAttack.m */,
-				FF2ABB351ECE68D400EC8B3C /* BasicAttack.h */,
-				FF2ABB0F1ECCB72100EC8B3C /* Backstab.m */,
-				FF2ABB0E1ECCB71B00EC8B3C /* Backstab.h */,
-				FF2ABB111ECCB73D00EC8B3C /* Fireball.m */,
-				FF2ABB131ECCB74200EC8B3C /* Fireball.h */,
-				FF2ABB151ECCB76100EC8B3C /* Freezecone.m */,
-				FF2ABB141ECCB75900EC8B3C /* Freezecone.h */,
-				FF2ABB171ECCB77100EC8B3C /* Frenzy.m */,
-				FF2ABB191ECCB77700EC8B3C /* Frenzy.h */,
-				FF2ABB1A1ECCB78100EC8B3C /* Heal.m */,
-				FF2ABB1C1ECCB78500EC8B3C /* Heal.h */,
-				FF2ABB1D1ECCB78C00EC8B3C /* Rend.m */,
-				FF2ABB1F1ECCB79000EC8B3C /* Rend.h */,
-				FF2ABB201ECCB79A00EC8B3C /* Vanish.m */,
-				FF2ABB221ECCB79F00EC8B3C /* Vanish.h */,
-			);
-			name = Abilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,11 +551,12 @@
 		FF2ABA151EC7CCDA00EC8B3C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Ben Ferraro";
 				TargetAttributes = {
 					FF2ABA1C1EC7CCDA00EC8B3C = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = CNRH25Z5XG;
 					};
 					FF2ABA381EC7CCDA00EC8B3C = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -521,12 +622,19 @@
 			files = (
 				FF2ABAE51ECB593400EC8B3C /* Item.m in Sources */,
 				FF2ABAE41ECA7D7600EC8B3C /* Space.m in Sources */,
+				6B61D7C5207BC57C006EF040 /* Party.m in Sources */,
+				6BF4C32B20741EB3002DFC35 /* MainCharacter.m in Sources */,
 				FF2ABAE81ECB9DB700EC8B3C /* ItemDictionary.m in Sources */,
+				6B5AD6B22072F60700AF48DD /* HealthBar.m in Sources */,
+				6B61D7BB207BAD33006EF040 /* Constants.m in Sources */,
 				FF2ABB281ECCDBAA00EC8B3C /* Skill.m in Sources */,
+				6BF4C32520740826002DFC35 /* LootManager.m in Sources */,
 				FF2ABAF81ECBC8A300EC8B3C /* Coldstone.m in Sources */,
 				FF2ABB241ECCB81D00EC8B3C /* SkillDictionary.m in Sources */,
+				6B61D7BF207BB80C006EF040 /* LoadCharacterController.m in Sources */,
 				FF2ABAF61ECBC89D00EC8B3C /* Poisonstone.m in Sources */,
 				FF2ABB021ECC003E00EC8B3C /* WeaponDictionary.m in Sources */,
+				6B61D7C1207BBBD0006EF040 /* EnterDungeonController.m in Sources */,
 				FF2ABAFC1ECBDA6600EC8B3C /* XPBoost.m in Sources */,
 				FF6DE0461ED4E95200A3C62F /* InventoryViewController.m in Sources */,
 				FF2ABAD51ECA686E00EC8B3C /* Buff.m in Sources */,
@@ -535,12 +643,16 @@
 				FF5F8FEF1ED734B1000842C6 /* EquipViewController.m in Sources */,
 				FF2ABAC81ECA448C00EC8B3C /* Barbarian.m in Sources */,
 				FF2ABB3B1ECEA1C000EC8B3C /* ElementScroll.m in Sources */,
+				6B61D7B9207BAB39006EF040 /* MCManager.m in Sources */,
 				FF2ABACC1ECA4D3900EC8B3C /* Wizard.m in Sources */,
 				FF2ABAC31ECA323600EC8B3C /* Armor.m in Sources */,
+				6B50521A2075104700533F8E /* ResourceBar.m in Sources */,
 				FF2ABAC41ECA323600EC8B3C /* Weapon.m in Sources */,
 				FF2ABB161ECCB76100EC8B3C /* Freezecone.m in Sources */,
 				FF2ABB211ECCB79A00EC8B3C /* Vanish.m in Sources */,
+				6BF4C32F207429AD002DFC35 /* EquipmentManager.m in Sources */,
 				FF2ABB321ECE688500EC8B3C /* Hero.m in Sources */,
+				6BF4C3292074127D002DFC35 /* InventoryManager.m in Sources */,
 				FF2ABA281EC7CCDA00EC8B3C /* ViewController.m in Sources */,
 				FF2ABB2E1ECE609700EC8B3C /* BuffDictionary.m in Sources */,
 				FF2ABACE1ECA535F00EC8B3C /* Rogue.m in Sources */,
@@ -550,6 +662,7 @@
 				FF2ABB381ECE720C00EC8B3C /* NPC.m in Sources */,
 				FF2ABA2E1EC7CCDA00EC8B3C /* RPG.xcdatamodeld in Sources */,
 				FF2ABAF21ECBC88900EC8B3C /* Arcanestone.m in Sources */,
+				6B5BE2DC207C151700678ECB /* PartyMember.m in Sources */,
 				FF2ABB181ECCB77100EC8B3C /* Frenzy.m in Sources */,
 				FF2ABA251EC7CCDA00EC8B3C /* AppDelegate.m in Sources */,
 				FF2ABAEC1ECBAB4C00EC8B3C /* Firestone.m in Sources */,
@@ -624,13 +737,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -669,13 +792,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -703,6 +836,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = CNRH25Z5XG;
 				INFOPLIST_FILE = RPG/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = randome.RPG;
@@ -714,6 +848,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = CNRH25Z5XG;
 				INFOPLIST_FILE = RPG/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = randome.RPG;

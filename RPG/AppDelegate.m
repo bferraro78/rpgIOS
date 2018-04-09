@@ -21,8 +21,9 @@
     /* SET ROOT */
     _root = [[ViewController alloc] init];
     _navigationController=[[UINavigationController alloc] initWithRootViewController:_root];
-    
 //    self.window.rootViewController = self.navigationController;
+    
+    _mcManager = [[MCManager alloc] init];
     
     return YES;
 }

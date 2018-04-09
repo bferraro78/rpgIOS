@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "ViewController.h"
+#import "MCManager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (nonatomic, strong) MCManager *mcManager; // MCManager object
 
 @property (strong, nonatomic) UIWindow *window;
 
