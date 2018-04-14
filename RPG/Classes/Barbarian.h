@@ -16,9 +16,8 @@
 @property int rage;
 @property int combatRage;
 
--(id)initname:(NSString *)aName classID:(int)aClassID vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext
-       startX:(int)aStartX startY:(int)aStartY dungeonLvl:(int)aDungeonLvl;
-
+-(id)initNewCharacterName:(NSString *)aName vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext;
+-(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats;
 
 -(void)loadSkills;
 

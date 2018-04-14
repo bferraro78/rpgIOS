@@ -10,6 +10,12 @@
 
 @implementation HealthBar
 
+-(id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    self.backgroundColor = [UIColor redColor];
+    return self;
+}
+
 -(void)setHealthBar:(int)currentHealth {
     _currentHealth = currentHealth;
     [self setNeedsDisplay];

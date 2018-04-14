@@ -14,11 +14,20 @@ int energy;
 int combatEnergy;
 
 
--(id)initname:(NSString *)aName classID:(int)aClassID vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext
-startX:(int)aStartX startY:(int)aStartY dungeonLvl:(int)aDungeonLvl {
-    [super initname:aName classID:aClassID vit:aVit strn:aStrn inti:aInti dext:aDext startX:aStartX startY:aStartY dungeonLvl:aDungeonLvl];
+-(id)initNewCharacterName:(NSString *)aName vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext {
     
+    self = [super initNewCharacterName:aName vit:aVit strn:aStrn inti:aInti dext:aDext];
+    
+    self.classID = 3;
     [self loadSkills];
+    _energy = 100;
+    _combatEnergy = self.energy;
+    return self;
+}
+
+-(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats {
+    [super loadPartyMemberHero:partyHeroStats];
+    self.classID = 3;
     _energy = 100;
     _combatEnergy = self.energy;
     return self;

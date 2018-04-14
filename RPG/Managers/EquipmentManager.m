@@ -75,7 +75,7 @@
 }
 
 +(BOOL)canUseWeapon:(Weapon*)w {
-    if ([[mainCharacter getClassName] isEqualToString:@"Barb"]) {
+    if ([[mainCharacter getClassName] isEqualToString:@"Barbarian"]) {
         if (![w.weaponType isEqualToString:@"Wand"]) {
             return true;
         }

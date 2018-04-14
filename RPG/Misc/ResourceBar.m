@@ -11,6 +11,12 @@
 
 @implementation ResourceBar
 
+-(id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    self.backgroundColor = [UIColor redColor];
+    return self;
+}
+
 -(void)setResourceBar:(int)currentResource {
     _currentResource = currentResource;
     [self setNeedsDisplay];

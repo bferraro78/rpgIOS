@@ -84,8 +84,7 @@ NSMutableArray *map;
         self.heroY = newY;
         code = 1;
     }
-    /* Add to steps already taken */
-    [mainCharacter addStepSpace:[[Space alloc] initx:newX y:newY item:nil]];
+    
     return code;
 }
 

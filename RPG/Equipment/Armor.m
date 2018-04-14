@@ -44,7 +44,7 @@ int armorResistance;
 -(NSMutableString*)toString {
     NSMutableString *armorPrint = [[NSMutableString alloc] init];
     
-    [armorPrint appendFormat:@"%s | Armor: %u | Strn: %u | Inti: %u | Dext: %u | Vit: %u | Element: %s +%u",
+    [armorPrint appendFormat:@"\n    Name: %s\n    Armor: %u\n    Strn: %u\n    Inti: %u\n    Dext: %u\n    Vit: %u\n    Element: %s +%u",
      [_armorName UTF8String], _armor, _armorStrn, _armorInti, _armorDext, _armorVit, [_armorElement UTF8String], _armorResistance];
     
     return armorPrint;

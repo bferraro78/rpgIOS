@@ -16,9 +16,14 @@
 
 +(Party*)getPartyArray;
 -(void)addToParty:(PartyMember*)partyMember;
--(void)removeFromParty:(PartyMember*)partyMember;
+-(void)removeFromParty:(NSString*)partyMember;
 -(PartyMember*)getPartyMember:(NSString*)partyMemberName;
 -(int)indexOfPartyMember:(NSString*)peerDisplayName;
+-(PartyMember*)partyMemberAtIndex:(NSInteger*)index;
 -(int)partyCount;
+-(int)readyCheckCount;
+-(void)clearParty;
+
+
 @end
 #endif /* Party_h */

@@ -28,5 +28,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *EquipmentText;
 
+-(void)setUpTabBarView;
 
 @end
+

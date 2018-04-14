@@ -8,14 +8,15 @@
 
 #ifndef PartyMember_h
 #define PartyMember_h
+#import "Hero.h"
 
 @interface PartyMember : NSObject
 
-@property NSString *name;
+@property Hero *partyMemberHero; // Has only the info needed for the mainCharacter's purposes
 @property BOOL readyCheck;
 
 
--(id)initWith:(NSString*)aName;
+-(id)initWith:(Hero*)aPartyMemberHero;
 
 @end
 #endif /* PartyMember_h */

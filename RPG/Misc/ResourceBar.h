@@ -17,6 +17,7 @@
 @property float fullResource;
 
 -(void)setResourceBar:(int)currentResource;
+-(id)initWithFrame:(CGRect)frame;
 
 @end
 

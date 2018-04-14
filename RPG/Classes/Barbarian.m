@@ -14,13 +14,22 @@ int rage;
 int combatRage;
 
 
--(id)initname:(NSString *)aName classID:(int)aClassID vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext
-       startX:(int)aStartX startY:(int)aStartY dungeonLvl:(int)aDungeonLvl {
-    [super initname:aName classID:aClassID vit:aVit strn:aStrn inti:aInti dext:aDext startX:aStartX startY:aStartY dungeonLvl:aDungeonLvl];
+-(id)initNewCharacterName:(NSString *)aName vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext {
     
+    self = [super initNewCharacterName:aName vit:aVit strn:aStrn inti:aInti dext:aDext];
+    
+    self.classID = 1;
     _combatRage = 0;
     _rage = 100;
     [self loadSkills];
+    return self;
+}
+
+-(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats {
+    [super loadPartyMemberHero:partyHeroStats];
+    self.classID = 1;
+    _combatRage = 0;
+    _rage = 100;
     return self;
 }
 
@@ -32,7 +41,6 @@ int combatRage;
         [super addSkillIfNotAlreadyKnown:@"Rend"];
     }
 }
-
 
 -(NSString*)getResourceName { return @"Rage"; }
 -(void)increaseResource:(int)rageIncrease { self.rage = rageIncrease; }

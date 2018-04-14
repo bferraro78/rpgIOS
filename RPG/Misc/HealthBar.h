@@ -17,7 +17,7 @@
 @property float fullHealth;
 
 -(void)setHealthBar:(int)currentHealth;
-
+-(id)initWithFrame:(CGRect)frame;
 @end
 
 #endif /* HealthBar_h */

@@ -60,7 +60,7 @@ BOOL isMainHand;
     NSString *lowRangeStr = [NSString stringWithFormat:@"%i", lowRange];
     NSString *highRangeStr = [NSString stringWithFormat:@"%i", _attack+_weaponRange];
     
-    [wepPrint appendFormat:@"%s | Attack: %s - %s | Element: %s" , [_weaponName UTF8String], [lowRangeStr UTF8String], [highRangeStr UTF8String], [_weaponElement UTF8String]];
+    [wepPrint appendFormat:@"\n    Name: %s\n    Attack: %s - %s\n    Element: %s" , [_weaponName UTF8String], [lowRangeStr UTF8String], [highRangeStr UTF8String], [_weaponElement UTF8String]];
     
     return wepPrint;
 }

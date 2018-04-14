@@ -11,7 +11,16 @@
 
 @implementation MCManager
 
--(id)init{
++(MCManager*)getMCManager {
+    static MCManager *MCManager = nil; // only called first time?
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        MCManager = [[self alloc] init];
+    });
+    return MCManager;
+}
+
+-(id)init {
     self = [super init];
     
     if (self) {
@@ -65,14 +74,25 @@
 /* The second delegate method is called when new data arrives from a peer. Remember that three kinds of data can be exchanged; messages, streaming and resources. This one is the delegate for messages. The next couple of methods are called when a resource is received */
 -(void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    
-    NSString *receivedString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    dict[@"data"] = data;
     dict[@"peerID"] = peerID;
-    dict[@"receivedString"] = receivedString;
     
-    if ([receivedString containsString:@"READY"]) { // a ready check
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReadyCheckNotification"
+    // Change data over to a iOS readable dictionary
+    NSError* error;
+    NSDictionary *receivedData = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:kNilOptions
+                                                           error:&error];
+    dict[@"receivedData"] = receivedData;  
+    
+    if ([receivedData[@"action"] isEqualToString:@"readyCheck"]) { // a ready check
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"readyCheckNotification"
+                                                            object:nil
+                                                          userInfo:dict];
+    } else if ([receivedData[@"action"] isEqualToString:@"createPartyMember"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"createPartyMemberNotification"
+                                                            object:nil
+                                                          userInfo:dict];
+    } else if ([receivedData[@"action"] isEqualToString:@"startDungeon"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EnterDungeonNotification"
                                                             object:nil
                                                           userInfo:dict];
     }

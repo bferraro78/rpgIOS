@@ -13,14 +13,11 @@
 
 @implementation EquipViewController
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
-
+    
     /* Text Field Non-Editable */
     _EquipmentText.editable = false;
-    
-    /* Set Name of Nav Bar to Hero's Name*/
-    self.title = mainCharacter.name;
     
     /* SET UP BUTTONS */
     if ([mainCharacter getMH].attack != 0) {
@@ -28,7 +25,7 @@
     } else {
         [_mainHandButton setTitle:@"Empty Main Hand" forState:UIControlStateNormal];
     }
-
+    
     if ([mainCharacter getOH].attack != 0) {
         [_offHandButton setTitle:@"Off Hand" forState:UIControlStateNormal];
     } else {
@@ -76,45 +73,45 @@
     } else {
         [_BootsButton setTitle:@"Empty Boots" forState:UIControlStateNormal];
     }
- 
+    
     
     /* SET UP BUTTON GESTURES */
     UILongPressGestureRecognizer *lpgrHelmet = [[UILongPressGestureRecognizer alloc]
-                                          initWithTarget:self action:@selector(handleLongPressHelmet:)];
+                                                initWithTarget:self action:@selector(handleLongPressHelmet:)];
     lpgrHelmet.minimumPressDuration = 1.0; //seconds
     
     UILongPressGestureRecognizer *lpgrShoulders = [[UILongPressGestureRecognizer alloc]
-                                          initWithTarget:self action:@selector(handleLongPressShoulders:)];
+                                                   initWithTarget:self action:@selector(handleLongPressShoulders:)];
     lpgrShoulders.minimumPressDuration = 1.0; //seconds
     
     UILongPressGestureRecognizer *lpgrTorso = [[UILongPressGestureRecognizer alloc]
-                                                   initWithTarget:self action:@selector(handleLongPressTorso:)];
+                                               initWithTarget:self action:@selector(handleLongPressTorso:)];
     lpgrTorso.minimumPressDuration = 1.0; //seconds
     
     UILongPressGestureRecognizer *lpgrBracers = [[UILongPressGestureRecognizer alloc]
-                                                   initWithTarget:self action:@selector(handleLongPressBracers:)];
+                                                 initWithTarget:self action:@selector(handleLongPressBracers:)];
     lpgrBracers.minimumPressDuration = 1.0; //seconds
     
     UILongPressGestureRecognizer *lpgrGloves = [[UILongPressGestureRecognizer alloc]
-                                                 initWithTarget:self action:@selector(handleLongPressGloves:)];
+                                                initWithTarget:self action:@selector(handleLongPressGloves:)];
     lpgrGloves.minimumPressDuration = 1.0; //seconds
     
     UILongPressGestureRecognizer *lpgrLegs = [[UILongPressGestureRecognizer alloc]
-                                                 initWithTarget:self action:@selector(handleLongPressLegs:)];
+                                              initWithTarget:self action:@selector(handleLongPressLegs:)];
     lpgrLegs.minimumPressDuration = 1.0; //seconds
     
     UILongPressGestureRecognizer *lpgrBoots = [[UILongPressGestureRecognizer alloc]
-                                                 initWithTarget:self action:@selector(handleLongPressBoots:)];
+                                               initWithTarget:self action:@selector(handleLongPressBoots:)];
     lpgrBoots.minimumPressDuration = 1.0; //seconds
-
+    
     UILongPressGestureRecognizer *lpgrMH = [[UILongPressGestureRecognizer alloc]
-                                               initWithTarget:self action:@selector(handleLongPressMH:)];
+                                            initWithTarget:self action:@selector(handleLongPressMH:)];
     lpgrMH.minimumPressDuration = 1.0; //seconds
-
+    
     UILongPressGestureRecognizer *lpgrOH = [[UILongPressGestureRecognizer alloc]
                                             initWithTarget:self action:@selector(handleLongPressOH:)];
     lpgrOH.minimumPressDuration = 1.0; //seconds
-
+    
     
     [_mainHandButton addGestureRecognizer:lpgrMH];
     [_offHandButton addGestureRecognizer:lpgrOH];
@@ -125,7 +122,12 @@
     [_BracersButton addGestureRecognizer:lpgrBracers];
     [_LegsButton addGestureRecognizer:lpgrLegs];
     [_BootsButton addGestureRecognizer:lpgrBoots];
-    
+}
+
+-(void)setUpTabBarView {
+    UITabBarItem *bitem = [[UITabBarItem alloc] init];
+    bitem.title = @"Equipment";
+    self.tabBarItem = bitem;
 }
 
 /* PRESS BUTTON ACTIONS */

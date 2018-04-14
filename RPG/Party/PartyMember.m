@@ -11,11 +11,10 @@
 
 @implementation PartyMember
 
--(id)initWith:(NSString*)aName {
-    _name = aName;
+-(id)initWith:(Hero*)aPartyMemberHero {
+    _partyMemberHero = aPartyMemberHero;
     _readyCheck = false;
     return self;
 }
-
 
 @end

@@ -33,7 +33,7 @@
     BOOL alreadyInParty = false;
     for (int i = 0; i < [self partyCount]; i++) {
         PartyMember *member = (PartyMember*)[self.PartyArray objectAtIndex:i];
-        if ([partyMember.name isEqualToString:member.name]) {
+        if ([partyMember.partyMemberHero.name isEqualToString:member.partyMemberHero.name]) {
             alreadyInParty = true;
         }
     }
@@ -42,10 +42,10 @@
     }
 }
 
--(void)removeFromParty:(PartyMember*)partyMember {
+-(void)removeFromParty:(NSString*)partyMemberName {
     for (int i = 0; i < [self partyCount]; i++) {
         PartyMember *member = (PartyMember*)[self.PartyArray objectAtIndex:i];
-        if ([partyMember.name isEqualToString:member.name]) {
+        if ([partyMemberName isEqualToString:member.partyMemberHero.name]) {
             [self.PartyArray removeObjectAtIndex:i];
             break;
         }
@@ -56,7 +56,7 @@
     PartyMember *ret = nil;
     for (int i = 0; i < [self partyCount]; i++) {
         PartyMember *member = (PartyMember*)[self.PartyArray objectAtIndex:i];
-        if ([partyMemberName isEqualToString:member.name]) {
+        if ([partyMemberName isEqualToString:member.partyMemberHero.name]) {
             ret = member;
             break;
         }
@@ -64,12 +64,32 @@
     return ret;
 }
 
+-(int)readyCheckCount {
+    int readyCount = 0;
+    Party *p = [Party getPartyArray];
+    for (int i = 0; i < [p partyCount]; i++) {
+        PartyMember *member = (PartyMember*)[p.PartyArray objectAtIndex:i];
+        if (member.readyCheck) {
+            readyCount++;
+        }
+    }
+    return readyCount;
+}
+
 -(int)indexOfPartyMember:(NSString*)peerDisplayName {
     return [self.PartyArray indexOfObject:peerDisplayName];
 }
 
+-(PartyMember*)partyMemberAtIndex:(NSInteger*)index {
+    return [self.PartyArray objectAtIndex:index];
+}
+
 -(int)partyCount {
     return [self.PartyArray count];
+}
+
+-(void)clearParty {
+    [self.PartyArray removeAllObjects];
 }
 
 @end

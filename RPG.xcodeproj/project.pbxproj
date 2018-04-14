@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B130262207EB62500E25240 /* CreateClassManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B130261207EB62500E25240 /* CreateClassManager.m */; };
 		6B50521A2075104700533F8E /* ResourceBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5052192075104700533F8E /* ResourceBar.m */; };
+		6B56337B207FBEC500140C34 /* HeroProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B56337A207FBEC500140C34 /* HeroProfileViewController.m */; };
+		6B56337E207FD3B000140C34 /* MainDungeonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B56337D207FD3B000140C34 /* MainDungeonViewController.m */; };
 		6B5AD6B22072F60700AF48DD /* HealthBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AD6B12072F60700AF48DD /* HealthBar.m */; };
 		6B5BE2DC207C151700678ECB /* PartyMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5BE2DB207C151700678ECB /* PartyMember.m */; };
 		6B61D7B9207BAB39006EF040 /* MCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7B8207BAB39006EF040 /* MCManager.m */; };
@@ -15,6 +18,9 @@
 		6B61D7BF207BB80C006EF040 /* LoadCharacterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7BE207BB80C006EF040 /* LoadCharacterController.m */; };
 		6B61D7C1207BBBD0006EF040 /* EnterDungeonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7C0207BBBD0006EF040 /* EnterDungeonController.m */; };
 		6B61D7C5207BC57C006EF040 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7C4207BC57C006EF040 /* Party.m */; };
+		6BD9C80F208007D800B64947 /* PartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C80E208007D800B64947 /* PartyViewController.m */; };
+		6BD9C8112080DFC800B64947 /* PartyMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C8102080DFC800B64947 /* PartyMemberView.m */; };
+		6BD9C81520812D2C00B64947 /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C81420812D2C00B64947 /* TabViewController.m */; };
 		6BF4C32520740826002DFC35 /* LootManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C32420740826002DFC35 /* LootManager.m */; };
 		6BF4C3292074127D002DFC35 /* InventoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C3282074127D002DFC35 /* InventoryManager.m */; };
 		6BF4C32B20741EB3002DFC35 /* MainCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C32A20741EB3002DFC35 /* MainCharacter.m */; };
@@ -22,7 +28,6 @@
 		FF110E811ED5D74E00C1554E /* CombatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF110E801ED5D74E00C1554E /* CombatViewController.m */; };
 		FF2ABA221EC7CCDA00EC8B3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA211EC7CCDA00EC8B3C /* main.m */; };
 		FF2ABA251EC7CCDA00EC8B3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */; };
-		FF2ABA281EC7CCDA00EC8B3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */; };
 		FF2ABA2B1EC7CCDA00EC8B3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF2ABA291EC7CCDA00EC8B3C /* Main.storyboard */; };
 		FF2ABA2E1EC7CCDA00EC8B3C /* RPG.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF2ABA2C1EC7CCDA00EC8B3C /* RPG.xcdatamodeld */; };
 		FF2ABA301EC7CCDA00EC8B3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2ABA2F1EC7CCDA00EC8B3C /* Assets.xcassets */; };
@@ -86,8 +91,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B130260207EB61C00E25240 /* CreateClassManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateClassManager.h; sourceTree = "<group>"; };
+		6B130261207EB62500E25240 /* CreateClassManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateClassManager.m; sourceTree = "<group>"; };
 		6B5052192075104700533F8E /* ResourceBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResourceBar.m; sourceTree = "<group>"; };
 		6B50521B2075104C00533F8E /* ResourceBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourceBar.h; sourceTree = "<group>"; };
+		6B56337A207FBEC500140C34 /* HeroProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeroProfileViewController.m; sourceTree = "<group>"; };
+		6B56337C207FBECB00140C34 /* HeroProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeroProfileViewController.h; sourceTree = "<group>"; };
+		6B56337D207FD3B000140C34 /* MainDungeonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainDungeonViewController.m; sourceTree = "<group>"; };
+		6B56337F207FD3B600140C34 /* MainDungeonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainDungeonViewController.h; sourceTree = "<group>"; };
 		6B5AD6B02072F60000AF48DD /* HealthBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthBar.h; sourceTree = "<group>"; };
 		6B5AD6B12072F60700AF48DD /* HealthBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthBar.m; sourceTree = "<group>"; };
 		6B5BE2DB207C151700678ECB /* PartyMember.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PartyMember.m; sourceTree = "<group>"; };
@@ -102,6 +113,12 @@
 		6B61D7C2207BBBD6006EF040 /* EnterDungeonController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterDungeonController.h; sourceTree = "<group>"; };
 		6B61D7C3207BC576006EF040 /* Party.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
 		6B61D7C4207BC57C006EF040 /* Party.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
+		6BD9C80D208007D200B64947 /* PartyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartyViewController.h; sourceTree = "<group>"; };
+		6BD9C80E208007D800B64947 /* PartyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PartyViewController.m; sourceTree = "<group>"; };
+		6BD9C8102080DFC800B64947 /* PartyMemberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PartyMemberView.m; sourceTree = "<group>"; };
+		6BD9C8122080DFD200B64947 /* PartyMemberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartyMemberView.h; sourceTree = "<group>"; };
+		6BD9C81320812D2600B64947 /* TabViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabViewController.h; sourceTree = "<group>"; };
+		6BD9C81420812D2C00B64947 /* TabViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
 		6BF4C32420740826002DFC35 /* LootManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LootManager.m; sourceTree = "<group>"; };
 		6BF4C3262074082B002DFC35 /* LootManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LootManager.h; sourceTree = "<group>"; };
 		6BF4C32720741276002DFC35 /* InventoryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryManager.h; sourceTree = "<group>"; };
@@ -116,8 +133,6 @@
 		FF2ABA211EC7CCDA00EC8B3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FF2ABA231EC7CCDA00EC8B3C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FF2ABA261EC7CCDA00EC8B3C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FF2ABA2A1EC7CCDA00EC8B3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF2ABA2D1EC7CCDA00EC8B3C /* RPG.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RPG.xcdatamodel; sourceTree = "<group>"; };
 		FF2ABA2F1EC7CCDA00EC8B3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -262,6 +277,12 @@
 		6B5BE2E4207C26A500678ECB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6B56337C207FBECB00140C34 /* HeroProfileViewController.h */,
+				6B56337A207FBEC500140C34 /* HeroProfileViewController.m */,
+				6BD9C8122080DFD200B64947 /* PartyMemberView.h */,
+				6BD9C8102080DFC800B64947 /* PartyMemberView.m */,
+				6BD9C80D208007D200B64947 /* PartyViewController.h */,
+				6BD9C80E208007D800B64947 /* PartyViewController.m */,
 				FF110E7F1ED5D74E00C1554E /* CombatViewController.h */,
 				FF110E801ED5D74E00C1554E /* CombatViewController.m */,
 				FF5F8FED1ED734B1000842C6 /* EquipViewController.h */,
@@ -270,8 +291,10 @@
 				FF6DE0451ED4E95200A3C62F /* InventoryViewController.m */,
 				FFA0A0871ED838780063ADBE /* SkillViewController.h */,
 				FFA0A0881ED838780063ADBE /* SkillViewController.m */,
-				FF2ABA261EC7CCDA00EC8B3C /* ViewController.h */,
-				FF2ABA271EC7CCDA00EC8B3C /* ViewController.m */,
+				6B56337F207FD3B600140C34 /* MainDungeonViewController.h */,
+				6B56337D207FD3B000140C34 /* MainDungeonViewController.m */,
+				6BD9C81320812D2600B64947 /* TabViewController.h */,
+				6BD9C81420812D2C00B64947 /* TabViewController.m */,
 				6B61D7BD207BB802006EF040 /* LoadCharacterController.h */,
 				6B61D7BE207BB80C006EF040 /* LoadCharacterController.m */,
 				6B61D7C2207BBBD6006EF040 /* EnterDungeonController.h */,
@@ -283,6 +306,8 @@
 		6B5BE2E5207C26CD00678ECB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				6B130260207EB61C00E25240 /* CreateClassManager.h */,
+				6B130261207EB62500E25240 /* CreateClassManager.m */,
 				6BF4C3262074082B002DFC35 /* LootManager.h */,
 				6BF4C32420740826002DFC35 /* LootManager.m */,
 				6BF4C32720741276002DFC35 /* InventoryManager.h */,
@@ -441,7 +466,6 @@
 				6B5BE2EE207C27E400678ECB /* Items */,
 				6B5BE2EB207C279E00678ECB /* Places */,
 				6B5BE2EF207C27F500678ECB /* Dictionaries */,
-				FF2ABA291EC7CCDA00EC8B3C /* Main.storyboard */,
 				6B5BE2EA207C278C00678ECB /* Equipment */,
 				6B5BE2E7207C272300678ECB /* Misc */,
 				6B5BE2E6207C26F600678ECB /* Classes */,
@@ -452,6 +476,7 @@
 				6B5BE2DF207C25DD00678ECB /* Party */,
 				6BF4C32C20741EBA002DFC35 /* MainCharacter.h */,
 				6BF4C32A20741EB3002DFC35 /* MainCharacter.m */,
+				FF2ABA291EC7CCDA00EC8B3C /* Main.storyboard */,
 				FF2ABA231EC7CCDA00EC8B3C /* AppDelegate.h */,
 				FF2ABA241EC7CCDA00EC8B3C /* AppDelegate.m */,
 				FF2ABA2F1EC7CCDA00EC8B3C /* Assets.xcassets */,
@@ -634,6 +659,7 @@
 				6B61D7BF207BB80C006EF040 /* LoadCharacterController.m in Sources */,
 				FF2ABAF61ECBC89D00EC8B3C /* Poisonstone.m in Sources */,
 				FF2ABB021ECC003E00EC8B3C /* WeaponDictionary.m in Sources */,
+				6BD9C81520812D2C00B64947 /* TabViewController.m in Sources */,
 				6B61D7C1207BBBD0006EF040 /* EnterDungeonController.m in Sources */,
 				FF2ABAFC1ECBDA6600EC8B3C /* XPBoost.m in Sources */,
 				FF6DE0461ED4E95200A3C62F /* InventoryViewController.m in Sources */,
@@ -647,14 +673,15 @@
 				FF2ABACC1ECA4D3900EC8B3C /* Wizard.m in Sources */,
 				FF2ABAC31ECA323600EC8B3C /* Armor.m in Sources */,
 				6B50521A2075104700533F8E /* ResourceBar.m in Sources */,
+				6B130262207EB62500E25240 /* CreateClassManager.m in Sources */,
 				FF2ABAC41ECA323600EC8B3C /* Weapon.m in Sources */,
 				FF2ABB161ECCB76100EC8B3C /* Freezecone.m in Sources */,
 				FF2ABB211ECCB79A00EC8B3C /* Vanish.m in Sources */,
 				6BF4C32F207429AD002DFC35 /* EquipmentManager.m in Sources */,
 				FF2ABB321ECE688500EC8B3C /* Hero.m in Sources */,
 				6BF4C3292074127D002DFC35 /* InventoryManager.m in Sources */,
-				FF2ABA281EC7CCDA00EC8B3C /* ViewController.m in Sources */,
 				FF2ABB2E1ECE609700EC8B3C /* BuffDictionary.m in Sources */,
+				6B56337E207FD3B000140C34 /* MainDungeonViewController.m in Sources */,
 				FF2ABACE1ECA535F00EC8B3C /* Rogue.m in Sources */,
 				FF2ABB1B1ECCB78100EC8B3C /* Heal.m in Sources */,
 				FF2ABAFE1ECBEFB300EC8B3C /* ArmorDictionary.m in Sources */,
@@ -663,15 +690,18 @@
 				FF2ABA2E1EC7CCDA00EC8B3C /* RPG.xcdatamodeld in Sources */,
 				FF2ABAF21ECBC88900EC8B3C /* Arcanestone.m in Sources */,
 				6B5BE2DC207C151700678ECB /* PartyMember.m in Sources */,
+				6B56337B207FBEC500140C34 /* HeroProfileViewController.m in Sources */,
 				FF2ABB181ECCB77100EC8B3C /* Frenzy.m in Sources */,
 				FF2ABA251EC7CCDA00EC8B3C /* AppDelegate.m in Sources */,
 				FF2ABAEC1ECBAB4C00EC8B3C /* Firestone.m in Sources */,
 				FF2ABAD31ECA56A300EC8B3C /* Enemy.m in Sources */,
+				6BD9C80F208007D800B64947 /* PartyViewController.m in Sources */,
 				FF2ABB101ECCB72100EC8B3C /* Backstab.m in Sources */,
 				FF2ABA221EC7CCDA00EC8B3C /* main.m in Sources */,
 				FF2ABAF01ECBC87E00EC8B3C /* Lightningstone.m in Sources */,
 				FF110E811ED5D74E00C1554E /* CombatViewController.m in Sources */,
 				FF2ABB121ECCB73D00EC8B3C /* Fireball.m in Sources */,
+				6BD9C8112080DFC800B64947 /* PartyMemberView.m in Sources */,
 				FF2ABADC1ECA6FD900EC8B3C /* Dungeon.m in Sources */,
 				FFA0A0891ED838780063ADBE /* SkillViewController.m in Sources */,
 			);
@@ -839,7 +869,7 @@
 				DEVELOPMENT_TEAM = CNRH25Z5XG;
 				INFOPLIST_FILE = RPG/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = randome.RPG;
+				PRODUCT_BUNDLE_IDENTIFIER = Element.RPG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -851,7 +881,7 @@
 				DEVELOPMENT_TEAM = CNRH25Z5XG;
 				INFOPLIST_FILE = RPG/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = randome.RPG;
+				PRODUCT_BUNDLE_IDENTIFIER = Element.RPG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

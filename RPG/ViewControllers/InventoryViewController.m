@@ -18,15 +18,20 @@ NSMutableString *textBox;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
 
+-(id)init {
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
     self.tableView = [[UITableView alloc]init];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    UITabBarItem *bitem = [[UITabBarItem alloc] init];
+    bitem.title = @"Inventory";
+    self.tabBarItem = bitem;
+    return self;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [mainCharacter.inventory count];

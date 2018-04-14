@@ -207,11 +207,11 @@ NSString *heroMoveName;
         printf("ENEMY HEALTH %u\n", self.e.enemyHealth);
         printf("HERO HEALTH %u\n", mainCharacter.health);
         
-        
         // Lightning Spec, get another turn -- TODO -- determine a chance for this to happen
         // Don't let the chance of another turn happen every time? maybe decrease by half every time
         if ([mainCharacter.elementSpec isEqualToString:LIGHTNING]) {
             _lightningSpecAdditionalTurn = true;
+            // TODO -- UPDATE UI telling users, this guy is taking another turn
         } else {
             // Print attacks to UI
             [self updateUIWithAttacks:enemyMoveName];
@@ -227,6 +227,9 @@ NSString *heroMoveName;
             
             /** Death Check Stage **/
             [self deathStage];
+            
+            // TODO - Send updated heroes and enemies to all other players
+            
         }
     } else {
         [self updateUIWithInvalidMove];
@@ -296,6 +299,9 @@ NSString *heroMoveName;
     self.critHit = false;
     [self critChance:critExtra];
     printf("\n\nVALUE IS : %d\n\n", self.critHit);
+    
+    
+    // TODO -- Multicombat , put the poisonDotArray on the enmy so they know to take the poison damage every turn
     
     
     /** Elemental Spec - POISON POISON DOT PASSIVE **/
@@ -792,7 +798,7 @@ NSString *heroMoveName;
 
     [_heroHealthBar setHealthBar:mainCharacter.combatHealth];
     [_enemyHealthBar setHealthBar:self.e.enemyCombatHealth];
-    [_heroResourceBar setResourceBar:[ mainCharacter getCombatResource]];
+    [_heroResourceBar setResourceBar:[mainCharacter getCombatResource]];
 
     
     printf("\nHealths: %i --- %i\n", mainCharacter.combatHealth, _e.enemyCombatHealth);

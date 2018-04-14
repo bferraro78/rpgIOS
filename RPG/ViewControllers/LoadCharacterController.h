@@ -24,13 +24,20 @@
 #import "Wizard.h"
 #import "Rogue.h"
 
+#import "Party.h"
+#import <MultipeerConnectivity/MultipeerConnectivity.h>
+#import "MCManager.h"
+
 @interface LoadCharacterController : UIViewController
+
 
 @property Hero *h1;
 @property Hero *h2;
+@property Hero *h3;
 
 @property (strong, nonatomic) IBOutlet UIButton *CharacterOneButton;
 @property (strong, nonatomic) IBOutlet UIButton *CharacterTwoButton;
+@property (strong, nonatomic) IBOutlet UIButton *CharacterThreeButton;
 
 @end
 

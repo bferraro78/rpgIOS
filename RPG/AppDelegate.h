@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "ViewController.h"
+#import "LoadCharacterController.h"
 #import "MCManager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (nonatomic, strong) MCManager *mcManager; // MCManager object
+@property UIBackgroundTaskIdentifier bgTask;
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -25,7 +25,7 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 @property (nonatomic,retain) UINavigationController *navigationController;
-@property (nonatomic, strong) ViewController *root;
+@property (nonatomic, strong) LoadCharacterController *root;
 
 @end
 

@@ -15,13 +15,23 @@ int mana;
 int combatMana;
 
 
--(id)initname:(NSString *)aName classID:(int)aClassID vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext
-       startX:(int)aStartX startY:(int)aStartY dungeonLvl:(int)aDungeonLvl {
-    [super initname:aName classID:aClassID vit:aVit strn:aStrn inti:aInti dext:aDext startX:aStartX startY:aStartY dungeonLvl:aDungeonLvl];
+-(id)initNewCharacterName:(NSString *)aName vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext {
+   
+    self = [super initNewCharacterName:aName vit:aVit strn:aStrn inti:aInti dext:aDext];
     
+    self.classID = 2;
     [self loadSkills];
     [self setResource];
     _combatMana = self.mana;
+    return self;
+}
+
+-(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats {
+    [super loadPartyMemberHero:partyHeroStats];
+    self.classID = 2;
+    [self setResource];
+    _combatMana = self.mana;
+    
     return self;
 }
 

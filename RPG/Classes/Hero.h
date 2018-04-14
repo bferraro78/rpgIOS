@@ -17,9 +17,6 @@
 
 @interface Hero : NSObject
 
-@property int MOVELISTMAX;// static?
-@property int INVENTORYMAX; // static?
-
 @property NSString *name;
 @property int classID;
 @property int level;
@@ -32,6 +29,9 @@
 @property int Exp;
 @property int purse;
 @property NSString *elementSpec;
+@property NSMutableDictionary *resistanceDefenseMap; //<Element, Integer>;
+@property NSMutableDictionary *resistanceOffenseMap; //<Element, Integer>;
+
 
 @property NSMutableArray *skillSet; // All Skills to Hero
 @property NSMutableArray *activeSkillSet; // The 4 active Skills Possible
@@ -45,9 +45,6 @@
 
 @property NSMutableArray *poisonPassiveDots;
 
-@property NSMutableDictionary *resistanceDefenseMap; //<Element, Integer>;
-@property NSMutableDictionary *resistanceOffenseMap; //<Element, Integer>;
-
 
 @property Weapon *mainHand;
 @property Weapon *offHand;
@@ -59,17 +56,12 @@
 @property Armor *legs;
 @property Armor *boots;
 
-@property int dungeonLvl;
-@property int startX;
-@property int startY;
-
 
 /* Methods */
--(id)initname:(NSString *)aName classID:(int)aClassID vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext startX:(int)aStartX startY:(int)aStartY dungeonLvl:(int)aDungeonLvl;
+-(id)initNewCharacterName:(NSString *)aName vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext;
 
--(void)increaseDungeonLevel;
--(void)addStepSpace:(Space*)s;
--(BOOL)containsSpace:(Space*)s;
+-(NSMutableDictionary*)heroPartyMemberToDictionary;
+-(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats;
 
 -(void)addSkillIfNotAlreadyKnown:(NSString*)ability; // add skill to skill array if not already available
 -(void)setActiveSkills;

@@ -11,9 +11,6 @@
 
 @implementation Hero
 
-int MOVELISTMAX = 20; // static?
-int INVENTORYMAX = 50; // static?
-
 NSString *name;
 int classID;
 int level;
@@ -46,7 +43,6 @@ NSMutableArray *poisonPassiveDots; //<Buff>
 NSMutableDictionary *resistanceDefenseMap; //<String, Integer>;
 NSMutableDictionary *resistanceOffenseMap; //<String, Integer>;
 
-
 /* Armor/Weapons */
 Weapon *mainHand;
 Weapon *offHand;
@@ -64,18 +60,14 @@ int startX;
 int startY;
 
 /** START OF CLASS METHODS **/
--(id)initname:(NSString *)aName classID:(int)aClassID vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext startX:(int)aStartX startY:(int)aStartY dungeonLvl:(int)aDungeonLvl {
+-(id)initNewCharacterName:(NSString *)aName vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext {
     _name = aName;
-    _classID = aClassID;
     _vit = aVit;
     _strn = aStrn;
     _inti = aInti;
     _dext = aDext;
     _Exp = 0;
     _level = 20;
-    _startX  = aStartX;
-    _startY = aStartY;
-    _dungeonLvl = aDungeonLvl;
     _purse = 0;
     _elementSpec= @"PHYSICAL";
     
@@ -111,31 +103,65 @@ int startY;
     return self;
 }
 
+-(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats {
+    _name = partyHeroStats[@"name"];
+    _level = [partyHeroStats[@"level"] intValue];
+    _health = [partyHeroStats[@"health"] intValue];
+    _combatHealth = [partyHeroStats[@"combatHealth"] intValue];
+    _strn = [partyHeroStats[@"strn"] intValue];
+    _dext = [partyHeroStats[@"dext"] intValue];
+    _inti = [partyHeroStats[@"inti"] intValue];
+    _vit = [partyHeroStats[@"vit"] intValue];
+    _elementSpec = partyHeroStats[@"elementSpec"];
+    _resistanceOffenseMap = partyHeroStats[@"resistanceOffenseMap"];
+    _resistanceDefenseMap = partyHeroStats[@"resistanceDefenseMap"];
+    return self;
+}
+
+/* Load mainCharacter up into dictionary to send to other players.
+   These are the ony stats a mainCharacter needs from his party for
+   dungeon/combat purposes */
+-(NSMutableDictionary*)heroPartyMemberToDictionary {
+    NSMutableDictionary* jsonable = [NSMutableDictionary dictionary];
+    jsonable[@"name"] = _name;
+    jsonable[@"class"] = [self getClassName];
+    jsonable[@"level"] = [NSString stringWithFormat:@"%i", _level];
+    jsonable[@"health"] = [NSString stringWithFormat:@"%i", _health];
+    jsonable[@"combatHealth"] = [NSString stringWithFormat:@"%i", _combatHealth];
+    jsonable[@"strn"] = [NSString stringWithFormat:@"%i", _strn];
+    jsonable[@"inti"] = [NSString stringWithFormat:@"%i", _inti];
+    jsonable[@"dext"] = [NSString stringWithFormat:@"%i", _dext];
+    jsonable[@"vit"] =  [NSString stringWithFormat:@"%i", _vit];
+    jsonable[@"elementSpec"] = _elementSpec;
+    jsonable[@"resistanceOffenseMap"] = _resistanceOffenseMap;
+    jsonable[@"resistanceDefenseMap"] = _resistanceDefenseMap;
+    return jsonable;
+}
 
 /*** Dungeon Info ***/
 /* Increase dungeon level by one, resets steps taken/active Items */
--(void)increaseDungeonLevel {
-    self.dungeonLvl += 1;
-    [self.stepsTaken removeAllObjects]; // remove all objects
-    [self resetActiveItems];
-}
-
-/** MAP SPACES **/
--(void)addStepSpace:(Space*)s {
-    [self.stepsTaken addObject:s];
-}
-
--(BOOL)containsSpace:(Space*)s {
-    NSUInteger count = [self.stepsTaken count];
-    for (int i = 0; i < count; i++) {
-        Space *tmp  = (Space*)[self.stepsTaken objectAtIndex:i];
-        if (tmp.x == s.x &&
-            tmp.y == s.y) {
-            return true;
-        }
-    }
-    return false;
-}
+//-(void)increaseDungeonLevel {
+//    self.dungeonLvl += 1;
+//    [self.stepsTaken removeAllObjects]; // remove all objects
+//    [self resetActiveItems];
+//}
+//
+///** MAP SPACES **/
+//-(void)addStepSpace:(Space*)s {
+//    [self.stepsTaken addObject:s];
+//}
+//
+//-(BOOL)containsSpace:(Space*)s {
+//    NSUInteger count = [self.stepsTaken count];
+//    for (int i = 0; i < count; i++) {
+//        Space *tmp  = (Space*)[self.stepsTaken objectAtIndex:i];
+//        if (tmp.x == s.x &&
+//            tmp.y == s.y) {
+//            return true;
+//        }
+//    }
+//    return false;
+//}
 
 
 /** ATTACKS and ABILITIES**/
@@ -166,7 +192,7 @@ int startY;
 /** Get Classes name based on ClassID **/
 -(NSString*)getClassName {
     if (self.classID == 1) {
-        return @"Barb";
+        return @"Barbarian";
     } else if (self.classID == 2) {
         return @"Wizard";
     } else {
@@ -176,7 +202,7 @@ int startY;
 
 /* Get Stats */
 -(int)getPrimaryStat {
-    if ([self.getClassName isEqualToString:@"Barb"]) {
+    if ([self.getClassName isEqualToString:@"Barbarian"]) {
         return self.strn;
     } else if ([self.getClassName isEqualToString:@"Wizard"]) {
         return self.inti;
@@ -208,11 +234,11 @@ int startY;
     [self.poisonPassiveDots removeAllObjects];
 }
 
-/* Set Health */
+/* Set Health and Combat Health */
 -(void)resetHealth { self.combatHealth = self.health; }
 
 -(void)setHealth {
-    if ([self.getClassName isEqualToString:@"Barb"]) { // Barb gets 2 health : 1 Vit
+    if ([self.getClassName isEqualToString:@"Barbarian"]) { // Barb gets 2 health : 1 Vit
         self.health = (self.vit*2);
     } else if ([self.getClassName isEqualToString:@"Wizard"]) {
         self.health = (int)((float)self.vit*(float)(0.5)); // Wizard gets .5 health : 1 Vit
@@ -274,7 +300,7 @@ int startY;
  * 2. Lootbox?
  * 3. Skills? */
 -(void)increaseLevel {
-    if ([self.getClassName isEqualToString:@"Barb"]) {
+    if ([self.getClassName isEqualToString:@"Barbarian"]) {
         [self increaseStrn:10];
         [self increaseInti:5];
         [self increaseDext:5];
@@ -491,59 +517,59 @@ int startY;
 /** Show Eqiupment/Weapons **/
     -(NSMutableString*)printBody {
         NSMutableString *body = [[NSMutableString alloc] init];
-        [body appendString:@"EQUIPED\n"];
+
         if ([self getMH].attack != 0) {
-            [body appendFormat:@"Main Hand: %s\n", [[[self getMH] toString] UTF8String]];
+            [body appendFormat:@"\nMain Hand: %s\n", [[[self getMH] toString] UTF8String]];
         } else {
-            [body appendFormat:@"Main Hand: %s\n", ""];
+            [body appendFormat:@"\nMain Hand: %s\n", ""];
         }
 
         if ([self getOH].attack != 0) {
-            [body appendFormat:@"Off Hand: %s\n", [[[self getOH] toString] UTF8String]];
+            [body appendFormat:@"\nOff Hand: %s\n", [[[self getOH] toString] UTF8String]];
         } else {
-            [body appendFormat:@"Off Hand: %s\n", ""];
+            [body appendFormat:@"\nOff Hand: %s\n", ""];
         }
 
         if ([self getHelm ].armor != 0) {
-            [body appendFormat:@"Helmet: %s\n", [[[self getHelm] toString] UTF8String]];
+            [body appendFormat:@"\nHelmet: %s\n", [[[self getHelm] toString] UTF8String]];
         } else {
-            [body appendFormat:@"Helmet: %s\n", ""];
+            [body appendFormat:@"\nHelmet: %s\n", ""];
         }
 
         if ([self getShoulders].armor != 0) {
-            [body appendFormat:@"Shoulders: %s\n", [[[self getShoulders] toString]UTF8String]];
+            [body appendFormat:@"\nShoulders: %s\n", [[[self getShoulders] toString]UTF8String]];
         } else {
-            [body appendFormat:@"Shoulders: %s\n", ""];
+            [body appendFormat:@"\nShoulders: %s\n", ""];
         }
 
         if ([self getTorso].armor != 0) {
-            [body appendFormat:@"Torso: %s\n", [[[self getTorso] toString] UTF8String]];
+            [body appendFormat:@"\nTorso: %s\n", [[[self getTorso] toString] UTF8String]];
         } else {
-            [body appendFormat:@"Torso: %s\n", ""];
+            [body appendFormat:@"\nTorso: %s\n", ""];
         }
 
         if ([self getGloves].armor != 0) {
-            [body appendFormat:@"Gloves: %s\n", [[[self getGloves] toString] UTF8String]];
+            [body appendFormat:@"\nGloves: %s\n", [[[self getGloves] toString] UTF8String]];
         } else {
-            [body appendFormat:@"Gloves: %s\n", ""];
+            [body appendFormat:@"\nGloves: %s\n", ""];
         }
 
         if ([self getBracers].armor != 0) {
-            [body appendFormat:@"Bracers: %s\n", [[[self getBracers] toString] UTF8String]];
+            [body appendFormat:@"\nBracers: %s\n", [[[self getBracers] toString] UTF8String]];
         } else {
-            [body appendFormat:@"Bracers: %s\n", ""];
+            [body appendFormat:@"\nBracers: %s\n", ""];
         }
 
         if ([self getLegs].armor != 0) {
-            [body appendFormat:@"Legs: %s\n", [[[self getLegs] toString]UTF8String]];
+            [body appendFormat:@"\nLegs: %s\n", [[[self getLegs] toString]UTF8String]];
         } else {
-            [body appendFormat:@"Legs: %s\n", ""];
+            [body appendFormat:@"\nLegs: %s\n", ""];
         }
 
         if ([self getBoots].armor != 0) {
-            [body appendFormat:@"Boots: %s\n", [[[self getBoots] toString] UTF8String]];
+            [body appendFormat:@"\nBoots: %s\n", [[[self getBoots] toString] UTF8String]];
         } else {
-            [body appendFormat:@"Boots: %s\n", ""];
+            [body appendFormat:@"\nBoots: %s\n", ""];
         }
         return body;
     }
@@ -551,30 +577,29 @@ int startY;
 -(NSMutableString*)printStats {
     NSMutableString *stats = [[NSMutableString alloc] init];
     
-    [stats appendString:@"      Hero's Stats: \n"];
+    [stats appendString:@"Hero's Stats: \n"];
 
-    [stats appendFormat:@"Class: %s\n" , [[self getClassName] UTF8String]];
-    [stats appendFormat:@"Name: %s\n" , [self.name UTF8String]];
-    [stats appendFormat:@"Dungeon Level: %u\n" , self.dungeonLvl];
-    [stats appendFormat:@"Element Spec: %s\n" , [self.elementSpec UTF8String]];
+    [stats appendFormat:@"Level %u %s\n" , self.level, [[self getClassName] UTF8String]];
+    [stats appendFormat:@"    Name: %s\n" , [self.name UTF8String]];
+    [stats appendFormat:@"    Element Spec: %s\n" , [self.elementSpec UTF8String]];
+    [stats appendFormat:@"    XP to Next Level: %u\n" , [self getLevelExp]];
+    [stats appendFormat:@"    XP: %u\n" , self.Exp];
+    [stats appendFormat:@"    Gold: %u\n" , self.purse];
 
-    [stats appendFormat:@"\nLevel: %u\n" , self.level];
-    [stats appendFormat:@"XP to Next Level: %u\n" , [self getLevelExp]];
-    [stats appendFormat:@"XP: %u\n" , self.Exp];
-    [stats appendFormat:@"Gold: %u\n" , self.purse];
 
-    [stats appendFormat:@"\n    STATS:%s\n" , ""];
+
+    [stats appendFormat:@"\nSTATS:\n"];
     
-    [stats appendFormat:@"Health: %u\n" , self.health];
-    [stats appendFormat:@"%s: %u\n" , [[self getResourceName] UTF8String], [self getResource]];
-    [stats appendFormat:@"Armor: %u\n" , [self getTotalArmor]];
-    [stats appendFormat:@"Vitality: %u\n" , self.vit];
-    [stats appendFormat:@"Strength: %u\n" , self.strn];
-    [stats appendFormat:@"Initeligence: %u\n" , self.inti];
-    [stats appendFormat:@"Dexterity: %u\n" , self.dext];
-    [stats appendFormat:@"Critical Hit Chance: %u\n" , [self getCritical]];
+    [stats appendFormat:@"    Health: %u\n" , self.health];
+    [stats appendFormat:@"    %s: %u\n" , [[self getResourceName] UTF8String], [self getResource]];
+    [stats appendFormat:@"    Armor: %u\n" , [self getTotalArmor]];
+    [stats appendFormat:@"    Vitality: %u\n" , self.vit];
+    [stats appendFormat:@"    Strength: %u\n" , self.strn];
+    [stats appendFormat:@"    Initeligence: %u\n" , self.inti];
+    [stats appendFormat:@"    Dexterity: %u\n" , self.dext];
+    [stats appendFormat:@"    Critical Hit Chance: %u\n" , [self getCritical]];
     
-    [stats appendString:@"\n    Resistances\n"];
+    [stats appendString:@"\nResistances"];
     [stats appendString:@"\nOffense:\n"];
     [stats appendString:[self printOffenseResMap]];
     [stats appendString:@"\n\nDefense:\n"];
@@ -591,7 +616,7 @@ int startY;
     
     for (NSString* dam in self.resistanceOffenseMap) {
         NSInteger value = [[self.resistanceOffenseMap objectForKey:dam] integerValue];
-        [resMap appendFormat:@"%s: %ld\n", [dam UTF8String], (long)value];
+        [resMap appendFormat:@"    %s: %ld\n", [dam UTF8String], (long)value];
     }
     
     return resMap;
@@ -602,7 +627,7 @@ int startY;
     
     for (NSString* dam in self.resistanceDefenseMap) {
         NSInteger value = [[self.resistanceDefenseMap objectForKey:dam] integerValue];
-        [resMap appendFormat:@"%s: %ld\n", [dam UTF8String], (long)value];
+        [resMap appendFormat:@"    %s: %ld\n", [dam UTF8String], (long)value];
     }
     
     return resMap;

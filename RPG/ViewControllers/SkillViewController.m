@@ -20,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+}
+
+-(id)init {
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
     self.tableView = [[UITableView alloc]init];
@@ -30,8 +33,11 @@
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
                                                initWithTarget:self action:@selector(longPressGestureRecognized:)];
     [self.tableView addGestureRecognizer:longPress];
-
     
+    self.navigationController.title = @"Skills";
+    UITabBarItem *bitem = [[UITabBarItem alloc] initWithTitle:@"Skills" image:nil tag:1];
+    self.tabBarItem = bitem;
+    return self;
 }
 
 - (IBAction)longPressGestureRecognized:(id)sender {
@@ -49,85 +55,85 @@
     static UIView       *snapshot = nil;        ///< A snapshot of the row user is moving.
     static NSIndexPath  *sourceIndexPath = nil; ///< Initial index path, where gesture begins.
     
-    switch (state) {
-        case UIGestureRecognizerStateBegan: {
-            if (indexPath) {
-                sourceIndexPath = indexPath;
-                
-                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-                
-                // Take a snapshot of the selected row using helper method.
-                snapshot = [self customSnapshotFromView:cell];
-                
-                // Add the snapshot as subview, centered at cell's center...
-                __block CGPoint center = cell.center;
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+        switch (state) {
+            case UIGestureRecognizerStateBegan: {
+                if (indexPath) {
+                    
+                    sourceIndexPath = indexPath;
+                    
+                    // Take a snapshot of the selected row using helper method.
+                    snapshot = [self customSnapshotFromView:cell];
+                    
+                    // Add the snapshot as subview, centered at cell's center...
+                    __block CGPoint center = cell.center;
+                    snapshot.center = center;
+                    snapshot.alpha = 0.0;
+                    [self.tableView addSubview:snapshot];
+                    [UIView animateWithDuration:0.25 animations:^{
+                        
+                        // Offset for gesture location.
+                        center.y = location.y;
+                        snapshot.center = center;
+                        snapshot.transform = CGAffineTransformMakeScale(1.05, 1.05);
+                        snapshot.alpha = 0.98;
+                        
+                        // Fade out.
+                        cell.alpha = 0.0;
+                        
+                    } completion:^(BOOL finished) {
+                        
+                        cell.hidden = YES;
+                        
+                    }];
+                }
+                break;
+            }
+            case UIGestureRecognizerStateChanged: {
+                CGPoint center = snapshot.center;
+                center.y = location.y;
                 snapshot.center = center;
-                snapshot.alpha = 0.0;
-                [self.tableView addSubview:snapshot];
+                
+                // Is destination valid and is it different from source?
+                if (indexPath && ![indexPath isEqual:sourceIndexPath]) {
+                    
+                    // ... update data source.
+                    [mainCharacter.skillSet exchangeObjectAtIndex:indexPath.row withObjectAtIndex:sourceIndexPath.row];
+                    
+                    // ... move the rows.
+                    [self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:indexPath];
+                    
+                    // ... and update source so it is in sync with UI changes.
+                    sourceIndexPath = indexPath;
+                }
+                break;
+            }
+                
+            default: {
+                // Clean up.
+                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:sourceIndexPath];
+                cell.hidden = NO;
+                cell.alpha = 0.0;
                 [UIView animateWithDuration:0.25 animations:^{
                     
-                    // Offset for gesture location.
-                    center.y = location.y;
-                    snapshot.center = center;
-                    snapshot.transform = CGAffineTransformMakeScale(1.05, 1.05);
-                    snapshot.alpha = 0.98;
+                    snapshot.center = cell.center;
+                    snapshot.transform = CGAffineTransformIdentity;
+                    snapshot.alpha = 0.0;
                     
-                    // Fade out.
-                    cell.alpha = 0.0;
+                    // Undo fade out.
+                    cell.alpha = 1.0;
                     
                 } completion:^(BOOL finished) {
                     
-                    cell.hidden = YES;
+                    sourceIndexPath = nil;
+                    [snapshot removeFromSuperview];
+                    snapshot = nil;
                     
                 }];
+                break;
             }
-            break;
         }
-        case UIGestureRecognizerStateChanged: {
-            CGPoint center = snapshot.center;
-            center.y = location.y;
-            snapshot.center = center;
-            
-            // Is destination valid and is it different from source?
-            if (indexPath && ![indexPath isEqual:sourceIndexPath]) {
-                
-                // ... update data source.
-                [mainCharacter.skillSet exchangeObjectAtIndex:indexPath.row withObjectAtIndex:sourceIndexPath.row];
-                
-                // ... move the rows.
-                [self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:indexPath];
-                
-                // ... and update source so it is in sync with UI changes.
-                sourceIndexPath = indexPath;
-            }
-            break;
-        }
-            
-        default: {
-            // Clean up.
-            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:sourceIndexPath];
-            cell.hidden = NO;
-            cell.alpha = 0.0;
-            [UIView animateWithDuration:0.25 animations:^{
-                
-                snapshot.center = cell.center;
-                snapshot.transform = CGAffineTransformIdentity;
-                snapshot.alpha = 0.0;
-                
-                // Undo fade out.
-                cell.alpha = 1.0;
-                
-            } completion:^(BOOL finished) {
-                
-                sourceIndexPath = nil;
-                [snapshot removeFromSuperview];
-                snapshot = nil;
-                
-            }];
-            break;
-        }
-    
-    }
 }
 
 - (UIView*)customSnapshotFromView:(UIView *)inputView {
@@ -169,18 +175,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-//    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
-//                                          initWithTarget:self action:@selector(handleLongPress:)];
-//    lpgr.minimumPressDuration = 0.5; //seconds
-//    lpgr.delegate = cell;
-//    [cell addGestureRecognizer:lpgr];
-    
-    
     cell.textLabel.text = [mainCharacter.skillSet objectAtIndex:indexPath.row];
     
     return cell;
 }
-
 
 
 /** SKill Description **/
