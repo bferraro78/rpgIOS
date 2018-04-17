@@ -34,15 +34,15 @@ int combatRage;
 }
 
 -(void)loadSkills {
-    [super addSkillIfNotAlreadyKnown:@"Basic Attack"];
-    [super addSkillIfNotAlreadyKnown:@"Frenzy"];
+    [super addSkillIfNotAlreadyKnown:BASICATTACK];
+    [super addSkillIfNotAlreadyKnown:FRENZY];
     
     if (super.level >= 5) {
-        [super addSkillIfNotAlreadyKnown:@"Rend"];
+        [super addSkillIfNotAlreadyKnown:REND];
     }
 }
 
--(NSString*)getResourceName { return @"Rage"; }
+-(NSString*)getResourceName { return RAGE; }
 -(void)increaseResource:(int)rageIncrease { self.rage = rageIncrease; }
 -(void)useCombatResource:(int)resourceUsed { self.combatRage = (self.combatRage-resourceUsed); }
 -(void)regenCombatResource:(int)resourceGain { self.combatRage = (self.combatRage+resourceGain); }

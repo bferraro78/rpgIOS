@@ -34,17 +34,20 @@
 
 
 @property NSMutableArray *skillSet; // All Skills to Hero
-@property NSMutableArray *activeSkillSet; // The 4 active Skills Possible
 @property NSMutableArray *inventory;
 @property NSMutableArray *activeItems;
 
+// Holds more permanant, pre/post combat enconters buffs/debuffs
+// ex: major buff from a skill or potion, disease which effects some stat...
 @property NSMutableDictionary *buffLibrary; //<String, Buff>;
 @property NSMutableDictionary *debuffLibrary;
-@property NSMutableArray *stepsTaken;
 
+// Things that should not carry to or from a combat encounter (heals, dots etc)
+@property NSMutableDictionary *combatBuffLibrary;
+@property NSMutableDictionary *combatDebuffLibrary;
 
-@property NSMutableArray *poisonPassiveDots;
-
+// Holds damage hero has taken during a combat phase
+@property NSMutableDictionary *combatDamageElementMap;
 
 @property Weapon *mainHand;
 @property Weapon *offHand;
@@ -64,15 +67,14 @@
 -(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats;
 
 -(void)addSkillIfNotAlreadyKnown:(NSString*)ability; // add skill to skill array if not already available
--(void)setActiveSkills;
 
 -(NSString*)getClassName;
 
 -(int)getPrimaryStat;
 -(int)getCritical;
 -(void)resetActiveItems;
--(void)resetLibraries;
--(void)resetHealth;
+-(void)resetCombatLibraries;
+-(void)resetCombatHealth;
 -(void)setHealth;
 -(void)takeDamage:(int)healthReductionOrIncrease;
 
@@ -106,6 +108,7 @@
 -(void)setMaxCombatResource;
 
 -(void)resetResourceAndHealth;
+-(void)resetDamageElementMaps;
 
 -(int)getTotalArmor;
 -(float)getArmorRating;

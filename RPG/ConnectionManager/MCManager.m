@@ -82,7 +82,7 @@
                                                          options:kNilOptions
                                                            error:&error];
     dict[@"receivedData"] = receivedData;  
-    
+
     if ([receivedData[@"action"] isEqualToString:@"readyCheck"]) { // a ready check
         [[NSNotificationCenter defaultCenter] postNotificationName:@"readyCheckNotification"
                                                             object:nil
@@ -95,14 +95,16 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"EnterDungeonNotification"
                                                             object:nil
                                                           userInfo:dict];
+    } else if ([receivedData[@"action"] isEqualToString:@"updatePartyMemberHeroNotification"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePartyMemberHeroNotification"
+                                                            object:nil
+                                                          userInfo:dict];
     }
 }
-
 
 -(void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress {
     
 }
-
 
 -(void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error {
     

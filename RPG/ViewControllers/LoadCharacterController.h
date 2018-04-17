@@ -25,7 +25,6 @@
 #import "Rogue.h"
 
 #import "Party.h"
-#import <MultipeerConnectivity/MultipeerConnectivity.h>
 #import "MCManager.h"
 
 @interface LoadCharacterController : UIViewController

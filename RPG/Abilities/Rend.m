@@ -12,10 +12,10 @@
 
 int rendResourceCost;
 
--(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription resourceCost:(int)aResourceCost
+-(id)initmoveName:(NSString*)aMoveName resourceCost:(int)aResourceCost
             spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec {
     
-    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell ElementSpec:aElementSpec];
+    [super initmoveName:aMoveName spell:aSpell ElementSpec:aElementSpec];
     _rendResourceCost = aResourceCost;
     
     return self;
@@ -24,13 +24,28 @@ int rendResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return 10; }
 
+-(NSString*)getMoveDescription {
+    int totalThreeTurnDamage = [self getHeroDamageAverage] *3;
+    return [NSString stringWithFormat:@"%i %@\nGouges the enemy for %i %s damage over 3 turns.",
+            [self getCombatResourceCost:mainCharacter.getResource], [mainCharacter getResourceName], totalThreeTurnDamage, [[mainCharacter getMH].weaponElement UTF8String]];
+}
+
+-(int)getHeroDamageAverage {
+    return (mainCharacter.strn/2)+([[mainCharacter getMH] attack]+[[mainCharacter getOH] attack]);
+}
+
+
+-(int)getHeroDamage {
+    return (mainCharacter.strn/2)+([[mainCharacter getMH] getSwing]+[[mainCharacter getOH] getSwing]);
+}
+
 -(void)activateHeroMove:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("Rend!!");
     
     /* Insert Rend Dot */
-    int damage = (mainCharacter.strn/2)+([[mainCharacter getMH] getSwing]+[[mainCharacter getOH] getSwing]);
+    int damage = [self getHeroDamage];
     
-    e.enemyDebuffLibrary[@"rendDot"] = [[Buff alloc] initvalue:damage duration:3];
+    e.enemyDebuffLibrary[RENDDOT] = [[Buff alloc] initvalue:damage duration:3];
     
 }
 
@@ -40,7 +55,7 @@ int rendResourceCost;
     /* Insert Rend Dot */
     int damage = (e.enemyStrn/2)+(mainCharacter.level*3);
     
-    mainCharacter.debuffLibrary[@"rendDot"] = [[Buff alloc] initvalue:damage duration:3];
+    mainCharacter.combatBuffLibrary[RENDDOT] = [[Buff alloc] initvalue:damage duration:3];
     
 }
 

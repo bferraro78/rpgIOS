@@ -34,15 +34,15 @@ int combatEnergy;
 }
 
 -(void)loadSkills {
-    [super addSkillIfNotAlreadyKnown:@"Basic Attack"];
-    [super addSkillIfNotAlreadyKnown:@"Backstab"];
+    [super addSkillIfNotAlreadyKnown:BASICATTACK];
+    [super addSkillIfNotAlreadyKnown:BACKSTAB];
     
     if (super.level >= 5) {
-        [super addSkillIfNotAlreadyKnown:@"Vanish"];
+        [super addSkillIfNotAlreadyKnown:VANISH];
     }
 }
 
--(NSString*)getResourceName { return @"Energy"; }
+-(NSString*)getResourceName { return ENERGY; }
 -(int)getResource { return self.energy; }
 -(int)getCombatResource { return self.combatEnergy; }
 -(void)increaseResource:(int)energyIncrease { self.energy = energyIncrease; }

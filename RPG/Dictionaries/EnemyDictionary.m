@@ -18,7 +18,7 @@ NSMutableArray *enemyLibrary;
     
     // LOAD ENEMIES
     [enemyLibrary addObject:[[Enemy alloc] initenemyName:@"MURLOC DUUDE" enemyElement:PHYSICAL
-                                           enemySkillSet:[[NSMutableArray alloc] initWithObjects:@"BasicAttack", @"Fireball", nil] enemyStrn:10 enemyInti:10 enemyDext:10 enemyHealth:100 enemyArmor:100]];
+                                           enemySkillSet:[[NSMutableArray alloc] initWithObjects:BASICATTACK, FIREBALL, nil] enemyStrn:10 enemyInti:10 enemyDext:10 enemyHealth:100 enemyArmor:100]];
     
     
 }

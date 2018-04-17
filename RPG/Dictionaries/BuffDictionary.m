@@ -27,27 +27,26 @@ NSMutableDictionary *buffLibToName;
 +(void)loadBuffLibrary {
     printf("LOADING BUFFS...");
     
-    buffLib = [[NSMutableDictionary alloc] init];
-    buffLibToName = [[NSMutableDictionary alloc] init];
+    buffLib = [[NSMutableDictionary alloc] init]; // descriptions
+    buffLibToName = [[NSMutableDictionary alloc] init]; // UI Names
     
-    [buffLib setObject:@"Frozen: Take 25% Less Damage" forKey:@"frozen" ];
-    [buffLibToName setObject:@"Frozen" forKey:@"frozen"];
+    [buffLib setObject:@"Frozen: Take 25% Less Damage" forKey:FROZEN];
+    [buffLibToName setObject:FROZEN forKey:FROZEN];
     
-    [buffLib setObject:@"Burning: Take Dot Damage" forKey:@"fireDot"];
-    [buffLibToName setObject:@"Burning" forKey:@"fireDot"];
+    [buffLib setObject:@"Burning: Take Dot Damage" forKey:FIREDOT];
+    [buffLibToName setObject:BURNING forKey:FIREDOT];
     
-    [buffLib setObject:@"Heal: Heals Over Time" forKey:@"healDot"];
-    [buffLibToName setObject:@"Healing" forKey:@"healDot"];
+    [buffLib setObject:@"Heal: Heals Over Time" forKey:HEALDOT];
+    [buffLibToName setObject:HEAL forKey:HEALDOT];
     
-    [buffLib setObject:@"Rend: Enemey Gushing Blood" forKey:@"rendDot"];
-    [buffLibToName setObject:@"Rend" forKey:@"rendDot"];
+    [buffLib setObject:@"Rend: Enemey Gushing Blood" forKey:RENDDOT];
+    [buffLibToName setObject:REND forKey:RENDDOT];
     
-    [buffLib setObject:@"Vanish: Cannot Find You..." forKey:@"vanish"];
-    [buffLibToName setObject:@"Vanish" forKey:@"vanish"];
+    [buffLib setObject:@"Vanish: Cannot Find You..." forKey:VANISH];
+    [buffLibToName setObject:VANISH forKey:VANISH];
 
-    [buffLib setObject:@"Poison Passive Dot" forKey:@"poisonPassiveDot"];
-    [buffLibToName setObject:@"Poison Passive" forKey:@"poisonPassiveDot"];
-    
+    [buffLib setObject:POISONPASSIVEDOT forKey:POISONPASSIVEDOT];
+    [buffLibToName setObject:POISONPASSIVEDOT forKey:POISONPASSIVEDOT];    
 }
 
 +(NSString*)getDescription:(NSString*)s {
@@ -56,6 +55,7 @@ NSMutableDictionary *buffLibToName;
 
 }
 
+// hero/enemy buff/debufffLibrary name (rendDot, healDot) --> Name printed on UI
 +(NSString*)getName:(NSString*)s {
     NSString *str = buffLibToName[s];
     return str;

@@ -17,6 +17,10 @@
 
 @implementation SkillViewController
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self.tabBarController setTitle:@"Skills"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -196,7 +200,7 @@
     self.moveView.tintColor = [UIColor blackColor];
     
     self.moveView.tag = 123;
-    self.moveView.text = [SkillDictionary findSkill:skillName].moveDescription;;
+    self.moveView.text = [[SkillDictionary findSkill:skillName] getMoveDescription];
     
     CGFloat fixedWidth = self.moveView.frame.size.width;
     CGSize newSize = [self.moveView sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
@@ -216,14 +220,11 @@
     
     [self.view addSubview:self.moveView];
     
-    printf("%s", [[SkillDictionary findSkill:skillName].moveDescription UTF8String]);
+    printf("%s", [[[SkillDictionary findSkill:skillName] getMoveDescription] UTF8String]);
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:true];
     
 }
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

@@ -24,11 +24,16 @@
 @property int armorResistance;
 
 
--(id)initarmorID:(int)aID  armorName:(NSString*)aName armorType:(NSString*)aType;
+-(id)initForRandomStatsarmorID:(int)aID  armorName:(NSString*)aName armorType:(NSString*)aType;
+-(id)initArmorFromDictionaryarmorID:(int)aID armorName:(NSString*)aName armorType:(NSString*)aType aArmor:(int)aArmor aArmorVit:(int)aArmorVit
+                         aArmorStrn:(int)aArmorStrn aArmorDext:(int)aArmorDext aArmorInti:(int)aArmorInti
+                           aElement:(NSString*)aElement aArmorResistance:(int)aArmorResistance;
+
 -(NSMutableString*)toString;
 -(NSString*)getName;
 
-
+-(NSMutableDictionary*)armorToDictionary;
++(Armor*)createArmorFromDictionary:(NSMutableDictionary*)armorDictionary;
 
 @end
 

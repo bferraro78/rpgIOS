@@ -26,22 +26,21 @@ NSString *elementSpec;
 
 /* Definite Libraries */
 NSMutableArray *skillSet;
-NSMutableArray *activeSkillSet;
 NSMutableArray *inventory;
 NSMutableArray *activeItems;
 
 /* Tempory libraries */
 NSMutableDictionary *buffLibrary; //<String, Buff>;
 NSMutableDictionary *debuffLibrary;
-NSMutableArray *stepsTaken;
+NSMutableDictionary *combatBuffLibrary; //<String, Buff>;
+NSMutableDictionary *combatDebuffLibrary;
 
-
-/* Element Passive Libraries */
-NSMutableArray *poisonPassiveDots; //<Buff>
 
 /* Resisatnces: Fire, Lightning, Cold, Poison, Arcane  */
 NSMutableDictionary *resistanceDefenseMap; //<String, Integer>;
 NSMutableDictionary *resistanceOffenseMap; //<String, Integer>;
+
+NSMutableDictionary *combatDamageElementMap;
 
 /* Armor/Weapons */
 Weapon *mainHand;
@@ -54,10 +53,6 @@ Armor *torso;
 Armor *legs;
 Armor *boots;
 
-/* Dungeon Info */
-int dungeonLvl;
-int startX;
-int startY;
 
 /** START OF CLASS METHODS **/
 -(id)initNewCharacterName:(NSString *)aName vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext {
@@ -69,17 +64,17 @@ int startY;
     _Exp = 0;
     _level = 20;
     _purse = 0;
-    _elementSpec= @"PHYSICAL";
+    _elementSpec= PHYSICAL;
     
     _skillSet = [[NSMutableArray alloc] init];
-    _activeSkillSet = [[NSMutableArray alloc] initWithCapacity:4];
     _inventory = [[NSMutableArray alloc] init];
     _activeItems = [[NSMutableArray alloc] init];
-    _stepsTaken = [[NSMutableArray alloc] init];
-    _poisonPassiveDots = [[NSMutableArray alloc] init];
-    
+
+    _combatDamageElementMap = [[NSMutableDictionary alloc] init];
     _buffLibrary = [[NSMutableDictionary alloc] init];
     _debuffLibrary = [[NSMutableDictionary alloc] init];
+    _combatBuffLibrary = [[NSMutableDictionary alloc] init];
+    _combatDebuffLibrary = [[NSMutableDictionary alloc] init];
     _resistanceDefenseMap = [[NSMutableDictionary alloc] init];
     _resistanceOffenseMap = [[NSMutableDictionary alloc] init];
     
@@ -97,8 +92,14 @@ int startY;
     _resistanceOffenseMap[LIGHTNING] = [NSNumber numberWithInt:0];
     _resistanceOffenseMap[PHYSICAL] = [NSNumber numberWithInt:0];
     
-    /* Set Heatlh Based On Vit */
+    /* Set Heatlh/Combat health Based On Vit */
     [self resetResourceAndHealth]; // method call
+    [self resetCombatHealth];
+    
+    /**
+        A HERO will keep there combat health untouched through the entire dungeon/campaign except by spells and potions.
+        Therefore, only set the combatHealth when a character is created or loaded, before initally sending out hero data to other players
+     **/
     
     return self;
 }
@@ -113,9 +114,74 @@ int startY;
     _inti = [partyHeroStats[@"inti"] intValue];
     _vit = [partyHeroStats[@"vit"] intValue];
     _elementSpec = partyHeroStats[@"elementSpec"];
-    _resistanceOffenseMap = partyHeroStats[@"resistanceOffenseMap"];
-    _resistanceDefenseMap = partyHeroStats[@"resistanceDefenseMap"];
+    
+    _resistanceOffenseMap = [self loadOffenseResistanceMaps:partyHeroStats[@"resistanceOffenseMap"]];
+    _resistanceDefenseMap = [self loadDefenseResistanceMaps:partyHeroStats[@"resistanceDefenseMap"]];
+    
+    _buffLibrary = [self loadBuffLibary:partyHeroStats[@"buffLibrary"]];
+    _debuffLibrary = [self loadDebuffLibary:partyHeroStats[@"debuffLibrary"]];
+    
+    _combatBuffLibrary = [self loadCombatBuffLibary:partyHeroStats[@"combatBuffLibrary"]];
+    _combatDebuffLibrary = [self loadCombatDebuffLibary:partyHeroStats[@"combatDebuffLibrary"]];
+    
+    [self loadArmorFromDictionary:partyHeroStats[@"armor"]];
+    [self loadWeaponsFromDictionary:partyHeroStats[@"weapons"]];
+    
     return self;
+}
+
+-(NSMutableDictionary*)loadBuffLibary:(NSDictionary*)buffLibrary {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    for (NSString* buffName in buffLibrary) {
+        dic[buffName] = buffLibrary[buffName];
+    }
+    return dic;
+}
+
+-(NSMutableDictionary*)loadDebuffLibary:(NSDictionary*)debuffLibrary {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    for (NSString* debuffName in debuffLibrary) {
+        dic[debuffName] = debuffLibrary[debuffName];
+    }
+    return dic;
+}
+
+-(NSMutableDictionary*)loadCombatBuffLibary:(NSDictionary*)combatBuffLibrary {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    for (NSString* buffName in combatBuffLibrary) {
+        dic[buffName] = combatBuffLibrary[buffName];
+    }
+    return dic;
+}
+
+-(NSMutableDictionary*)loadCombatDebuffLibary:(NSDictionary*)combatDebuffLibrary {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    for (NSString* debuffName in combatDebuffLibrary) {
+        dic[debuffName] = combatDebuffLibrary[debuffName];
+    }
+    return dic;
+}
+
+-(NSMutableDictionary*)loadOffenseResistanceMaps:(NSDictionary*)offensiveDictionary {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[FIRE] = offensiveDictionary[FIRE];
+    dic[COLD] = offensiveDictionary[COLD];
+    dic[ARCANE] = offensiveDictionary[ARCANE];
+    dic[POISON] = offensiveDictionary[POISON];
+    dic[LIGHTNING] = offensiveDictionary[LIGHTNING];
+    dic[PHYSICAL] = offensiveDictionary[PHYSICAL];
+    return dic;
+}
+
+-(NSMutableDictionary*)loadDefenseResistanceMaps:(NSDictionary*)defenseDictionary {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic[FIRE] = defenseDictionary[FIRE];
+    dic[COLD] = defenseDictionary[COLD];
+    dic[ARCANE] = defenseDictionary[ARCANE];
+    dic[POISON] = defenseDictionary[POISON];
+    dic[LIGHTNING] = defenseDictionary[LIGHTNING];
+    dic[PHYSICAL] = defenseDictionary[PHYSICAL];
+    return dic;
 }
 
 /* Load mainCharacter up into dictionary to send to other players.
@@ -133,8 +199,19 @@ int startY;
     jsonable[@"dext"] = [NSString stringWithFormat:@"%i", _dext];
     jsonable[@"vit"] =  [NSString stringWithFormat:@"%i", _vit];
     jsonable[@"elementSpec"] = _elementSpec;
+    
     jsonable[@"resistanceOffenseMap"] = _resistanceOffenseMap;
     jsonable[@"resistanceDefenseMap"] = _resistanceDefenseMap;
+    
+    jsonable[@"buffLibrary"] = _buffLibrary;
+    jsonable[@"debuffLibrary"] = _debuffLibrary;
+    
+    jsonable[@"combatBuffLibrary"] = _combatBuffLibrary;
+    jsonable[@"combatDebuffLibrary"] = _combatDebuffLibrary;
+    
+    jsonable[@"armor"] = [self getDictionaryOfArmor];
+    jsonable[@"weapons"] = [self getDictionaryOfWeapons];
+    
     return jsonable;
 }
 
@@ -176,35 +253,23 @@ int startY;
     if (count == 0) { [self.skillSet addObject:ability]; }
 }
 
-/* Load Up Active Skill Set With First Four Skills in skillSet */
--(void)setActiveSkills {
-    [self.activeSkillSet removeAllObjects];
-    
-    for (int i = 0; i < [self.skillSet count]; i++) {
-        [self.activeSkillSet addObject:[self.skillSet objectAtIndex:i]];
-        if (i == 4) {
-            break;
-        }
-    }
-}
-
 
 /** Get Classes name based on ClassID **/
 -(NSString*)getClassName {
     if (self.classID == 1) {
-        return @"Barbarian";
+        return BARBARIAN;
     } else if (self.classID == 2) {
-        return @"Wizard";
+        return WIZARD;
     } else {
-        return @"Rogue";
+        return ROGUE;
     }
 }
 
 /* Get Stats */
 -(int)getPrimaryStat {
-    if ([self.getClassName isEqualToString:@"Barbarian"]) {
+    if ([self.getClassName isEqualToString:BARBARIAN]) {
         return self.strn;
-    } else if ([self.getClassName isEqualToString:@"Wizard"]) {
+    } else if ([self.getClassName isEqualToString:WIZARD]) {
         return self.inti;
     } else { // Rogue
         return self.dext;
@@ -228,25 +293,31 @@ int startY;
 }
 
 /* Buff Library */
--(void)resetLibraries {
-    [self.buffLibrary removeAllObjects];
-    [self.debuffLibrary removeAllObjects];
-    [self.poisonPassiveDots removeAllObjects];
+-(void)resetCombatLibraries {
+    [self.combatBuffLibrary removeAllObjects];
+    [self.combatDebuffLibrary removeAllObjects];
+}
+
+-(void)resetDamageElementMaps {
+    _combatDamageElementMap[FIRE] = [NSNumber numberWithInt:0];
+    _combatDamageElementMap[COLD] = [NSNumber numberWithInt:0];
+    _combatDamageElementMap[ARCANE] = [NSNumber numberWithInt:0];
+    _combatDamageElementMap[POISON] = [NSNumber numberWithInt:0];
+    _combatDamageElementMap[LIGHTNING] = [NSNumber numberWithInt:0];
+    _combatDamageElementMap[PHYSICAL] = [NSNumber numberWithInt:0];
 }
 
 /* Set Health and Combat Health */
--(void)resetHealth { self.combatHealth = self.health; }
+-(void)resetCombatHealth { self.combatHealth = self.health; }
 
 -(void)setHealth {
-    if ([self.getClassName isEqualToString:@"Barbarian"]) { // Barb gets 2 health : 1 Vit
-        self.health = (self.vit*2);
-    } else if ([self.getClassName isEqualToString:@"Wizard"]) {
+    if ([self.getClassName isEqualToString:BARBARIAN]) { // Barb gets 1.25 health : 1 Vit
+        self.health = (int)((float)self.vit*(float)(1.25));
+    } else if ([self.getClassName isEqualToString:WIZARD]) {
         self.health = (int)((float)self.vit*(float)(0.5)); // Wizard gets .5 health : 1 Vit
     } else { // Rogue
         self.health = (int)((float)self.vit*(float)(0.75)); // Rogue gets .75 health : 1 Vit
     }
-    /* Set Combat Health */
-    self.combatHealth = self.health;
 }
 
 -(void)takeDamage:(int)healthReductionOrIncrease {
@@ -265,7 +336,7 @@ int startY;
 -(void)increaseVit:(int)vit { self.vit = self.vit + vit; }
 -(void)increaseResistance:(NSString*)element  increaseBy:(int)resistance {
     /* Increase both Offense and Defense Resistance */
-    if (![element isEqualToString:@"PHYSICAL"]) {
+    if (![element isEqualToString:PHYSICAL]) {
         /* Increase that elemental resistance */
         NSNumber *oldOffenseResistance  = [self.resistanceOffenseMap objectForKey:element];
         NSNumber *oldDefenseResistance = [self.resistanceDefenseMap objectForKey:element];
@@ -284,7 +355,7 @@ int startY;
 -(void)decreaseVit:(int)vit { self.vit = self.vit - vit; };
 -(void)decreaseResistance:(NSString*)element  decreaseBy:(int)resistance {
     /* Decrease both Offense and Defense Resistance */
-    if (![element isEqualToString:@"PHYSICAL"]) {
+    if (![element isEqualToString:PHYSICAL]) {
         NSNumber *oldOffenseResistance  = [self.resistanceOffenseMap objectForKey:element];
         NSNumber *oldDefenseResistance = [self.resistanceDefenseMap objectForKey:element];
         NSNumber *newOffenseResistance = [NSNumber numberWithInt:[oldOffenseResistance intValue] - (resistance)];
@@ -300,12 +371,12 @@ int startY;
  * 2. Lootbox?
  * 3. Skills? */
 -(void)increaseLevel {
-    if ([self.getClassName isEqualToString:@"Barbarian"]) {
+    if ([self.getClassName isEqualToString:BARBARIAN]) {
         [self increaseStrn:10];
         [self increaseInti:5];
         [self increaseDext:5];
         [self increaseVit:10];
-    } else if ([self.getClassName isEqualToString:@"Wizard"]) {
+    } else if ([self.getClassName isEqualToString:WIZARD]) {
         [self increaseStrn:5];
         [self increaseInti:10];
         [self increaseDext:5];
@@ -445,14 +516,14 @@ int startY;
 /* Get Armor/Weapons */
 -(Weapon*)getMH {
     if (self.mainHand == nil) {
-        return [[Weapon alloc] initweaponID:0 weaponName:@"" weaponType:@"" twoHand:false MH:false];
+        return [[Weapon alloc] initForRandomStatsweaponID:0 weaponName:@"" weaponType:@"" twoHand:false MH:false];
     } else {
         return self.mainHand;
     }
 }
 -(Weapon*)getOH {
     if (self.offHand == nil) {
-        return [[Weapon alloc] initweaponID:0 weaponName:@"" weaponType:@"" twoHand:false MH:false];
+        return [[Weapon alloc] initForRandomStatsweaponID:0 weaponName:@"" weaponType:@"" twoHand:false MH:false];
     } else {
         return self.offHand;
     }
@@ -460,7 +531,7 @@ int startY;
 
 -(Armor*)getTorso {
     if (self.torso == nil) {
-        return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
+        return [[Armor alloc] initForRandomStatsarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.torso;
     }
@@ -468,7 +539,7 @@ int startY;
 
 -(Armor*)getShoulders {
     if (self.shoulders == nil) {
-        return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
+        return [[Armor alloc] initForRandomStatsarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.shoulders;
     }
@@ -476,7 +547,7 @@ int startY;
 
 -(Armor*)getHelm {
     if (self.helm == nil) {
-        return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
+        return [[Armor alloc] initForRandomStatsarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.helm;
     }
@@ -484,7 +555,7 @@ int startY;
 
 -(Armor*)getBoots {
     if (self.boots == nil) {
-        return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
+        return [[Armor alloc] initForRandomStatsarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.boots;
     }
@@ -492,7 +563,7 @@ int startY;
 
 -(Armor*)getLegs {
     if (self.legs == nil) {
-        return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
+        return [[Armor alloc] initForRandomStatsarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.legs;
     }
@@ -500,7 +571,7 @@ int startY;
 
 -(Armor*)getGloves {
     if (gloves == nil) {
-        return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
+        return [[Armor alloc] initForRandomStatsarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.gloves;
     }
@@ -508,7 +579,7 @@ int startY;
 
 -(Armor*)getBracers {
     if (self.bracers == nil) {
-        return [[Armor alloc] initarmorID:0 armorName:@"" armorType:@""];
+        return [[Armor alloc] initForRandomStatsarmorID:0 armorName:@"" armorType:@""];
     } else {
         return self.bracers;
     }
@@ -518,61 +589,98 @@ int startY;
     -(NSMutableString*)printBody {
         NSMutableString *body = [[NSMutableString alloc] init];
 
-        if ([self getMH].attack != 0) {
+        if ([self getMH].weaponID != 0) {
             [body appendFormat:@"\nMain Hand: %s\n", [[[self getMH] toString] UTF8String]];
         } else {
             [body appendFormat:@"\nMain Hand: %s\n", ""];
         }
 
-        if ([self getOH].attack != 0) {
+        if ([self getOH].weaponID != 0) {
             [body appendFormat:@"\nOff Hand: %s\n", [[[self getOH] toString] UTF8String]];
         } else {
             [body appendFormat:@"\nOff Hand: %s\n", ""];
         }
 
-        if ([self getHelm ].armor != 0) {
+        if ([self getHelm ].armorID != 0) {
             [body appendFormat:@"\nHelmet: %s\n", [[[self getHelm] toString] UTF8String]];
         } else {
             [body appendFormat:@"\nHelmet: %s\n", ""];
         }
 
-        if ([self getShoulders].armor != 0) {
+        if ([self getShoulders].armorID != 0) {
             [body appendFormat:@"\nShoulders: %s\n", [[[self getShoulders] toString]UTF8String]];
         } else {
             [body appendFormat:@"\nShoulders: %s\n", ""];
         }
 
-        if ([self getTorso].armor != 0) {
+        if ([self getTorso].armorID != 0) {
             [body appendFormat:@"\nTorso: %s\n", [[[self getTorso] toString] UTF8String]];
         } else {
             [body appendFormat:@"\nTorso: %s\n", ""];
         }
 
-        if ([self getGloves].armor != 0) {
+        if ([self getGloves].armorID != 0) {
             [body appendFormat:@"\nGloves: %s\n", [[[self getGloves] toString] UTF8String]];
         } else {
             [body appendFormat:@"\nGloves: %s\n", ""];
         }
 
-        if ([self getBracers].armor != 0) {
+        if ([self getBracers].armorID != 0) {
             [body appendFormat:@"\nBracers: %s\n", [[[self getBracers] toString] UTF8String]];
         } else {
             [body appendFormat:@"\nBracers: %s\n", ""];
         }
 
-        if ([self getLegs].armor != 0) {
+        if ([self getLegs].armorID != 0) {
             [body appendFormat:@"\nLegs: %s\n", [[[self getLegs] toString]UTF8String]];
         } else {
             [body appendFormat:@"\nLegs: %s\n", ""];
         }
 
-        if ([self getBoots].armor != 0) {
+        if ([self getBoots].armorID != 0) {
             [body appendFormat:@"\nBoots: %s\n", [[[self getBoots] toString] UTF8String]];
         } else {
             [body appendFormat:@"\nBoots: %s\n", ""];
         }
         return body;
     }
+
+-(NSMutableDictionary*)getDictionaryOfArmor {
+    NSMutableDictionary *armorDictionary = [[NSMutableDictionary alloc] init];
+    armorDictionary[HELMET] = [[self getHelm] armorToDictionary];
+    armorDictionary[SHOULDERS] = [[self getShoulders] armorToDictionary];
+    armorDictionary[TORSO] = [[self getTorso] armorToDictionary];
+    armorDictionary[BRACERS] = [[self getBracers] armorToDictionary];
+    armorDictionary[GLOVES] = [[self getGloves] armorToDictionary];
+    armorDictionary[BOOTS] = [[self getBoots] armorToDictionary];
+    armorDictionary[LEGS] = [[self getLegs] armorToDictionary];
+    return armorDictionary;
+}
+
+-(NSMutableDictionary*)getDictionaryOfWeapons {
+    NSMutableDictionary *weaponDictionary = [[NSMutableDictionary alloc] init];
+    weaponDictionary[MAINHAND] = [[self getMH] weaponToDictionary];
+    weaponDictionary[OFFHAND] = [[self getOH] weaponToDictionary];
+    return weaponDictionary;
+}
+
+/* Don't use the equip function, because the stats are already in effet when
+   the hero data is sent over. */
+-(void)loadArmorFromDictionary:(NSMutableDictionary*)armorDictionary {
+    self.helm = [Armor createArmorFromDictionary:armorDictionary[HELMET]];
+    self.shoulders = [Armor createArmorFromDictionary:armorDictionary[SHOULDERS]];
+    self.torso = [Armor createArmorFromDictionary:armorDictionary[TORSO]];
+    self.bracers = [Armor createArmorFromDictionary:armorDictionary[BRACERS]];
+    self.gloves = [Armor createArmorFromDictionary:armorDictionary[GLOVES]];
+    self.boots = [Armor createArmorFromDictionary:armorDictionary[BOOTS]];
+    self.legs = [Armor createArmorFromDictionary:armorDictionary[LEGS]];
+}
+
+-(void)loadWeaponsFromDictionary:(NSMutableDictionary*)weaponDictionary {
+    self.mainHand = [Weapon createWeaponFromDictionary:weaponDictionary[MAINHAND]];
+    self.offHand = [Weapon createWeaponFromDictionary:weaponDictionary[OFFHAND]];
+}
+
 
 -(NSMutableString*)printStats {
     NSMutableString *stats = [[NSMutableString alloc] init];

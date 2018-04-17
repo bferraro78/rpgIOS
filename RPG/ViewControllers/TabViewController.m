@@ -22,7 +22,8 @@
     PartyMember *m = [[Party getPartyArray].PartyArray objectAtIndex:0];
     vc5.partyMember = m;
     
-    // After getting views from storyboard, we must init all data values
+    // Sets up any data before viewDidLoad
+    // 1. Sets name of the tab in TabBarUI
     [vc1 setUpTabBarView];
     [vc2 setUpTabBarView];
     [vc5 setUpTabBarView];

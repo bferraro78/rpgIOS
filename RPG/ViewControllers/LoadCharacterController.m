@@ -11,6 +11,10 @@
 
 @implementation LoadCharacterController
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self.navigationItem setTitle:@"Select Character"];
+}
+
 -(void)viewDidAppear:(BOOL)animated {
     // Clear Party if switching heroes before
     [[Party getPartyArray] clearParty];
@@ -29,10 +33,9 @@
     [BuffDictionary loadBuffLibrary];
     
     // TODO - LOAD/CREATE HEROOO
-    _h1 = [[Barbarian alloc] initNewCharacterName:@"Barbarian" vit:40 strn:20 inti:10 dext:10];
-    _h2 = [[Wizard alloc] initNewCharacterName:@"Wizard" vit:30 strn:10 inti:20 dext:10];
-    _h3 = [[Rogue alloc] initNewCharacterName:@"Rogue" vit:40 strn:10 inti:10 dext:20];
-    
+    _h1 = [[Barbarian alloc] initNewCharacterName:BARBARIAN vit:40 strn:20 inti:10 dext:10];
+    _h2 = [[Wizard alloc] initNewCharacterName:WIZARD vit:30 strn:10 inti:20 dext:10];
+    _h3 = [[Rogue alloc] initNewCharacterName:ROGUE vit:40 strn:10 inti:10 dext:20];
 
 //    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
 //    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
@@ -64,7 +67,7 @@
 -(IBAction)CharacterOneButton:(id)sender {
     mainCharacter = _h1;
     // ADD HEALTH PIECE -- TODO DEBUG
-    Armor *healthPiece = [[Armor alloc] initarmorID:999 armorName:@"Health piece" armorType:@"Torso"];
+    Armor *healthPiece = [[Armor alloc] initForRandomStatsarmorID:999 armorName:@"Health piece" armorType:TORSO];
     healthPiece.armorVit = 1000;
     healthPiece.armor = 10;
     [EquipmentManager equipArmor:healthPiece];
@@ -74,24 +77,54 @@
     [EquipmentManager equipWeapon:w];
     [InventoryManager addToInventory:w1];
     [InventoryManager addToInventory:w2];
+    
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:false]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    
+    [mainCharacter resetCombatHealth]; // resetting this should be done when the character is loaded, THAT IS IT
 }
 
 - (IBAction)CharacterTwoButton:(id)sender {
     mainCharacter = _h2;
     // ADD HEALTH PIECE -- TODO DEBUG
-    Armor *healthPiece = [[Armor alloc] initarmorID:999 armorName:@"Health piece" armorType:@"Torso"];
+    Armor *healthPiece = [[Armor alloc] initForRandomStatsarmorID:999 armorName:@"Health piece" armorType:TORSO];
     healthPiece.armorVit = 1000;
     healthPiece.armor = 10;
     [EquipmentManager equipArmor:healthPiece];
+    
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:false]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    
+    [mainCharacter resetCombatHealth]; // resetting this should be done when the character is loaded, THAT IS IT
 }
 
 - (IBAction)CharacterThreeButton:(id)sender {
     mainCharacter = _h3;
     // ADD HEALTH PIECE -- TODO DEBUG
-    Armor *healthPiece = [[Armor alloc] initarmorID:999 armorName:@"Health piece" armorType:@"Torso"];
+    Armor *healthPiece = [[Armor alloc] initForRandomStatsarmorID:999 armorName:@"Health piece" armorType:TORSO];
     healthPiece.armorVit = 1000;
     healthPiece.armor = 10;
     [EquipmentManager equipArmor:healthPiece];
+    
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:false]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+    [InventoryManager addToInventory:[ItemDictionary generateRandomItem:true]];
+
+    [mainCharacter resetCombatHealth]; // resetting this should be done when the character is loaded, THAT IS IT
 }
 
 

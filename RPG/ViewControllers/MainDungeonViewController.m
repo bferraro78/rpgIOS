@@ -12,6 +12,10 @@
 
 NSMutableString *mainText;
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self.tabBarController setTitle:@"Dungeon"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -19,6 +23,12 @@ NSMutableString *mainText;
                                              selector:@selector(peerDidChangeStateWithNotification:)
                                                  name:@"MCDidChangeStateNotification"
                                                object:nil];
+    // Indivdual member
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePartyMemberHero:)
+                                                 name:@"UpdatePartyMemberHeroNotification"
+                                               object:nil];
+    
     
     /*
      * Once you enter the dungeon there is no return
@@ -40,16 +50,26 @@ NSMutableString *mainText;
     [_mainText appendFormat:@"Starting Dungeon"];
     self.MainTextField.text = _mainText;
     
+    // DEBUGG
+    NSString *lead = [[Party getPartyArray] getPartyLeader].partyMemberHero.name;
+    [_mainText appendFormat:@"%s", [lead UTF8String]];
+    self.MainTextField.text = _mainText;
+    
 }
 
 -(void)setUpTabBarView {
     self.navigationController.title = @"Dungeon";
     UITabBarItem *bitem = [[UITabBarItem alloc] initWithTitle:@"Dungeon" image:nil tag:1];
     self.tabBarItem = bitem;
-
 }
 
-/* Get Connection from user, create a party member and add to party array */
+-(void)clearTextField:(UILongPressGestureRecognizer *)gestureRecognizer {
+    _mainText = [[NSMutableString alloc] init];
+    self.MainTextField.text = _mainText;
+}
+
+/** NOTIFICATION FUNCTIONS **/
+/* Get Connection from user, really only used is party member is disconnected... :( */
 -(void)peerDidChangeStateWithNotification:(NSNotification *)notification {
     MCPeerID *peerID = [[notification userInfo] objectForKey:@"peerID"];
     NSString *peerDisplayName = peerID.displayName;
@@ -70,7 +90,6 @@ NSMutableString *mainText;
         }
     }
 }
-
 -(void)updatePartyTextRemove:(NSString*)partyMember {
     [_mainText appendFormat:@"\n\n%s has left the party..\n", [partyMember UTF8String]];
     self.MainTextField.text = _mainText;
@@ -79,44 +98,43 @@ NSMutableString *mainText;
     [self.MainTextField scrollRangeToVisible:range];
 }
 
--(void)sendHeroData {
-    NSData* dataToSend = [NSJSONSerialization dataWithJSONObject:[mainCharacter heroPartyMemberToDictionary] options:0 error:nil];
-    NSArray *allPeers = [MCManager getMCManager].session.connectedPeers;
-    NSError *error;
-    [[MCManager getMCManager].session sendData:dataToSend
-                                       toPeers:allPeers
-                                      withMode:MCSessionSendDataReliable
-                                         error:&error];
+-(void)updatePartyMemberHero:(NSNotification *)notification {
+    NSDictionary *partyMemberInfo = [[notification userInfo] objectForKey:@"receivedData"];
+    // has @"action" and Hero data dictionary
     
-    if (error) {
-        NSLog(@"%@", [error localizedDescription]);
-    }
-}
-
--(void)clearTextField:(UILongPressGestureRecognizer *)gestureRecognizer {
-    _mainText = [[NSMutableString alloc] init];
-    self.MainTextField.text = _mainText;
+    // Update Party Member Hero in the PartyMemberArray
+    PartyMember *member = [[Party getPartyArray] getPartyMember:partyMemberInfo[@"name"]];
+    [member loadExistingPartyMemberFromDictionary:partyMemberInfo];
 }
 
 
 /** Buttons **/
-- (IBAction)HeroStats:(id)sender {
-    [self performSegueWithIdentifier:@"heroProfileSegue" sender:nil];
+
+/* TESTING COMBAT PURPOSES!
+ 1. Must send my "updated" hero, to all other party members
+ 2. Load all recieved party members into party array
+ 3. Enter combat
+ */
+- (IBAction)CombatButton:(id)sender {
+    [self updateHeroDataForAllOtherPartyMembers]; // 1.
+    [self performSegueWithIdentifier:@"combatSegue" sender:nil]; // 3.
 }
-- (IBAction)SkillsButton:(id)sender {
-    [self performSegueWithIdentifier:@"skillSegue" sender:nil];
-}
-- (IBAction)EquipmentButton:(id)sender {
-    [self performSegueWithIdentifier:@"equipSegue" sender:nil];
-}
-- (IBAction)InventoryButton:(id)sender {
-    [self performSegueWithIdentifier:@"inventorySegue" sender:nil];
+
+-(void)updateHeroDataForAllOtherPartyMembers {
+    PartyMember *member = [[Party getPartyArray] getPartyMember:mainCharacter.name];
+    NSMutableDictionary *dictionaryToSend = [member partyMemberToDictionary];
+    dictionaryToSend[@"action"] = @"updatePartyMemberHero";
+    [[SendDataMCManager getSender] sendDictionaryOfInfo:dictionaryToSend];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"heroProfileSegue"]) {
         HeroProfileViewController *profile = [segue destinationViewController];
         profile.partyMember = [[Party getPartyArray] getPartyMember:mainCharacter.name];
+    }
+
+    if ([[segue identifier] isEqualToString:@"combatSegue"]) {
+        
     }
     
     // Make sure your segue name in storyboard is the same as this line

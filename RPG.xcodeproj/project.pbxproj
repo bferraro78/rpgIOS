@@ -18,9 +18,12 @@
 		6B61D7BF207BB80C006EF040 /* LoadCharacterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7BE207BB80C006EF040 /* LoadCharacterController.m */; };
 		6B61D7C1207BBBD0006EF040 /* EnterDungeonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7C0207BBBD0006EF040 /* EnterDungeonController.m */; };
 		6B61D7C5207BC57C006EF040 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B61D7C4207BC57C006EF040 /* Party.m */; };
+		6B82F6342084F3900094A430 /* EnemyParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B82F6332084F3900094A430 /* EnemyParty.m */; };
+		6B82F63620855F980094A430 /* EnemyPartyMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B82F63520855F980094A430 /* EnemyPartyMember.m */; };
 		6BD9C80F208007D800B64947 /* PartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C80E208007D800B64947 /* PartyViewController.m */; };
 		6BD9C8112080DFC800B64947 /* PartyMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C8102080DFC800B64947 /* PartyMemberView.m */; };
 		6BD9C81520812D2C00B64947 /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C81420812D2C00B64947 /* TabViewController.m */; };
+		6BD9C8172082731800B64947 /* SendDataMCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C8162082731800B64947 /* SendDataMCManager.m */; };
 		6BF4C32520740826002DFC35 /* LootManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C32420740826002DFC35 /* LootManager.m */; };
 		6BF4C3292074127D002DFC35 /* InventoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C3282074127D002DFC35 /* InventoryManager.m */; };
 		6BF4C32B20741EB3002DFC35 /* MainCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C32A20741EB3002DFC35 /* MainCharacter.m */; };
@@ -113,12 +116,18 @@
 		6B61D7C2207BBBD6006EF040 /* EnterDungeonController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterDungeonController.h; sourceTree = "<group>"; };
 		6B61D7C3207BC576006EF040 /* Party.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
 		6B61D7C4207BC57C006EF040 /* Party.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
+		6B82F6322084F3830094A430 /* EnemyParty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnemyParty.h; sourceTree = "<group>"; };
+		6B82F6332084F3900094A430 /* EnemyParty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnemyParty.m; sourceTree = "<group>"; };
+		6B82F63520855F980094A430 /* EnemyPartyMember.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnemyPartyMember.m; sourceTree = "<group>"; };
+		6B82F63720855FA20094A430 /* EnemyPartyMember.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnemyPartyMember.h; sourceTree = "<group>"; };
 		6BD9C80D208007D200B64947 /* PartyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartyViewController.h; sourceTree = "<group>"; };
 		6BD9C80E208007D800B64947 /* PartyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PartyViewController.m; sourceTree = "<group>"; };
 		6BD9C8102080DFC800B64947 /* PartyMemberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PartyMemberView.m; sourceTree = "<group>"; };
 		6BD9C8122080DFD200B64947 /* PartyMemberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartyMemberView.h; sourceTree = "<group>"; };
 		6BD9C81320812D2600B64947 /* TabViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabViewController.h; sourceTree = "<group>"; };
 		6BD9C81420812D2C00B64947 /* TabViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
+		6BD9C8162082731800B64947 /* SendDataMCManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendDataMCManager.m; sourceTree = "<group>"; };
+		6BD9C8182082731F00B64947 /* SendDataMCManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendDataMCManager.h; sourceTree = "<group>"; };
 		6BF4C32420740826002DFC35 /* LootManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LootManager.m; sourceTree = "<group>"; };
 		6BF4C3262074082B002DFC35 /* LootManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LootManager.h; sourceTree = "<group>"; };
 		6BF4C32720741276002DFC35 /* InventoryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryManager.h; sourceTree = "<group>"; };
@@ -248,6 +257,10 @@
 		6B5BE2DF207C25DD00678ECB /* Party */ = {
 			isa = PBXGroup;
 			children = (
+				6B82F6322084F3830094A430 /* EnemyParty.h */,
+				6B82F6332084F3900094A430 /* EnemyParty.m */,
+				6B82F63720855FA20094A430 /* EnemyPartyMember.h */,
+				6B82F63520855F980094A430 /* EnemyPartyMember.m */,
 				6B61D7C3207BC576006EF040 /* Party.h */,
 				6B61D7C4207BC57C006EF040 /* Party.m */,
 				6B5BE2DD207C152400678ECB /* PartyMember.h */,
@@ -270,6 +283,8 @@
 			children = (
 				6B61D7B7207BAB07006EF040 /* MCManager.h */,
 				6B61D7B8207BAB39006EF040 /* MCManager.m */,
+				6BD9C8182082731F00B64947 /* SendDataMCManager.h */,
+				6BD9C8162082731800B64947 /* SendDataMCManager.m */,
 			);
 			path = ConnectionManager;
 			sourceTree = "<group>";
@@ -279,8 +294,6 @@
 			children = (
 				6B56337C207FBECB00140C34 /* HeroProfileViewController.h */,
 				6B56337A207FBEC500140C34 /* HeroProfileViewController.m */,
-				6BD9C8122080DFD200B64947 /* PartyMemberView.h */,
-				6BD9C8102080DFC800B64947 /* PartyMemberView.m */,
 				6BD9C80D208007D200B64947 /* PartyViewController.h */,
 				6BD9C80E208007D800B64947 /* PartyViewController.m */,
 				FF110E7F1ED5D74E00C1554E /* CombatViewController.h */,
@@ -439,6 +452,15 @@
 			path = Dictionaries;
 			sourceTree = "<group>";
 		};
+		6BD9C8192082775400B64947 /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				6BD9C8122080DFD200B64947 /* PartyMemberView.h */,
+				6BD9C8102080DFC800B64947 /* PartyMemberView.m */,
+			);
+			path = UIViews;
+			sourceTree = "<group>";
+		};
 		FF2ABA141EC7CCDA00EC8B3C = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +496,7 @@
 				6B5BE2E1207C262E00678ECB /* ConnectionManager */,
 				6B5BE2E0207C261600678ECB /* Constants */,
 				6B5BE2DF207C25DD00678ECB /* Party */,
+				6BD9C8192082775400B64947 /* UIViews */,
 				6BF4C32C20741EBA002DFC35 /* MainCharacter.h */,
 				6BF4C32A20741EB3002DFC35 /* MainCharacter.m */,
 				FF2ABA291EC7CCDA00EC8B3C /* Main.storyboard */,
@@ -646,6 +669,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF2ABAE51ECB593400EC8B3C /* Item.m in Sources */,
+				6BD9C8172082731800B64947 /* SendDataMCManager.m in Sources */,
 				FF2ABAE41ECA7D7600EC8B3C /* Space.m in Sources */,
 				6B61D7C5207BC57C006EF040 /* Party.m in Sources */,
 				6BF4C32B20741EB3002DFC35 /* MainCharacter.m in Sources */,
@@ -667,6 +691,7 @@
 				FF2ABB041ECC072500EC8B3C /* EnemyDictionary.m in Sources */,
 				FF2ABB1E1ECCB78C00EC8B3C /* Rend.m in Sources */,
 				FF5F8FEF1ED734B1000842C6 /* EquipViewController.m in Sources */,
+				6B82F63620855F980094A430 /* EnemyPartyMember.m in Sources */,
 				FF2ABAC81ECA448C00EC8B3C /* Barbarian.m in Sources */,
 				FF2ABB3B1ECEA1C000EC8B3C /* ElementScroll.m in Sources */,
 				6B61D7B9207BAB39006EF040 /* MCManager.m in Sources */,
@@ -683,6 +708,7 @@
 				FF2ABB2E1ECE609700EC8B3C /* BuffDictionary.m in Sources */,
 				6B56337E207FD3B000140C34 /* MainDungeonViewController.m in Sources */,
 				FF2ABACE1ECA535F00EC8B3C /* Rogue.m in Sources */,
+				6B82F6342084F3900094A430 /* EnemyParty.m in Sources */,
 				FF2ABB1B1ECCB78100EC8B3C /* Heal.m in Sources */,
 				FF2ABAFE1ECBEFB300EC8B3C /* ArmorDictionary.m in Sources */,
 				FF2ABB341ECE68BA00EC8B3C /* BasicAttack.m in Sources */,

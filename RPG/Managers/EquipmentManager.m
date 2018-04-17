@@ -14,35 +14,35 @@
 /** Set Armor/Weapons **/
 /* Will unequip armor if slot is not empty */
 +(void)equipArmor:(Armor*)a {
-    if ([a.armorType isEqualToString:@"Helmet"]) {
+    if ([a.armorType isEqualToString:HELMET]) {
         [self unequipHelm];
         mainCharacter.helm = a;
-    } else if ([a.armorType isEqualToString:@"Torso"]) {
+    } else if ([a.armorType isEqualToString:TORSO]) {
         [self unequipTorso];
         mainCharacter.torso = a;
-    } else if ([a.armorType isEqualToString:@"Shoulders"]) {
+    } else if ([a.armorType isEqualToString:SHOULDERS]) {
         [self unequipShoulders];
         mainCharacter.shoulders = a;
-    } else if ([a.armorType isEqualToString:@"Bracers"]) {
+    } else if ([a.armorType isEqualToString:BRACERS]) {
         [self unequipBracers];
         mainCharacter.bracers = a;
-    } else if ([a.armorType isEqualToString:@"Gloves"]) {
+    } else if ([a.armorType isEqualToString:GLOVES]) {
         [self unequipGloves];
         mainCharacter.gloves = a;
-    } else if ([a.armorType isEqualToString:@"Legs"]) {
+    } else if ([a.armorType isEqualToString:LEGS]) {
         [self unequipLegs];
         mainCharacter.legs = a;
-    } else if ([a.armorType isEqualToString:@"Boots"]) {
+    } else if ([a.armorType isEqualToString:BOOTS]) {
         [self unequipBoots];
         mainCharacter.boots = a;
     } else {
         
     }
     /* Increase stats */
+    [mainCharacter increaseVit:a.armorVit];
     [mainCharacter increaseStrn:a.armorStrn];
     [mainCharacter increaseInti:a.armorInti];
     [mainCharacter increaseDext:a.armorDext];
-    [mainCharacter increaseVit:a.armorVit];
     [mainCharacter increaseResistance:a.armorElement increaseBy:a.armorResistance];
     /* Remove and reset values */
     [InventoryManager removeFromInventory:a];
@@ -71,32 +71,39 @@
             printf("Class can't use weapon");
         }
     }
+    
+    /* Increase stats */
+    [mainCharacter increaseVit:w.weaponVit];
+    [mainCharacter increaseStrn:w.weaponStrn];
+    [mainCharacter increaseInti:w.weaponInti];
+    [mainCharacter increaseDext:w.weaponDext];
     [InventoryManager removeFromInventory:w];
+    [mainCharacter resetResourceAndHealth];
 }
 
 +(BOOL)canUseWeapon:(Weapon*)w {
-    if ([[mainCharacter getClassName] isEqualToString:@"Barbarian"]) {
-        if (![w.weaponType isEqualToString:@"Wand"]) {
+    if ([[mainCharacter getClassName] isEqualToString:BARBARIAN]) {
+        if (![w.weaponType isEqualToString:WAND]) {
             return true;
         }
-    } else if ([[mainCharacter getClassName] isEqualToString:@"Wizard"]) {
+    } else if ([[mainCharacter getClassName] isEqualToString:WIZARD]) {
         /* WIZARDS CAN'T DUAL WIELD */
         if (w.isMainHand) { // MH
-            if ([w.weaponType isEqualToString:@"Wand"] || [w.weaponType isEqualToString:@"Staff"] ||
-                [w.weaponType isEqualToString:@"Sword"] || [w.weaponType isEqualToString:@"Dagger"] ||
-                [w.weaponType isEqualToString:@"Shield"]) {
+            if ([w.weaponType isEqualToString:WAND] || [w.weaponType isEqualToString:STAFF] ||
+                [w.weaponType isEqualToString:SWORD] || [w.weaponType isEqualToString:DAGGER] ||
+                [w.weaponType isEqualToString:SHIELD]) {
                 return true;
             }
         } else { // OH
-            if ([w.weaponType isEqualToString:@"Shield"]) {
+            if ([w.weaponType isEqualToString:SHIELD]) {
                 return true;
             } else {
                 printf("Class Can't Dual Wield");
             }
         }
     } else { // Rogue
-        if ([w.weaponType isEqualToString:@"Blunt"] || [w.weaponType isEqualToString:@"Axe"] ||
-            [w.weaponType isEqualToString:@"Sword"] || [w.weaponType isEqualToString:@"Dagger"]) {
+        if ([w.weaponType isEqualToString:BLUNT] || [w.weaponType isEqualToString:AXE] ||
+            [w.weaponType isEqualToString:SWORD] || [w.weaponType isEqualToString:DAGGER]) {
             return true;
         }
     }
@@ -202,13 +209,23 @@
 
 +(void)unequipMH {
     if (mainCharacter.mainHand != nil) {
+        [mainCharacter decreaseStrn:mainCharacter.mainHand.weaponStrn];
+        [mainCharacter decreaseInti:mainCharacter.mainHand.weaponInti];
+        [mainCharacter decreaseDext:mainCharacter.mainHand.weaponDext];
+        [mainCharacter decreaseVit:mainCharacter.mainHand.weaponVit];
+        [mainCharacter resetResourceAndHealth];
         [InventoryManager addToInventory:mainCharacter.mainHand];
         mainCharacter.mainHand = nil;
     }
 }
 
 +(void)unequipOH {
-    if (mainCharacter.offHand != nil) {
+    if (mainCharacter.mainHand != nil) {
+        [mainCharacter decreaseStrn:mainCharacter.mainHand.weaponStrn];
+        [mainCharacter decreaseInti:mainCharacter.mainHand.weaponInti];
+        [mainCharacter decreaseDext:mainCharacter.mainHand.weaponDext];
+        [mainCharacter decreaseVit:mainCharacter.mainHand.weaponVit];
+        [mainCharacter resetResourceAndHealth];
         [InventoryManager addToInventory:mainCharacter.offHand];
         mainCharacter.offHand = nil;
     }

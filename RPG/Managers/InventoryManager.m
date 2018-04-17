@@ -62,8 +62,7 @@
         /* Remove from Inventory */
         [self removeFromInventory:item];
         
-    } else {
-        
+    } else {    
         if ([mainCharacter.activeItems count] >= 4) { // if more than four items active, must delete one
             [self removeActiveItem];
         } else {

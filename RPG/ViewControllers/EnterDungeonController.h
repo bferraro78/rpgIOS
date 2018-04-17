@@ -9,8 +9,10 @@
 #ifndef EnterDungeonController_h
 #define EnterDungeonController_h
 #import <UIKit/UIKit.h>
-#import <MultipeerConnectivity/MultipeerConnectivity.h>
+
 #import "MCManager.h"
+#import "SendDataMCManager.h"
+
 #import "Party.h"
 #import "Constants.h"
 #import "CreateClassManager.h"
@@ -27,7 +29,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *tablePartyView;
 @property (strong, nonatomic) IBOutlet UILabel *partyLabel;
 
--(void)peerDidChangeStateWithNotification:(NSNotification *)notification;
 
 @end
 

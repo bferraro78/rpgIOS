@@ -16,7 +16,7 @@
 
 @interface CreateClassManager : NSObject
 
-+(Hero*)loadPartyMember:(NSDictionary*)aPartyMemberInfo;
++(Hero*)loadPartyMemberHero:(NSDictionary*)aPartyMemberInfo;
 
 @end
 #endif /* CreateClassManager_h */

@@ -16,14 +16,13 @@
 @interface Skill : NSObject
 
 @property NSString *moveName;
-@property NSString *moveDescription;
 @property BOOL spell;
 @property NSString *skillElementSpec;
 
--(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription
-            spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec;
+-(id)initmoveName:(NSString*)aMoveName spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec;
 
 -(int)getCombatResourceCost:(int)totalResource;
+-(NSString*)getMoveDescription;
 -(void)activateHeroMove:(NSMutableDictionary*)elementMap Enemy:(Enemy*)e;
 -(void)activateEnemyMove:(Enemy*)e ElementMap:(NSMutableDictionary*)elementMap;
 

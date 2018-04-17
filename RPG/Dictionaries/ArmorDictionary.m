@@ -21,16 +21,14 @@ NSMutableArray *armorLibrary;
     
     // LOAD ARMOR
     
-    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"HELM OF GAWDS" armorType:@"Helmet"]];
-    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"LEGS OF GAWDS" armorType:@"Legs"]];
-    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"BOOTS OF GAWDS" armorType:@"Boots"]];
-    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"TORSO OF GAWDS" armorType:@"Torso"]];
+    [armorLibrary addObject:[[Armor alloc] initForRandomStatsarmorID:1 armorName:@"HELM OF GAWDS" armorType:HELMET]];
+    [armorLibrary addObject:[[Armor alloc] initForRandomStatsarmorID:2 armorName:@"LEGS OF GAWDS" armorType:LEGS]];
+    [armorLibrary addObject:[[Armor alloc] initForRandomStatsarmorID:3 armorName:@"BOOTS OF GAWDS" armorType:BOOTS]];
+    [armorLibrary addObject:[[Armor alloc] initForRandomStatsarmorID:4 armorName:@"TORSO OF GAWDS" armorType:TORSO]];
     
 
-    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"Leather Torso" armorType:@"Torso"]];
-    [armorLibrary addObject:[[Armor alloc] initarmorID:1 armorName:@"Leather Legs" armorType:@"Legs"]];
-    
-    
+    [armorLibrary addObject:[[Armor alloc] initForRandomStatsarmorID:5 armorName:@"Leather Torso" armorType:TORSO]];
+    [armorLibrary addObject:[[Armor alloc] initForRandomStatsarmorID:6 armorName:@"Leather Legs" armorType:LEGS]];
     
 }
 
@@ -42,7 +40,7 @@ NSMutableArray *armorLibrary;
     
     /* Make copy of template from library */
     Armor *tmpArmor = [armorLibrary objectAtIndex:choice];
-    Armor *chosenArmor = [[Armor alloc] initarmorID:tmpArmor.armorID
+    Armor *chosenArmor = [[Armor alloc] initForRandomStatsarmorID:tmpArmor.armorID
                                           armorName:tmpArmor.armorName armorType:tmpArmor.armorType];
     
     /* Get Hero stats and generate Armor stats base on level */

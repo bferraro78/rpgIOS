@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MainCharacter.h"
+#import "Party.h"
 #import "Enemy.h"
+#import "EnemyParty.h"
 #import "EnemyDictionary.h"
 #import "SkillDictionary.h"
 #import "ItemDictionary.h"
@@ -26,41 +28,20 @@
 /* Hero Spec */
 @property BOOL lightningSpecAdditionalTurn;
 
-@property NSMutableDictionary *heroElementMap;
-@property NSMutableDictionary *enemyElementMap;
-
-// Timer
-@property NSUInteger critTimerCount;
-@property NSTimer *timer;
-@property BOOL critHit;
-
 @property NSAttributedString *combatTextTmpString; // represents the text at the moment, constantly reset
 @property NSMutableAttributedString *combatSetText; // represents the extend text of the whole fight, updated every change in combat text
 @property (strong, nonatomic) IBOutlet UITextView *CombatText; // actual text view
-@property (strong, nonatomic) IBOutlet UITextView *HeroBuffsDebuffs;
-@property (strong, nonatomic) IBOutlet UITextView *EnemyBuffsDebuffs;
 
-@property(nonatomic) Enemy *e;
 
-/* Skill Buttons */
-@property (strong, nonatomic) IBOutlet UIButton *SkillOne;
-@property (strong, nonatomic) IBOutlet UIButton *SkillTwo;
-@property (strong, nonatomic) IBOutlet UIButton *SkillThree;
-@property (strong, nonatomic) IBOutlet UIButton *SkillFour;
-
-@property (strong, nonatomic) IBOutlet UIButton *critButton;
+// Party of enimies
+@property(nonatomic) EnemyParty *EnemyParty;
 
 
 /* HEROS MOVE */
 @property (strong, nonatomic) NSString *heroMoveName;
+@property BOOL critHit;
 
-@property (strong, nonatomic) IBOutlet UILabel *EnemyLabel;
 @property (strong, nonatomic) UITextView *moveView; // Pop up box Long Press
-
-/* Health/Resource Bars */
-@property (strong, nonatomic) IBOutlet HealthBar *heroHealthBar;
-@property (strong, nonatomic) IBOutlet ResourceBar *heroResourceBar;
-@property (strong, nonatomic) IBOutlet HealthBar *enemyHealthBar;
 
 
 -(void)initCombat;

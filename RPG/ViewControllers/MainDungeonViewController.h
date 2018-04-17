@@ -14,20 +14,23 @@
 #import "Dungeon.h"
 #import "Space.h"
 #import "Party.h"
+#import "CreateClassManager.h"
 
 #import "HeroProfileViewController.h" // Main character profile
-
 #import "EquipViewController.h" // Equipment
 #import "InventoryViewController.h" // Inventory
 #import "SkillViewController.h" // Skills
 
-#import "MCManager.h"
+#import "SendDataMCManager.h"
 
 
 @interface MainDungeonViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UITextView *MainTextField;
 @property NSMutableString *mainText;
+
+// DEBUGG
+@property (strong, nonatomic) IBOutlet UIButton *CombatButton;
 
 //@property Dungeon *currMap;
 

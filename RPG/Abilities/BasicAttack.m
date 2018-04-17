@@ -12,10 +12,10 @@
 
 int basicattackResourceCost;
 
--(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription resourceCost:(int)aResourceCost
+-(id)initmoveName:(NSString*)aMoveName resourceCost:(int)aResourceCost
             spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec {
     
-    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell ElementSpec:aElementSpec];
+    [super initmoveName:aMoveName spell:aSpell ElementSpec:aElementSpec];
     _basicattackResourceCost = aResourceCost;
     
     return self;
@@ -23,22 +23,35 @@ int basicattackResourceCost;
 
 
 -(int)getCombatResourceCost:(int)totalResource {
-    
     return 0; // (int)((float)(self.basicattackResourceCost/100.0)*(float)totalResource);
+}
+
+-(NSString*)getMoveDescription {
+    return [NSString stringWithFormat:@"Strike the enemy for %i %s damage.",
+            [self getHeroDamageAverage], [[mainCharacter getMH].weaponElement UTF8String]];
+}
+
+-(int)getHeroDamageAverage {
+    return (mainCharacter.level+[mainCharacter getPrimaryStat]+5)+([[mainCharacter getMH] attack]+
+                                                            [[mainCharacter getOH] attack]);
+}
+
+-(int)getHeroDamage {
+    return (mainCharacter.level+[mainCharacter getPrimaryStat]+5)+([[mainCharacter getMH] getSwing]+
+                                                                   [[mainCharacter getOH] getSwing]);
 }
 
 -(void)activateHeroMove:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("BasicAttack\n");
     
     /* Insert Damage */
-    int damage = (mainCharacter.level+[mainCharacter getPrimaryStat]+5)+([[mainCharacter getMH] getSwing]+
-                                                                         [[mainCharacter getOH] getSwing]);
+    int damage = [self getHeroDamage];
     
     NSString *element = [mainCharacter getMH].weaponElement;
     elementMap[element] = [NSNumber numberWithInt:damage];
     
     /** Rage is increased by Basic Attacks, reset if regen past full **/
-    if ([[mainCharacter getResourceName] isEqualToString:@"Rage"]) {
+    if ([[mainCharacter getResourceName] isEqualToString:RAGE]) {
         int regen = 12;
         if ([mainCharacter getCombatResource]+regen  <= [mainCharacter getResource]) {
             [mainCharacter regenCombatResource:regen];

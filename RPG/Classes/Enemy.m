@@ -11,6 +11,7 @@
 @implementation Enemy
 
 NSString *enemyName;
+int enemyLevel;
 int enemyHealth;
 int enemyCombatHealth;
 int enemyStrn;
@@ -37,6 +38,15 @@ NSMutableDictionary *enemyDebuffLibrary;
     _enemyBuffLibrary = [[NSMutableDictionary alloc] init];
     _enemyDebuffLibrary = [[NSMutableDictionary alloc] init];
     _enemySkillSet = [[NSMutableArray alloc] init];
+    
+    _combatDamageElementMap = [[NSMutableDictionary alloc] init];
+    _combatDamageElementMap[FIRE] = [NSNumber numberWithInt:0];
+    _combatDamageElementMap[COLD] = [NSNumber numberWithInt:0];
+    _combatDamageElementMap[ARCANE] = [NSNumber numberWithInt:0];
+    _combatDamageElementMap[POISON] = [NSNumber numberWithInt:0];
+    _combatDamageElementMap[LIGHTNING] = [NSNumber numberWithInt:0];
+    _combatDamageElementMap[PHYSICAL] = [NSNumber numberWithInt:0];
+    
     [self setSkills:aEnemySkillSet];
     
     return self;
@@ -108,6 +118,34 @@ NSMutableDictionary *enemyDebuffLibrary;
     return stats;
 }
 
+-(id)loadPartyMemberEnemy:(NSDictionary*)partyEnemyStats {
+    _enemyName = partyEnemyStats[@"enemyName"];
+    _enemyLevel = [partyEnemyStats[@"enemyLevel"] intValue];
+    _enemyHealth = [partyEnemyStats[@"enemyHealth"] intValue];
+    _enemyCombatHealth = [partyEnemyStats[@"enemyCombatHealth"] intValue];
+    _enemyStrn = [partyEnemyStats[@"enemyStrn"] intValue];
+    _enemyDext = [partyEnemyStats[@"enemyDext"] intValue];
+    _enemyInti = [partyEnemyStats[@"enemyInti"] intValue];
+    _enemyArmor = [partyEnemyStats[@"enemyArmor"] intValue];
+    _enemyExp = [partyEnemyStats[@"enemyExp"] intValue];
+    _enemyElement = partyEnemyStats[@"enemyElement"];
+    return self;
+}
+
+-(NSMutableDictionary*)enemyPartyMemberToDictionary {
+    NSMutableDictionary* jsonable = [NSMutableDictionary dictionary];
+    jsonable[@"enemyName"] = _enemyName;
+    jsonable[@"enemyLevel"] = [NSString stringWithFormat:@"%i", _enemyLevel];
+    jsonable[@"enemyHealth"] = [NSString stringWithFormat:@"%i", _enemyHealth];
+    jsonable[@"enemyCombatHealth"] = [NSString stringWithFormat:@"%i", _enemyCombatHealth];
+    jsonable[@"enemyStrn"] = [NSString stringWithFormat:@"%i", _enemyStrn];
+    jsonable[@"enemyInti"] = [NSString stringWithFormat:@"%i", _enemyInti];
+    jsonable[@"enemyDext"] = [NSString stringWithFormat:@"%i", _enemyDext];
+    jsonable[@"enemyArmor"] =  [NSString stringWithFormat:@"%i", _enemyArmor];
+    jsonable[@"enemyExp"] =  [NSString stringWithFormat:@"%i", _enemyExp];
+    jsonable[@"enemyElement"] = _enemyElement;
+    return jsonable;
+}
 
 
 @end

@@ -12,17 +12,17 @@
 @implementation CreateClassManager
 
 /* Create a Hero object based on stats sent from another player */
-+(Hero*)loadPartyMember:(NSDictionary*)aPartyMemberInfo {
++(Hero*)loadPartyMemberHero:(NSDictionary*)aPartyMemberInfo {
    
     Hero *returnHero;
    
     NSString *className = aPartyMemberInfo[@"class"];
     // set classID based on class name
-    if ([className isEqualToString:@"Barbarian"]) { // ID: 1
+    if ([className isEqualToString:BARBARIAN]) { // ID: 1
         returnHero = [[Barbarian alloc] loadPartyMemberHero:aPartyMemberInfo];
-    } else if ([className isEqualToString:@"Rogue"]) { // ID: 3
+    } else if ([className isEqualToString:ROGUE]) { // ID: 3
         returnHero = [[Rogue alloc] loadPartyMemberHero:aPartyMemberInfo];
-    } else if ([className isEqualToString:@"Wizard"]) { // ID: 2
+    } else if ([className isEqualToString:WIZARD]) { // ID: 2
         returnHero = [[Wizard alloc] loadPartyMemberHero:aPartyMemberInfo];
     }
     

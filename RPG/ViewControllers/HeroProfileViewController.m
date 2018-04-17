@@ -12,18 +12,26 @@
 @implementation HeroProfileViewController
 
 
--(void)viewDidAppear:(BOOL)animated {
-
+-(void)viewWillAppear:(BOOL)animated {
+    // Sometimes this view controller is part of the nav controller, other times part of the tabBar controller
+    [self.tabBarController setTitle:[NSString stringWithFormat:@"%@", _partyMember.partyMemberHero.name]];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@", _partyMember.partyMemberHero.name]];
+    
+    NSString *buttonTitle = ([_ChangeHeroInfoButton.titleLabel.text isEqualToString:@"View Equipment"]) ? @"View Equipment" : @"View Stats";
+    [_ChangeHeroInfoButton setTitle:buttonTitle forState:UIControlStateNormal];
 }
 
--(void)viewDidLoad {
+-(void)viewDidAppear:(BOOL)animated {
     _heroProfileTextView.selectable = false;
-    _heroProfileTextView.text =  [_partyMember.partyMemberHero printStats];
+    _heroProfileTextView.text = ([_ChangeHeroInfoButton.titleLabel.text isEqualToString:@"View Equipment"]) ?
+    [_partyMember.partyMemberHero printStats] : [_partyMember.partyMemberHero printBody];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self->_heroProfileTextView scrollRangeToVisible:NSMakeRange(0, 0)];
     });
-    
+}
+
+-(void)viewDidLoad {
     [_ChangeHeroInfoButton setTitle:@"View Equipment" forState:UIControlStateNormal];
 }
 

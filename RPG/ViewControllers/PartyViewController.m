@@ -11,6 +11,11 @@
 @implementation PartyViewController
 
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self.tabBarController setTitle:@"Party"];
+    [self.navigationItem setTitle:@"Party"];
+}
+
 -(void)viewDidLoad {
     
     UITabBarItem *bitem = [[UITabBarItem alloc] init];

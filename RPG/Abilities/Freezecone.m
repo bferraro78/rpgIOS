@@ -12,10 +12,10 @@
 
 int freezeconeResourceCost;
 
--(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription resourceCost:(int)aResourceCost
+-(id)initmoveName:(NSString*)aMoveName resourceCost:(int)aResourceCost
             spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec {
     
-    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell ElementSpec:aElementSpec];
+    [super initmoveName:aMoveName spell:aSpell ElementSpec:aElementSpec];
     _freezeconeResourceCost = aResourceCost;
     
     return self;
@@ -24,17 +24,30 @@ int freezeconeResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.freezeconeResourceCost/100.0)*(float)totalResource); }
 
+-(NSString*)getMoveDescription {
+    return [NSString stringWithFormat:@"%i %@\nFreeze the enemy for %i COLD damage and causes the enemy to do 25%% less damage for 3 turns.", [self getCombatResourceCost:mainCharacter.getResource], [mainCharacter getResourceName], [self getHeroDamageAverage]];
+}
+
+-(int)getHeroDamageAverage {
+    return ((mainCharacter.level*5)+mainCharacter.inti)+([[mainCharacter getMH] attack]+
+                                                          [[mainCharacter getOH] attack]);
+}
+
+-(int)getHeroDamage {
+    return ((mainCharacter.level*5)+mainCharacter.inti)+([[mainCharacter getMH] getSwing]+
+                                                          [[mainCharacter getOH] getSwing]);
+}
+
 -(void)activateHeroMove:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("Freezecone!!");
     
     /* Insert Damage */
-    int damage = ((mainCharacter.level*5)+mainCharacter.inti)+([[mainCharacter getMH] getSwing]+
-                                                               [[mainCharacter getOH] getSwing]);
+    int damage = [self getHeroDamage];
     
     elementMap[self.skillElementSpec] = [NSNumber numberWithInt:damage];
     
     /* Take reduceed damage from enemy */
-    e.enemyDebuffLibrary[@"frozen"] = [[Buff alloc] initvalue:0 duration:3];
+    e.enemyDebuffLibrary[FROZEN] = [[Buff alloc] initvalue:0 duration:3];
 }
 
 -(void)activateEnemyMove:(Enemy*)e ElementMap:(NSMutableDictionary*)elementMap {
@@ -46,7 +59,7 @@ int freezeconeResourceCost;
     elementMap[self.skillElementSpec] = [NSNumber numberWithInt:damage];
     
     /* Take reduceed damage from enemy */
-    mainCharacter.debuffLibrary[@"frozen"] = [[Buff alloc] initvalue:0 duration:3];
+    mainCharacter.combatDebuffLibrary[FROZEN] = [[Buff alloc] initvalue:0 duration:3];
 }
 
 @end

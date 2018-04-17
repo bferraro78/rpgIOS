@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MainCharacter.h"
 #import "InventoryManager.h"
+#import "Constants.h"
 
 @interface InventoryViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
 

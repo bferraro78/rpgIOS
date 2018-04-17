@@ -36,11 +36,11 @@ int combatMana;
 }
 
 -(void)loadSkills {
-    [super addSkillIfNotAlreadyKnown:@"Basic Attack"];
-    [super addSkillIfNotAlreadyKnown:@"Fireball"];
+    [super addSkillIfNotAlreadyKnown:BASICATTACK];
+    [super addSkillIfNotAlreadyKnown:FIREBALL];
     
     if (super.level >= 5) {
-        [super addSkillIfNotAlreadyKnown:@"Freezecone"];
+        [super addSkillIfNotAlreadyKnown:FREEZECONE];
     }
     
 }
@@ -49,7 +49,7 @@ int combatMana;
 -(void)setResource {self.mana = 100+super.inti; }
 -(int)getResource { return self.mana; }
 -(int)getCombatResource {return self.combatMana; }
--(NSString*)getResourceName { return @"Mana"; }
+-(NSString*)getResourceName { return MANA; }
 -(void)increaseResource:(int)manaIncrease { self.mana = manaIncrease; }
 -(void)useCombatResource:(int)resourceUsed { self.combatMana = (self.combatMana-resourceUsed); }
 -(void)regenCombatResource:(int)resourceGain { self.combatMana = (self.combatMana+resourceGain); }

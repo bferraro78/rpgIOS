@@ -14,6 +14,7 @@
 @interface Enemy : NSObject
 
 @property NSString *enemyName;
+@property int enemyLevel;
 @property int enemyHealth;
 @property int enemyCombatHealth;
 @property int enemyStrn;
@@ -23,7 +24,13 @@
 @property int enemyExp;
 @property NSString *enemyElement;
 
+
+// Don't need to package and send?
 @property NSMutableArray *enemySkillSet;
+
+@property NSMutableArray *poisonPassiveDots; // holding poison damages from hero poison specs
+@property NSMutableDictionary *combatDamageElementMap;
+
 @property NSMutableDictionary *enemyBuffLibrary;
 @property NSMutableDictionary *enemyDebuffLibrary;
 
@@ -46,6 +53,9 @@
 -(void)takeDamage:(int)healthReductionOrIncrease;
 
 -(NSMutableString*)printStats;
+
+-(id)loadPartyMemberEnemy:(NSDictionary*)partyEnemyStats;
+-(NSMutableDictionary*)enemyPartyMemberToDictionary;
 
 @end
 

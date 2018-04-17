@@ -15,9 +15,8 @@ NSString *moveDescription;
 BOOL spell;
 NSString *skillElementSpec;
 
--(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec {
+-(id)initmoveName:(NSString*)aMoveName spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec {
     _moveName = aMoveName;
-    _moveDescription = aMoveDescription;
     _spell = aSpell;
     _skillElementSpec = aElementSpec;
     return self;
@@ -25,6 +24,7 @@ NSString *skillElementSpec;
 
 /* Actual bodies are put in the Ability Class */
 -(int)getCombatResourceCost:(int)totalResource { return 0; }
+-(NSString*)getMoveDescription { return @""; }
 -(void)activateHeroMove:(NSMutableDictionary*)elementMap Enemy:(Enemy*)e { }
 -(void)activateEnemyMove:(Enemy*)e ElementMap:(NSMutableDictionary*)elementMap { }
 

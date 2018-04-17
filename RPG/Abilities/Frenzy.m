@@ -12,10 +12,10 @@
 
 int frenzyResourceCost;
 
--(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription resourceCost:(int)aResourceCost
+-(id)initmoveName:(NSString*)aMoveName resourceCost:(int)aResourceCost
             spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec {
     
-    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell ElementSpec:aElementSpec];
+    [super initmoveName:aMoveName spell:aSpell ElementSpec:aElementSpec];
     _frenzyResourceCost = aResourceCost;
     
     return self;
@@ -24,12 +24,27 @@ int frenzyResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return 25; }
 
+-(NSString*)getMoveDescription {
+    return [NSString stringWithFormat:@"%i %@\nStrike the enemy for %i %s damage. Chance to swing for double damage.",
+            [self getCombatResourceCost:mainCharacter.getResource], [mainCharacter getResourceName], [self getHeroDamageAverage], [[mainCharacter getMH].weaponElement UTF8String]];
+}
+
+-(int)getHeroDamageAverage {
+    return ((mainCharacter.level*15)+mainCharacter.inti)+([[mainCharacter getMH] attack]+
+                                                         [[mainCharacter getOH] attack]);
+}
+
+-(int)getHeroDamage {
+    return ((mainCharacter.level*15)+mainCharacter.strn)+([[mainCharacter getMH] getSwing]+
+                                                         [[mainCharacter getOH] getSwing]);
+}
+
 -(void)activateHeroMove:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
     printf("Frenzy!!");
     
     /* Insert Damage */
-    int damage = ((mainCharacter.level*15)+mainCharacter.strn)+([[mainCharacter getMH] getSwing]+
-                                                                [[mainCharacter getOH] getSwing]);
+    int damage = [self getHeroDamage];
+    
     int isDS = arc4random_uniform(100);
     if (isDS < 15) {
         printf("Double Strike");

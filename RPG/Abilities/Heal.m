@@ -12,10 +12,10 @@
 
 int healResourceCost;
 
--(id)initmoveName:(NSString*)aMoveName moveDescription:(NSString*)aMoveDescription resourceCost:(int)aResourceCost
+-(id)initmoveName:(NSString*)aMoveName resourceCost:(int)aResourceCost
             spell:(BOOL)aSpell ElementSpec:(NSString*)aElementSpec {
     
-    [super initmoveName:aMoveName moveDescription:aMoveDescription spell:aSpell ElementSpec:aElementSpec];
+    [super initmoveName:aMoveName spell:aSpell ElementSpec:aElementSpec];
     _healResourceCost = aResourceCost;
     
     return self;
@@ -24,13 +24,21 @@ int healResourceCost;
 
 -(int)getCombatResourceCost:(int)totalResource { return (int)((float)(self.healResourceCost/100.0)*(float)totalResource); }
 
+-(NSString*)getMoveDescription {
+    int totalThreeTurnHeal = [self getHeroHeal] *3;
+    return [NSString stringWithFormat:@"%i %@\nHeals a friendly target for %i over 3 turns.",
+            [self getCombatResourceCost:mainCharacter.getResource], [mainCharacter getResourceName], totalThreeTurnHeal];
+}
+
+-(int)getHeroHeal {
+    return -(mainCharacter.inti/2);
+}
+
 -(void)activateHeroMove:(NSMutableDictionary*)elementMap Enemy:(Enemy *)e {
-    printf("Heal!!");
-    
     /* Insert Heal Dot */
-    int heal = -(mainCharacter.inti/2);
+    int heal = [self getHeroHeal];
     
-    mainCharacter.buffLibrary[@"healDot"] = [[Buff alloc] initvalue:heal duration:3];
+    mainCharacter.combatBuffLibrary[HEALDOT] = [[Buff alloc] initvalue:heal duration:3];
     
 }
 
@@ -40,7 +48,7 @@ int healResourceCost;
     /* Insert Heal Dot */
     int heal = -(e.enemyInti/2);
     
-    e.enemyBuffLibrary[@"healDot"] = [[Buff alloc] initvalue:heal duration:3];
+    e.enemyBuffLibrary[HEALDOT] = [[Buff alloc] initvalue:heal duration:3];
     
 }
 

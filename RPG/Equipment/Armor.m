@@ -22,7 +22,7 @@ int armorInti;
 NSString *armorElement;
 int armorResistance;
 
--(id)initarmorID:(int)aID  armorName:(NSString*)aName armorType:(NSString*)aType {
+-(id)initForRandomStatsarmorID:(int)aID armorName:(NSString*)aName armorType:(NSString*)aType {
     _armorID = aID;
     _armorName = aName;
     _armorType = aType;
@@ -41,6 +41,25 @@ int armorResistance;
     return self;
 }
 
+-(id)initArmorFromDictionaryarmorID:(int)aID armorName:(NSString*)aName armorType:(NSString*)aType aArmor:(int)aArmor aArmorVit:(int)aArmorVit
+                         aArmorStrn:(int)aArmorStrn aArmorDext:(int)aArmorDext aArmorInti:(int)aArmorInti
+                           aElement:(NSString*)aElement aArmorResistance:(int)aArmorResistance {
+    _armorID = aID;
+    _armorName = aName;
+    _armorType = aType;
+    
+    _armor = aArmor;
+    _armorVit = aArmorVit;
+    _armorStrn = aArmorStrn;
+    _armorDext = aArmorDext;
+    _armorInti = aArmorInti;
+    
+    _armorElement = aElement;
+    _armorResistance = aArmorResistance;
+    
+    return self;
+}
+
 -(NSMutableString*)toString {
     NSMutableString *armorPrint = [[NSMutableString alloc] init];
     
@@ -52,5 +71,35 @@ int armorResistance;
 
 -(NSString*)getName { return self.armorName; }
 
+-(NSMutableDictionary*)armorToDictionary {
+    NSMutableDictionary *armorDictionary = [[NSMutableDictionary alloc] init];
+    
+    armorDictionary[@"armorID"] = [NSString stringWithFormat:@"%i", _armorID];
+    armorDictionary[@"armor"] = [NSString stringWithFormat:@"%i", _armor];
+    
+    armorDictionary[@"armorVit"] = [NSString stringWithFormat:@"%i", _armorVit];
+    armorDictionary[@"armorStrn"] = [NSString stringWithFormat:@"%i", _armorStrn];
+    armorDictionary[@"armorDext"] = [NSString stringWithFormat:@"%i", _armorDext];
+    armorDictionary[@"armorInti"] = [NSString stringWithFormat:@"%i", _armorInti];
+    
+    armorDictionary[@"armorType"] = _armorType;
+    armorDictionary[@"armorName"] = _armorName;
+    
+    armorDictionary[@"armorElement"] = _armorElement;
+    armorDictionary[@"armorResistance"] = [NSString stringWithFormat:@"%i", _armorResistance];
+    
+    return armorDictionary;
+}
+
++(Armor*)createArmorFromDictionary:(NSMutableDictionary*)armorDictionary {
+    Armor *returnArmor;
+    
+    if ([armorDictionary[@"armorID"] intValue] == 0) { // empty slot!
+        returnArmor = [[Armor alloc] initForRandomStatsarmorID:0 armorName:@"" armorType:@""];
+    } else {
+        returnArmor = [[Armor alloc] initArmorFromDictionaryarmorID:[armorDictionary[@"armorID"] intValue] armorName:armorDictionary[@"armorName"] armorType:armorDictionary[@"armorType"] aArmor:[armorDictionary[@"armor"] intValue] aArmorVit:[armorDictionary[@"armorVit"] intValue] aArmorStrn:[armorDictionary[@"armorStrn"] intValue] aArmorDext:[armorDictionary[@"armorDext"] intValue] aArmorInti:[armorDictionary[@"armorInti"] intValue] aElement:armorDictionary[@"armorElement"] aArmorResistance:[armorDictionary[@"armorResistance"] intValue]];
+    }
+    return returnArmor;
+}
 
 @end

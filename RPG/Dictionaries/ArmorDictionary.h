@@ -9,6 +9,7 @@
 #ifndef ArmorDictionary_h
 #define ArmorDictionary_h
 #import "MainCharacter.h"
+#import "Constants.h"
 
 @interface ArmorDictionary : NSObject
 

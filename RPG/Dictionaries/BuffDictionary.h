@@ -8,6 +8,7 @@
 
 #ifndef BuffDictionary_h
 #define BuffDictionary_h
+#import "Constants.h"
 @interface BuffDictionary : NSObject
 
 

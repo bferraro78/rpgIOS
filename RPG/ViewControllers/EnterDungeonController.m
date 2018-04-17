@@ -19,6 +19,9 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    
+    [self.navigationItem setTitle:@"Staging Area"];
+    
     /* Register Observers for sending messages */
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(createPartyMemberNotificationRecieved:)
@@ -44,7 +47,7 @@
                                                object:nil];
     
     // Add yourself to the party
-    [[Party getPartyArray] addToParty:[[PartyMember alloc] initWith:mainCharacter]];
+    [[Party getPartyArray] addToParty:[[PartyMember alloc] initWith:mainCharacter readyCheck:false]];
     
      // change button statuses
     [self setPartyButtonTitle];
@@ -57,6 +60,7 @@
     _tablePartyView.layer.borderWidth = 2.0;
     _tablePartyView.backgroundColor = [UIColor clearColor];
     _tablePartyView.userInteractionEnabled = YES;
+    
 }
 
 /** Recieved Notification Functions **/
@@ -68,8 +72,8 @@
     // Load Party Hero
     // Create party member
     // Add to party
-    Hero *partyMemberHero = [CreateClassManager loadPartyMember:partyMemberInfo];
-    PartyMember *partyMember = [[PartyMember alloc] initWith:partyMemberHero];
+    Hero *partyMemberHero = [CreateClassManager loadPartyMemberHero:partyMemberInfo];
+    PartyMember *partyMember = [[PartyMember alloc] initWith:partyMemberHero readyCheck:false];
     [p addToParty:partyMember];
     
     partyMember.readyCheck = ([partyMemberInfo[@"readyCheck"] isEqualToString:READY]) ? true : false;
@@ -130,25 +134,12 @@
     });
 }
 
-/* Send hero data over */
+/* Send hero data / ready check over */
 -(void)sendPartyMemberInfo {
-    NSMutableDictionary *dictionaryToSend = [mainCharacter heroPartyMemberToDictionary];
-    
     PartyMember *mainCharacterInParty = [[Party getPartyArray] getPartyMember:mainCharacter.name];
-    NSString *readyString = (mainCharacterInParty.readyCheck) ? READY : NOTREADY;
-    dictionaryToSend[@"readyCheck"] = readyString;
+    NSMutableDictionary *dictionaryToSend = [mainCharacterInParty partyMemberToDictionary];
     dictionaryToSend[@"action"] = @"createPartyMember";
-    
-    NSData *dataToSend = [NSJSONSerialization dataWithJSONObject:dictionaryToSend options:0 error:nil];
-    NSArray *allPeers = [MCManager getMCManager].session.connectedPeers;
-    NSError *error;
-    [[MCManager getMCManager].session sendData:dataToSend
-                                     toPeers:allPeers
-                                    withMode:MCSessionSendDataReliable
-                                       error:&error];
-    if (error) {
-        NSLog(@"%@", [error localizedDescription]);
-    }
+    [[SendDataMCManager getSender] sendDictionaryOfInfo:dictionaryToSend];
 }
 
 /** Buttons **/
@@ -179,23 +170,7 @@
 }
 
 -(void)sendReadyCheck:(NSString*)readyString {
-    NSData *dataToSend = [NSJSONSerialization dataWithJSONObject:[self packageReadyCheck:readyString] options:0 error:nil];
-    NSArray *allPeers = [MCManager getMCManager].session.connectedPeers;
-    NSError *error;
-    [[MCManager getMCManager].session sendData:dataToSend
-                                     toPeers:allPeers
-                                    withMode:MCSessionSendDataReliable
-                                       error:&error];
-    if (error) {
-        NSLog(@"%@", [error localizedDescription]);
-    }
-}
-
--(NSMutableDictionary*)packageReadyCheck:(NSString*)readyString {
-    NSMutableDictionary *readyCheckDictionary = [[NSMutableDictionary alloc] init];
-    readyCheckDictionary[@"action"] = @"readyCheck";
-    readyCheckDictionary[@"readyCheck"] = readyString;
-    return readyCheckDictionary;
+    [[SendDataMCManager getSender] sendReadyCheck:readyString];
 }
 
 -(IBAction)EnterDungeonButton:(id)sender {
@@ -217,23 +192,9 @@
 }
 
 -(void)sendStartDungeon {
-    NSData* dataToSend = [NSJSONSerialization dataWithJSONObject:[self sendStartDungeonDictionary] options:0 error:nil];
-    NSArray *allPeers = [MCManager getMCManager].session.connectedPeers;
-    NSError *error;
-    [[MCManager getMCManager].session sendData:dataToSend
-                                     toPeers:allPeers
-                                    withMode:MCSessionSendDataReliable
-                                       error:&error];
-    if (error) {
-        NSLog(@"%@", [error localizedDescription]);
-    }
+    [[SendDataMCManager getSender] sendStartDungeon];
 }
 
--(NSMutableDictionary*)sendStartDungeonDictionary {
-    NSMutableDictionary* jsonable = [NSMutableDictionary dictionary];
-    jsonable[@"action"] = @"startDungeon";
-    return jsonable;
-}
 
 /* Party up button, brings up MCViewController */
 - (IBAction)PartyUp:(id)sender {

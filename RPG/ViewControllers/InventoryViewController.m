@@ -16,6 +16,11 @@
 
 NSMutableString *textBox;
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self.tabBarController setTitle:@"Inventory"];
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -98,32 +103,32 @@ NSMutableString *textBox;
             
             Armor *a = (Armor*)[mainCharacter.inventory objectAtIndex:indexPath.row];
             
-            if ([a.armorType isEqualToString:@"Helmet"]) {
-                if ([mainCharacter getHelm].armor != 0) {
+            if ([a.armorType isEqualToString:HELMET]) {
+                if ([mainCharacter getHelm].armorID != 0) {
                     [str appendFormat:@"Equipped:\n%@\n", [[mainCharacter getHelm] toString]];
                 }
-            } else if ([a.armorType isEqualToString:@"Torso"]) {
-                if ([mainCharacter getTorso].armor != 0) {
+            } else if ([a.armorType isEqualToString:TORSO]) {
+                if ([mainCharacter getTorso].armorID != 0) {
                     [str appendFormat:@"Equipped:\n%@\n", [[mainCharacter getTorso] toString]];
                 }
-            } else if ([a.armorType isEqualToString:@"Shoulders"]) {
-                if ([mainCharacter getShoulders].armor != 0) {
+            } else if ([a.armorType isEqualToString:SHOULDERS]) {
+                if ([mainCharacter getShoulders].armorID != 0) {
                     [str appendFormat:@"Equipped:\n%@\n", [[mainCharacter getShoulders] toString]];
                 }
-            } else if ([a.armorType isEqualToString:@"Bracers"]) {
-                if ([mainCharacter getBracers].armor != 0) {
+            } else if ([a.armorType isEqualToString:BRACERS]) {
+                if ([mainCharacter getBracers].armorID != 0) {
                     [str appendFormat:@"Equipped:\n%@\n", [[mainCharacter getBracers] toString]];
                 }
-            } else if ([a.armorType isEqualToString:@"Gloves"]) {
-                if ([mainCharacter getGloves].armor != 0) {
+            } else if ([a.armorType isEqualToString:GLOVES]) {
+                if ([mainCharacter getGloves].armorID != 0) {
                     [str appendFormat:@"Equipped:\n%@\n", [[mainCharacter getGloves] toString]];
                 }
-            } else if ([a.armorType isEqualToString:@"Legs"]) {
-                if ([mainCharacter getLegs].armor != 0) {
+            } else if ([a.armorType isEqualToString:LEGS]) {
+                if ([mainCharacter getLegs].armorID != 0) {
                     [str appendFormat:@"Equipped:\n%@\n", [[mainCharacter getLegs] toString]];
                 }
-            } else if ([a.armorType isEqualToString:@"Boots"]) {
-                if ([mainCharacter getBoots].armor != 0) {
+            } else if ([a.armorType isEqualToString:BOOTS]) {
+                if ([mainCharacter getBoots].armorID != 0) {
                     [str appendFormat:@"Equipped:\n%@\n", [[mainCharacter getBoots] toString]];
                 }
             }
@@ -131,11 +136,11 @@ NSMutableString *textBox;
             
             Weapon *tmp = (Weapon*)[mainCharacter.inventory objectAtIndex:indexPath.row];
             if (tmp.isMainHand) {
-                if ([mainCharacter getMH].attack != 0) {
+                if ([mainCharacter getMH].weaponID != 0) {
                     [str appendFormat:@"Equipped:\n%@\n", [[mainCharacter getMH] toString]];
                 }
             } else { // OH
-                if ([mainCharacter getOH].attack != 0) {
+                if ([mainCharacter getOH].weaponID != 0) {
                     [str appendFormat:@"Equipped:\n%@\n", [[mainCharacter getOH] toString]];
                 }
             }
