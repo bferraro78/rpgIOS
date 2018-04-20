@@ -53,7 +53,7 @@ int rendResourceCost;
     printf("Enemey uses Rend...");
     
     /* Insert Rend Dot */
-    int damage = (e.enemyStrn/2)+(mainCharacter.level*3);
+    int damage = (e.strn/2)+(mainCharacter.level*3);
     
     mainCharacter.combatBuffLibrary[RENDDOT] = [[Buff alloc] initvalue:damage duration:3];
     

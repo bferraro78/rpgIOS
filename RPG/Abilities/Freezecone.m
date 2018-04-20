@@ -54,7 +54,7 @@ int freezeconeResourceCost;
     printf("Enemey uses Freezecone...");
     
     /* Insert Damage */
-    int damage = e.enemyInti+(5*mainCharacter.level);
+    int damage = e.inti+(5*mainCharacter.level);
     
     elementMap[self.skillElementSpec] = [NSNumber numberWithInt:damage];
     

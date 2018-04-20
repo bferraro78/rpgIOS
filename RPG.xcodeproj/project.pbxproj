@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6B130262207EB62500E25240 /* CreateClassManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B130261207EB62500E25240 /* CreateClassManager.m */; };
+		6B1CD2F32087D84800CB967E /* Being.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1CD2F22087D84800CB967E /* Being.m */; };
+		6B4DAAA22087840000728B45 /* CombatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DAAA12087840000728B45 /* CombatManager.m */; };
+		6B4DAAA720878BDF00728B45 /* CombatQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DAAA620878BDF00728B45 /* CombatQueue.m */; };
 		6B50521A2075104700533F8E /* ResourceBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5052192075104700533F8E /* ResourceBar.m */; };
 		6B56337B207FBEC500140C34 /* HeroProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B56337A207FBEC500140C34 /* HeroProfileViewController.m */; };
 		6B56337E207FD3B000140C34 /* MainDungeonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B56337D207FD3B000140C34 /* MainDungeonViewController.m */; };
@@ -21,9 +24,11 @@
 		6B82F6342084F3900094A430 /* EnemyParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B82F6332084F3900094A430 /* EnemyParty.m */; };
 		6B82F63620855F980094A430 /* EnemyPartyMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B82F63520855F980094A430 /* EnemyPartyMember.m */; };
 		6BD9C80F208007D800B64947 /* PartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C80E208007D800B64947 /* PartyViewController.m */; };
-		6BD9C8112080DFC800B64947 /* PartyMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C8102080DFC800B64947 /* PartyMemberView.m */; };
+		6BD9C8112080DFC800B64947 /* HeroPartyMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C8102080DFC800B64947 /* HeroPartyMemberView.m */; };
 		6BD9C81520812D2C00B64947 /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C81420812D2C00B64947 /* TabViewController.m */; };
 		6BD9C8172082731800B64947 /* SendDataMCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9C8162082731800B64947 /* SendDataMCManager.m */; };
+		6BE69B8F20881FA4001F6259 /* HeroPartyMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE69B8E20881FA4001F6259 /* HeroPartyMember.m */; };
+		6BE69B91208943E3001F6259 /* EnemyPartyMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE69B90208943E3001F6259 /* EnemyPartyMemberView.m */; };
 		6BF4C32520740826002DFC35 /* LootManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C32420740826002DFC35 /* LootManager.m */; };
 		6BF4C3292074127D002DFC35 /* InventoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C3282074127D002DFC35 /* InventoryManager.m */; };
 		6BF4C32B20741EB3002DFC35 /* MainCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4C32A20741EB3002DFC35 /* MainCharacter.m */; };
@@ -96,6 +101,12 @@
 /* Begin PBXFileReference section */
 		6B130260207EB61C00E25240 /* CreateClassManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateClassManager.h; sourceTree = "<group>"; };
 		6B130261207EB62500E25240 /* CreateClassManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateClassManager.m; sourceTree = "<group>"; };
+		6B1CD2F22087D84800CB967E /* Being.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Being.m; sourceTree = "<group>"; };
+		6B1CD2F42087D84D00CB967E /* Being.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Being.h; sourceTree = "<group>"; };
+		6B4DAAA12087840000728B45 /* CombatManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CombatManager.m; sourceTree = "<group>"; };
+		6B4DAAA32087840500728B45 /* CombatManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CombatManager.h; sourceTree = "<group>"; };
+		6B4DAAA520878BDA00728B45 /* CombatQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CombatQueue.h; sourceTree = "<group>"; };
+		6B4DAAA620878BDF00728B45 /* CombatQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CombatQueue.m; sourceTree = "<group>"; };
 		6B5052192075104700533F8E /* ResourceBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResourceBar.m; sourceTree = "<group>"; };
 		6B50521B2075104C00533F8E /* ResourceBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourceBar.h; sourceTree = "<group>"; };
 		6B56337A207FBEC500140C34 /* HeroProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeroProfileViewController.m; sourceTree = "<group>"; };
@@ -122,12 +133,16 @@
 		6B82F63720855FA20094A430 /* EnemyPartyMember.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnemyPartyMember.h; sourceTree = "<group>"; };
 		6BD9C80D208007D200B64947 /* PartyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartyViewController.h; sourceTree = "<group>"; };
 		6BD9C80E208007D800B64947 /* PartyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PartyViewController.m; sourceTree = "<group>"; };
-		6BD9C8102080DFC800B64947 /* PartyMemberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PartyMemberView.m; sourceTree = "<group>"; };
-		6BD9C8122080DFD200B64947 /* PartyMemberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartyMemberView.h; sourceTree = "<group>"; };
+		6BD9C8102080DFC800B64947 /* HeroPartyMemberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeroPartyMemberView.m; sourceTree = "<group>"; };
+		6BD9C8122080DFD200B64947 /* HeroPartyMemberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeroPartyMemberView.h; sourceTree = "<group>"; };
 		6BD9C81320812D2600B64947 /* TabViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabViewController.h; sourceTree = "<group>"; };
 		6BD9C81420812D2C00B64947 /* TabViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
 		6BD9C8162082731800B64947 /* SendDataMCManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendDataMCManager.m; sourceTree = "<group>"; };
 		6BD9C8182082731F00B64947 /* SendDataMCManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendDataMCManager.h; sourceTree = "<group>"; };
+		6BE69B8D20881F9E001F6259 /* HeroPartyMember.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeroPartyMember.h; sourceTree = "<group>"; };
+		6BE69B8E20881FA4001F6259 /* HeroPartyMember.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeroPartyMember.m; sourceTree = "<group>"; };
+		6BE69B90208943E3001F6259 /* EnemyPartyMemberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnemyPartyMemberView.m; sourceTree = "<group>"; };
+		6BE69B92208943EA001F6259 /* EnemyPartyMemberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnemyPartyMemberView.h; sourceTree = "<group>"; };
 		6BF4C32420740826002DFC35 /* LootManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LootManager.m; sourceTree = "<group>"; };
 		6BF4C3262074082B002DFC35 /* LootManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LootManager.h; sourceTree = "<group>"; };
 		6BF4C32720741276002DFC35 /* InventoryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryManager.h; sourceTree = "<group>"; };
@@ -254,17 +269,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B4DAAA420878B8700728B45 /* CombatEncounter */ = {
+			isa = PBXGroup;
+			children = (
+				FF110E7F1ED5D74E00C1554E /* CombatViewController.h */,
+				FF110E801ED5D74E00C1554E /* CombatViewController.m */,
+				6B4DAAA32087840500728B45 /* CombatManager.h */,
+				6B4DAAA12087840000728B45 /* CombatManager.m */,
+				6B4DAAA520878BDA00728B45 /* CombatQueue.h */,
+				6B4DAAA620878BDF00728B45 /* CombatQueue.m */,
+			);
+			path = CombatEncounter;
+			sourceTree = "<group>";
+		};
 		6B5BE2DF207C25DD00678ECB /* Party */ = {
 			isa = PBXGroup;
 			children = (
-				6B82F6322084F3830094A430 /* EnemyParty.h */,
-				6B82F6332084F3900094A430 /* EnemyParty.m */,
-				6B82F63720855FA20094A430 /* EnemyPartyMember.h */,
-				6B82F63520855F980094A430 /* EnemyPartyMember.m */,
-				6B61D7C3207BC576006EF040 /* Party.h */,
-				6B61D7C4207BC57C006EF040 /* Party.m */,
 				6B5BE2DD207C152400678ECB /* PartyMember.h */,
 				6B5BE2DB207C151700678ECB /* PartyMember.m */,
+				6B82F63720855FA20094A430 /* EnemyPartyMember.h */,
+				6B82F63520855F980094A430 /* EnemyPartyMember.m */,
+				6BE69B8D20881F9E001F6259 /* HeroPartyMember.h */,
+				6BE69B8E20881FA4001F6259 /* HeroPartyMember.m */,
+				6B82F6322084F3830094A430 /* EnemyParty.h */,
+				6B82F6332084F3900094A430 /* EnemyParty.m */,
+				6B61D7C3207BC576006EF040 /* Party.h */,
+				6B61D7C4207BC57C006EF040 /* Party.m */,
 			);
 			path = Party;
 			sourceTree = "<group>";
@@ -296,8 +326,6 @@
 				6B56337A207FBEC500140C34 /* HeroProfileViewController.m */,
 				6BD9C80D208007D200B64947 /* PartyViewController.h */,
 				6BD9C80E208007D800B64947 /* PartyViewController.m */,
-				FF110E7F1ED5D74E00C1554E /* CombatViewController.h */,
-				FF110E801ED5D74E00C1554E /* CombatViewController.m */,
 				FF5F8FED1ED734B1000842C6 /* EquipViewController.h */,
 				FF5F8FEE1ED734B1000842C6 /* EquipViewController.m */,
 				FF6DE0441ED4E95200A3C62F /* InventoryViewController.h */,
@@ -308,10 +336,10 @@
 				6B56337D207FD3B000140C34 /* MainDungeonViewController.m */,
 				6BD9C81320812D2600B64947 /* TabViewController.h */,
 				6BD9C81420812D2C00B64947 /* TabViewController.m */,
-				6B61D7BD207BB802006EF040 /* LoadCharacterController.h */,
-				6B61D7BE207BB80C006EF040 /* LoadCharacterController.m */,
 				6B61D7C2207BBBD6006EF040 /* EnterDungeonController.h */,
 				6B61D7C0207BBBD0006EF040 /* EnterDungeonController.m */,
+				6B61D7BD207BB802006EF040 /* LoadCharacterController.h */,
+				6B61D7BE207BB80C006EF040 /* LoadCharacterController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -334,6 +362,8 @@
 		6B5BE2E6207C26F600678ECB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6B1CD2F42087D84D00CB967E /* Being.h */,
+				6B1CD2F22087D84800CB967E /* Being.m */,
 				FF2ABA9E1EC8D52000EC8B3C /* Hero.h */,
 				FF2ABB311ECE688500EC8B3C /* Hero.m */,
 				FF2ABAC91ECA449600EC8B3C /* Barbarian.h */,
@@ -455,8 +485,10 @@
 		6BD9C8192082775400B64947 /* UIViews */ = {
 			isa = PBXGroup;
 			children = (
-				6BD9C8122080DFD200B64947 /* PartyMemberView.h */,
-				6BD9C8102080DFC800B64947 /* PartyMemberView.m */,
+				6BE69B92208943EA001F6259 /* EnemyPartyMemberView.h */,
+				6BE69B90208943E3001F6259 /* EnemyPartyMemberView.m */,
+				6BD9C8122080DFD200B64947 /* HeroPartyMemberView.h */,
+				6BD9C8102080DFC800B64947 /* HeroPartyMemberView.m */,
 			);
 			path = UIViews;
 			sourceTree = "<group>";
@@ -492,6 +524,7 @@
 				6B5BE2E7207C272300678ECB /* Misc */,
 				6B5BE2E6207C26F600678ECB /* Classes */,
 				6B5BE2E5207C26CD00678ECB /* Managers */,
+				6B4DAAA420878B8700728B45 /* CombatEncounter */,
 				6B5BE2E4207C26A500678ECB /* ViewControllers */,
 				6B5BE2E1207C262E00678ECB /* ConnectionManager */,
 				6B5BE2E0207C261600678ECB /* Constants */,
@@ -671,11 +704,13 @@
 				FF2ABAE51ECB593400EC8B3C /* Item.m in Sources */,
 				6BD9C8172082731800B64947 /* SendDataMCManager.m in Sources */,
 				FF2ABAE41ECA7D7600EC8B3C /* Space.m in Sources */,
+				6B4DAAA720878BDF00728B45 /* CombatQueue.m in Sources */,
 				6B61D7C5207BC57C006EF040 /* Party.m in Sources */,
 				6BF4C32B20741EB3002DFC35 /* MainCharacter.m in Sources */,
 				FF2ABAE81ECB9DB700EC8B3C /* ItemDictionary.m in Sources */,
 				6B5AD6B22072F60700AF48DD /* HealthBar.m in Sources */,
 				6B61D7BB207BAD33006EF040 /* Constants.m in Sources */,
+				6BE69B91208943E3001F6259 /* EnemyPartyMemberView.m in Sources */,
 				FF2ABB281ECCDBAA00EC8B3C /* Skill.m in Sources */,
 				6BF4C32520740826002DFC35 /* LootManager.m in Sources */,
 				FF2ABAF81ECBC8A300EC8B3C /* Coldstone.m in Sources */,
@@ -690,6 +725,7 @@
 				FF2ABAD51ECA686E00EC8B3C /* Buff.m in Sources */,
 				FF2ABB041ECC072500EC8B3C /* EnemyDictionary.m in Sources */,
 				FF2ABB1E1ECCB78C00EC8B3C /* Rend.m in Sources */,
+				6B4DAAA22087840000728B45 /* CombatManager.m in Sources */,
 				FF5F8FEF1ED734B1000842C6 /* EquipViewController.m in Sources */,
 				6B82F63620855F980094A430 /* EnemyPartyMember.m in Sources */,
 				FF2ABAC81ECA448C00EC8B3C /* Barbarian.m in Sources */,
@@ -702,6 +738,7 @@
 				FF2ABAC41ECA323600EC8B3C /* Weapon.m in Sources */,
 				FF2ABB161ECCB76100EC8B3C /* Freezecone.m in Sources */,
 				FF2ABB211ECCB79A00EC8B3C /* Vanish.m in Sources */,
+				6B1CD2F32087D84800CB967E /* Being.m in Sources */,
 				6BF4C32F207429AD002DFC35 /* EquipmentManager.m in Sources */,
 				FF2ABB321ECE688500EC8B3C /* Hero.m in Sources */,
 				6BF4C3292074127D002DFC35 /* InventoryManager.m in Sources */,
@@ -723,11 +760,12 @@
 				FF2ABAD31ECA56A300EC8B3C /* Enemy.m in Sources */,
 				6BD9C80F208007D800B64947 /* PartyViewController.m in Sources */,
 				FF2ABB101ECCB72100EC8B3C /* Backstab.m in Sources */,
+				6BE69B8F20881FA4001F6259 /* HeroPartyMember.m in Sources */,
 				FF2ABA221EC7CCDA00EC8B3C /* main.m in Sources */,
 				FF2ABAF01ECBC87E00EC8B3C /* Lightningstone.m in Sources */,
 				FF110E811ED5D74E00C1554E /* CombatViewController.m in Sources */,
 				FF2ABB121ECCB73D00EC8B3C /* Fireball.m in Sources */,
-				6BD9C8112080DFC800B64947 /* PartyMemberView.m in Sources */,
+				6BD9C8112080DFC800B64947 /* HeroPartyMemberView.m in Sources */,
 				FF2ABADC1ECA6FD900EC8B3C /* Dungeon.m in Sources */,
 				FFA0A0891ED838780063ADBE /* SkillViewController.m in Sources */,
 			);

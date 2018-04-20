@@ -8,14 +8,12 @@
 
 #ifndef PartyMember_h
 #define PartyMember_h
-#import "MainCharacter.h"
+#import "Being.h"
 
 @interface PartyMember : NSObject
 
-@property Hero *partyMemberHero; // Has only the info needed for the mainCharacter's purposes
-@property BOOL readyCheck;
+@property Being *partyMember;
 
--(id)initWith:(Hero*)aPartyMemberHero readyCheck:(BOOL)readyCheck;
 -(NSMutableDictionary*)partyMemberToDictionary;
 -(void)loadExistingPartyMemberFromDictionary:(NSDictionary*)partyMemberDictionary;
 

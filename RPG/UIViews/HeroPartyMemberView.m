@@ -1,5 +1,5 @@
 //
-//  PartyMemberView.m
+//  HeroPartyMemberView.m
 //  RPG
 //
 //  Created by james schuler on 4/13/18.
@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PartyMemberView.h"
-@implementation PartyMemberView
+#import "HeroPartyMemberView.h"
+@implementation HeroPartyMemberView
 
 -(void)setUpSubviews:(Hero*)aHero {
     
-    _Hero = aHero;    
+    _Hero = aHero;
     
     CGFloat width = [super frame].size.width;
     

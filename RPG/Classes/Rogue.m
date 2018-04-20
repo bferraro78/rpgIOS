@@ -26,7 +26,7 @@ int combatEnergy;
 }
 
 -(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats {
-    [super loadPartyMemberHero:partyHeroStats];
+    [super loadBeingFromDictionary:partyHeroStats];
     self.classID = 3;
     _energy = 100;
     _combatEnergy = self.energy;

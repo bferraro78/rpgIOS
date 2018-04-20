@@ -21,7 +21,7 @@
 
 @interface EnterDungeonController : UIViewController <MCBrowserViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property PartyMember *partyMemberProfile;
+@property HeroPartyMember *partyMemberProfile;
 
 @property (strong, nonatomic) IBOutlet UIButton *PartyUp;
 @property (strong, nonatomic) IBOutlet UIButton *ReadyCheckButton;

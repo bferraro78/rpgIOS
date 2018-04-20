@@ -573,27 +573,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Combat Log" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZc-aT-Lpz">
-                                <rect key="frame" x="16" y="342" width="343" height="305"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Most Recent Turn Combat Log" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZc-aT-Lpz">
+                                <rect key="frame" x="16" y="616" width="343" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="LZ2-MX-ZZk"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="CRI-Ba-44U" id="I5X-aE-FMh"/>
                                 </connections>
                             </textView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bv2-4l-2bH">
+                                <rect key="frame" x="0.0" y="28" width="375" height="285"/>
+                            </scrollView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ss7-vV-ZQg">
+                                <rect key="frame" x="0.0" y="323" width="375" height="285"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="FZc-aT-Lpz" firstAttribute="top" secondItem="T8S-4A-5Lw" secondAttribute="bottom" constant="322" id="3Tj-v6-rFK"/>
+                            <constraint firstAttribute="trailing" secondItem="Bv2-4l-2bH" secondAttribute="trailing" id="0ni-CD-c3b"/>
+                            <constraint firstItem="Bv2-4l-2bH" firstAttribute="leading" secondItem="6Ap-NG-TeB" secondAttribute="leading" id="1YK-W7-vGD"/>
+                            <constraint firstAttribute="trailing" secondItem="Ss7-vV-ZQg" secondAttribute="trailing" id="3Mw-tU-WVx"/>
+                            <constraint firstItem="FZc-aT-Lpz" firstAttribute="top" secondItem="Ss7-vV-ZQg" secondAttribute="bottom" constant="8" id="Cfj-DW-Jhz"/>
                             <constraint firstItem="FZc-aT-Lpz" firstAttribute="leading" secondItem="6Ap-NG-TeB" secondAttribute="leading" constant="16" id="GWF-HS-YZE"/>
                             <constraint firstAttribute="trailing" secondItem="FZc-aT-Lpz" secondAttribute="trailing" constant="16" id="TJg-6Y-vA0"/>
-                            <constraint firstItem="2tZ-bo-Mce" firstAttribute="top" secondItem="FZc-aT-Lpz" secondAttribute="bottom" constant="20" id="Tgd-kN-FfO"/>
+                            <constraint firstItem="2tZ-bo-Mce" firstAttribute="top" secondItem="FZc-aT-Lpz" secondAttribute="bottom" constant="11" id="Tgd-kN-FfO"/>
+                            <constraint firstItem="Bv2-4l-2bH" firstAttribute="top" secondItem="T8S-4A-5Lw" secondAttribute="bottom" constant="8" id="YBs-6z-Cbi"/>
+                            <constraint firstItem="Ss7-vV-ZQg" firstAttribute="height" secondItem="Bv2-4l-2bH" secondAttribute="height" id="gJe-zg-szI"/>
+                            <constraint firstItem="Ss7-vV-ZQg" firstAttribute="top" secondItem="Bv2-4l-2bH" secondAttribute="bottom" constant="10" id="oea-l4-KA8"/>
+                            <constraint firstItem="Ss7-vV-ZQg" firstAttribute="leading" secondItem="6Ap-NG-TeB" secondAttribute="leading" id="yAk-m2-mMs"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="k7a-Wu-dRA"/>
                     <connections>
                         <outlet property="CombatText" destination="FZc-aT-Lpz" id="6M1-lI-x76"/>
+                        <outlet property="enemyScrollView" destination="Ss7-vV-ZQg" id="R6M-Jg-blN"/>
+                        <outlet property="heroScrollView" destination="Bv2-4l-2bH" id="YTs-c3-5of"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ln-4f-KDl" userLabel="First Responder" sceneMemberID="firstResponder"/>

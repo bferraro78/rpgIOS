@@ -31,9 +31,9 @@ NSMutableString *mainText;
     
     
     /*
-     * Once you enter the dungeon there is no return
-     * 1. Allow no more connections
-     * 2. No back on navigator bar
+       Once you enter the dungeon there is no return
+       1. Allow no more connections
+       2. No back on navigator bar
      */
     [[MCManager getMCManager] advertiseSelf:false];
     
@@ -48,11 +48,6 @@ NSMutableString *mainText;
     [_MainTextField addGestureRecognizer:clearTextField];
     
     [_mainText appendFormat:@"Starting Dungeon"];
-    self.MainTextField.text = _mainText;
-    
-    // DEBUGG
-    NSString *lead = [[Party getPartyArray] getPartyLeader].partyMemberHero.name;
-    [_mainText appendFormat:@"%s", [lead UTF8String]];
     self.MainTextField.text = _mainText;
     
 }
@@ -115,7 +110,7 @@ NSMutableString *mainText;
  2. Load all recieved party members into party array
  3. Enter combat
  */
-- (IBAction)CombatButton:(id)sender {
+-(IBAction)CombatButton:(id)sender {
     [self updateHeroDataForAllOtherPartyMembers]; // 1.
     [self performSegueWithIdentifier:@"combatSegue" sender:nil]; // 3.
 }
@@ -127,6 +122,27 @@ NSMutableString *mainText;
     [[SendDataMCManager getSender] sendDictionaryOfInfo:dictionaryToSend];
 }
 
+
+
+
+
+
+/***
+ 
+    1. Write text to UI
+    2. Give option button to all peers
+    3. once someone hits an option, send notification to all peers, udate decision map, and advance text
+ 
+ ***/
+
+
+
+
+
+
+
+
+/* Segues */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"heroProfileSegue"]) {
         HeroProfileViewController *profile = [segue destinationViewController];

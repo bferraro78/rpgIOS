@@ -58,14 +58,14 @@ int fireballResourceCost;
     printf("Enemey uses Fireball...");
     
     /* Insert Damage */
-    int damage = e.enemyInti+(5*mainCharacter.level);
+    int damage = e.inti+(5*mainCharacter.level);
     
     elementMap[self.skillElementSpec] = [NSNumber numberWithInt:damage];
     
     /* 20% Chance for Fire Dot */
     int isDot = arc4random_uniform(100);
     if (isDot < 20) {
-        int dotDamage = e.enemyInti/2;
+        int dotDamage = e.inti/2;
         mainCharacter.combatDebuffLibrary[FIREDOT] = [[Buff alloc] initvalue:dotDamage duration:3];
     }
 }

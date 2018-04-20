@@ -29,7 +29,7 @@ NSMutableArray *enemyLibrary;
     
     /* Make copy of template from library */
     Enemy *tmpEnemy = [enemyLibrary objectAtIndex:choice];
-    Enemy *chosenEnemy = [[Enemy alloc] initenemyName:tmpEnemy.enemyName enemyElement:tmpEnemy.enemyElement enemySkillSet:tmpEnemy.enemySkillSet enemyStrn:tmpEnemy.enemyStrn enemyInti:tmpEnemy.enemyInti enemyDext:tmpEnemy.enemyDext enemyHealth:tmpEnemy.enemyHealth enemyArmor:tmpEnemy.enemyArmor];
+    Enemy *chosenEnemy = [[Enemy alloc] initenemyName:tmpEnemy.name enemyElement:tmpEnemy.elementSpec enemySkillSet:tmpEnemy.enemySkillSet enemyStrn:tmpEnemy.strn enemyInti:tmpEnemy.inti enemyDext:tmpEnemy.dext enemyHealth:tmpEnemy.health enemyArmor:tmpEnemy.enemyArmor];
 
     /* Generate Random Enemy */
     int heroPrimaryStat = [mainCharacter getPrimaryStat];
@@ -37,11 +37,14 @@ NSMutableArray *enemyLibrary;
     int heroArmor = [mainCharacter getTotalArmor];
     int heroHeatlh = mainCharacter.health;
     
-    chosenEnemy.enemyStrn = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
-    chosenEnemy.enemyInti = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
-    chosenEnemy.enemyDext = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
-    [chosenEnemy setHealth:((arc4random_uniform(heroHeatlh)+(heroLevel))+20)];
+    chosenEnemy.strn = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
+    chosenEnemy.inti = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
+    chosenEnemy.dext = arc4random_uniform(heroPrimaryStat/2)+heroLevel;
+    chosenEnemy.health = ((arc4random_uniform(heroHeatlh)+(heroLevel))+20);
+    chosenEnemy.combatHealth = chosenEnemy.health;
     chosenEnemy.enemyArmor = arc4random_uniform(heroArmor)+heroLevel;
+    
+    [chosenEnemy setExp];
     
     return chosenEnemy;
 }
@@ -49,7 +52,7 @@ NSMutableArray *enemyLibrary;
 +(Enemy*)findEnemy:(NSString*)s {
     for (int i = 0; i < [enemyLibrary count]; i++) {
         Enemy *tmp = [enemyLibrary objectAtIndex:i];
-        if ([tmp.enemyName isEqualToString:s]) {
+        if ([tmp.name isEqualToString:s]) {
             return tmp;
         }
     }

@@ -33,6 +33,7 @@ extern NSString* const BOOTS;
 extern NSString* const MAINHAND;
 extern NSString* const OFFHAND;
 
+extern NSString* const ENEMY;
 extern NSString* const BARBARIAN;
 extern NSString* const WIZARD;
 extern NSString* const ROGUE;
@@ -67,6 +68,9 @@ extern NSString* const DAGGER;
 extern NSString* const WAND;
 extern NSString* const STAFF;
 extern NSString* const POLEARM;
+
+extern NSString* const ENEMYPARTYMEMBER;
+extern NSString* const HEROPARTYMEMBER;
 
 @end
 

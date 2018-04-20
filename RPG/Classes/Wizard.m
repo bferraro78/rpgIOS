@@ -27,7 +27,7 @@ int combatMana;
 }
 
 -(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats {
-    [super loadPartyMemberHero:partyHeroStats];
+    [super loadBeingFromDictionary:partyHeroStats];
     self.classID = 2;
     [self setResource];
     _combatMana = self.mana;

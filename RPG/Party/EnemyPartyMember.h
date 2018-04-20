@@ -9,14 +9,13 @@
 #ifndef EnemyPartyMember_h
 #define EnemyPartyMember_h
 #import "Enemy.h"
+#import "PartyMember.h"
 
-@interface EnemyPartyMember : NSObject
+@interface EnemyPartyMember : PartyMember
 
-@property Enemy *partyMemberEnemy;
+@property int indexOfEnemyPartyMember;
 
--(id)initWith:(Enemy*)aPartyMemberEnemy;
--(NSMutableDictionary*)partyMemberToDictionary;
--(void)loadExistingPartyMemberFromDictionary:(NSDictionary*)partyMemberDictionary;
+-(id)initWith:(Being*)aPartyMemberEnemy indexOfEnemyPartyMember:(int)indexOfEnemyPartyMember;
 
 @end
 

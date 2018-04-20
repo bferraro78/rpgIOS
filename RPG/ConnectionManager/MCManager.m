@@ -95,8 +95,12 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"EnterDungeonNotification"
                                                             object:nil
                                                           userInfo:dict];
-    } else if ([receivedData[@"action"] isEqualToString:@"updatePartyMemberHeroNotification"]) {
+    } else if ([receivedData[@"action"] isEqualToString:@"updatePartyMemberHero"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePartyMemberHeroNotification"
+                                                            object:nil
+                                                          userInfo:dict];
+    } else if ([receivedData[@"action"] isEqualToString:@"loadCombatOrderAndEnemyParty"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"loadCombatOrderAndEnemyPartyNotification"
                                                             object:nil
                                                           userInfo:dict];
     }

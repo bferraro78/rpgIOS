@@ -29,11 +29,11 @@
 }
 
 // Add to party if not already in party
--(void)addToParty:(PartyMember*)partyMember {
+-(void)addToParty:(HeroPartyMember*)partyMember {
     BOOL alreadyInParty = false;
     for (int i = 0; i < [self partyCount]; i++) {
-        PartyMember *member = (PartyMember*)[self.PartyArray objectAtIndex:i];
-        if ([partyMember.partyMemberHero.name isEqualToString:member.partyMemberHero.name]) {
+        HeroPartyMember *member = (HeroPartyMember*)[self.PartyArray objectAtIndex:i];
+        if ([partyMember.partyMember.name isEqualToString:member.partyMember.name]) {
             alreadyInParty = true;
         }
     }
@@ -44,19 +44,19 @@
 
 -(void)removeFromParty:(NSString*)partyMemberName {
     for (int i = 0; i < [self partyCount]; i++) {
-        PartyMember *member = (PartyMember*)[self.PartyArray objectAtIndex:i];
-        if ([partyMemberName isEqualToString:member.partyMemberHero.name]) {
+        HeroPartyMember *member = (HeroPartyMember*)[self.PartyArray objectAtIndex:i];
+        if ([partyMemberName isEqualToString:member.partyMember.name]) {
             [self.PartyArray removeObjectAtIndex:i];
             break;
         }
     }
 }
 
--(PartyMember*)getPartyMember:(NSString*)partyMemberName {
-    PartyMember *ret = nil;
+-(HeroPartyMember*)getPartyMember:(NSString*)partyMemberName {
+    HeroPartyMember *ret = nil;
     for (int i = 0; i < [self partyCount]; i++) {
-        PartyMember *member = (PartyMember*)[self.PartyArray objectAtIndex:i];
-        if ([partyMemberName isEqualToString:member.partyMemberHero.name]) {
+        HeroPartyMember *member = (HeroPartyMember*)[self.PartyArray objectAtIndex:i];
+        if ([partyMemberName isEqualToString:member.partyMember.name]) {
             ret = member;
             break;
         }
@@ -68,7 +68,7 @@
     int readyCount = 0;
     Party *p = [Party getPartyArray];
     for (int i = 0; i < [p partyCount]; i++) {
-        PartyMember *member = (PartyMember*)[p.PartyArray objectAtIndex:i];
+        HeroPartyMember *member = (HeroPartyMember*)[p.PartyArray objectAtIndex:i];
         if (member.readyCheck) {
             readyCount++;
         }
@@ -76,12 +76,12 @@
     return readyCount;
 }
 
--(int)indexOfPartyMember:(NSString*)peerDisplayName {
+-(NSInteger)indexOfPartyMember:(NSString*)peerDisplayName {
     return [self.PartyArray indexOfObject:peerDisplayName];
 }
 
--(PartyMember*)partyMemberAtIndex:(NSInteger*)index {
-    return [self.PartyArray objectAtIndex:(int)index];
+-(PartyMember*)partyMemberAtIndex:(int)index {
+    return [self.PartyArray objectAtIndex:index];
 }
 
 -(int)partyCount {
@@ -92,38 +92,6 @@
     [self.PartyArray removeAllObjects];
 }
 
-/* Package a whole party object to be sent to all other users */
-//-(NSMutableDictionary*)partyToDictionary {
-//    NSMutableDictionary* jsonable = [NSMutableDictionary dictionary];
-//    NSMutableArray *partyArray = [[NSMutableArray alloc] init];
-//    
-//    for (int i = 0; i < [self partyCount]; i++) {
-//        PartyMember *pm = [self partyMemberAtIndex:i];
-//        [partyArray addObject:[pm partyMemberToDictionary]];
-//    }
-//    
-//    jsonable[@"party"] = partyArray; // [PartyMember Dic One, PartyMember Dic Two,...]
-//    jsonable[@"action"] = @"updateHeroPartyNotification";
-//    return jsonable;
-//}
-
-/* WARNING: MUST ONLY SEND OUT YOUR VERSION OF THE PARTY/ENEMY PARTY WHEN YOU KNOW
-            NO ONE ELSE BUT YOU HAS CHANGED A PARTY OR ENEMYPARTY
-            1. Used after a turn in combat. The turn by turn nature allows you
-               to assume that only you have changed the either party.
-            2. If your character is being updated based on someones elses party info,
-               Instead just update the hero's stats DO NOT RESET THE MAINCAHRACTER REFERENCE OR CREATE A NEW Hero*
- */
-//-(void)loadUpdatedPartyHeroesFromDictionary:(NSDictionary*)partyDictionary {
-//    NSMutableArray *partyArray = partyDictionary[@"party"];
-//    for (int i = 0; i < [partyArray count]; i++) {
-//        NSDictionary *partyMemberDictionary = [partyArray objectAtIndex:i];
-//        NSString *partyMemberName = partyMemberDictionary[@"name"];
-//        // Update Party Member
-//        PartyMember *m = [self getPartyMember:partyMemberName];
-//        [m loadExistingPartyMemberFromDictionary:partyMemberDictionary];
-//    }
-//}
 
 
 /* NOT THE ACTUAL PARTY LEADER - JUST TO ENSURE THAT SOME FUNCTIONS ARE DONE
@@ -133,14 +101,14 @@
  1. Generate combat turn order
  2. Generate enemies
  3. Generate loot */
--(PartyMember*)getPartyLeader {
+-(HeroPartyMember*)getPartyLeader {
     Party *p = [Party getPartyArray];
     
     /* Start with first member of group, compare to other based on alphabet */
-    PartyMember *CurrentLeader = [p partyMemberAtIndex:0];
+    HeroPartyMember *CurrentLeader = [p partyMemberAtIndex:0];
     for (int i = 1; i < [p partyCount]; i++) {
-        PartyMember *tmpLeader = [p partyMemberAtIndex:i];
-        if ([CurrentLeader.partyMemberHero.name compare:tmpLeader.partyMemberHero.name] == NSOrderedDescending) {
+        HeroPartyMember *tmpLeader = [p partyMemberAtIndex:i];
+        if ([CurrentLeader.partyMember.name compare:tmpLeader.partyMember.name] == NSOrderedDescending) {
             CurrentLeader = tmpLeader;
         }
     }

@@ -12,11 +12,12 @@
 #import "Barbarian.h"
 #import "Rogue.h"
 #import "Wizard.h"
+#import "Enemy.h"
 #import "Constants.h"
 
 @interface CreateClassManager : NSObject
 
-+(Hero*)loadPartyMemberHero:(NSDictionary*)aPartyMemberInfo;
++(Being*)loadPartyMemberBeing:(NSDictionary*)aPartyMemberInfo;
 
 @end
 #endif /* CreateClassManager_h */

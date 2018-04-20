@@ -46,7 +46,7 @@ int healResourceCost;
     printf("Enemey uses Heal...");
     
     /* Insert Heal Dot */
-    int heal = -(e.enemyInti/2);
+    int heal = -(e.inti/2);
     
     e.enemyBuffLibrary[HEALDOT] = [[Buff alloc] initvalue:heal duration:3];
     

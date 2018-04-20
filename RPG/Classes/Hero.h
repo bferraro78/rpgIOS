@@ -9,26 +9,21 @@
 
 #define Hero_h
 #import <UIKit/UIKit.h>
+#import "Being.h"
+
 #import "Armor.h"
 #import "Weapon.h"
 #import "Space.h"
 #import "Item.h"
 #import "Constants.h"
 
-@interface Hero : NSObject
+@interface Hero : Being
 
-@property NSString *name;
+
 @property int classID;
-@property int level;
-@property int health; // HEALTH IS HEROES TOTAL HEALTH
-@property int combatHealth; // COMBAT HEALTH IS USED TO DETERMINE HEALTH IN ONE INSTANCE OF COMBAT
-@property int strn;
-@property int inti;
-@property int dext;
-@property int vit;
 @property int Exp;
 @property int purse;
-@property NSString *elementSpec;
+
 @property NSMutableDictionary *resistanceDefenseMap; //<Element, Integer>;
 @property NSMutableDictionary *resistanceOffenseMap; //<Element, Integer>;
 
@@ -47,7 +42,7 @@
 @property NSMutableDictionary *combatDebuffLibrary;
 
 // Holds damage hero has taken during a combat phase
-@property NSMutableDictionary *combatDamageElementMap;
+@property NSMutableDictionary *combatActionMap;
 
 @property Weapon *mainHand;
 @property Weapon *offHand;
@@ -62,9 +57,6 @@
 
 /* Methods */
 -(id)initNewCharacterName:(NSString *)aName vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext;
-
--(NSMutableDictionary*)heroPartyMemberToDictionary;
--(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats;
 
 -(void)addSkillIfNotAlreadyKnown:(NSString*)ability; // add skill to skill array if not already available
 
@@ -108,7 +100,7 @@
 -(void)setMaxCombatResource;
 
 -(void)resetResourceAndHealth;
--(void)resetDamageElementMaps;
+-(void)resetCombatActionMap;
 
 -(int)getTotalArmor;
 -(float)getArmorRating;

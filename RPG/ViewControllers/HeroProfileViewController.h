@@ -10,16 +10,16 @@
 #define HeroProfileViewController_h
 #import <UIKit/UIKit.h>
 #import "Hero.h"
-#import "PartyMember.h"
+#import "HeroPartyMember.h"
 
 @interface HeroProfileViewController : UIViewController
 
-@property (strong, nonatomic) PartyMember *partyMember;
+@property (strong, nonatomic) HeroPartyMember *partyMember;
 @property (strong, nonatomic) IBOutlet UITextView *heroProfileTextView;
 @property (strong, nonatomic) IBOutlet UIButton *ChangeHeroInfoButton;
 
 -(void)setUpTabBarView;
--(void)setPartyMember:(PartyMember*)pm;
+-(void)setPartyMember:(HeroPartyMember*)pm;
 
 @end
 

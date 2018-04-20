@@ -10,16 +10,8 @@
 #import "Enemy.h"
 @implementation Enemy
 
-NSString *enemyName;
-int enemyLevel;
-int enemyHealth;
-int enemyCombatHealth;
-int enemyStrn;
-int enemyInti;
-int enemyDext;
 int enemyArmor;
 int enemyExp;
-NSString *enemyElement;
 
 NSMutableArray *enemySkillSet;
 NSMutableDictionary *enemyBuffLibrary;
@@ -28,12 +20,12 @@ NSMutableDictionary *enemyDebuffLibrary;
 
 -(id)initenemyName:(NSString*)aEnemyName enemyElement:(NSString*)aEnemyElement enemySkillSet:(NSMutableArray*)aEnemySkillSet enemyStrn:(int)aEnemyStrn enemyInti:(int) aEnemyInti enemyDext:(int)aEnemyDext enemyHealth:(int)aEnemyHealth
         enemyArmor:(int)aEnemyArmor {
-    _enemyName = aEnemyName;
-    _enemyElement = aEnemyElement;
-    _enemyStrn = aEnemyStrn;
-    _enemyInti = aEnemyInti;
-    _enemyDext = aEnemyDext;
-    _enemyHealth = aEnemyHealth;
+    self.name = aEnemyName;
+    self.elementSpec = aEnemyElement;
+    self.strn = aEnemyStrn;
+    self.inti = aEnemyInti;
+    self.dext = aEnemyDext;
+    self.health = aEnemyHealth;
     _enemyArmor = aEnemyArmor;
     _enemyBuffLibrary = [[NSMutableDictionary alloc] init];
     _enemyDebuffLibrary = [[NSMutableDictionary alloc] init];
@@ -84,19 +76,13 @@ NSMutableDictionary *enemyDebuffLibrary;
 
 -(float)getArmorRating { return (float)self.enemyArmor * (float)0.12; }
 
-
--(void)setHealth:(int)health {
-    self.enemyHealth = health;
-    self.enemyCombatHealth = self.enemyHealth;
-    [self setExp];
-}
--(void)setExp { self.enemyExp = (self.enemyHealth/3); }
+-(void)setExp { self.enemyExp = (self.health/3); }
 
 -(void)takeDamage:(int)healthReductionOrIncrease {
-    int oldCombatHealth = self.enemyCombatHealth;
-    self.enemyCombatHealth = (oldCombatHealth-healthReductionOrIncrease);
-    if (self.enemyCombatHealth > self.enemyHealth) {
-        self.enemyCombatHealth = self.enemyHealth;
+    int oldCombatHealth = self.combatHealth;
+    self.combatHealth = (oldCombatHealth-healthReductionOrIncrease);
+    if (self.combatHealth > self.health) {
+        self.combatHealth = self.health;
     }
 }
 
@@ -104,46 +90,47 @@ NSMutableDictionary *enemyDebuffLibrary;
     NSMutableString *stats = [[NSMutableString alloc] init];
     
     [stats appendString:@"Enemy's Stats: \n"];
-    [stats appendFormat:@"Name: %s\n" , [self.enemyName UTF8String]];
-    [stats appendFormat:@"Element Spec: %s\n" , [self.enemyElement UTF8String]];
+    [stats appendFormat:@"Name: %s\n" , [self.name UTF8String]];
+    [stats appendFormat:@"Element Spec: %s\n" , [self.elementSpec UTF8String]];
     
     [stats appendFormat:@"\n    STATS:%s\n" , ""];
 
-    [stats appendFormat:@"Health: %u\n" , self.enemyHealth];
+    [stats appendFormat:@"Health: %u\n" , self.health];
     [stats appendFormat:@"Armor: %u\n" , self.enemyArmor];
-    [stats appendFormat:@"Strength: %u\n" , self.enemyStrn];
-    [stats appendFormat:@"Initeligence: %u\n" , self.enemyInti];
-    [stats appendFormat:@"Dexterity: %u\n" , self.enemyDext];
+    [stats appendFormat:@"Strength: %u\n" , self.strn];
+    [stats appendFormat:@"Initeligence: %u\n" , self.inti];
+    [stats appendFormat:@"Dexterity: %u\n" , self.dext];
     
     return stats;
 }
 
--(id)loadPartyMemberEnemy:(NSDictionary*)partyEnemyStats {
-    _enemyName = partyEnemyStats[@"enemyName"];
-    _enemyLevel = [partyEnemyStats[@"enemyLevel"] intValue];
-    _enemyHealth = [partyEnemyStats[@"enemyHealth"] intValue];
-    _enemyCombatHealth = [partyEnemyStats[@"enemyCombatHealth"] intValue];
-    _enemyStrn = [partyEnemyStats[@"enemyStrn"] intValue];
-    _enemyDext = [partyEnemyStats[@"enemyDext"] intValue];
-    _enemyInti = [partyEnemyStats[@"enemyInti"] intValue];
+-(id)loadEnemyBeingFromDictionary:(NSDictionary*)partyEnemyStats {
+    self.name = partyEnemyStats[@"enemyName"];
+    self.level = [partyEnemyStats[@"enemyLevel"] intValue];
+    self.health = [partyEnemyStats[@"enemyHealth"] intValue];
+    self.combatHealth = [partyEnemyStats[@"enemyCombatHealth"] intValue];
+    self.strn = [partyEnemyStats[@"enemyStrn"] intValue];
+    self.dext = [partyEnemyStats[@"enemyDext"] intValue];
+    self.inti = [partyEnemyStats[@"enemyInti"] intValue];
     _enemyArmor = [partyEnemyStats[@"enemyArmor"] intValue];
     _enemyExp = [partyEnemyStats[@"enemyExp"] intValue];
-    _enemyElement = partyEnemyStats[@"enemyElement"];
+    self.elementSpec = partyEnemyStats[@"enemyElement"];
     return self;
 }
 
--(NSMutableDictionary*)enemyPartyMemberToDictionary {
+-(NSMutableDictionary*)beingToDictionary {
     NSMutableDictionary* jsonable = [NSMutableDictionary dictionary];
-    jsonable[@"enemyName"] = _enemyName;
-    jsonable[@"enemyLevel"] = [NSString stringWithFormat:@"%i", _enemyLevel];
-    jsonable[@"enemyHealth"] = [NSString stringWithFormat:@"%i", _enemyHealth];
-    jsonable[@"enemyCombatHealth"] = [NSString stringWithFormat:@"%i", _enemyCombatHealth];
-    jsonable[@"enemyStrn"] = [NSString stringWithFormat:@"%i", _enemyStrn];
-    jsonable[@"enemyInti"] = [NSString stringWithFormat:@"%i", _enemyInti];
-    jsonable[@"enemyDext"] = [NSString stringWithFormat:@"%i", _enemyDext];
+    jsonable[@"enemyName"] = self.name;
+    jsonable[@"class"] = ENEMY;
+    jsonable[@"enemyLevel"] = [NSString stringWithFormat:@"%i", self.level];
+    jsonable[@"enemyHealth"] = [NSString stringWithFormat:@"%i", self.health];
+    jsonable[@"enemyCombatHealth"] = [NSString stringWithFormat:@"%i", self.combatHealth];
+    jsonable[@"enemyStrn"] = [NSString stringWithFormat:@"%i", self.strn];
+    jsonable[@"enemyInti"] = [NSString stringWithFormat:@"%i", self.inti];
+    jsonable[@"enemyDext"] = [NSString stringWithFormat:@"%i", self.dext];
     jsonable[@"enemyArmor"] =  [NSString stringWithFormat:@"%i", _enemyArmor];
     jsonable[@"enemyExp"] =  [NSString stringWithFormat:@"%i", _enemyExp];
-    jsonable[@"enemyElement"] = _enemyElement;
+    jsonable[@"enemyElement"] = self.elementSpec;
     return jsonable;
 }
 

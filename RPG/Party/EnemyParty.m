@@ -27,25 +27,25 @@
     return self;
 }
 
--(void)addToParty:(Enemy*)enemyPartyMember {
+-(void)addToParty:(EnemyPartyMember*)enemyPartyMember {
     [self.EnemyPartyArray addObject:enemyPartyMember];
 }
 
 -(void)removeFromParty:(NSString*)enemyPartyMemberName {
     for (int i = 0; i < [self enemyPartyCount]; i++) {
-        Enemy *enemy = (Enemy*)[self.EnemyPartyArray objectAtIndex:i];
-        if ([enemyPartyMemberName isEqualToString:enemy.enemyName]) {
+        EnemyPartyMember *enemy = (EnemyPartyMember*)[self.EnemyPartyArray objectAtIndex:i];
+        if ([enemyPartyMemberName isEqualToString:enemy.partyMember.name]) {
             [self.EnemyPartyArray removeObjectAtIndex:i];
             break;
         }
     }
 }
 
--(Enemy*)getEnemyPartyMember:(NSString*)enemyPartyMemberName {
-    Enemy *ret = nil;
+-(EnemyPartyMember*)getEnemyPartyMember:(NSString*)enemyPartyMemberName {
+    EnemyPartyMember *ret = nil;
     for (int i = 0; i < [self enemyPartyCount]; i++) {
-        Enemy *enemy= (Enemy*)[self.EnemyPartyArray objectAtIndex:i];
-        if ([enemyPartyMemberName isEqualToString:enemy.enemyName]) {
+        EnemyPartyMember *enemy= (EnemyPartyMember*)[self.EnemyPartyArray objectAtIndex:i];
+        if ([enemyPartyMemberName isEqualToString:enemy.partyMember.name]) {
             ret = enemy;
             break;
         }
@@ -57,8 +57,8 @@
     return [self.EnemyPartyArray indexOfObject:enemyName];
 }
 
--(Enemy*)enemyPartyMemberAtIndex:(NSInteger*)index {
-    return [self.EnemyPartyArray objectAtIndex:(int)index];
+-(EnemyPartyMember*)enemyPartyMemberAtIndex:(int)index {
+    return [self.EnemyPartyArray objectAtIndex:index];
 }
 
 -(NSInteger)enemyPartyCount {
@@ -70,7 +70,30 @@
 }
 
 
+/* These functions are only used to initally pass on the generated enemies! */
+-(NSMutableDictionary*)enemyPartyToDictionary {
+    NSMutableDictionary* jsonable = [NSMutableDictionary dictionary];
+    NSMutableArray *partyArray = [[NSMutableArray alloc] init];
 
+    for (int i = 0; i < [self enemyPartyCount]; i++) {
+        EnemyPartyMember *pm = [self enemyPartyMemberAtIndex:i];
+        [partyArray addObject:[pm partyMemberToDictionary]];
+    }
+
+    jsonable[@"enemyParty"] = partyArray; // [PartyMember Dic One, PartyMember Dic Two,...]
+    return jsonable;
+}
+
+-(void)loadPartyEnemiesFromDictionary:(NSDictionary*)partyDictionary {
+    NSArray *partyArray = partyDictionary[@"enemyParty"];
+    for (int i = 0; i < [partyArray count]; i++) {
+        NSDictionary *partyMemberDictionary = [partyArray objectAtIndex:i];
+        
+        Enemy *e = (Enemy*)[CreateClassManager loadPartyMemberBeing:partyMemberDictionary];
+        EnemyPartyMember *epm = [[EnemyPartyMember alloc] initWith:e indexOfEnemyPartyMember:[partyMemberDictionary[@"indexOfEnemy"] intValue]];
+        [self.EnemyPartyArray addObject:epm];
+    }
+}
 
 
 @end

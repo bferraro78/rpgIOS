@@ -11,18 +11,10 @@
 
 @implementation Hero
 
-NSString *name;
+
 int classID;
-int level;
-int health; // HEALTH IS HEROES TOTAL HEALTH
-int combatHealth; // COMBAT HEALTH IS USED TO DETERMINE HEALTH IN ONE INSTANCE OF COMBAT
-int strn;
-int inti;
-int dext;
-int vit;
 int Exp;
 int purse;
-NSString *elementSpec;
 
 /* Definite Libraries */
 NSMutableArray *skillSet;
@@ -40,7 +32,7 @@ NSMutableDictionary *combatDebuffLibrary;
 NSMutableDictionary *resistanceDefenseMap; //<String, Integer>;
 NSMutableDictionary *resistanceOffenseMap; //<String, Integer>;
 
-NSMutableDictionary *combatDamageElementMap;
+NSMutableDictionary *combatActionMap;
 
 /* Armor/Weapons */
 Weapon *mainHand;
@@ -56,21 +48,21 @@ Armor *boots;
 
 /** START OF CLASS METHODS **/
 -(id)initNewCharacterName:(NSString *)aName vit:(int)aVit strn:(int)aStrn inti:(int)aInti dext:(int)aDext {
-    _name = aName;
-    _vit = aVit;
-    _strn = aStrn;
-    _inti = aInti;
-    _dext = aDext;
+    self.name = aName;
+    self.vit = aVit;
+    self.strn = aStrn;
+    self.inti = aInti;
+    self.dext = aDext;
     _Exp = 0;
-    _level = 20;
+    self.level = 20;
     _purse = 0;
-    _elementSpec= PHYSICAL;
+    self.elementSpec= PHYSICAL;
     
     _skillSet = [[NSMutableArray alloc] init];
     _inventory = [[NSMutableArray alloc] init];
     _activeItems = [[NSMutableArray alloc] init];
 
-    _combatDamageElementMap = [[NSMutableDictionary alloc] init];
+    _combatActionMap = [[NSMutableDictionary alloc] init];
     _buffLibrary = [[NSMutableDictionary alloc] init];
     _debuffLibrary = [[NSMutableDictionary alloc] init];
     _combatBuffLibrary = [[NSMutableDictionary alloc] init];
@@ -104,16 +96,16 @@ Armor *boots;
     return self;
 }
 
--(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats {
-    _name = partyHeroStats[@"name"];
-    _level = [partyHeroStats[@"level"] intValue];
-    _health = [partyHeroStats[@"health"] intValue];
-    _combatHealth = [partyHeroStats[@"combatHealth"] intValue];
-    _strn = [partyHeroStats[@"strn"] intValue];
-    _dext = [partyHeroStats[@"dext"] intValue];
-    _inti = [partyHeroStats[@"inti"] intValue];
-    _vit = [partyHeroStats[@"vit"] intValue];
-    _elementSpec = partyHeroStats[@"elementSpec"];
+-(id)loadBeingFromDictionary:(NSDictionary*)partyHeroStats {
+    self.name = partyHeroStats[@"name"];
+    self.level = [partyHeroStats[@"level"] intValue];
+    self.health = [partyHeroStats[@"health"] intValue];
+    self.combatHealth = [partyHeroStats[@"combatHealth"] intValue];
+    self.strn = [partyHeroStats[@"strn"] intValue];
+    self.dext = [partyHeroStats[@"dext"] intValue];
+    self.inti = [partyHeroStats[@"inti"] intValue];
+    self.vit = [partyHeroStats[@"vit"] intValue];
+    self.elementSpec = partyHeroStats[@"elementSpec"];
     
     _resistanceOffenseMap = [self loadOffenseResistanceMaps:partyHeroStats[@"resistanceOffenseMap"]];
     _resistanceDefenseMap = [self loadDefenseResistanceMaps:partyHeroStats[@"resistanceDefenseMap"]];
@@ -187,18 +179,18 @@ Armor *boots;
 /* Load mainCharacter up into dictionary to send to other players.
    These are the ony stats a mainCharacter needs from his party for
    dungeon/combat purposes */
--(NSMutableDictionary*)heroPartyMemberToDictionary {
+-(NSMutableDictionary*)beingToDictionary {
     NSMutableDictionary* jsonable = [NSMutableDictionary dictionary];
-    jsonable[@"name"] = _name;
+    jsonable[@"name"] = self.name;
     jsonable[@"class"] = [self getClassName];
-    jsonable[@"level"] = [NSString stringWithFormat:@"%i", _level];
-    jsonable[@"health"] = [NSString stringWithFormat:@"%i", _health];
-    jsonable[@"combatHealth"] = [NSString stringWithFormat:@"%i", _combatHealth];
-    jsonable[@"strn"] = [NSString stringWithFormat:@"%i", _strn];
-    jsonable[@"inti"] = [NSString stringWithFormat:@"%i", _inti];
-    jsonable[@"dext"] = [NSString stringWithFormat:@"%i", _dext];
-    jsonable[@"vit"] =  [NSString stringWithFormat:@"%i", _vit];
-    jsonable[@"elementSpec"] = _elementSpec;
+    jsonable[@"level"] = [NSString stringWithFormat:@"%i", self.level];
+    jsonable[@"health"] = [NSString stringWithFormat:@"%i", self.health];
+    jsonable[@"combatHealth"] = [NSString stringWithFormat:@"%i", self.combatHealth];
+    jsonable[@"strn"] = [NSString stringWithFormat:@"%i", self.strn];
+    jsonable[@"inti"] = [NSString stringWithFormat:@"%i", self.inti];
+    jsonable[@"dext"] = [NSString stringWithFormat:@"%i", self.dext];
+    jsonable[@"vit"] =  [NSString stringWithFormat:@"%i", self.vit];
+    jsonable[@"elementSpec"] = self.elementSpec;
     
     jsonable[@"resistanceOffenseMap"] = _resistanceOffenseMap;
     jsonable[@"resistanceDefenseMap"] = _resistanceDefenseMap;
@@ -298,13 +290,8 @@ Armor *boots;
     [self.combatDebuffLibrary removeAllObjects];
 }
 
--(void)resetDamageElementMaps {
-    _combatDamageElementMap[FIRE] = [NSNumber numberWithInt:0];
-    _combatDamageElementMap[COLD] = [NSNumber numberWithInt:0];
-    _combatDamageElementMap[ARCANE] = [NSNumber numberWithInt:0];
-    _combatDamageElementMap[POISON] = [NSNumber numberWithInt:0];
-    _combatDamageElementMap[LIGHTNING] = [NSNumber numberWithInt:0];
-    _combatDamageElementMap[PHYSICAL] = [NSNumber numberWithInt:0];
+-(void)resetCombatActionMap {
+    _combatActionMap = [[NSMutableDictionary alloc] init];
 }
 
 /* Set Health and Combat Health */

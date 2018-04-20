@@ -11,37 +11,53 @@
 #import "Party.h"
 #import "Enemy.h"
 #import "EnemyParty.h"
+
+#import "HeroPartyMemberView.h"
+#import "EnemyPartyMemberView.h"
+
 #import "EnemyDictionary.h"
 #import "SkillDictionary.h"
 #import "ItemDictionary.h"
 #import "BuffDictionary.h"
-#import "HealthBar.h"
-#import "ResourceBar.h"
+
 #import "LootManager.h"
+#import "CombatManager.h"
 #import "InventoryManager.h"
+#import "SendDataMCManager.h"
+
+#import "CombatQueue.h"
 #import "Constants.h"
 
 @interface CombatViewController : UIViewController
 
-@property int turnNumber;
 
 /* Hero Spec */
 @property BOOL lightningSpecAdditionalTurn;
 
-@property NSAttributedString *combatTextTmpString; // represents the text at the moment, constantly reset
-@property NSMutableAttributedString *combatSetText; // represents the extend text of the whole fight, updated every change in combat text
-@property (strong, nonatomic) IBOutlet UITextView *CombatText; // actual text view
-
-
-// Party of enimies
-@property(nonatomic) EnemyParty *EnemyParty;
-
+/* Combat Queue */
+@property CombatQueue *combatQueue;
 
 /* HEROS MOVE */
 @property (strong, nonatomic) NSString *heroMoveName;
 @property BOOL critHit;
 
-@property (strong, nonatomic) UITextView *moveView; // Pop up box Long Press
+// Turn number
+@property int turnNumber;
+
+/* Scroll Views */
+@property (strong, nonatomic) IBOutlet UIScrollView *heroScrollView;
+@property (strong, nonatomic) IBOutlet UIScrollView *enemyScrollView;
+
+/* Text Strings */
+// represents the text at the moment, constantly reset
+@property NSAttributedString *combatTextTmpString;
+@property NSMutableAttributedString *fullCombatTextString; // represents the extend text of the whole fight, updated every change in combat text
+
+/* Views */
+@property (strong, nonatomic) IBOutlet UITextView *CombatText; // actual text view
+
+@property (strong, nonatomic) UITextView *moveView; // Pop up box Long Press (Enemy Status)
+
 
 
 -(void)initCombat;

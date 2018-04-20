@@ -31,11 +31,11 @@
     int y = 85.0;
     
     for (int i = 0; i < [[Party getPartyArray] partyCount]; i++) {
-        PartyMember *pm = [[Party getPartyArray] partyMemberAtIndex:i];
-        PartyMemberView *HeroView = [[PartyMemberView alloc] initWithFrame:CGRectMake(10.0, y, width-20.0, 50.0)];
-        [HeroView setUpSubviews:pm.partyMemberHero];
+        HeroPartyMember *pm = [[Party getPartyArray] partyMemberAtIndex:i];
+        HeroPartyMemberView *HeroView = [[HeroPartyMemberView alloc] initWithFrame:CGRectMake(10.0, y, width-20.0, 50.0)];
+        [HeroView setUpSubviews:(Hero*)pm.partyMember];
         
-        /* Clear text field long tap */
+        /* View Hero Profile */
         UITapGestureRecognizer *viewProfile = [[UITapGestureRecognizer alloc]
                                                      initWithTarget:self action:@selector(ViewHeroProfile:)];
         [HeroView addGestureRecognizer:viewProfile];
@@ -46,8 +46,9 @@
     }
 }
 
+/* When you tap on a view. The "sender" parameter has access to the view which holds the Hero Object */
 -(void)ViewHeroProfile:(id)sender {
-    PartyMemberView *pv = (PartyMemberView*) [sender view];
+    HeroPartyMemberView *pv = (HeroPartyMemberView*) [sender view];
     // Show player profile
     _partyMemberProfile = [[Party getPartyArray] getPartyMember:pv.Hero.name];
     /* Go to profile */

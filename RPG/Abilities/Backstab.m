@@ -56,8 +56,8 @@ int backstabResourceCost;
     printf("Enemey uses BackStab...");
     
     /* Insert Damage */
-    int damage = (e.enemyDext+(5*mainCharacter.level));
-    NSString *element = e.enemyElement;
+    int damage = (e.dext+(5*mainCharacter.level));
+    NSString *element = e.elementSpec;
     elementMap[element] = [NSNumber numberWithInt:damage];
     
     /* 50% extra crit chance */

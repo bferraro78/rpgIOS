@@ -67,9 +67,9 @@ int basicattackResourceCost;
     printf("Enemy Uses Basic Attack\n");
     
     /* Insert Damage */
-    int damage = (e.enemyStrn+e.enemyInti+e.enemyDext);
+    int damage = (e.strn+e.inti+e.dext);
     
-    NSString *element = e.enemyElement;
+    NSString *element = e.elementSpec;
     elementMap[element] = [NSNumber numberWithInt:damage];
 }
 

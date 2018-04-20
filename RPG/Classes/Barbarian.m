@@ -26,7 +26,7 @@ int combatRage;
 }
 
 -(id)loadPartyMemberHero:(NSDictionary*)partyHeroStats {
-    [super loadPartyMemberHero:partyHeroStats];
+    [super loadBeingFromDictionary:partyHeroStats];
     self.classID = 1;
     _combatRage = 0;
     _rage = 100;

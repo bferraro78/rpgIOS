@@ -8,29 +8,26 @@
 
 #ifndef Party_h
 #define Party_h
-#import "PartyMember.h"
+#import "HeroPartyMember.h"
 
 @interface Party : NSObject
 
 @property (nonatomic, strong) NSMutableArray *PartyArray;
 
 +(Party*)getPartyArray;
--(void)addToParty:(PartyMember*)partyMember;
+-(void)addToParty:(HeroPartyMember*)partyMember;
 -(void)removeFromParty:(NSString*)partyMember;
 
--(PartyMember*)getPartyMember:(NSString*)partyMemberName;
--(int)indexOfPartyMember:(NSString*)peerDisplayName;
--(PartyMember*)partyMemberAtIndex:(NSInteger*)index;
+-(HeroPartyMember*)getPartyMember:(NSString*)partyMemberName;
+-(NSInteger)indexOfPartyMember:(NSString*)peerDisplayName;
+-(HeroPartyMember*)partyMemberAtIndex:(int)index;
 
 -(int)partyCount;
 -(void)clearParty;
 
-//-(NSMutableDictionary*)partyToDictionary;
-//-(void)loadUpdatedPartyHeroesFromDictionary:(NSDictionary*)partyDictionary;
-
 -(int)readyCheckCount;
 
--(PartyMember*)getPartyLeader;
+-(HeroPartyMember*)getPartyLeader;
 
 @end
 #endif /* Party_h */

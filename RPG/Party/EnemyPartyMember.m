@@ -12,20 +12,23 @@
 @implementation EnemyPartyMember
 
 
--(id)initWith:(Enemy*)aPartyMemberEnemy {
-    _partyMemberEnemy = aPartyMemberEnemy;
+-(id)initWith:(Being*)aPartyMemberEnemy indexOfEnemyPartyMember:(int)indexOfEnemyPartyMember {
+    self.partyMember = aPartyMemberEnemy;
+    _indexOfEnemyPartyMember = indexOfEnemyPartyMember;
     return self;
 }
 
 /* Package a whole party enemy member object to be sent to all other users during combat */
 -(NSMutableDictionary*)partyMemberToDictionary {
-    NSMutableDictionary* jsonable = [_partyMemberEnemy enemyPartyMemberToDictionary];
+    NSMutableDictionary* jsonable = [self.partyMember beingToDictionary];
+    jsonable[@"indexOfEnemy"] = [NSString stringWithFormat:@"%i", _indexOfEnemyPartyMember];
     return jsonable;
 }
 
 -(void)loadExistingPartyMemberFromDictionary:(NSDictionary*)partyMemberDictionary {
     // update party member enemy
-    _partyMemberEnemy = [_partyMemberEnemy loadPartyMemberEnemy:partyMemberDictionary];
+    self.partyMember = [self.partyMember loadBeingFromDictionary:partyMemberDictionary];
+    _indexOfEnemyPartyMember = [partyMemberDictionary[@"indexOfEnemy"] intValue];
 }
 
 

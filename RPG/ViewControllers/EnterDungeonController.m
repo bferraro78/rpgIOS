@@ -47,7 +47,7 @@
                                                object:nil];
     
     // Add yourself to the party
-    [[Party getPartyArray] addToParty:[[PartyMember alloc] initWith:mainCharacter readyCheck:false]];
+    [[Party getPartyArray] addToParty:[[HeroPartyMember alloc] initWith:mainCharacter readyCheck:false]];
     
      // change button statuses
     [self setPartyButtonTitle];
@@ -72,8 +72,8 @@
     // Load Party Hero
     // Create party member
     // Add to party
-    Hero *partyMemberHero = [CreateClassManager loadPartyMemberHero:partyMemberInfo];
-    PartyMember *partyMember = [[PartyMember alloc] initWith:partyMemberHero readyCheck:false];
+    Hero *partyMemberHero = (Hero*)[CreateClassManager loadPartyMemberBeing:partyMemberInfo];
+    HeroPartyMember *partyMember = [[HeroPartyMember alloc] initWith:partyMemberHero readyCheck:false];
     [p addToParty:partyMember];
     
     partyMember.readyCheck = ([partyMemberInfo[@"readyCheck"] isEqualToString:READY]) ? true : false;
@@ -91,7 +91,7 @@
     NSString *peerDisplayName = peerID.displayName;
     
     Party *p = [Party getPartyArray];
-    PartyMember *member = [p getPartyMember:peerDisplayName];
+    HeroPartyMember *member = [p getPartyMember:peerDisplayName];
     member.readyCheck = ([readyCheck[@"readyCheck"] isEqualToString:READY]) ? true : false;
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -100,7 +100,15 @@
     
 }
 
-/* All users enter dungeon */
+/**
+
+ Once one user presses enter dungeon...
+    1. All users enter dungeon
+    2. Close any chance on connecting with Multipeer Connectivity Framework
+        2b. Done in viewDidLoad --> MainDungeonController.m
+ 
+**/
+
 -(void)AllUsersStartDungeon:(NSNotification *)notification {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self performSegueWithIdentifier:@"enterDungeonSegue" sender:nil];
@@ -153,7 +161,7 @@
 - (IBAction)ReadyCheck:(id)sender {
     NSString *readyString;
     
-    PartyMember *mainCharacterInParty = [[Party getPartyArray] getPartyMember:mainCharacter.name];
+    HeroPartyMember *mainCharacterInParty = [[Party getPartyArray] getPartyMember:mainCharacter.name];
     
     if (_ReadyCheckButton.backgroundColor == [UIColor greenColor]) {
         [_ReadyCheckButton setBackgroundColor:[UIColor whiteColor]];
@@ -254,15 +262,15 @@
     // If it the first row, the data input will be "Data1" from the array.
     NSUInteger row = [indexPath row];
     
-    PartyMember* partyMember = [[Party getPartyArray] partyMemberAtIndex:row];
+    HeroPartyMember* partyMember = [[Party getPartyArray] partyMemberAtIndex:row];
     
-    if ([[Party getPartyArray] getPartyMember:partyMember.partyMemberHero.name].readyCheck) {
+    if ([[Party getPartyArray] getPartyMember:partyMember.partyMember.name].readyCheck) {
         cell.backgroundColor = [UIColor greenColor];
     } else {
         cell.backgroundColor = [UIColor clearColor];
     }
     
-    cell.textLabel.text = partyMember.partyMemberHero.name;
+    cell.textLabel.text = partyMember.partyMember.name;
     
     return cell;
 }

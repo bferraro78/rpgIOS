@@ -61,7 +61,7 @@ int frenzyResourceCost;
     printf("Enemey uses Frenzy...");
     
     /* Insert Damage */
-    int damage = e.enemyStrn+(10*mainCharacter.level);
+    int damage = e.strn+(10*mainCharacter.level);
     
     int isDS = arc4random_uniform(100);
     if (isDS < 15) {
@@ -69,7 +69,7 @@ int frenzyResourceCost;
         damage *= 2;
     }
     
-    NSString *element = e.enemyElement;
+    NSString *element = e.elementSpec;
     elementMap[element] = [NSNumber numberWithInt:damage];
     
 }

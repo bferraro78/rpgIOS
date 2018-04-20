@@ -1,5 +1,5 @@
 //
-//  PartyMemberView.h
+//  HeroPartyMemberView.h
 //  RPG
 //
 //  Created by james schuler on 4/13/18.
@@ -14,7 +14,7 @@
 #import "ResourceBar.h"
 
 /** Represents a view for a party member: Name Label w/ level/class, health bar, resource bar, dot map (on hold) **/
-@interface PartyMemberView : UIView
+@interface HeroPartyMemberView : UIView
 
 @property Hero *Hero;
 @property HealthBar *HealthBar;
@@ -24,4 +24,4 @@
 
 @end
 
-#endif /* PartyMemberView_h */
+#endif /* HeroPartyMemberView_h */
